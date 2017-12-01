@@ -46,7 +46,7 @@ const MainRouter = () => (
             <Route exact path="/" component={Home}/>
             <Route path="/about" component={About}/>
             <Route path="/contacts" render={
-                props => <AddContactForm onSubmit={showResults}/>
+                props => <AddContactForm {...props} onSubmit={showResults}/>
             }/>
             <Route path="/calendar" component={Calendar}/>
         </div>
