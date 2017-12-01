@@ -1,8 +1,7 @@
 import React from 'react'
 import {
     BrowserRouter as Router,
-    Route,
-    Link
+    Route
 } from 'react-router-dom'
 import {
     Navbar,
@@ -12,6 +11,9 @@ import {
 import {
     LinkContainer
 } from 'react-router-bootstrap'
+
+import AddContactForm from './AddContactForm'
+import showResults from "./helpers";
 
 const MainRouter = () => (
     <Router>
@@ -43,7 +45,9 @@ const MainRouter = () => (
 
             <Route exact path="/" component={Home}/>
             <Route path="/about" component={About}/>
-            <Route path="/contacts" component={Contacts}/>
+            <Route path="/contacts" render={
+                props => <AddContactForm onSubmit={showResults}/>
+            }/>
             <Route path="/calendar" component={Calendar}/>
         </div>
     </Router>
