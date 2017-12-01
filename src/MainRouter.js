@@ -4,21 +4,47 @@ import {
     Route,
     Link
 } from 'react-router-dom'
+import {
+    Navbar,
+    Nav,
+    NavItem
+} from 'react-bootstrap'
+import {
+    LinkContainer
+} from 'react-router-bootstrap'
 
 const MainRouter = () => (
     <Router>
         <div>
-            <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/about">About</Link></li>
-                <li><Link to="/topics">Topics</Link></li>
-            </ul>
+            <Navbar>
+                <Navbar.Header>
+                    <Navbar.Brand>
+                        <a href="#">Wishes generator</a>
+                    </Navbar.Brand>
+                </Navbar.Header>
+                <Nav>
+                    <LinkContainer exact to="/">
+                        <NavItem>Home</NavItem>
+                    </LinkContainer>
 
-            <hr/>
+                    <LinkContainer to="/about">
+                        <NavItem>About us</NavItem>
+                    </LinkContainer>
+
+                    <LinkContainer to="/contacts">
+                        <NavItem>Contacts</NavItem>
+                    </LinkContainer>
+
+                    <LinkContainer to="/calendar">
+                        <NavItem>Calendar</NavItem>
+                    </LinkContainer>
+                </Nav>
+            </Navbar>
 
             <Route exact path="/" component={Home}/>
             <Route path="/about" component={About}/>
-            <Route path="/topics" component={Topics}/>
+            <Route path="/contacts" component={Contacts}/>
+            <Route path="/calendar" component={Calendar}/>
         </div>
     </Router>
 )
@@ -35,37 +61,15 @@ const About = () => (
     </div>
 )
 
-const Topics = ({ match }) => (
+const Contacts = () => (
     <div>
-        <h2>Topics</h2>
-        <ul>
-            <li>
-                <Link to={`${match.url}/rendering`}>
-                    Rendering with React
-                </Link>
-            </li>
-            <li>
-                <Link to={`${match.url}/components`}>
-                    Components
-                </Link>
-            </li>
-            <li>
-                <Link to={`${match.url}/props-v-state`}>
-                    Props v. State
-                </Link>
-            </li>
-        </ul>
-
-        <Route path={`${match.url}/:topicId`} component={Topic}/>
-        <Route exact path={match.url} render={() => (
-            <h3>Please select a topic.</h3>
-        )}/>
+        <h2>Contacts list</h2>
     </div>
 )
 
-const Topic = ({ match }) => (
+const Calendar = () => (
     <div>
-        <h3>{match.params.topicId}</h3>
+        <h2>Calendar</h2>
     </div>
 )
 
