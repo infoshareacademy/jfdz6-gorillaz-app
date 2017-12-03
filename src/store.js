@@ -1,4 +1,5 @@
-import { createStore, combineReducers } from 'redux';
+import { compose, createStore, combineReducers } from 'redux'
+import persistState from 'redux-localstorage'
 import { reducer as reduxFormReducer } from 'redux-form';
 
 const contactsReducer = (state = [], action = {}) => {
@@ -13,9 +14,17 @@ const contactsReducer = (state = [], action = {}) => {
 const reducer = combineReducers({
     form: reduxFormReducer,
     contacts: contactsReducer
-});
-const store = (window.devToolsExtension
-    ? window.devToolsExtension()(createStore)
-    : createStore)(reducer);
+})
 
-export default store;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
+const enhancer = composeEnhancers(
+    persistState([])
+)
+
+const store = createStore(
+    reducer,
+    enhancer
+)
+
+export default store
