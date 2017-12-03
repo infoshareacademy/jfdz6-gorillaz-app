@@ -29,7 +29,7 @@ const renderTextField = ({input, label, type, meta: {touched, error}}) => (
 const renderTextareaField = ({input, label, type}) => (
     <FormGroup>
         <ControlLabel>{label}</ControlLabel>
-        <FormControl {...input} componentClass={type} placeholder={label} />
+        <FormControl {...input} componentClass={type} placeholder={label}/>
     </FormGroup>
 )
 
@@ -79,8 +79,10 @@ const AddContactForm = props => {
                     label="Notes"
                 />
                 <ButtonToolbar>
-                    <Button type="submit" bsStyle="success" disabled={pristine || submitting}>{'Submit' + (submitting ? 'ting' : '')}</Button>
-                    <Button type="button" bsStyle="warning" disabled={pristine || submitting} onClick={reset}>Clear Values</Button>
+                    <Button type="submit" bsStyle="success"
+                            disabled={pristine || submitting}>{'Submit' + (submitting ? 'ting' : '')}</Button>
+                    <Button type="button" bsStyle="warning" disabled={pristine || submitting} onClick={reset}>Clear
+                        Values</Button>
                 </ButtonToolbar>
             </form>
         </div>
