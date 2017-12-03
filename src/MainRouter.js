@@ -13,6 +13,8 @@ import {
     LinkContainer
 } from 'react-router-bootstrap'
 
+import Message from './message'
+
 const MainRouter = () => (
     <Router>
         <div>
@@ -45,6 +47,8 @@ const MainRouter = () => (
             <Route path="/about" component={About}/>
             <Route path="/contacts" component={Contacts}/>
             <Route path="/calendar" component={Calendar}/>
+            <Message/>
+
         </div>
     </Router>
 )
