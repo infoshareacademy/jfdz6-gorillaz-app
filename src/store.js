@@ -2,18 +2,11 @@ import { compose, createStore, combineReducers } from 'redux'
 import persistState from 'redux-localstorage'
 import { reducer as reduxFormReducer } from 'redux-form';
 
-const contactsReducer = (state = [], action = {}) => {
-    switch (action.type) {
-        case 'ADD_CONTACT':
-            return [...state, action.newContact]
-        default:
-            return state
-    }
-}
+import contacts from './state/contacts'
 
 const reducer = combineReducers({
     form: reduxFormReducer,
-    contacts: contactsReducer
+    contacts
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
