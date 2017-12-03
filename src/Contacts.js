@@ -1,9 +1,10 @@
 import React from 'react'
+import {connect} from 'react-redux'
 
 import AddContactForm from './AddContactForm'
 import showResults from "./helpers";
 
-export default class Contacts extends React.Component {
+class Contacts extends React.Component {
 
     render() {
         return (
@@ -14,3 +15,11 @@ export default class Contacts extends React.Component {
         )
     }
 }
+
+const mapStateToProps = state => ({
+    contacts: state.contacts
+})
+
+export default connect(
+    mapStateToProps
+)(Contacts)
