@@ -12,8 +12,7 @@ import {
     LinkContainer
 } from 'react-router-bootstrap'
 
-import AddContactForm from './AddContactForm'
-import showResults from "./helpers";
+import Contacts from './Contacts'
 
 const MainRouter = () => (
     <Router>
@@ -45,9 +44,7 @@ const MainRouter = () => (
 
             <Route exact path="/" component={Home}/>
             <Route path="/about" component={About}/>
-            <Route path="/contacts" render={
-                props => <AddContactForm {...props} onSubmit={showResults}/>
-            }/>
+            <Route path="/contacts" component={Contacts}/>
             <Route path="/calendar" component={Calendar}/>
         </div>
     </Router>
@@ -62,12 +59,6 @@ const Home = () => (
 const About = () => (
     <div>
         <h2>About</h2>
-    </div>
-)
-
-const Contacts = () => (
-    <div>
-        <h2>Contacts list</h2>
     </div>
 )
 
