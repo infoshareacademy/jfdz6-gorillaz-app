@@ -13,7 +13,22 @@ class Contacts extends React.Component {
     }
 
     handleAddContactClick = () => {
-        this.setState({addingContact: true})
+        this.setState({
+            addingContact: true,
+            selectedContact: null
+        })
+    }
+
+    handleEditContact = (event) => {
+        const contactId = +event.target.dataset.contactId
+        const selectedContact = this.props.contacts.filter(
+            contact => contact.id === contactId
+        )[0]
+
+        this.setState({
+            addingContact: false,
+            selectedContact
+        })
     }
 
     render() {
@@ -21,9 +36,19 @@ class Contacts extends React.Component {
             <div>
                 <h1>List of contacts</h1>
                 <Button onClick={this.handleAddContactClick}>Add Contact</Button>
-                {this.state.addingContact ? <AddContactForm onSubmit={showResults}/>
-                    : <h4>Click button to add new contact or select item from the list</h4>}
-                <ContactsList contacts={this.props.contacts}/>
+                {
+                    this.state.addingContact ?
+                        <AddContactForm onSubmit={showResults}/> :
+                        (
+                            this.state.selectedContact ?
+                                <h4>{JSON.stringify(this.state.selectedContact)}</h4> :
+                                <h4>Click button to add new contact or select item from the list</h4>
+                        )
+                }
+                <ContactsList
+                    contacts={this.props.contacts}
+                    onEditContact={this.handleEditContact}
+                />
             </div>
         )
     }
