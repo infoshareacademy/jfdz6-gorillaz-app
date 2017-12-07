@@ -13,7 +13,8 @@ BigCalendar.setLocalizer(
 export class Calendar extends React.Component {
     state = {
         events: [],
-        currentYear: (new Date()).getFullYear()
+        currentYear: (new Date()).getFullYear(),
+        selectedEvents: []
     }
 
     componentDidMount = () => (
@@ -38,14 +39,44 @@ export class Calendar extends React.Component {
         }
     }
 
+    handleSelectSlot = ({start}) => (
+        this.setState({
+            selectedEvents: this.state.events.filter(event =>
+                event.start.toString() === start.toString()
+            )
+        })
+    )
+
     render() {
         return (
-            <div className="Calendar__wrapper">
-                <BigCalendar
-                    events={this.state.events}
-                    popup
-                    onNavigate={this.handleNavigate}
-                />
+            <div>
+                <div className="Calendar__wrapper">
+                    <BigCalendar
+                        selectable
+                        popup
+                        timeslots={1}
+                        step={3600}
+                        events={this.state.events}
+                        onNavigate={this.handleNavigate}
+                        onSelectSlot={this.handleSelectSlot}
+                    />
+                </div>
+                <div>
+                    {
+                        this.state.selectedEvents.length ?
+                            <ul>
+                                {
+                                    this.state.selectedEvents.map(event => (
+                                            <li>
+                                                <h3>{event.title}</h3>
+                                                <p>{event.payload}</p>
+                                            </li>
+                                        )
+                                    )
+                                }
+                            </ul> : null
+                    }
+                </div>
             </div>
         )
     }
