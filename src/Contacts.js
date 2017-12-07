@@ -38,7 +38,7 @@ class Contacts extends React.Component {
                 <Button onClick={this.handleAddContactClick}>Add Contact</Button>
                 {
                     this.state.addingContact ?
-                        <AddContactForm onSubmit={showResults}/> :
+                        <AddContactForm onSubmit={showResults} initialValues ={{firstName: 'www@ala.pl'}}/> :
                         (
                             this.state.selectedContact ?
                                 <h4>{JSON.stringify(this.state.selectedContact)}</h4> :
