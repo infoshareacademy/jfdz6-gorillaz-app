@@ -44,7 +44,7 @@ export class Calendar extends React.Component {
 
     handleSelectSlot = ({start}) => {
         const dateKey = ('0' + start.getDate()).slice(-2) + ('0' + (start.getMonth() + 1)).slice(-2)
-        const names = nameDays.filter(day => day.date === dateKey)[0].names.join(' ')
+        const names = nameDays.find(day => day.date === dateKey).names.join(' ')
         const namesObj = {
             start: new Date(start),
             title: 'People celebrating name day',
