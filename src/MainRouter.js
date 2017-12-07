@@ -13,6 +13,7 @@ import {
 } from 'react-router-bootstrap'
 
 import Contacts from './Contacts'
+import {Calendar} from './calendar/Calendar'
 
 const MainRouter = () => (
     <Router>
@@ -59,12 +60,6 @@ const Home = () => (
 const About = () => (
     <div>
         <h2>About</h2>
-    </div>
-)
-
-const Calendar = () => (
-    <div>
-        <h2>Calendar</h2>
     </div>
 )
 
