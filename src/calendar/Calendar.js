@@ -12,18 +12,39 @@ BigCalendar.setLocalizer(
 
 export class Calendar extends React.Component {
     state = {
-        events: [
-            ...customEvents,
-            ...fixedOfficialEvents
-        ].map(parseEvents)
+        events: [],
+        currentYear: (new Date()).getFullYear()
+    }
+
+    componentDidMount = () => (
+        this.getParsedEvents(this.state.currentYear)
+    )
+
+    getParsedEvents = (currentYear) => (
+        this.setState({
+            events: [
+                ...customEvents,
+                ...fixedOfficialEvents
+            ].map(parseEvents(currentYear))
+        })
+    )
+
+    handleNavigate = (currentDate) => {
+        const currentYear = (new Date(currentDate)).getFullYear()
+
+        if (this.state.currentYear !== currentYear) {
+            this.setState({currentYear})
+            this.getParsedEvents(currentYear)
+        }
     }
 
     render() {
-        console.log(this.state.events)
         return (
             <div className="Calendar__wrapper">
                 <BigCalendar
                     events={this.state.events}
+                    popup
+                    onNavigate={this.handleNavigate}
                 />
             </div>
         )
