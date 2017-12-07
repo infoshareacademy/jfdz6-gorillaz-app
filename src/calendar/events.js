@@ -5,6 +5,11 @@ export const customEvents = [
         payload: 'Wojtek must become a dev'
     },
     {
+        date: '1108',
+        title: 'save the world',
+        payload: 'Wojtek must save the world'
+    },
+    {
         date: '1117',
         title: 'enjoy iSA free weekend',
         payload: 'Wojtek cannot be at iSA this day'

@@ -5,6 +5,7 @@ import moment from 'moment'
 import './Calendar.css'
 import {customEvents, fixedOfficialEvents} from "./events"
 import {parseEvents} from './helpers'
+import EventsList from '../events/EventsList'
 
 BigCalendar.setLocalizer(
     BigCalendar.momentLocalizer(moment)
@@ -64,17 +65,7 @@ export class Calendar extends React.Component {
                 <div>
                     {
                         this.state.selectedEvents.length ?
-                            <ul>
-                                {
-                                    this.state.selectedEvents.map(event => (
-                                            <li>
-                                                <h3>{event.title}</h3>
-                                                <p>{event.payload}</p>
-                                            </li>
-                                        )
-                                    )
-                                }
-                            </ul> : null
+                            <EventsList events={this.state.selectedEvents}/> : null
                     }
                 </div>
             </div>
