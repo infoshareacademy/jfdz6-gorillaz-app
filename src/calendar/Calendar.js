@@ -1,10 +1,11 @@
 import React from 'react'
 import BigCalendar from 'react-big-calendar'
 import moment from 'moment'
+import 'react-big-calendar/lib/css/react-big-calendar.css'
 
 import './Calendar.css'
 import {customEvents, fixedOfficialEvents} from "./events"
-import {parseEvents} from './helpers'
+import {parseCustomEvents, parseOfficialEvents} from './helpers'
 import EventsList from '../events/EventsList'
 
 BigCalendar.setLocalizer(
@@ -25,9 +26,9 @@ export class Calendar extends React.Component {
     getParsedEvents = (currentYear) => (
         this.setState({
             events: [
-                ...customEvents,
-                ...fixedOfficialEvents
-            ].map(parseEvents(currentYear))
+                ...customEvents.map(parseCustomEvents(currentYear)),
+                ...fixedOfficialEvents.map(parseOfficialEvents(currentYear))
+            ]
         })
     )
 
@@ -48,6 +49,12 @@ export class Calendar extends React.Component {
         })
     )
 
+    eventPropGetter = ({isOfficial}) => (
+        {
+            className: (isOfficial ? 'Calendar__event-official' : {})
+        }
+    )
+
     render() {
         return (
             <div>
@@ -61,6 +68,7 @@ export class Calendar extends React.Component {
                         events={this.state.events}
                         onNavigate={this.handleNavigate}
                         onSelectSlot={this.handleSelectSlot}
+                        eventPropGetter={this.eventPropGetter}
                     />
                 </div>
                 <div>

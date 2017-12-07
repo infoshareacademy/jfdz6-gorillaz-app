@@ -4,3 +4,7 @@
     margin: 0 auto;
     padding: 15px;
 }
+
+.Calendar__event-official {
+    color: red;
+}
