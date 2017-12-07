@@ -4,9 +4,10 @@ import moment from 'moment'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 
 import './Calendar.css'
-import {customEvents, fixedOfficialEvents} from "./events"
+import {customEvents, fixedOfficialEvents} from "../events/events"
 import {parseCustomEvents, parseOfficialEvents} from './helpers'
 import EventsList from '../events/EventsList'
+import {nameDays} from '../events/name-days'
 
 BigCalendar.setLocalizer(
     BigCalendar.momentLocalizer(moment)
@@ -41,13 +42,24 @@ export class Calendar extends React.Component {
         }
     }
 
-    handleSelectSlot = ({start}) => (
+    handleSelectSlot = ({start}) => {
+        const dateKey = ('0' + start.getDate()).slice(-2) + ('0' + (start.getMonth() + 1)).slice(-2)
+        const names = nameDays.filter(day => day.date === dateKey)[0].names.join(' ')
+        const namesObj = {
+            start: new Date(start),
+            title: 'People celebrating name day',
+            payload: names
+        }
+
         this.setState({
-            selectedEvents: this.state.events.filter(event =>
+            selectedEvents: [
+                ...this.state.events.filter(event =>
                 event.start.toString() === start.toString()
-            )
+            ),
+                namesObj
+            ]
         })
-    )
+    }
 
     eventPropGetter = ({isOfficial}) => (
         {
