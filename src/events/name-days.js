@@ -58,6 +58,7 @@ export const nameDays = `
 2602Mirosława,Aleksandra
 2702Gabriela,Anastazji
 2802Romana,Ludomira,Lecha
+2902Antoni,Augusta
 0103Antoniny,Radosława,Dawida
 0203Heleny,Halszki,Pawła
 0303Maryny,Kunegundy,Tycjana
@@ -303,6 +304,7 @@ export const nameDays = `
 2910Euzebii,Wioletty,Felicjana
 3010Zenobii,Przemysława,Edmunda
 3110Urbana,Saturnina,Krzysztofa
+0111Seweryna
 0211Bohdany,Bożydara
 0311Sylwii,Marcina,Huberta
 0411Karola,Olgierda
@@ -364,11 +366,13 @@ export const nameDays = `
 3012Rainera,Eugeniusza,Irmy
 3112Sylwestra,Melanii,Mariusza
 `.split('\n')
-    .map(day => (
-        {
-            date: day.slice(0, 4),
-            names: day.slice(4)
-                .split(',')
-        }
-        )
+    .reduce((nameDays, nextDay) => (
+            Object.assign(
+                nameDays,
+                {
+                    [nextDay.slice(0, 4)]: nextDay.slice(4).split(',')
+                }
+            )
+        ),
+        {}
     )
