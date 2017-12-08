@@ -58,6 +58,7 @@ class Calendar extends React.Component {
         const dateKey = ('0' + start.getDate()).slice(-2) + ('0' + (start.getMonth() + 1)).slice(-2)
         const names = this.props.nameDays[dateKey].join(' ')
         const namesObj = {
+            id: dateKey + 'name',
             start: new Date(start),
             title: 'People celebrating name day',
             payload: names
