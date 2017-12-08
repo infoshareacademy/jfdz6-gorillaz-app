@@ -1,3 +1,15 @@
+.rbc-day-bg {
+    cursor: pointer;
+}
+
+.rbc-today {
+    background-color: lightpink;
+}
+
+.rbc-event {
+    background-color: deepskyblue;
+}
+
 .Calendar__wrapper {
     max-width: 800px;
     height: 80vh;
@@ -5,10 +17,12 @@
     padding: 15px;
 }
 
-.Calendar__event-public {
+.Calendar__event-public,
+.Calendar__event-public.rbc-selected {
     background-color: red;
 }
 
-.Calendar__event-other {
+.Calendar__event-other,
+.Calendar__event-other.rbc-selected{
     background-color: green;
 }

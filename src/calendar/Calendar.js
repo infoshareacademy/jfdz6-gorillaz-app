@@ -73,6 +73,10 @@ class Calendar extends React.Component {
         })
     }
 
+    handleSelectEvent= (event) => {
+        this.handleSelectSlot(event)
+    }
+
     eventPropGetter = ({type}) => {
         switch (type) {
             case 'public':
@@ -97,6 +101,7 @@ class Calendar extends React.Component {
                         events={this.state.events}
                         onNavigate={this.handleNavigate}
                         onSelectSlot={this.handleSelectSlot}
+                        onSelectEvent={this.handleSelectEvent}
                         eventPropGetter={this.eventPropGetter}
                     />
                 </div>
