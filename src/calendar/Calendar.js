@@ -109,7 +109,10 @@ class Calendar extends React.Component {
                 <div>
                     {
                         this.state.selectedEvents.length ?
-                            <EventsList events={this.state.selectedEvents}/> :
+                            <EventsList
+                                events={this.state.selectedEvents}
+                                isSingleDayListEvent={true}
+                            /> :
                             <h5>Click on a given day to check who celebrates a name day!</h5>
                     }
                 </div>
