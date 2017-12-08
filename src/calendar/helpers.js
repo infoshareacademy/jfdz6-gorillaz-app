@@ -38,21 +38,62 @@ const getEasterRelatedDate = (year, holiday) => {
     return ('0' + holidayDate.getDate()).slice(-2) + ('0' + holidayDate.getMonth()).slice(-2)
 }
 
-export const parseCustomEvents = (currentYear) => (
-    (event) => ({
-        start: new Date(currentYear, +event.date.slice(0, 2), +event.date.slice(2)),
-        end: new Date(currentYear, +event.date.slice(0, 2), +event.date.slice(2) + 1),
+const getParsedObjectCommonPart = (currentYear, event) => (
+    {
+        start: new Date(currentYear, +event.date.slice(2) - 1, +event.date.slice(0, 2)),
+        end: new Date(currentYear, +event.date.slice(2) - 1, +event.date.slice(0, 2)),
         title: event.title,
         payload: event.payload
-    })
+    }
+
 )
 
-export const parseOfficialEvents = (currentYear) => (
-    (event) => ({
-        start: new Date(currentYear, +event.date.slice(0, 2), +event.date.slice(2)),
-        end: new Date(currentYear, +event.date.slice(0, 2), +event.date.slice(2) + 1),
-        isOfficial: true,
-        title: event.title,
-        payload: event.payload
-    })
+export const parseCustomEvents = (currentYear) => (
+    (event) => (
+        Object.assign(
+            getParsedObjectCommonPart(currentYear, event),
+            {
+                id: event.id,
+                type: 'custom'
+            }
+        )
+    )
+)
+
+export const parseOtherHolidays = (currentYear) => (
+    (event) => (
+        Object.assign(
+            getParsedObjectCommonPart(currentYear, event),
+            {
+                id: event.date + 'other',
+                type: 'other'
+            }
+        )
+    )
+)
+
+export const parsePublicMovableHolidays = (currentYear) => (
+    (event) => {
+        event = {...event, date: getEasterRelatedDate(currentYear, event.title)}
+
+        return Object.assign(
+            getParsedObjectCommonPart(currentYear, event),
+            {
+                id: event.date + 'public',
+                type: 'public'
+            }
+        )
+    }
+)
+
+export const parsePublicNonMovableHolidays = (currentYear) => (
+    (event) => (
+        Object.assign(
+            getParsedObjectCommonPart(currentYear, event),
+            {
+                id: event.date + 'public',
+                type: 'public'
+            }
+        )
+    )
 )

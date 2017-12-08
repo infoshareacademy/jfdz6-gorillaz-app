@@ -13,7 +13,7 @@ import {
 } from 'react-router-bootstrap'
 
 import Contacts from './Contacts'
-import {Calendar} from './calendar/Calendar'
+import Calendar from './calendar/Calendar'
 
 const MainRouter = () => (
     <Router>

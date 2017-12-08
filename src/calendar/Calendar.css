@@ -5,6 +5,10 @@
     padding: 15px;
 }
 
-.Calendar__event-official {
-    color: red;
+.Calendar__event-public {
+    background-color: red;
+}
+
+.Calendar__event-other {
+    background-color: green;
 }

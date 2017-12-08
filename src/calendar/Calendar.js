@@ -1,19 +1,23 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import BigCalendar from 'react-big-calendar'
 import moment from 'moment'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 
 import './Calendar.css'
-import {customEvents, fixedOfficialEvents} from "../events/events"
-import {parseCustomEvents, parseOfficialEvents} from './helpers'
+import {
+    parseCustomEvents,
+    parseOtherHolidays,
+    parsePublicMovableHolidays,
+    parsePublicNonMovableHolidays
+} from './helpers'
 import EventsList from '../events/EventsList'
-import {nameDays} from '../events/name-days'
 
 BigCalendar.setLocalizer(
     BigCalendar.momentLocalizer(moment)
 );
 
-export class Calendar extends React.Component {
+class Calendar extends React.Component {
     state = {
         events: [],
         currentYear: (new Date()).getFullYear(),
@@ -24,14 +28,18 @@ export class Calendar extends React.Component {
         this.getParsedEvents(this.state.currentYear)
     )
 
-    getParsedEvents = (currentYear) => (
+    getParsedEvents = (currentYear) => {
+        const {customEvents, otherHolidays, publicMovableHolidays, publicNonMovableHolidays} = this.props
+
         this.setState({
             events: [
                 ...customEvents.map(parseCustomEvents(currentYear)),
-                ...fixedOfficialEvents.map(parseOfficialEvents(currentYear))
+                ...otherHolidays.map(parseOtherHolidays(currentYear)),
+                ...publicMovableHolidays.map(parsePublicMovableHolidays(currentYear)),
+                ...publicNonMovableHolidays.map(parsePublicNonMovableHolidays(currentYear))
             ]
         })
-    )
+    }
 
     handleNavigate = (currentDate) => {
         const currentYear = (new Date(currentDate)).getFullYear()
@@ -44,7 +52,7 @@ export class Calendar extends React.Component {
 
     handleSelectSlot = ({start}) => {
         const dateKey = ('0' + start.getDate()).slice(-2) + ('0' + (start.getMonth() + 1)).slice(-2)
-        const names = nameDays[dateKey].join(' ')
+        const names = this.props.nameDays[dateKey].join(' ')
         const namesObj = {
             start: new Date(start),
             title: 'People celebrating name day',
@@ -54,18 +62,23 @@ export class Calendar extends React.Component {
         this.setState({
             selectedEvents: [
                 ...this.state.events.filter(event =>
-                event.start.toString() === start.toString()
-            ),
+                    event.start.toString() === start.toString()
+                ),
                 namesObj
             ]
         })
     }
 
-    eventPropGetter = ({isOfficial}) => (
-        {
-            className: (isOfficial ? 'Calendar__event-official' : {})
+    eventPropGetter = ({type}) => {
+        switch (type) {
+            case 'public':
+                return {className: 'Calendar__event-public'}
+            case 'other':
+                return {className: 'Calendar__event-other'}
+            default:
+                return {className: {}}
         }
-    )
+    }
 
     render() {
         return (
@@ -93,3 +106,15 @@ export class Calendar extends React.Component {
         )
     }
 }
+
+const mapStateToProps = state => ({
+    customEvents: state.customEvents,
+    nameDays: state.nameDays,
+    otherHolidays: state.otherHolidays,
+    publicMovableHolidays: state.publicMovableHolidays,
+    publicNonMovableHolidays: state.publicNonMovableHolidays
+})
+
+export default connect(
+    mapStateToProps
+)(Calendar)
