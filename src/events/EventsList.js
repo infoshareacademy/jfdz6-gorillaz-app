@@ -1,24 +1,29 @@
 import React from 'react'
 
-import Event from './Event'
+import ReadOnlyEvent from './ReadOnlyEvent'
+import EditableEvent from './EditableEvent'
 
 const EventsList = (props) => {
-    const {events} = props
+    const {events, selectedDate} = props
 
     return (
-        <ul>
-            {
-                events.map(event => (
-                        <li key={event.id}>
-                            <Event
-                                {...props}
-                                event={event}
-                            />
-                        </li>
+        <div>
+            <h2>Holidays for {selectedDate}</h2>
+            <ul>
+                {
+                    events.map(event => (
+                            <li key={event.id}>
+                                {
+                                    event.type === 'custom' ?
+                                        <EditableEvent event={event}/> :
+                                        <ReadOnlyEvent event={event}/>
+                                }
+                            </li>
+                        )
                     )
-                )
-            }
-        </ul>
+                }
+            </ul>
+        </div>
     )
 }
 

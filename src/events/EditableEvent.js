@@ -1,40 +1,61 @@
 import React from 'react'
-import {Button} from 'react-bootstrap'
+import {connect} from 'react-redux'
+import {
+    Button,
+    ButtonToolbar
+} from 'react-bootstrap'
 
-export default class EditableEvent extends React.Component {
-    handleDeleteEventClick = event => {
-        const target = event.currentTarget
-        const eventId = +target.dataset.eventId
+import EventForm from './EventForm'
+import ModalButton from '../ModalButton'
+import {add, remove} from "../state/custom-events"
 
-        console.log('You want to delete event with id:' + eventId)
+class EditableEvent extends React.Component {
+    handleDeleteEventClick = () => {
+        this.props.removeEvent(this.props.event.id)
+    }
+
+    handleSubmit = newEvent => {
+        this.props.addEvent(newEvent)
+        this.props.removeEvent(this.props.event.id)
     }
 
     render() {
-        const {event, isSingleDayListEvent, onEditEventClick} = this.props
+        const {event} = this.props
 
         return (
             <div>
                 <h3>Title: {event.title}</h3>
-                {
-                    isSingleDayListEvent ?
-                        null:
-                        <h6>Date: {event.start.toDateString()}</h6>
-                }
                 <p>Description: {event.payload}</p>
-                <Button
-                    onClick={onEditEventClick}
-                    data-event-id={event.id}
-                >
-                    Edit
-                </Button>
-                <Button
-                    onClick={this.handleDeleteEventClick}
-                    data-event-id={event.id}
-                >
-                    Delete
-                </Button>
+                <ButtonToolbar>
+                    <ModalButton
+                        buttonName="Edit"
+                        modalHeader="Edit your event"
+                    >
+                        <EventForm
+                            onSubmit={this.handleSubmit}
+                            initialValues={
+                                {
+                                    title: event.title,
+                                    payload: event.payload
+                                }
+                            }
+                        />
+                    </ModalButton>
+                    <Button onClick={this.handleDeleteEventClick}>
+                        Delete
+                    </Button>
+                </ButtonToolbar>
             </div>
         )
     }
-
 }
+
+const mapDispatchToProps = dispatch => ({
+    removeEvent: (eventId) => dispatch(remove(eventId)),
+    addEvent: (newEvent) => dispatch(add(newEvent))
+})
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(EditableEvent)

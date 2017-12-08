@@ -12,6 +12,7 @@ import {
     parsePublicNonMovableHolidays
 } from './helpers'
 import EventsList from '../events/EventsList'
+import NewEvent from '../events/NewEvent'
 
 BigCalendar.setLocalizer(
     BigCalendar.momentLocalizer(moment)
@@ -21,6 +22,7 @@ class Calendar extends React.Component {
     state = {
         events: [],
         currentYear: (new Date()).getFullYear(),
+        selectedDate: null,
         selectedEvents: []
     }
 
@@ -28,17 +30,26 @@ class Calendar extends React.Component {
         this.getParsedEvents(this.state.currentYear)
     )
 
-    getParsedEvents = (currentYear) => {
-        const {customEvents, otherHolidays, publicMovableHolidays, publicNonMovableHolidays} = this.props
+    componentWillReceiveProps = (newProps) => {
+        const parsedEvents = this.getParsedEvents(this.state.currentYear, newProps)
+        this.handleSelectSlot({start: this.state.selectedDate}, parsedEvents)
+    }
+
+    getParsedEvents = (currentYear, sentProps) => {
+        const props = sentProps || this.props
+        const {customEvents, otherHolidays, publicMovableHolidays, publicNonMovableHolidays} = props
+        const parsedEvents = [
+            ...customEvents.map(parseCustomEvents(currentYear)),
+            ...otherHolidays.map(parseOtherHolidays(currentYear)),
+            ...publicMovableHolidays.map(parsePublicMovableHolidays(currentYear)),
+            ...publicNonMovableHolidays.map(parsePublicNonMovableHolidays(currentYear))
+        ]
 
         this.setState({
-            events: [
-                ...customEvents.map(parseCustomEvents(currentYear)),
-                ...otherHolidays.map(parseOtherHolidays(currentYear)),
-                ...publicMovableHolidays.map(parsePublicMovableHolidays(currentYear)),
-                ...publicNonMovableHolidays.map(parsePublicNonMovableHolidays(currentYear))
-            ]
+            events: parsedEvents
         })
+
+        return parsedEvents
     }
 
     handleNavigate = (currentDate) => {
@@ -54,7 +65,8 @@ class Calendar extends React.Component {
         })
     }
 
-    handleSelectSlot = ({start}) => {
+    handleSelectSlot = ({start}, sentParsedEvents) => {
+        const parsedEvents = sentParsedEvents || this.state.events
         const dateKey = ('0' + start.getDate()).slice(-2) + ('0' + (start.getMonth() + 1)).slice(-2)
         const names = this.props.nameDays[dateKey].join(' ')
         const namesObj = {
@@ -64,17 +76,20 @@ class Calendar extends React.Component {
             payload: names
         }
 
-        this.setState({
-            selectedEvents: [
-                ...this.state.events.filter(event =>
-                    event.start.toString() === start.toString()
-                ),
-                namesObj
-            ]
-        })
+        this.setState(
+            {
+                selectedEvents: [
+                    ...parsedEvents.filter(event =>
+                        event.start.toString() === start.toString()
+                    ),
+                    namesObj
+                ],
+                selectedDate: start
+            }
+        )
     }
 
-    handleSelectEvent= (event) => {
+    handleSelectEvent = (event) => {
         this.handleSelectSlot(event)
     }
 
@@ -107,11 +122,12 @@ class Calendar extends React.Component {
                     />
                 </div>
                 <div>
+                    <NewEvent/>
                     {
                         this.state.selectedEvents.length ?
                             <EventsList
                                 events={this.state.selectedEvents}
-                                isSingleDayListEvent={true}
+                                selectedDate={this.state.selectedDate.toDateString()}
                             /> :
                             <h5>Click on a given day to check who celebrates a name day!</h5>
                     }
