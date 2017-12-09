@@ -62,6 +62,7 @@ class Calendar extends React.Component {
         }
 
         this.setState({
+            selectedDate: null,
             selectedEvents: []
         })
     }
