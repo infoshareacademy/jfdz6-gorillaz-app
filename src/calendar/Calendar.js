@@ -131,7 +131,7 @@ class Calendar extends React.Component {
                         this.state.selectedEvents.length ?
                             <EventsList
                                 events={this.state.selectedEvents}
-                                selectedDate={this.state.selectedDate.toDateString()}
+                                selectedDate={this.state.selectedDate}
                             /> :
                             <h5>Click on a given day to check who celebrates a name day!</h5>
                     }

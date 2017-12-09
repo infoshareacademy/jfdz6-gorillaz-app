@@ -20,7 +20,15 @@ class EditableEvent extends React.Component {
     }
 
     render() {
-        const {event} = this.props
+        const {event, selectedDate} = this.props
+        const initialDate = selectedDate || new Date()
+        const parsedDate =
+            [
+                initialDate.getFullYear(),
+                ('0' + (initialDate.getMonth() + 1)).slice(-2),
+                ('0' + initialDate.getDate()).slice(-2)
+            ]
+                .join('-')
 
         return (
             <div>
@@ -35,6 +43,7 @@ class EditableEvent extends React.Component {
                             onSubmit={this.handleSubmit}
                             initialValues={
                                 {
+                                    date: parsedDate,
                                     title: event.title,
                                     payload: event.payload
                                 }
