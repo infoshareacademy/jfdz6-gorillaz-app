@@ -14,6 +14,7 @@ import {
 
 import Contacts from './Contacts'
 import Calendar from './calendar/Calendar'
+import EventsMasterDetail from './my-events/EventsMasterDetail'
 
 const MainRouter = () => (
     <Router>
@@ -40,6 +41,10 @@ const MainRouter = () => (
                     <LinkContainer to="/calendar">
                         <NavItem>Calendar</NavItem>
                     </LinkContainer>
+
+                    <LinkContainer to="/my-events">
+                        <NavItem>My events</NavItem>
+                    </LinkContainer>
                 </Nav>
             </Navbar>
 
@@ -47,6 +52,7 @@ const MainRouter = () => (
             <Route path="/about" component={About}/>
             <Route path="/contacts" component={Contacts}/>
             <Route path="/calendar" component={Calendar}/>
+            <Route path="/my-events" component={EventsMasterDetail}/>
         </div>
     </Router>
 )
