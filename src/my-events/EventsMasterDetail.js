@@ -1,13 +1,19 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 
-import {add} from "../state/custom-events"
 import EventsMasterView from './EventsMasterView'
-import EventForm from '../events/EventForm'
+import EventDetailView from './EventDetailView'
+import NewEvent from '../events/NewEvent'
 
 class EventsMasterDetail extends React.Component {
     state = {
         selectedEvent: null
+    }
+
+    componentWillReceiveProps = () => {
+        this.setState({
+            selectedEvent: null
+        })
     }
 
     handleEventClick = (event) => {
@@ -20,20 +26,7 @@ class EventsMasterDetail extends React.Component {
         })
     }
 
-    handleSubmit = newEvent => {
-        this.props.addEvent(newEvent)
-    }
-
     render() {
-        const date = new Date()
-        const parsedDate =
-            [
-                date.getFullYear(),
-                ('0' + (date.getMonth() + 1)).slice(-2),
-                ('0' + date.getDate()).slice(-2)
-            ]
-                .join('-')
-
         return (
             <div>
                 <h2>Your custom events</h2>
@@ -41,13 +34,16 @@ class EventsMasterDetail extends React.Component {
                     events={this.props.events}
                     onEventClick={this.handleEventClick}
                 />
-                <h2>Add new event</h2>
-                <EventForm
-                    onSubmit={this.handleSubmit}
-                    initialValues={{date: parsedDate}}
-                />
-            </div>
 
+                <h2>Add new event</h2>
+                <NewEvent/>
+
+                {
+                    this.state.selectedEvent ?
+                        <EventDetailView event={this.state.selectedEvent}/> :
+                        <h2>Select event from the list</h2>
+                }
+            </div>
         )
     }
 }
@@ -56,11 +52,6 @@ const mapStateToProps = state => ({
     events: state.customEvents
 })
 
-const mapDispatchToProps = dispatch => ({
-    addEvent: (newEvent) => dispatch(add(newEvent))
-})
-
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+    mapStateToProps
 )(EventsMasterDetail)

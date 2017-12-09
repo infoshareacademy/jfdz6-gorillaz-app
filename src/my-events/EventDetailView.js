@@ -6,10 +6,10 @@ import {
 } from 'react-bootstrap'
 
 import {add, remove} from "../state/custom-events"
-import EventForm from './EventForm'
+import EventForm from '../events/EventForm'
 import ModalButton from '../ModalButton'
 
-class EditableEvent extends React.Component {
+class EventDetailView extends React.Component {
     handleDeleteEventClick = () => {
         this.props.removeEvent(this.props.event.id)
     }
@@ -20,19 +20,12 @@ class EditableEvent extends React.Component {
     }
 
     render() {
-        const {event, selectedDate} = this.props
-        const initialDate = selectedDate || new Date()
-        const parsedDate =
-            [
-                initialDate.getFullYear(),
-                ('0' + (initialDate.getMonth() + 1)).slice(-2),
-                ('0' + initialDate.getDate()).slice(-2)
-            ]
-                .join('-')
+        const {event} = this.props
 
         return (
             <div>
                 <h3>Title: {event.title}</h3>
+                <h5>Date {event.date}</h5>
                 <p>Description: {event.payload}</p>
 
                 <ButtonToolbar>
@@ -42,13 +35,7 @@ class EditableEvent extends React.Component {
                     >
                         <EventForm
                             onSubmit={this.handleSubmit}
-                            initialValues={
-                                {
-                                    date: parsedDate,
-                                    title: event.title,
-                                    payload: event.payload
-                                }
-                            }
+                            initialValues={{...event}}
                         />
                     </ModalButton>
 
@@ -69,4 +56,6 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
     null,
     mapDispatchToProps
-)(EditableEvent)
+)(EventDetailView)
+
+

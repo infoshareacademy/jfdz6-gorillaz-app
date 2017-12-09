@@ -11,7 +11,7 @@ import {
 
 import validate from './eventFormValidation'
 
-const clearForm = (result, dispatch) => (
+const onSubmitSuccess = (result, dispatch) => (
     dispatch(reset('eventForm'))
 )
 
@@ -40,9 +40,9 @@ const renderTextareaField = ({input, label, type}) => (
     </FormGroup>
 )
 
-
 const EventForm = props => {
     const {handleSubmit, pristine, reset, submitting} = props;
+
     return (
         <div className="form__wrapper">
             <form onSubmit={handleSubmit}>
@@ -52,18 +52,21 @@ const EventForm = props => {
                     type="date"
                     label="Record event since"
                 />
+
                 <Field
                     name="title"
                     component={renderTextField}
                     type="text"
                     label="Event name"
                 />
+
                 <Field
                     name="payload"
                     component={renderTextareaField}
                     type="textarea"
                     label="Description"
                 />
+
                 <ButtonToolbar>
                     <Button
                         type="submit"
@@ -72,6 +75,7 @@ const EventForm = props => {
                     >
                         {'Submit' + (submitting ? 'ting' : '')}
                     </Button>
+
                     <Button
                         type="button"
                         bsStyle="warning"
@@ -89,5 +93,5 @@ const EventForm = props => {
 export default reduxForm({
     form: 'eventForm',
     validate,
-    onSubmitSuccess: clearForm
+    onSubmitSuccess
 })(EventForm);

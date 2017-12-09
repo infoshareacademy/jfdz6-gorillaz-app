@@ -27,8 +27,8 @@ export default (state = initialState, action = {}) => {
                 [
                     ...state,
                     {
-                        id: Date.now(),
-                        ...action.newEvent
+                        ...action.newEvent,
+                        id: Date.now()
                     }
                 ]
             )
