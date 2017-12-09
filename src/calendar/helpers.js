@@ -50,15 +50,17 @@ const getParsedObjectCommonPart = (currentYear, event) => (
 
 export const parseCustomEvents = (currentYear) => (
     (event) => (
-        Object.assign(
-            getParsedObjectCommonPart(currentYear, event),
-            {
-                id: event.id,
-                type: 'custom'
-            }
-        )
+        {
+            id: event.id,
+            start: new Date(currentYear, +event.date.slice(5, 7) - 1, +event.date.slice(8)),
+            end: new Date(currentYear, +event.date.slice(5, 7) - 1, +event.date.slice(8)),
+            title: event.title,
+            payload: event.payload,
+            type: 'custom'
+        }
     )
 )
+
 
 export const parseOtherHolidays = (currentYear) => (
     (event) => (

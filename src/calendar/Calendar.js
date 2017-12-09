@@ -109,7 +109,7 @@ class Calendar extends React.Component {
             <div>
                 <div className="Calendar__wrapper">
                     <BigCalendar
-                        views={['month', 'agenda']}
+                        views={['month']}
                         selectable
                         popup
                         timeslots={1}
