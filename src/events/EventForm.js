@@ -46,7 +46,7 @@ const EventForm = props => {
                     name="date"
                     component={renderTextField}
                     type="date"
-                    label="Event date"
+                    label="Record event since"
                 />
                 <Field
                     name="title"

@@ -11,12 +11,25 @@ class NewEvent extends React.Component {
     }
 
     render() {
+        const {selectedDate} = this.props
+        const initialDate = selectedDate || new Date()
+        const parsedDate =
+            [
+                initialDate.getFullYear(),
+                ('0' + (initialDate.getMonth() + 1)).slice(-2),
+                ('0' + initialDate.getDate()).slice(-2)
+            ]
+                .join('-')
+
         return (
             <ModalButton
                 buttonName="Add event"
                 modalHeader="Add new event"
             >
-                <EventForm onSubmit={this.handleSubmit}/>
+                <EventForm
+                    onSubmit={this.handleSubmit}
+                    initialValues={{date: parsedDate}}
+                />
             </ModalButton>
         )
     }

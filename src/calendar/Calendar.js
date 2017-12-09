@@ -32,14 +32,15 @@ class Calendar extends React.Component {
 
     componentWillReceiveProps = (newProps) => {
         const parsedEvents = this.getParsedEvents(this.state.currentYear, newProps)
-        this.handleSelectSlot({start: this.state.selectedDate}, parsedEvents)
+        this.state.selectedDate ? this.handleSelectSlot({start: this.state.selectedDate}, parsedEvents) : null
     }
 
     getParsedEvents = (currentYear, sentProps) => {
         const props = sentProps || this.props
         const {customEvents, otherHolidays, publicMovableHolidays, publicNonMovableHolidays} = props
         const parsedEvents = [
-            ...customEvents.map(parseCustomEvents(currentYear)),
+            ...customEvents.filter(event => +event.date.slice(0, 4) <= currentYear)
+                .map(parseCustomEvents(currentYear)),
             ...otherHolidays.map(parseOtherHolidays(currentYear)),
             ...publicMovableHolidays.map(parsePublicMovableHolidays(currentYear)),
             ...publicNonMovableHolidays.map(parsePublicNonMovableHolidays(currentYear))
@@ -122,7 +123,9 @@ class Calendar extends React.Component {
                     />
                 </div>
                 <div>
-                    <NewEvent/>
+                    <NewEvent
+                        selectedDate={this.state.selectedDate}
+                    />
                     {
                         this.state.selectedEvents.length ?
                             <EventsList
