@@ -1,5 +1,5 @@
 import React from 'react';
-import {Field, reduxForm} from 'redux-form';
+import {Field, reset, reduxForm} from 'redux-form';
 import {
     FormGroup,
     ControlLabel,
@@ -10,6 +10,10 @@ import {
 } from 'react-bootstrap'
 
 import validate from './eventFormValidation'
+
+const clearForm = (result, dispatch) => (
+    dispatch(reset('eventForm'))
+)
 
 const renderTextField = ({input, label, type, meta: {touched, error}}) => (
     <FormGroup
@@ -85,4 +89,5 @@ const EventForm = props => {
 export default reduxForm({
     form: 'eventForm',
     validate,
+    onSubmitSuccess: clearForm
 })(EventForm);
