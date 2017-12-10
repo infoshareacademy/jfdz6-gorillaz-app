@@ -1,27 +1,23 @@
-import { compose, createStore, combineReducers } from 'redux'
+import { compose, createStore, combineReducers, applyMiddleware } from 'redux'
 import persistState from 'redux-localstorage'
+import thunk from 'redux-thunk'
 import { reducer as reduxFormReducer } from 'redux-form';
 
 import contacts from './state/contacts'
 import customEvents from './state/custom-events'
-import nameDays from './state/name-days'
-import otherHolidays from './state/other-holidays'
-import publicMovableHolidays from './state/public-movable-holidays'
-import publicNonMovableHolidays from './state/public-non-movable-holidays'
+import holidays from './state/holidays'
 
 const reducer = combineReducers({
     form: reduxFormReducer,
     contacts,
     customEvents,
-    nameDays,
-    otherHolidays,
-    publicMovableHolidays,
-    publicNonMovableHolidays
+    holidays
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const enhancer = composeEnhancers(
+    applyMiddleware(thunk),
     persistState([])
 )
 

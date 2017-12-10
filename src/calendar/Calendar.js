@@ -4,6 +4,7 @@ import BigCalendar from 'react-big-calendar'
 import moment from 'moment'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 
+import {getHolidays} from "../state/holidays"
 import './Calendar.css'
 import {
     parseCustomEvents,
@@ -26,18 +27,21 @@ class Calendar extends React.Component {
         selectedEvents: []
     }
 
-    componentDidMount = () => (
-        this.getParsedEvents(this.state.currentYear)
-    )
+    componentDidMount = () => {
+        this.props.getHolidays()
+    }
 
     componentWillReceiveProps = (newProps) => {
-        const parsedEvents = this.getParsedEvents(this.state.currentYear, newProps)
-        this.state.selectedDate ? this.handleSelectSlot({start: this.state.selectedDate}, parsedEvents) : null
+        if (newProps.holidays.data){
+            const parsedEvents = this.getParsedEvents(this.state.currentYear, newProps)
+            this.state.selectedDate ? this.handleSelectSlot({start: this.state.selectedDate}, parsedEvents) : null
+        }
     }
 
     getParsedEvents = (currentYear, sentProps) => {
         const props = sentProps || this.props
-        const {customEvents, otherHolidays, publicMovableHolidays, publicNonMovableHolidays} = props
+        const {otherHolidays, publicMovableHolidays, publicNonMovableHolidays} = props.holidays.data
+        const {customEvents} = props
         const parsedEvents = [
             ...customEvents.filter(event => +event.date.slice(0, 4) <= currentYear)
                 .map(parseCustomEvents(currentYear)),
@@ -70,7 +74,7 @@ class Calendar extends React.Component {
     handleSelectSlot = ({start}, sentParsedEvents) => {
         const parsedEvents = sentParsedEvents || this.state.events
         const dateKey = ('0' + start.getDate()).slice(-2) + ('0' + (start.getMonth() + 1)).slice(-2)
-        const names = this.props.nameDays[dateKey].join(' ')
+        const names = this.props.holidays.data.nameDays[dateKey].join(' ')
         const namesObj = {
             id: dateKey + 'name',
             start: new Date(start),
@@ -124,6 +128,9 @@ class Calendar extends React.Component {
                     />
                 </div>
                 <div>
+                    {
+                        this.props.holidays.getting ? <p>Getting data...</p> : null
+                    }
                     <NewEvent
                         selectedDate={this.state.selectedDate}
                     />
@@ -143,12 +150,14 @@ class Calendar extends React.Component {
 
 const mapStateToProps = state => ({
     customEvents: state.customEvents,
-    nameDays: state.nameDays,
-    otherHolidays: state.otherHolidays,
-    publicMovableHolidays: state.publicMovableHolidays,
-    publicNonMovableHolidays: state.publicNonMovableHolidays
+    holidays: state.holidays
+})
+
+const mapDispatchToProps = dispatch => ({
+    getHolidays: () => dispatch(getHolidays())
 })
 
 export default connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(Calendar)
