@@ -15,7 +15,7 @@ import {
 import Contacts from './Contacts'
 import Calendar from './calendar/Calendar'
 import EventsMasterDetail from './my-events/EventsMasterDetail'
-import {Container} from './styled-components/grid-components'
+import {Container, Box} from './styled-components/grid-components'
 
 const MainRouter = () => (
     <Router>
@@ -66,7 +66,31 @@ const Home = () => (
 
 const About = () => (
     <Container>
-        <h2>About</h2>
+        <Box
+            sm={6}
+            md={3}
+            smPush={1}
+        >
+            Box1
+        </Box>
+        <Box
+            sm={6}
+            md={3}
+        >
+            Box2
+        </Box>
+        <Box
+            sm={6}
+            md={3}
+        >
+            Box3
+        </Box>
+        <Box
+            sm={6}
+            md={3}
+        >
+            Box4
+        </Box>
     </Container>
 )
 
