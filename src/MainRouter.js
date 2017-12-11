@@ -15,6 +15,7 @@ import {
 import Contacts from './Contacts'
 import Calendar from './calendar/Calendar'
 import EventsMasterDetail from './my-events/EventsMasterDetail'
+import {Container} from './styled-components/grid-components'
 
 const MainRouter = () => (
     <Router>
@@ -64,9 +65,9 @@ const Home = () => (
 )
 
 const About = () => (
-    <div>
+    <Container>
         <h2>About</h2>
-    </div>
+    </Container>
 )
 
 export default MainRouter
