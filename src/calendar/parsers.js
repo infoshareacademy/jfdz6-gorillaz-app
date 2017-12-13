@@ -118,3 +118,29 @@ export function getParsedEvents(currentYear, sentProps) {
 
     return parsedEvents
 }
+
+export function getParsedEventsForSelectedDate(date, sentParsedEvents) {
+    const parsedEvents = sentParsedEvents || this.state.events
+    const dateKey = ('0' + date.getDate()).slice(-2) + ('0' + (date.getMonth() + 1)).slice(-2)
+    const names = this.props.holidays.data.nameDays[dateKey].join(' ')
+    const namesObj =
+        {
+            id: dateKey + 'name',
+            start: new Date(date),
+            title: 'People celebrating name day',
+            payload: names
+        }
+
+    this.setState(
+        {
+            selectedEvents:
+                [
+                    ...parsedEvents.filter(event =>
+                        event.start.toString() === date.toString()
+                    ),
+                    namesObj
+                ],
+            selectedDate: date
+        }
+    )
+}

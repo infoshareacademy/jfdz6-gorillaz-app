@@ -6,7 +6,10 @@ import 'react-big-calendar/lib/css/react-big-calendar.css'
 
 import {getHolidays} from "../state/holidays"
 import './Calendar.css'
-import {getParsedEvents} from './parsers'
+import {
+    getParsedEvents,
+    getParsedEventsForSelectedDate
+} from './parsers'
 import EventsList from '../events/EventsList'
 import NewEvent from '../events/NewEvent'
 
@@ -29,11 +32,13 @@ class Calendar extends React.Component {
     componentWillReceiveProps = (newProps) => {
         if (newProps.holidays.data) {
             const parsedEvents = this.getParsedEvents(this.state.currentYear, newProps)
-            this.state.selectedDate ? this.handleSelectSlot({start: this.state.selectedDate}, parsedEvents) : null
+            const selectedDate = this.state.selectedDate
+            selectedDate ? this.getParsedEventsForSelectedDate(selectedDate, parsedEvents) : null
         }
     }
 
     getParsedEvents = getParsedEvents.bind(this)
+    getParsedEventsForSelectedDate = getParsedEventsForSelectedDate.bind(this)
 
     handleNavigate = (currentDate) => {
         const currentYear = (new Date(currentDate)).getFullYear()
@@ -49,33 +54,9 @@ class Calendar extends React.Component {
         }
     }
 
-    handleSelectSlot = ({start}, sentParsedEvents) => {
-        const parsedEvents = sentParsedEvents || this.state.events
-        const dateKey = ('0' + start.getDate()).slice(-2) + ('0' + (start.getMonth() + 1)).slice(-2)
-        const names = this.props.holidays.data.nameDays[dateKey].join(' ')
-        const namesObj = {
-            id: dateKey + 'name',
-            start: new Date(start),
-            title: 'People celebrating name day',
-            payload: names
-        }
+    handleSelectSlot = ({start}) => this.getParsedEventsForSelectedDate(start)
 
-        this.setState(
-            {
-                selectedEvents: [
-                    ...parsedEvents.filter(event =>
-                        event.start.toString() === start.toString()
-                    ),
-                    namesObj
-                ],
-                selectedDate: start
-            }
-        )
-    }
-
-    handleSelectEvent = (event) => {
-        this.handleSelectSlot(event)
-    }
+    handleSelectEvent = (event) => this.handleSelectSlot(event)
 
     eventPropGetter = ({type}) => {
         switch (type) {
