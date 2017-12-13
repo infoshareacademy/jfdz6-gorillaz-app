@@ -10,6 +10,7 @@ import {
     getParsedEvents,
     getParsedEventsForSelectedDate
 } from './parsers'
+import {getCalendarConfig} from './calendar-config'
 import EventsList from '../events/EventsList'
 import NewEvent from '../events/NewEvent'
 
@@ -32,13 +33,13 @@ class Calendar extends React.Component {
     componentWillReceiveProps = (newProps) => {
         if (newProps.holidays.data) {
             const parsedEvents = this.getParsedEvents(this.state.currentYear, newProps)
-            const selectedDate = this.state.selectedDate
-            selectedDate ? this.getParsedEventsForSelectedDate(selectedDate, parsedEvents) : null
+            this.state.selectedDate && this.getParsedEventsForSelectedDate(this.state.selectedDate, parsedEvents)
         }
     }
 
     getParsedEvents = getParsedEvents.bind(this)
     getParsedEventsForSelectedDate = getParsedEventsForSelectedDate.bind(this)
+    getCalendarConfig = getCalendarConfig.bind(this)
 
     handleNavigate = (currentDate) => {
         const currentYear = (new Date(currentDate)).getFullYear()
@@ -58,41 +59,17 @@ class Calendar extends React.Component {
 
     handleSelectEvent = (event) => this.handleSelectSlot(event)
 
-    eventPropGetter = ({type}) => {
-        switch (type) {
-            case 'public':
-                return {className: 'Calendar__event-public'}
-            case 'other':
-                return {className: 'Calendar__event-other'}
-            default:
-                return {className: {}}
-        }
-    }
-
     render() {
         return (
             <div>
                 <div className="Calendar__wrapper">
-                    <BigCalendar
-                        views={['month']}
-                        selectable
-                        popup
-                        timeslots={1}
-                        step={3600}
-                        events={this.state.events}
-                        onNavigate={this.handleNavigate}
-                        onSelectSlot={this.handleSelectSlot}
-                        onSelectEvent={this.handleSelectEvent}
-                        eventPropGetter={this.eventPropGetter}
-                    />
+                    <BigCalendar {...this.getCalendarConfig()}/>
                 </div>
                 <div>
                     {
-                        this.props.holidays.getting ? <p>Getting data...</p> : null
+                        this.props.holidays.getting && <p>Getting data...</p>
                     }
-                    <NewEvent
-                        selectedDate={this.state.selectedDate}
-                    />
+                    <NewEvent selectedDate={this.state.selectedDate}/>
                     {
                         this.state.selectedEvents.length ?
                             <EventsList
