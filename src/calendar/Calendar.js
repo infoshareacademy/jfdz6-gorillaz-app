@@ -11,7 +11,7 @@ import {
     parseOtherHolidays,
     parsePublicMovableHolidays,
     parsePublicNonMovableHolidays
-} from './helpers'
+} from './parsers'
 import EventsList from '../events/EventsList'
 import NewEvent from '../events/NewEvent'
 
@@ -60,15 +60,15 @@ class Calendar extends React.Component {
     handleNavigate = (currentDate) => {
         const currentYear = (new Date(currentDate)).getFullYear()
 
-        if (this.state.currentYear !== currentYear) {
-            this.setState({currentYear})
-            this.getParsedEvents(currentYear)
-        }
-
         this.setState({
             selectedDate: null,
             selectedEvents: []
         })
+
+        if (this.state.currentYear !== currentYear) {
+            this.getParsedEvents(currentYear)
+            this.setState({currentYear})
+        }
     }
 
     handleSelectSlot = ({start}, sentParsedEvents) => {

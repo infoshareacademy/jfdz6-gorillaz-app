@@ -45,7 +45,6 @@ const getParsedObjectCommonPart = (currentYear, event) => (
         title: event.title,
         payload: event.payload
     }
-
 )
 
 export const parseCustomEvents = (currentYear) => (
@@ -61,26 +60,27 @@ export const parseCustomEvents = (currentYear) => (
     )
 )
 
-
 export const parseOtherHolidays = (currentYear) => (
     (event) => (
-        Object.assign(
-            getParsedObjectCommonPart(currentYear, event),
-            {
-                id: event.date + 'other',
-                type: 'other'
-            }
-        )
+        {
+            ...getParsedObjectCommonPart(currentYear, event),
+            id: event.date + 'other',
+            type: 'other'
+        }
     )
 )
 
 export const parsePublicMovableHolidays = (currentYear) => (
     (event) => {
-        event = {...event, date: getEasterRelatedDate(currentYear, event.title)}
-
-        return Object.assign(
-            getParsedObjectCommonPart(currentYear, event),
+        event =
             {
+                ...event,
+                date: getEasterRelatedDate(currentYear, event.title)
+            }
+
+        return (
+            {
+                ...getParsedObjectCommonPart(currentYear, event),
                 id: event.date + 'public',
                 type: 'public'
             }
@@ -90,12 +90,10 @@ export const parsePublicMovableHolidays = (currentYear) => (
 
 export const parsePublicNonMovableHolidays = (currentYear) => (
     (event) => (
-        Object.assign(
-            getParsedObjectCommonPart(currentYear, event),
-            {
-                id: event.date + 'public',
-                type: 'public'
-            }
-        )
+        {
+            ...getParsedObjectCommonPart(currentYear, event),
+            id: event.date + 'public',
+            type: 'public'
+        }
     )
 )
