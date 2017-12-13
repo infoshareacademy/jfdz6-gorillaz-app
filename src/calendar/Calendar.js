@@ -6,18 +6,13 @@ import 'react-big-calendar/lib/css/react-big-calendar.css'
 
 import {getHolidays} from "../state/holidays"
 import './Calendar.css'
-import {
-    parseCustomEvents,
-    parseOtherHolidays,
-    parsePublicMovableHolidays,
-    parsePublicNonMovableHolidays
-} from './parsers'
+import {getParsedEvents} from './parsers'
 import EventsList from '../events/EventsList'
 import NewEvent from '../events/NewEvent'
 
 BigCalendar.setLocalizer(
     BigCalendar.momentLocalizer(moment)
-);
+)
 
 class Calendar extends React.Component {
     state = {
@@ -32,30 +27,13 @@ class Calendar extends React.Component {
     }
 
     componentWillReceiveProps = (newProps) => {
-        if (newProps.holidays.data){
+        if (newProps.holidays.data) {
             const parsedEvents = this.getParsedEvents(this.state.currentYear, newProps)
             this.state.selectedDate ? this.handleSelectSlot({start: this.state.selectedDate}, parsedEvents) : null
         }
     }
 
-    getParsedEvents = (currentYear, sentProps) => {
-        const props = sentProps || this.props
-        const {otherHolidays, publicMovableHolidays, publicNonMovableHolidays} = props.holidays.data
-        const {customEvents} = props
-        const parsedEvents = [
-            ...customEvents.filter(event => +event.date.slice(0, 4) <= currentYear)
-                .map(parseCustomEvents(currentYear)),
-            ...otherHolidays.map(parseOtherHolidays(currentYear)),
-            ...publicMovableHolidays.map(parsePublicMovableHolidays(currentYear)),
-            ...publicNonMovableHolidays.map(parsePublicNonMovableHolidays(currentYear))
-        ]
-
-        this.setState({
-            events: parsedEvents
-        })
-
-        return parsedEvents
-    }
+    getParsedEvents = getParsedEvents.bind(this)
 
     handleNavigate = (currentDate) => {
         const currentYear = (new Date(currentDate)).getFullYear()
