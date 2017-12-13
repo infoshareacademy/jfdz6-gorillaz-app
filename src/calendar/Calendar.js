@@ -27,7 +27,7 @@ class Calendar extends React.Component {
     }
 
     componentDidMount = () => {
-        this.props.getHolidays()
+        this.props.holidays.data ? this.componentWillReceiveProps(this.props) : this.props.getHolidays()
     }
 
     componentWillReceiveProps = (newProps) => {
