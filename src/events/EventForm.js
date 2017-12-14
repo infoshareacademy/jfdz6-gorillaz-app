@@ -35,7 +35,7 @@ const renderTextareaField = ({input, label, type}) => (
 )
 
 const EventForm = props => {
-    const {handleSubmit, pristine, reset, submitting} = props
+    const {handleSubmit, pristine, reset, submitting, submitSucceeded} = props
 
     return (
         <div className="form__wrapper">
@@ -79,6 +79,8 @@ const EventForm = props => {
                         Clear
                     </Button>
                 </ButtonToolbar>
+
+                <HelpBlock>{submitSucceeded && 'Event has been added!'}</HelpBlock>
             </form>
         </div>
     )

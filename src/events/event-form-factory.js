@@ -5,9 +5,10 @@ import EventForm from './EventForm'
 import validate from './event-form-validation'
 
 const getEventForm = formName => {
-    const onSubmitSuccess = (result, dispatch) => (
-        dispatch(reset(formName))
-    )
+    const resetDelay = 2000
+    const onSubmitSuccess = (result, dispatch) => {
+        setTimeout(() => dispatch(reset(formName)), resetDelay)
+    }
 
     return reduxForm({
         form: formName,
