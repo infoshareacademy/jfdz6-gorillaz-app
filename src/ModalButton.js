@@ -12,6 +12,7 @@ export default class ModalButton extends React.Component {
 
     render() {
         const {buttonName, modalHeader} = this.props
+
         return (
             <div>
                 <Button onClick={this.open}>{buttonName}</Button>
@@ -34,7 +35,6 @@ export default class ModalButton extends React.Component {
                     <Modal.Footer>
                         <Button onClick={this.close}>Close</Button>
                     </Modal.Footer>
-
                 </Modal>
             </div>
         )

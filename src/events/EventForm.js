@@ -1,5 +1,5 @@
-import React from 'react';
-import {Field, reset, reduxForm} from 'redux-form';
+import React from 'react'
+import {Field} from 'redux-form'
 import {
     FormGroup,
     ControlLabel,
@@ -8,12 +8,6 @@ import {
     Button,
     ButtonToolbar
 } from 'react-bootstrap'
-
-import validate from './eventFormValidation'
-
-const onSubmitSuccess = (result, dispatch) => (
-    dispatch(reset('eventForm'))
-)
 
 const renderTextField = ({input, label, type, meta: {touched, error}}) => (
     <FormGroup
@@ -41,7 +35,7 @@ const renderTextareaField = ({input, label, type}) => (
 )
 
 const EventForm = props => {
-    const {handleSubmit, pristine, reset, submitting} = props;
+    const {handleSubmit, pristine, reset, submitting} = props
 
     return (
         <div className="form__wrapper">
@@ -87,11 +81,7 @@ const EventForm = props => {
                 </ButtonToolbar>
             </form>
         </div>
-    );
-};
+    )
+}
 
-export default reduxForm({
-    form: 'eventForm',
-    validate,
-    onSubmitSuccess
-})(EventForm);
+export default EventForm

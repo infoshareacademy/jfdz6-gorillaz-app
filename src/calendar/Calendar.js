@@ -11,8 +11,8 @@ import {
     getParsedEventsForSelectedDate
 } from './parsers'
 import {getCalendarConfig} from './calendar-config'
+import NewEventButton from '../events/NewEventButton'
 import EventsList from '../events/EventsList'
-import NewEvent from '../events/NewEvent'
 
 BigCalendar.setLocalizer(
     BigCalendar.momentLocalizer(moment)
@@ -65,11 +65,12 @@ class Calendar extends React.Component {
                 <div className="Calendar__wrapper">
                     <BigCalendar {...this.getCalendarConfig()}/>
                 </div>
+
                 <div>
                     {
                         this.props.holidays.getting && <p>Getting data...</p>
                     }
-                    <NewEvent selectedDate={this.state.selectedDate}/>
+                    <NewEventButton selectedDate={this.state.selectedDate}/>
                     {
                         this.state.selectedEvents.length ?
                             <EventsList

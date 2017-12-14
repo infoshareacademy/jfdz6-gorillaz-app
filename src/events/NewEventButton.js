@@ -2,17 +2,16 @@ import React from 'react'
 import {connect} from 'react-redux'
 
 import {add} from "../state/custom-events"
-import EventForm from './EventForm'
 import ModalButton from '../ModalButton'
+import getEventForm from './event-form-factory'
 
-class NewEvent extends React.Component {
+class NewEventButton extends React.Component {
     handleSubmit = newEvent => {
         this.props.addEvent(newEvent)
     }
 
     render() {
-        const {selectedDate} = this.props
-        const initialDate = selectedDate || new Date()
+        const initialDate = this.props.selectedDate || new Date()
         const parsedDate =
             [
                 initialDate.getFullYear(),
@@ -20,13 +19,14 @@ class NewEvent extends React.Component {
                 ('0' + initialDate.getDate()).slice(-2)
             ]
                 .join('-')
+        const NewEventForm = getEventForm('newEventForm')
 
         return (
             <ModalButton
                 buttonName="Add event"
                 modalHeader="Add new event"
             >
-                <EventForm
+                <NewEventForm
                     onSubmit={this.handleSubmit}
                     initialValues={{date: parsedDate}}
                 />
@@ -42,4 +42,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
     null,
     mapDispatchToProps
-)(NewEvent)
+)(NewEventButton)
