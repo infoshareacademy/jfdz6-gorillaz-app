@@ -11,7 +11,7 @@ import {
     getParsedEventsForSelectedDate
 } from './parsers'
 import {getCalendarConfig} from './calendar-config'
-import NewEventButton from '../events/NewEventButton'
+import NewEventButton from '../events/views/NewEventButton'
 import EventsList from '../events/EventsList'
 
 BigCalendar.setLocalizer(

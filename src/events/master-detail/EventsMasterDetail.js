@@ -2,8 +2,8 @@ import React from 'react'
 import {connect} from 'react-redux'
 
 import EventsMasterView from './EventsMasterView'
+import NewEvent from '../views/NewEvent'
 import EventDetailView from './EventDetailView'
-import NewEvent from '../events/NewEventButton'
 
 class EventsMasterDetail extends React.Component {
     state = {

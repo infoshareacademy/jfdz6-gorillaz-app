@@ -5,9 +5,9 @@ import {
     ButtonToolbar
 } from 'react-bootstrap'
 
-import {add, remove} from "../state/custom-events"
-import EventForm from '../events/form/EventForm'
-import ModalButton from '../ModalButton'
+import {add, remove} from "../../state/custom-events"
+import EventForm from '../form/EventForm'
+import ModalButton from '../../ModalButton'
 
 class EventDetailView extends React.Component {
     handleDeleteEventClick = () => {

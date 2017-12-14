@@ -1,7 +1,7 @@
 import React from 'react'
 import {Button} from 'react-bootstrap'
 
-import PreviewEvent from '../events/views/PreviewEvent'
+import PreviewEvent from '../views/PreviewEvent'
 
 const EventsMasterView = props => {
     const {events, onEventClick} = props
