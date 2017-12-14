@@ -16,7 +16,7 @@ class EventsMasterDetail extends React.Component {
         })
     }
 
-    handleEventClick = (event) => {
+    handleEventClick = event => {
         const target = event.currentTarget
         const selectedEventId = +target.dataset.eventId
         const selectedEvent = this.props.events.find(event => event.id === selectedEventId)

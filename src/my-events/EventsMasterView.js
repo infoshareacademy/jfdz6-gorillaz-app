@@ -1,7 +1,9 @@
 import React from 'react'
 import {Button} from 'react-bootstrap'
 
-const EventsMasterView = (props) => {
+import PreviewEvent from '../events/views/PreviewEvent'
+
+const EventsMasterView = props => {
     const {events, onEventClick} = props
 
     return (
@@ -9,8 +11,8 @@ const EventsMasterView = (props) => {
             {
                 events.map(event => (
                         <li key={event.id}>
-                            <h3>Date: {event.date.slice(5)}</h3>
-                            <h5>Title: {event.title}</h5>
+                            <PreviewEvent event={event}/>
+
                             <Button
                                 onClick={onEventClick}
                                 data-event-id={event.id}
