@@ -78,6 +78,8 @@ const EventForm = props => {
                     >
                         Clear
                     </Button>
+
+                    {props.cancelButton}
                 </ButtonToolbar>
 
                 <HelpBlock>{submitSucceeded && 'Event has been added!'}</HelpBlock>
