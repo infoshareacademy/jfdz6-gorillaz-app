@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ReadOnlyEvent = (props) => {
+const ReadOnlyEvent = props => {
     const {event} = props
 
     return (

@@ -5,9 +5,9 @@ import {
     ButtonToolbar
 } from 'react-bootstrap'
 
-import {add, remove} from "../state/custom-events"
-import EventForm from './EventForm'
-import ModalButton from '../ModalButton'
+import {add, remove} from "../../state/custom-events"
+import getEventForm from '../form/event-form-factory'
+import ModalButton from '../../ModalButton'
 
 class EditableEvent extends React.Component {
     handleDeleteEventClick = () => {
@@ -29,6 +29,7 @@ class EditableEvent extends React.Component {
                 ('0' + initialDate.getDate()).slice(-2)
             ]
                 .join('-')
+        const EditEventForm = getEventForm('editEventForm' + event.id)
 
         return (
             <div>
@@ -40,7 +41,7 @@ class EditableEvent extends React.Component {
                         buttonName="Edit"
                         modalHeader="Edit your event"
                     >
-                        <EventForm
+                        <EditEventForm
                             onSubmit={this.handleSubmit}
                             initialValues={
                                 {

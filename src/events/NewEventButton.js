@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 
 import {add} from "../state/custom-events"
 import ModalButton from '../ModalButton'
-import getEventForm from './event-form-factory'
+import getEventForm from './form/event-form-factory'
 
 class NewEventButton extends React.Component {
     handleSubmit = newEvent => {
@@ -19,7 +19,7 @@ class NewEventButton extends React.Component {
                 ('0' + initialDate.getDate()).slice(-2)
             ]
                 .join('-')
-        const NewEventForm = getEventForm('newEventForm')
+        const NewEventForm = getEventForm('newEventForm', 2000)
 
         return (
             <ModalButton

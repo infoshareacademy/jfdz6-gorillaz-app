@@ -6,7 +6,7 @@ import {
 } from 'react-bootstrap'
 
 import {add, remove} from "../state/custom-events"
-import EventForm from '../events/EventForm'
+import EventForm from '../events/form/EventForm'
 import ModalButton from '../ModalButton'
 
 class EventDetailView extends React.Component {

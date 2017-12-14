@@ -1,9 +1,9 @@
 import React from 'react'
 
-import ReadOnlyEvent from './ReadOnlyEvent'
-import EditableEvent from './EditableEvent'
+import ReadOnlyEvent from './views/ReadOnlyEvent'
+import EditableEvent from './views/EditableEvent'
 
-const EventsList = (props) => {
+const EventsList = props => {
     const {events, selectedDate} = props
 
     return (
