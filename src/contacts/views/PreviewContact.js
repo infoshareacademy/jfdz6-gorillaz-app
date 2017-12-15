@@ -1,11 +1,11 @@
 import React from 'react'
 
 const PreviewContact = props => {
-    const {event} = props
+    const {item} = props
 
     return (
         <div>
-            <h3>{`${event.firstName.charAt(0)}. ${event.lastName}`}</h3>
+            <h3>{`${item.firstName.charAt(0)}. ${item.lastName}`}</h3>
         </div>
     )
 }
