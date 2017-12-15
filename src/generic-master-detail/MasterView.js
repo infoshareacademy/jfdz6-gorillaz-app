@@ -1,17 +1,15 @@
 import React from 'react'
 import {Button} from 'react-bootstrap'
 
-import PreviewEvent from '../views/PreviewEvent'
-
 const EventsMasterView = props => {
-    const {events, onEventClick} = props
+    const {events, PreviewItem, onEventClick} = props
 
     return (
         <ul>
             {
                 events.map(event => (
                         <li key={event.id}>
-                            <PreviewEvent event={event}/>
+                            <PreviewItem event={event}/>
 
                             <Button
                                 onClick={onEventClick}

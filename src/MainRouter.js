@@ -14,7 +14,7 @@ import {
 
 import Contacts from './Contacts'
 import Calendar from './calendar/Calendar'
-import EventsMasterDetail from './events/master-detail/EventsMasterDetail'
+import EventsMasterDetail from './events/EventsMasterDetail'
 import {Container, Box} from './styled-components/grid-components'
 
 const MainRouter = () => (

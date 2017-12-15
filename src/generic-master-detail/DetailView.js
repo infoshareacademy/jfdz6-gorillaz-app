@@ -1,9 +1,6 @@
 import React from 'react'
 import {Button} from 'react-bootstrap'
 
-import DetailedEvent from '../views/DetailedEvent'
-import EditEvent from '../views/EditEvent'
-
 export default class EventDetailView extends React.Component {
     state = {
         isBeingEdited: false
@@ -28,21 +25,21 @@ export default class EventDetailView extends React.Component {
     )
 
     render() {
-        const {event} = this.props
+        const {event, DetailedItem, EditItem} = this.props
 
         return (
             this.state.isBeingEdited ?
                 <div>
                     <h2>Edit selected event</h2>
-                    <EditEvent event={event}>
+                    <EditItem event={event}>
                         <Button onClick={this.handleCancelClick}>Cancel</Button>
-                    </EditEvent>
+                    </EditItem>
                 </div> :
 
                 <div>
-                    <DetailedEvent event={event}>
+                    <DetailedItem event={event}>
                         <Button onClick={this.handleEditEventClick}>Edit</Button>
-                    </DetailedEvent>
+                    </DetailedItem>
                 </div>
         )
     }
