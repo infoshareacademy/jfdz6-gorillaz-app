@@ -12,7 +12,7 @@ export default class EventDetailView extends React.Component {
         })
     }
 
-    handleEditEventClick = () => (
+    handleEditItemClick = () => (
         this.setState({
             isBeingEdited: true
         })
@@ -25,20 +25,20 @@ export default class EventDetailView extends React.Component {
     )
 
     render() {
-        const {event, DetailedItem, EditItem} = this.props
+        const {item, DetailedItem, EditItem} = this.props
 
         return (
             this.state.isBeingEdited ?
                 <div>
                     <h2>Edit selected event</h2>
-                    <EditItem event={event}>
+                    <EditItem item={item}>
                         <Button onClick={this.handleCancelClick}>Cancel</Button>
                     </EditItem>
                 </div> :
 
                 <div>
-                    <DetailedItem event={event}>
-                        <Button onClick={this.handleEditEventClick}>Edit</Button>
+                    <DetailedItem item={item}>
+                        <Button onClick={this.handleEditItemClick}>Edit</Button>
                     </DetailedItem>
                 </div>
         )

@@ -1,19 +1,19 @@
 import React from 'react'
 import {Button} from 'react-bootstrap'
 
-const EventsMasterView = props => {
-    const {events, PreviewItem, onEventClick} = props
+const MasterView = props => {
+    const {items, PreviewItem, onItemClick} = props
 
     return (
         <ul>
             {
-                events.map(event => (
-                        <li key={event.id}>
-                            <PreviewItem event={event}/>
+                items.map(item => (
+                        <li key={item.id}>
+                            <PreviewItem item={item}/>
 
                             <Button
-                                onClick={onEventClick}
-                                data-event-id={event.id}
+                                onClick={onItemClick}
+                                data-item-id={item.id}
                             >
                                 See more..
                             </Button>
@@ -25,4 +25,4 @@ const EventsMasterView = props => {
     )
 }
 
-export default EventsMasterView
+export default MasterView

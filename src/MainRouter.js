@@ -12,7 +12,7 @@ import {
     LinkContainer
 } from 'react-router-bootstrap'
 
-import Contacts from './Contacts'
+import ContactsMasterDetail from './contacts/ContactsMasterDetail'
 import Calendar from './calendar/Calendar'
 import EventsMasterDetail from './events/EventsMasterDetail'
 import {Container, Box} from './styled-components/grid-components'
@@ -51,7 +51,7 @@ const MainRouter = () => (
 
             <Route exact path="/" component={Home}/>
             <Route path="/about" component={About}/>
-            <Route path="/contacts" component={Contacts}/>
+            <Route path="/contacts" component={ContactsMasterDetail}/>
             <Route path="/calendar" component={Calendar}/>
             <Route path="/my-events" component={EventsMasterDetail}/>
         </div>

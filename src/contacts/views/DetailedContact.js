@@ -20,8 +20,8 @@ class DetailedContact extends React.Component {
                 <h2>Contact details</h2>
                 <h3>First Name: {item.firstName}</h3>
                 <h3>Last Name: {item.lastName}</h3>
-                <h5>Email {item.email}</h5>
-                <h5>Sex {item.sex}</h5>
+                <h5>Email: {item.email}</h5>
+                <h5>Sex: {item.sex}</h5>
                 <p>Notes: {item.notes}</p>
 
                 <ButtonToolbar>

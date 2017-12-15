@@ -9,18 +9,18 @@ import {add, remove} from "../../state/custom-events"
 
 class DetailedEvent extends React.Component {
     handleDeleteEventClick = () => {
-        this.props.removeEvent(this.props.event.id)
+        this.props.removeEvent(this.props.item.id)
     }
 
     render() {
-        const {event} = this.props
+        const {item} = this.props
 
         return (
             <div>
                 <h2>Event details</h2>
-                <h3>Title: {event.title}</h3>
-                <h5>Date {event.date}</h5>
-                <p>Description: {event.payload}</p>
+                <h3>Title: {item.title}</h3>
+                <h5>Date {item.date}</h5>
+                <p>Description: {item.payload}</p>
 
                 <ButtonToolbar>
                     {this.props.children}

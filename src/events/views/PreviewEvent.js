@@ -1,12 +1,12 @@
 import React from 'react'
 
 const PreviewEvent = props => {
-    const {event} = props
+    const {item} = props
 
     return (
         <div>
-            <h3>Date: {event.date.slice(5)}</h3>
-            <h5>Title: {event.title}</h5>
+            <h3>Date: {item.date.slice(5)}</h3>
+            <h5>Title: {item.title}</h5>
         </div>
     )
 }

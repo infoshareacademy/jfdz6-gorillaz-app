@@ -1,5 +1,4 @@
 import React from 'react'
-import {connect} from 'react-redux'
 
 import {Container, Box} from '../styled-components/grid-components'
 import MasterView from './MasterView'
@@ -7,22 +6,22 @@ import DetailView from './DetailView'
 
 class MasterDetail extends React.Component {
     state = {
-        selectedEvent: null
+        selectedItem: null
     }
 
     componentWillReceiveProps = () => {
         this.setState({
-            selectedEvent: null
+            selectedItem: null
         })
     }
 
-    handleEventClick = event => {
+    handleItemClick = event => {
         const target = event.currentTarget
-        const selectedEventId = +target.dataset.eventId
-        const selectedEvent = this.props.events.find(event => event.id === selectedEventId)
+        const selectedItemId = +target.dataset.itemId
+        const selectedItem = this.props.items.find(item => item.id === selectedItemId)
 
         this.setState({
-            selectedEvent
+            selectedItem
         })
     }
 
@@ -32,26 +31,26 @@ class MasterDetail extends React.Component {
         return (
             <Container>
                 <Box sm={5}>
-                    <h2>Your custom events</h2>
+                    <h2>List of items</h2>
                     <MasterView
-                        events={this.props.events}
+                        items={this.props.items}
                         PreviewItem={this.props.PreviewItem}
-                        onEventClick={this.handleEventClick}
+                        onItemClick={this.handleItemClick}
                     />
                 </Box>
 
                 <Box sm={7}>
-                    <h2>Add new event</h2>
+                    <h2>Add new item</h2>
                     <NewItem/>
 
                     {
-                        this.state.selectedEvent ?
+                        this.state.selectedItem ?
                             <DetailView
-                                event={this.state.selectedEvent}
+                                item={this.state.selectedItem}
                                 DetailedItem={this.props.DetailedItem}
                                 EditItem={this.props.EditItem}
                             /> :
-                            <h2>Select event from the list</h2>
+                            <h2>Select item from the list</h2>
                     }
                 </Box>
             </Container>
@@ -59,10 +58,4 @@ class MasterDetail extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({
-    events: state.customEvents
-})
-
-export default connect(
-    mapStateToProps
-)(MasterDetail)
+export default MasterDetail

@@ -1,4 +1,5 @@
 import React from 'react'
+import {connect} from 'react-redux'
 
 import MasterDetail from '../generic-master-detail/MasterDetail'
 import NewEvent from './views/NewEvent'
@@ -10,6 +11,7 @@ const EventsMasterDetail = props => {
 
     return (
         <MasterDetail
+            items={props.items}
             NewItem={NewEvent}
             PreviewItem={PreviewEvent}
             DetailedItem={DetailedEvent}
@@ -18,4 +20,10 @@ const EventsMasterDetail = props => {
     )
 }
 
-export default EventsMasterDetail
+const mapStateToProps = state => ({
+    items: state.customEvents
+})
+
+export default connect(
+    mapStateToProps
+)(EventsMasterDetail)

@@ -1,4 +1,5 @@
 import React from 'react'
+import {connect} from 'react-redux'
 
 import MasterDetail from '../generic-master-detail/MasterDetail'
 import NewContact from './views/NewContact'
@@ -10,6 +11,7 @@ const ContactsMasterDetail = props => {
 
     return (
         <MasterDetail
+            items={props.items}
             NewItem={NewContact}
             PreviewItem={PreviewContact}
             DetailedItem={DetailedContact}
@@ -18,4 +20,10 @@ const ContactsMasterDetail = props => {
     )
 }
 
-export default ContactsMasterDetail
+const mapStateToProps = state => ({
+    items: state.contacts
+})
+
+export default connect(
+    mapStateToProps
+)(ContactsMasterDetail)
