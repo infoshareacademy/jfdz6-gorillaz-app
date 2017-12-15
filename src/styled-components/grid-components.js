@@ -21,7 +21,6 @@ const gridBasis = 12
 export const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
-  background: red;
   margin: 0 auto;
   padding: 10px;
   
@@ -31,8 +30,6 @@ ${media.largeDesktop`width: 1170px;`}
 `
 
 export const Box = styled.div`
-  background: lime;
-  border: 1px solid white;
   padding: 10px;
   width: ${props => props.xs ? (props.xs / gridBasis) * 100 : 100}%;
   

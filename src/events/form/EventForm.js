@@ -9,6 +9,8 @@ import {
     ButtonToolbar
 } from 'react-bootstrap'
 
+import './EventForm.css'
+
 const renderTextField = ({input, label, type, meta: {touched, error}}) => (
     <FormGroup
         validationState={touched ? (error ? 'error' : 'success') : null}

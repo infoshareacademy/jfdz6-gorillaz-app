@@ -5,6 +5,7 @@ import moment from 'moment'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 
 import {getHolidays} from "../state/holidays"
+import {Container, Box} from '../styled-components/grid-components'
 import './Calendar.css'
 import {
     getParsedEvents,
@@ -61,11 +62,13 @@ class Calendar extends React.Component {
 
     render() {
         return (
-            <div>
-                <div className="Calendar__wrapper">
-                    <BigCalendar {...this.getCalendarConfig()}/>
-                </div>
-
+            <Container>
+                <Box sm={8}>
+                    <div className="Calendar__wrapper">
+                        <BigCalendar {...this.getCalendarConfig()}/>
+                    </div>
+                </Box>
+                <Box sm={4}>
                 <div>
                     {
                         this.props.holidays.getting && <p>Getting data...</p>
@@ -80,7 +83,8 @@ class Calendar extends React.Component {
                             <h5>Click on a given day to check who celebrates a name day!</h5>
                     }
                 </div>
-            </div>
+                </Box>
+            </Container>
         )
     }
 }

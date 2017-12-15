@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
+import {Container, Box} from '../../styled-components/grid-components'
 import EventsMasterView from './EventsMasterView'
 import NewEvent from '../views/NewEvent'
 import EventDetailView from './EventDetailView'
@@ -28,22 +29,26 @@ class EventsMasterDetail extends React.Component {
 
     render() {
         return (
-            <div>
-                <h2>Your custom events</h2>
-                <EventsMasterView
-                    events={this.props.events}
-                    onEventClick={this.handleEventClick}
-                />
+            <Container>
+                <Box sm={5}>
+                    <h2>Your custom events</h2>
+                    <EventsMasterView
+                        events={this.props.events}
+                        onEventClick={this.handleEventClick}
+                    />
+                </Box>
 
-                <h2>Add new event</h2>
-                <NewEvent/>
+                <Box sm={7}>
+                    <h2>Add new event</h2>
+                    <NewEvent/>
 
-                {
-                    this.state.selectedEvent ?
-                        <EventDetailView event={this.state.selectedEvent}/> :
-                        <h2>Select event from the list</h2>
-                }
-            </div>
+                    {
+                        this.state.selectedEvent ?
+                            <EventDetailView event={this.state.selectedEvent}/> :
+                            <h2>Select event from the list</h2>
+                    }
+                </Box>
+            </Container>
         )
     }
 }
