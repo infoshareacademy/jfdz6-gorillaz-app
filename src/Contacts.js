@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Button} from 'react-bootstrap'
 
-import AddContactForm from './AddContactForm'
+import AddContactForm from './contacts/form/ContactForm'
 import showResults from "./helpers";
 import ContactsList from './ContactsList'
 
