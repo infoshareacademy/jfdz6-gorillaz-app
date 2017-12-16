@@ -12,6 +12,7 @@ const ContactsMasterDetail = props => {
     return (
         <MasterDetail
             items={props.items}
+            name={'contact'}
             NewItem={NewContact}
             PreviewItem={PreviewContact}
             DetailedItem={DetailedContact}

@@ -12,6 +12,7 @@ const EventsMasterDetail = props => {
     return (
         <MasterDetail
             items={props.items}
+            name={'event'}
             NewItem={NewEvent}
             PreviewItem={PreviewEvent}
             DetailedItem={DetailedEvent}

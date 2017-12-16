@@ -7,7 +7,7 @@ import getEventForm from '../form/event-form-factory'
 class EditEvent extends React.Component {
     handleSubmit = newEvent => {
         this.props.addEvent(newEvent)
-        this.props.removeEvent(this.props.event.id)
+        this.props.removeEvent(this.props.item.id)
     }
 
     render() {
