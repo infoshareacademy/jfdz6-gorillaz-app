@@ -14,6 +14,7 @@ import {
 import {getCalendarConfig} from './calendar-config'
 import NewEventButton from '../events/views/NewEventButton'
 import EventsList from '../events/EventsList'
+import DateSearchBar from '../search-bar/DateSearchBar'
 
 BigCalendar.setLocalizer(
     BigCalendar.momentLocalizer(moment)
@@ -73,6 +74,7 @@ class Calendar extends React.Component {
                     {
                         this.props.holidays.getting && <p>Getting data...</p>
                     }
+                    <DateSearchBar/>
                     <NewEventButton selectedDate={this.state.selectedDate}/>
                     {
                         this.state.selectedEvents.length ?
