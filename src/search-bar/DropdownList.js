@@ -2,11 +2,17 @@ import React from 'react'
 
 const DropdownList = props => (
     <div>
-        <select onChange={props.onSelectChange}>
+        <select value={props.value} onChange={props.onSelectChange}>
+            <option
+                key={'select'}
+                value={''}
+                disabled
+            >
+                select
+            </option>
             <option
                 key={'all'}
-                value={'all'}
-                default
+                value={0}
             >
                 all
             </option>

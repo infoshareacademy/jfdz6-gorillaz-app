@@ -5,10 +5,23 @@ import DropdownList from './DropdownList'
 
 export default class DateSearchBar extends React.Component {
     state = {
-        year: null,
-        month: null,
-        day: null,
+        year: '',
+        month: '',
+        day: '',
         currentDaysRange: getDaysForGivenMonth(1)
+    }
+
+    componentWillReceiveProps = newProps => {
+        if(newProps.selectedDate) {
+            const currentDaysRange = getDaysForGivenMonth(+newProps.selectedDate.getMonth() + 1)
+
+            this.setState({
+                year: +newProps.selectedDate.getFullYear(),
+                month: +newProps.selectedDate.getMonth() + 1,
+                day: +newProps.selectedDate.getDate(),
+                currentDaysRange
+            })
+        }
     }
 
     setDatePart = (part, event) => {
@@ -30,7 +43,7 @@ export default class DateSearchBar extends React.Component {
             currentDaysRange
         })
 
-        !currentDaysRange.find(day => day.value === this.state.day) && this.setState({day: null})
+        !currentDaysRange.find(day => day.value === this.state.day) && this.setState({day: ''})
     }
 
     handleDayChange = event => (
@@ -44,18 +57,21 @@ export default class DateSearchBar extends React.Component {
 
                 Year:
                 <DropdownList
+                    value={this.state.year}
                     onSelectChange={this.handleYearChange}
                     options={years}
                 />
 
                 Month:
                 <DropdownList
+                    value={this.state.month}
                     onSelectChange={this.handleMonthChange}
                     options={months}
                 />
 
                 Day:
                 <DropdownList
+                    value={this.state.day}
                     onSelectChange={this.handleDayChange}
                     options={this.state.currentDaysRange}
                 />

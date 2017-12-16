@@ -148,7 +148,7 @@ export function getParsedEventsForSelectedDate(date, sentParsedEvents) {
 
 export function getParsedEventsForSelectedRange(range, sentParsedEvents) {
     const parsedEvents = sentParsedEvents || this.state.events
-
+console.log(range)
     this.setState(
         {
             selectedEvents:

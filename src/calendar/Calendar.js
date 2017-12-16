@@ -78,7 +78,11 @@ class Calendar extends React.Component {
                     {
                         this.props.holidays.getting && <p>Getting data...</p>
                     }
-                    <DateSearchBar onRangeChange={this.handleRangeChange}/>
+                    <DateSearchBar
+                        onRangeChange={this.handleRangeChange}
+                        selectedDate={this.state.selectedDate}
+                    />
+
                     <NewEventButton selectedDate={this.state.selectedDate}/>
                     {
                         this.state.selectedEvents.length ?
