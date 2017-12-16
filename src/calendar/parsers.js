@@ -53,6 +53,7 @@ const parseCustomEvents = (currentYear) => (
             id: event.id,
             start: new Date(currentYear, +event.date.slice(5, 7) - 1, +event.date.slice(8)),
             end: new Date(currentYear, +event.date.slice(5, 7) - 1, +event.date.slice(8)),
+            since: +event.date.slice(0, 4),
             title: event.title,
             payload: event.payload,
             type: 'custom'
@@ -141,6 +142,24 @@ export function getParsedEventsForSelectedDate(date, sentParsedEvents) {
                     namesObj
                 ],
             selectedDate: date
+        }
+    )
+}
+
+export function getParsedEventsForSelectedRange(range, sentParsedEvents) {
+    const parsedEvents = sentParsedEvents || this.state.events
+
+    this.setState(
+        {
+            selectedEvents:
+                [
+                    ...parsedEvents.filter(event =>
+                        (range.year && event.since ? (event.since <= range.year) : true) &&
+                        (range.month ? (event.start.getMonth() + 1 === range.month) : true) &&
+                        (range.day ? (event.start.getDate() === range.day) : true)
+                    )
+                ],
+            selectedDate: null
         }
     )
 }

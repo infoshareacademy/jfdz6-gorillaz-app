@@ -8,7 +8,7 @@ const EventsList = props => {
 
     return (
         <div>
-            <h2>Holidays for {selectedDate.toDateString()}</h2>
+            <h2>Holidays for {selectedDate ? selectedDate.toDateString() : 'selected range'}</h2>
             <ul>
                 {
                     events.map(event => (

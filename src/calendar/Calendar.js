@@ -9,7 +9,8 @@ import {Container, Box} from '../styled-components/grid-components'
 import './Calendar.css'
 import {
     getParsedEvents,
-    getParsedEventsForSelectedDate
+    getParsedEventsForSelectedDate,
+    getParsedEventsForSelectedRange
 } from './parsers'
 import {getCalendarConfig} from './calendar-config'
 import NewEventButton from '../events/views/NewEventButton'
@@ -41,6 +42,7 @@ class Calendar extends React.Component {
 
     getParsedEvents = getParsedEvents.bind(this)
     getParsedEventsForSelectedDate = getParsedEventsForSelectedDate.bind(this)
+    getParsedEventsForSelectedRange = getParsedEventsForSelectedRange.bind(this)
     getCalendarConfig = getCalendarConfig.bind(this)
 
     handleNavigate = (currentDate) => {
@@ -61,6 +63,8 @@ class Calendar extends React.Component {
 
     handleSelectEvent = (event) => this.handleSelectSlot(event)
 
+    handleRangeChange = selectedRange => this.getParsedEventsForSelectedRange(selectedRange)
+
     render() {
         return (
             <Container>
@@ -74,7 +78,7 @@ class Calendar extends React.Component {
                     {
                         this.props.holidays.getting && <p>Getting data...</p>
                     }
-                    <DateSearchBar/>
+                    <DateSearchBar onRangeChange={this.handleRangeChange}/>
                     <NewEventButton selectedDate={this.state.selectedDate}/>
                     {
                         this.state.selectedEvents.length ?

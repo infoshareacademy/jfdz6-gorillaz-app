@@ -15,6 +15,7 @@ export default class DateSearchBar extends React.Component {
         this.setState({
             [part]: +event.currentTarget.value
         })
+        this.props.onRangeChange({...this.state, [part]: +event.currentTarget.value})
     }
 
     handleYearChange = event => (
