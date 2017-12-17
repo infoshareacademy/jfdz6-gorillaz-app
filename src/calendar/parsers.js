@@ -147,6 +147,30 @@ export function getParsedEventsForSelectedDate(date, sentParsedEvents) {
 
 export function getParsedEventsForSelectedRange(range, sentParsedEvents) {
     const parsedEvents = sentParsedEvents || this.state.events
+    const nullPattern = '00'
+    const dateKey = (nullPattern + range.day).slice(-2) + (nullPattern + range.month).slice(-2)
+    const isDateFull = dateKey.slice(0, 2) !== nullPattern && dateKey.slice(-2) !== nullPattern
+    const nameDays = this.props.holidays.data.nameDays
+
+    const namesArr = Object.keys(nameDays).reduce((acc, next) => {
+            const isMatching = next === dateKey ||
+                (!isDateFull &&
+                    (next.slice(0, 2) === dateKey.slice(0, 2) ||
+                    next.slice(-2) === dateKey.slice(-2))
+                )
+            isMatching && (acc.push(
+                {
+                    id: next + 'name',
+                    start: next,
+                    title: 'People celebrating name day at ' + next,
+                    payload: nameDays[next].join(' ')
+                }
+            ))
+
+            return acc
+        },
+        []
+    )
 
     this.setState(
         {
@@ -155,32 +179,12 @@ export function getParsedEventsForSelectedRange(range, sentParsedEvents) {
                     (range.year && event.since ? (event.since <= range.year) : true) &&
                     (range.month ? (event.start.getMonth() + 1 === range.month) : true) &&
                     (range.day ? (event.start.getDate() === range.day) : true)
-                )
+                ),
+                ...namesArr
             ],
             selectedDate: null
         }
     )
-
-
-    const nullPattern = '00'
-    const dateKey = (nullPattern + range.day).slice(-2) + (nullPattern + range.month).slice(-2)
-    const isDateFull = dateKey.slice(0, 2) !== nullPattern && dateKey.slice(-2) !== nullPattern
-    const nameDays = this.props.holidays.data.nameDays
-
-    const namesObj = Object.keys(nameDays).reduce((acc, next) => {
-            const isMatching = next === dateKey ||
-                (!isDateFull &&
-                    (next.slice(0, 2) === dateKey.slice(0, 2) ||
-                    next.slice(-2) === dateKey.slice(-2))
-                )
-            isMatching && (acc[next] = nameDays[next].join(' '))
-
-            return acc
-        },
-        {}
-    )
-
-    console.log(JSON.stringify(namesObj))
 }
 
 
