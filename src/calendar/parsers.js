@@ -106,7 +106,7 @@ export function getParsedEvents(currentYear, sentProps) {
     const parsedEvents =
         [
             ...customEvents.filter(event =>
-                +event.date.slice(0, 4) <= currentYear)
+            +event.date.slice(0, 4) <= currentYear)
                 .map(parseCustomEvents(currentYear)),
             ...otherHolidays.map(parseOtherHolidays(currentYear)),
             ...publicMovableHolidays.map(parsePublicMovableHolidays(currentYear)),
@@ -134,13 +134,12 @@ export function getParsedEventsForSelectedDate(date, sentParsedEvents) {
 
     this.setState(
         {
-            selectedEvents:
-                [
-                    ...parsedEvents.filter(event =>
-                        event.start.toString() === date.toString()
-                    ),
-                    namesObj
-                ],
+            selectedEvents: [
+                ...parsedEvents.filter(event =>
+                    event.start.toString() === date.toString()
+                ),
+                namesObj
+            ],
             selectedDate: date
         }
     )
@@ -148,18 +147,41 @@ export function getParsedEventsForSelectedDate(date, sentParsedEvents) {
 
 export function getParsedEventsForSelectedRange(range, sentParsedEvents) {
     const parsedEvents = sentParsedEvents || this.state.events
-console.log(range)
+
     this.setState(
         {
-            selectedEvents:
-                [
-                    ...parsedEvents.filter(event =>
-                        (range.year && event.since ? (event.since <= range.year) : true) &&
-                        (range.month ? (event.start.getMonth() + 1 === range.month) : true) &&
-                        (range.day ? (event.start.getDate() === range.day) : true)
-                    )
-                ],
+            selectedEvents: [
+                ...parsedEvents.filter(event =>
+                    (range.year && event.since ? (event.since <= range.year) : true) &&
+                    (range.month ? (event.start.getMonth() + 1 === range.month) : true) &&
+                    (range.day ? (event.start.getDate() === range.day) : true)
+                )
+            ],
             selectedDate: null
         }
     )
+
+
+    const nullPattern = '00'
+    const dateKey = (nullPattern + range.day).slice(-2) + (nullPattern + range.month).slice(-2)
+    const isDateFull = dateKey.slice(0, 2) !== nullPattern && dateKey.slice(-2) !== nullPattern
+    const nameDays = this.props.holidays.data.nameDays
+
+    const namesObj = Object.keys(nameDays).reduce((acc, next) => {
+            const isMatching = next === dateKey ||
+                (!isDateFull &&
+                    (next.slice(0, 2) === dateKey.slice(0, 2) ||
+                    next.slice(-2) === dateKey.slice(-2))
+                )
+            isMatching && (acc[next] = nameDays[next].join(' '))
+
+            return acc
+        },
+        {}
+    )
+
+    console.log(JSON.stringify(namesObj))
 }
+
+
+
