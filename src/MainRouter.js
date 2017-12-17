@@ -1,5 +1,6 @@
 import React from 'react'
 import SignUp from './SignUp'
+import SignIn from './SignIn'
 
 import {
     BrowserRouter as Router,
@@ -53,6 +54,7 @@ const MainRouter = () => (
 
             <Route exact path="/" component={Home}/>
             <Route path="/sign-up" component={SignUp}/>
+            <Route path="/sign-in" component={SignIn}/>
             <Route path="/about" component={About}/>
             <Route path="/contacts" component={ContactsMasterDetail}/>
             <Route path="/calendar" component={Calendar}/>
