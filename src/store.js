@@ -39,4 +39,6 @@ const store = createStore(
     enhancer
 )
 
+store.dispatch({ type: 'RESET'})
+
 export default store

@@ -27,6 +27,7 @@ class SignUp extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <p>{this.props.auth.data && this.props.auth.data.email}</p>
+        <p>{this.props.auth.error && this.props.auth.error.message}</p>
         Login:
         <input
           name="login"

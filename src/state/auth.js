@@ -32,6 +32,11 @@ export const SignIn = (email, password) => dispatch => {
 
 export default (state = initialState, action = {}) => {
   switch (action.type){
+    case 'RESET':
+      return {
+        ...state,
+        error: null
+      }
     case SET_USER:
       return {
         ...state,
