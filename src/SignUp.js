@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { coonnect } from 'react-redux'
+import { connect } from 'react-redux'
 import { signUp } from './state/auth'
 
 class SignUp extends Component {
