@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+import { coonnect } from 'react-redux'
+import { signUp } from './state/auth'
 
 class SignUp extends Component {
 
@@ -15,11 +17,16 @@ class SignUp extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
+    this.props.signUp(
+      this.state.login,
+      this.state.password
+    )
   }
 
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
+        <p>{this.props.auth && this.props.auth.email}</p>
         Login:
         <input
           name="login"
@@ -37,4 +44,15 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp
+const mapStateToProps = state => ({
+  auth: state.auth
+})
+
+const mapDispatchToProps = dispatch => ({
+  signUp: (email, password) => dispatch(signUp(email,password))
+})
+
+export default connect (
+  mapStateToProps,
+  mapDispatchToProps
+)(SignUp)

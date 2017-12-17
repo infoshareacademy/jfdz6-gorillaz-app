@@ -4,6 +4,7 @@ import thunk from 'redux-thunk'
 import { reducer as reduxFormReducer } from 'redux-form';
 import firebase from 'firebase'
 
+import auth from './state/auth'
 import contacts from './state/contacts'
 import customEvents from './state/custom-events'
 import holidays from './state/holidays'
@@ -20,6 +21,7 @@ firebase.initializeApp(config);
 
 const reducer = combineReducers({
     form: reduxFormReducer,
+    auth,
     contacts,
     customEvents,
     holidays
