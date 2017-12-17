@@ -8,7 +8,7 @@ class Auth extends Component {
     return(
       <div>
         {
-          this.props.auth === null ?
+          this.props.auth.data === null ?
             <SignIn/>:
             this.props.children
         }

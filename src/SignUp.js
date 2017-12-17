@@ -26,7 +26,7 @@ class SignUp extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <p>{this.props.auth && this.props.auth.email}</p>
+        <p>{this.props.auth.data && this.props.auth.data.email}</p>
         Login:
         <input
           name="login"
@@ -52,7 +52,7 @@ const mapDispatchToProps = dispatch => ({
   signUp: (email, password) => dispatch(signUp(email,password))
 })
 
-export default connect (
+export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(SignUp)
