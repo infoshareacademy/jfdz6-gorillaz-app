@@ -1,8 +1,7 @@
 import React from 'react'
 import {
     BrowserRouter as Router,
-    Route,
-    Link
+    Route
 } from 'react-router-dom'
 import {
     Navbar,
@@ -12,6 +11,11 @@ import {
 import {
     LinkContainer
 } from 'react-router-bootstrap'
+
+import ContactsMasterDetail from './contacts/ContactsMasterDetail'
+import Calendar from './calendar/Calendar'
+import EventsMasterDetail from './events/EventsMasterDetail'
+import {Container, Box} from './styled-components/grid-components'
 
 const MainRouter = () => (
     <Router>
@@ -38,13 +42,18 @@ const MainRouter = () => (
                     <LinkContainer to="/calendar">
                         <NavItem>Calendar</NavItem>
                     </LinkContainer>
+
+                    <LinkContainer to="/my-events">
+                        <NavItem>My events</NavItem>
+                    </LinkContainer>
                 </Nav>
             </Navbar>
 
             <Route exact path="/" component={Home}/>
             <Route path="/about" component={About}/>
-            <Route path="/contacts" component={Contacts}/>
+            <Route path="/contacts" component={ContactsMasterDetail}/>
             <Route path="/calendar" component={Calendar}/>
+            <Route path="/my-events" component={EventsMasterDetail}/>
         </div>
     </Router>
 )
@@ -56,21 +65,33 @@ const Home = () => (
 )
 
 const About = () => (
-    <div>
-        <h2>About</h2>
-    </div>
-)
-
-const Contacts = () => (
-    <div>
-        <h2>Contacts list</h2>
-    </div>
-)
-
-const Calendar = () => (
-    <div>
-        <h2>Calendar</h2>
-    </div>
+    <Container>
+        <Box
+            sm={6}
+            md={3}
+            smPush={1}
+        >
+            Box1
+        </Box>
+        <Box
+            sm={6}
+            md={3}
+        >
+            Box2
+        </Box>
+        <Box
+            sm={6}
+            md={3}
+        >
+            Box3
+        </Box>
+        <Box
+            sm={6}
+            md={3}
+        >
+            Box4
+        </Box>
+    </Container>
 )
 
 export default MainRouter
