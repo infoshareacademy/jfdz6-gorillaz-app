@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { signUp } from './state/auth'
 import { Button } from 'react-bootstrap'
@@ -51,7 +51,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  signUp: (email, password) => dispatch(signUp(email,password))
+  signUp: (email, password) => dispatch(signUp(email, password))
 })
 
 export default connect(
