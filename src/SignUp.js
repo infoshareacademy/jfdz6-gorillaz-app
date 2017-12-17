@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { signUp } from './state/auth'
+import { Button } from 'react-bootstrap'
 
 class SignUp extends Component {
 
@@ -39,7 +40,7 @@ class SignUp extends Component {
           type="password"
           onChange={this.handleChange}
         />
-        <button>Sign up</button>
+        <Button type="submit" bsStyle="primary">Sign up</Button>
       </form>
     )
   }
