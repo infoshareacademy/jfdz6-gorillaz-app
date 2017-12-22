@@ -1,3 +1,5 @@
+import firebase from 'firebase'
+
 import {customEvents} from '../events/data/custom-events'
 
 const ADD = 'custom-events/ADD_EVENT'
@@ -8,6 +10,14 @@ export const add = newEvent => ({
     type: ADD,
     newEvent
 })
+
+export const addEvent = newEvent => dispatch => {
+    // const newEventKey = firebase.database().ref().child('posts').push().key;
+    const userId = firebase.auth().currentUser.uid
+    firebase.database().ref(`/users/${userId}/custom-events/${Date.now()}`).set(newEvent)
+
+    dispatch(add(newEvent))
+}
 
 export const get = () => ({
     type: GET

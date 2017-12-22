@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import {add} from "../../state/custom-events"
+import {addEvent} from "../../state/custom-events"
 import ModalButton from '../../ModalButton'
 import getEventForm from '../form/event-form-factory'
 
@@ -36,7 +36,7 @@ class NewEventButton extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    addEvent: (newEvent) => dispatch(add(newEvent))
+    addEvent: (newEvent) => dispatch(addEvent(newEvent)),
 })
 
 export default connect(
