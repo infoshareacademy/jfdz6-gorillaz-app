@@ -5,7 +5,10 @@ import moment from 'moment'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 
 import {getHolidays} from "../state/holidays"
-import {getCustomEvents} from '../state/custom-events'
+import {
+    subscribeCustomEvents,
+    unsubscribeCustomEvents
+} from '../state/custom-events'
 import {Container, Box} from '../styled-components/grid-components'
 import './Calendar.css'
 import {
@@ -30,7 +33,7 @@ class Calendar extends React.Component {
 
     componentDidMount = () => {
         this.props.holidays.data ? this.componentWillReceiveProps(this.props) : this.props.getHolidays()
-        this.props.getCustomEvents()
+        this.props.subscribeCustomEvents()
     }
 
     componentWillReceiveProps = (newProps) => {
@@ -38,6 +41,10 @@ class Calendar extends React.Component {
             const parsedEvents = this.getParsedEvents(this.state.currentYear, newProps)
             this.state.selectedDate && this.getParsedEventsForSelectedDate(this.state.selectedDate, parsedEvents)
         }
+    }
+
+    componentWillUnmount = () => {
+        this.props.unsubscribeCustomEvents()
     }
 
     getParsedEvents = getParsedEvents.bind(this)
@@ -98,7 +105,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     getHolidays: () => dispatch(getHolidays()),
-    getCustomEvents: () => dispatch(getCustomEvents())
+    subscribeCustomEvents: () => dispatch(subscribeCustomEvents()),
+    unsubscribeCustomEvents: () => dispatch(unsubscribeCustomEvents())
 })
 
 export default connect(
