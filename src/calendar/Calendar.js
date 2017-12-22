@@ -5,6 +5,7 @@ import moment from 'moment'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 
 import {getHolidays} from "../state/holidays"
+import {getCustomEvents} from '../state/custom-events'
 import {Container, Box} from '../styled-components/grid-components'
 import './Calendar.css'
 import {
@@ -29,6 +30,7 @@ class Calendar extends React.Component {
 
     componentDidMount = () => {
         this.props.holidays.data ? this.componentWillReceiveProps(this.props) : this.props.getHolidays()
+        this.props.getCustomEvents()
     }
 
     componentWillReceiveProps = (newProps) => {
@@ -95,7 +97,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    getHolidays: () => dispatch(getHolidays())
+    getHolidays: () => dispatch(getHolidays()),
+    getCustomEvents: () => dispatch(getCustomEvents())
 })
 
 export default connect(

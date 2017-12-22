@@ -17,7 +17,7 @@ class MasterDetail extends React.Component {
 
     handleItemClick = event => {
         const target = event.currentTarget
-        const selectedItemId = +target.dataset.itemId
+        const selectedItemId = target.dataset.itemId
         const selectedItem = this.props.items.find(item => item.id === selectedItemId)
 
         this.setState({
