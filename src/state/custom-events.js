@@ -43,6 +43,16 @@ export const getCustomEvents = () => dispatch => {
     })
 }
 
+export const removeEvent = eventId => dispatch => {
+    const userId = firebase.auth().currentUser.uid
+
+    firebase.database().ref(`/users/${userId}/custom-events/${eventId}`)
+        .remove()
+        .then(
+            dispatch(getCustomEvents())
+        )
+}
+
 export const remove = eventId => ({
     type: REMOVE,
     eventId
