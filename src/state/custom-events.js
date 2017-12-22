@@ -12,10 +12,10 @@ export const add = newEvent => ({
 })
 
 export const addEvent = newEvent => dispatch => {
-    // const newEventKey = firebase.database().ref().child('posts').push().key;
     const userId = firebase.auth().currentUser.uid
-    firebase.database().ref(`/users/${userId}/custom-events/${Date.now()}`).set(newEvent)
+    const newEventKey = firebase.database().ref(`users/${userId}/custom-events`).push().key
 
+    firebase.database().ref(`/users/${userId}/custom-events/${newEventKey}`).set(newEvent)
     dispatch(add(newEvent))
 }
 
