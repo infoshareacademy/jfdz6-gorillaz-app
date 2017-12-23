@@ -9,7 +9,10 @@ export const addEvent = newEvent => dispatch => {
     const userId = firebase.auth().currentUser.uid
     const newEventKey = firebase.database().ref(`users/${userId}/custom-events`).push().key
 
-    firebase.database().ref(`/users/${userId}/custom-events/${newEventKey}`).set(newEvent)
+    firebase.database().ref(`/users/${userId}/custom-events/${newEventKey}`).set({
+        ...newEvent,
+        payload: newEvent.payload || 'no data'
+    })
 }
 
 export const subscribeCustomEvents = () => dispatch => {
@@ -42,15 +45,6 @@ export const unsubscribeCustomEvents = () => dispatch => {
     const customEventsRef = firebase.database().ref(`users/${userId}/custom-events`)
 
     customEventsRef.off()
-}
-
-export const updateEvent = (newEvent, eventId) => dispatch => {
-    const userId = firebase.auth().currentUser.uid
-    const newEventKey = firebase.database().ref(`users/${userId}/custom-events`).push().key
-
-    firebase.database().ref(`/users/${userId}/custom-events/${newEventKey}`).set(newEvent).then(
-        dispatch(removeEvent(eventId))
-    )
 }
 
 export const removeEvent = eventId => dispatch => {

@@ -1,12 +1,13 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import {updateEvent} from "../../state/custom-events"
+import {addEvent, removeEvent} from "../../state/custom-events"
 import getEventForm from '../form/event-form-factory'
 
 class EditEvent extends React.Component {
     handleSubmit = newEvent => {
-        this.props.updateEvent(newEvent, this.props.item.id)
+        this.props.addEvent(newEvent)
+        this.props.removeEvent(this.props.item.id)
     }
 
     render() {
@@ -28,7 +29,8 @@ class EditEvent extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    updateEvent: (newEvent, eventId) => dispatch(updateEvent(newEvent, eventId))
+    addEvent: newEvent => dispatch(addEvent(newEvent)),
+    removeEvent: eventId => dispatch(removeEvent(eventId))
 })
 
 export default connect(
