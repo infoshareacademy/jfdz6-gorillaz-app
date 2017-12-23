@@ -20,8 +20,8 @@ export const subscribeCustomEvents = () => dispatch => {
         const data = snapshot.val() ?
             Object.keys(snapshot.val()).reduce((arrayedEvents, eventId) => {
                     arrayedEvents.push({
-                        id: eventId,
-                        ...snapshot.val()[eventId]
+                        ...snapshot.val()[eventId],
+                        id: eventId
                     })
 
                     return arrayedEvents
@@ -42,6 +42,15 @@ export const unsubscribeCustomEvents = () => dispatch => {
     const customEventsRef = firebase.database().ref(`users/${userId}/custom-events`)
 
     customEventsRef.off()
+}
+
+export const updateEvent = (newEvent, eventId) => dispatch => {
+    const userId = firebase.auth().currentUser.uid
+    const newEventKey = firebase.database().ref(`users/${userId}/custom-events`).push().key
+
+    firebase.database().ref(`/users/${userId}/custom-events/${newEventKey}`).set(newEvent).then(
+        dispatch(removeEvent(eventId))
+    )
 }
 
 export const removeEvent = eventId => dispatch => {
