@@ -12,13 +12,11 @@ class NewEventButton extends React.Component {
 
     render() {
         const initialDate = this.props.selectedDate || new Date()
-        const parsedDate =
-            [
+        const parsedDate = [
                 initialDate.getFullYear(),
                 ('0' + (initialDate.getMonth() + 1)).slice(-2),
                 ('0' + initialDate.getDate()).slice(-2)
-            ]
-                .join('-')
+            ].join('-')
         const NewEventForm = getEventForm('newEventForm', 2000)
 
         return (

@@ -34,7 +34,7 @@ class EventsMasterDetail extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    items: state.customEvents
+    items: state.customEvents.data
 })
 
 const mapDispatchToProps = dispatch => ({

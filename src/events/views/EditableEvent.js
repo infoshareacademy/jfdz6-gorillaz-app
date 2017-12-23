@@ -22,13 +22,11 @@ class EditableEvent extends React.Component {
     render() {
         const {event, selectedDate} = this.props
         const initialDate = selectedDate || new Date()
-        const parsedDate =
-            [
-                initialDate.getFullYear(),
-                ('0' + (initialDate.getMonth() + 1)).slice(-2),
-                ('0' + initialDate.getDate()).slice(-2)
-            ]
-                .join('-')
+        const parsedDate = [
+            initialDate.getFullYear(),
+            ('0' + (initialDate.getMonth() + 1)).slice(-2),
+            ('0' + initialDate.getDate()).slice(-2)
+        ].join('-')
         const EditEventForm = getEventForm('editEventForm' + event.id)
 
         return (
@@ -43,13 +41,11 @@ class EditableEvent extends React.Component {
                     >
                         <EditEventForm
                             onSubmit={this.handleSubmit}
-                            initialValues={
-                                {
-                                    date: parsedDate,
-                                    title: event.title,
-                                    payload: event.payload
-                                }
-                            }
+                            initialValues={{
+                                date: parsedDate,
+                                title: event.title,
+                                payload: event.payload
+                            }}
                         />
                     </ModalButton>
 

@@ -4,20 +4,24 @@ import BigCalendar from 'react-big-calendar'
 import moment from 'moment'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 
-import {getHolidays} from "../state/holidays"
 import {
     subscribeCustomEvents,
-    unsubscribeCustomEvents
+    unsubscribeCustomEvents,
+    parseEvents
 } from '../state/custom-events'
-import {Container, Box} from '../styled-components/grid-components'
-import './Calendar.css'
 import {
-    getParsedEvents,
-    getParsedEventsForSelectedDate
+    getHolidays,
+    parseHolidays
+}from "../state/holidays"
+import {
+    getParsedEventsForSelectedDate,
+    getParsedHolidaysForSelectedDate
 } from './parsers'
 import {getCalendarConfig} from './calendar-config'
 import NewEventButton from '../events/views/NewEventButton'
 import EventsList from '../events/EventsList'
+import {Container, Box} from '../styled-components/grid-components'
+import './Calendar.css'
 
 BigCalendar.setLocalizer(
     BigCalendar.momentLocalizer(moment)
@@ -25,51 +29,52 @@ BigCalendar.setLocalizer(
 
 class Calendar extends React.Component {
     state = {
-        events: [],
         currentYear: (new Date()).getFullYear(),
-        selectedDate: null,
-        selectedEvents: []
+        selectedDate: null
     }
 
     componentDidMount = () => {
-        this.props.holidays.data ? this.componentWillReceiveProps(this.props) : this.props.getHolidays()
+        !this.props.holidays.data && this.props.getHolidays()
         this.props.subscribeCustomEvents()
-    }
-
-    componentWillReceiveProps = (newProps) => {
-        if (newProps.holidays.data) {
-            const parsedEvents = this.getParsedEvents(this.state.currentYear, newProps)
-            this.state.selectedDate && this.getParsedEventsForSelectedDate(this.state.selectedDate, parsedEvents)
-        }
     }
 
     componentWillUnmount = () => {
         this.props.unsubscribeCustomEvents()
     }
 
-    getParsedEvents = getParsedEvents.bind(this)
-    getParsedEventsForSelectedDate = getParsedEventsForSelectedDate.bind(this)
     getCalendarConfig = getCalendarConfig.bind(this)
 
-    handleNavigate = (currentDate) => {
+    handleNavigate = currentDate => {
         const currentYear = (new Date(currentDate)).getFullYear()
 
-        this.setState({
-            selectedDate: null,
-            selectedEvents: []
-        })
-
         if (this.state.currentYear !== currentYear) {
-            this.getParsedEvents(currentYear)
-            this.setState({currentYear})
+            this.props.parseEvents(currentYear)
+            this.props.parseHolidays(currentYear)
+
+            this.setState({
+                currentYear,
+                selectedDate: null
+            })
+        } else {
+            this.setState({
+                selectedDate: null
+            })
         }
     }
 
-    handleSelectSlot = ({start}) => this.getParsedEventsForSelectedDate(start)
+    handleSelectSlot = ({start}) => this.setState({selectedDate: start})
 
-    handleSelectEvent = (event) => this.handleSelectSlot(event)
+    handleSelectEvent = event => this.handleSelectSlot(event)
 
     render() {
+        const {customEvents, holidays} = this.props
+        const selectedEvents = customEvents.parsedData && this.state.selectedDate ?
+            getParsedEventsForSelectedDate(customEvents.parsedData, this.state.selectedDate) :
+            []
+        const selectedHolidays = holidays.parsedData && this.state.selectedDate ?
+            getParsedHolidaysForSelectedDate(holidays, this.state.selectedDate) :
+            []
+
         return (
             <Container>
                 <Box sm={8}>
@@ -77,21 +82,25 @@ class Calendar extends React.Component {
                         <BigCalendar {...this.getCalendarConfig()}/>
                     </div>
                 </Box>
+
                 <Box sm={4}>
-                <div>
-                    {
-                        this.props.holidays.getting && <p>Getting data...</p>
-                    }
-                    <NewEventButton selectedDate={this.state.selectedDate}/>
-                    {
-                        this.state.selectedEvents.length ?
-                            <EventsList
-                                events={this.state.selectedEvents}
-                                selectedDate={this.state.selectedDate}
-                            /> :
-                            <h5>Click on a given day to check who celebrates a name day!</h5>
-                    }
-                </div>
+                    <div>
+                        {
+                            this.props.holidays.getting && <p>Getting data...</p>
+                        }
+                        <NewEventButton selectedDate={this.state.selectedDate}/>
+                        {
+                            selectedEvents.length || selectedHolidays.length ?
+                                <EventsList
+                                    events={[
+                                        ...selectedEvents,
+                                        ...selectedHolidays
+                                    ]}
+                                    selectedDate={this.state.selectedDate}
+                                /> :
+                                <h5>Click on a given day to check who celebrates a name day!</h5>
+                        }
+                    </div>
                 </Box>
             </Container>
         )
@@ -104,9 +113,11 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    getHolidays: () => dispatch(getHolidays()),
+    parseEvents: year => dispatch(parseEvents(year)),
     subscribeCustomEvents: () => dispatch(subscribeCustomEvents()),
-    unsubscribeCustomEvents: () => dispatch(unsubscribeCustomEvents())
+    unsubscribeCustomEvents: () => dispatch(unsubscribeCustomEvents()),
+    getHolidays: () => dispatch(getHolidays()),
+    parseHolidays: year => dispatch(parseHolidays(year))
 })
 
 export default connect(
