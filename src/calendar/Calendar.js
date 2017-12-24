@@ -51,7 +51,7 @@ class Calendar extends React.Component {
 
     handleNavigate = currentDate => {
         const currentYear = (new Date(currentDate)).getFullYear()
-console.log('was called')
+
         if (this.state.currentYear !== currentYear) {
             this.props.parseEvents(currentYear)
             this.props.parseHolidays(currentYear)
@@ -85,12 +85,24 @@ console.log('was called')
 
     handleSelectEvent = event => this.handleSelectSlot(event)
 
-    handleRangeChange = (part, value) => this.setState({
-        selectedDate: {
-            ...this.state.selectedDate,
-            [part]: value
+    handleRangeChange = (part, value) => {
+        if (part === 'year' && this.state.currentYear !== value) {
+            this.props.parseEvents(value)
+            this.props.parseHolidays(value)
+
+            this.setState({
+                currentYear: value,
+            })
         }
-    })
+
+        this.setState({
+            selectedDate: {
+                ...this.state.selectedDate,
+                [part]: value
+            }
+        })
+    }
+
 
     render() {
         const {customEvents, holidays} = this.props
