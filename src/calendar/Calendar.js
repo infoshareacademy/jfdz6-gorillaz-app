@@ -32,9 +32,9 @@ class Calendar extends React.Component {
     state = {
         currentYear: (new Date()).getFullYear(),
         selectedDate: {
-            year: (new Date()).getFullYear(),
-            month: (new Date()).getMonth() + 1,
-            day: (new Date()).getDate()
+            year: '',
+            month: '',
+            day: ''
         }
     }
 
