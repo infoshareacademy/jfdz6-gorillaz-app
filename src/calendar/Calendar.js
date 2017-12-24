@@ -85,7 +85,7 @@ class Calendar extends React.Component {
 
     handleSelectEvent = event => this.handleSelectSlot(event)
 
-    handleRangeChange = (part, value) => {
+    handleRangeChange = (part, value, noSuchDay) => {
         if (part === 'year' && this.state.currentYear !== value) {
             this.props.parseEvents(value)
             this.props.parseHolidays(value)
@@ -95,12 +95,20 @@ class Calendar extends React.Component {
             })
         }
 
-        this.setState({
-            selectedDate: {
-                ...this.state.selectedDate,
-                [part]: value
-            }
-        })
+        noSuchDay ?
+            this.setState({
+                selectedDate: {
+                    ...this.state.selectedDate,
+                    [part]: value,
+                    day: ''
+                }
+            }) :
+            this.setState({
+                selectedDate: {
+                    ...this.state.selectedDate,
+                    [part]: value
+                }
+            })
     }
 
 
