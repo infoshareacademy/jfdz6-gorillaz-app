@@ -14,8 +14,8 @@ import {
     parseHolidays
 }from "../state/holidays"
 import {
-    getParsedEventsForSelectedDate,
-    getParsedHolidaysForSelectedDate
+    getParsedEventsForSelectedRange,
+    getParsedHolidaysForSelectedRange
 } from './parsers'
 import {getCalendarConfig} from './calendar-config'
 import NewEventButton from '../events/views/NewEventButton'
@@ -31,7 +31,11 @@ BigCalendar.setLocalizer(
 class Calendar extends React.Component {
     state = {
         currentYear: (new Date()).getFullYear(),
-        selectedDate: null
+        selectedDate: {
+            year: '',
+            month: '',
+            day: ''
+        }
     }
 
     componentDidMount = () => {
@@ -54,26 +58,48 @@ class Calendar extends React.Component {
 
             this.setState({
                 currentYear,
-                selectedDate: null
+                selectedDate: {
+                    year: '',
+                    month: '',
+                    day: ''
+                }
             })
         } else {
             this.setState({
-                selectedDate: null
+                selectedDate: {
+                    year: '',
+                    month: '',
+                    day: ''
+                }
             })
         }
     }
 
-    handleSelectSlot = ({start}) => this.setState({selectedDate: start})
+    handleSelectSlot = ({start}) => this.setState({
+        selectedDate: {
+            year: start.getFullYear(),
+            month: start.getMonth() + 1,
+            day: start.getDate()
+        }
+    })
 
     handleSelectEvent = event => this.handleSelectSlot(event)
 
+    handleRangeChange = (part, value) => this.setState({
+        selectedDate: {
+            ...this.state.selectedDate,
+            [part]: value
+        }
+    })
+
     render() {
         const {customEvents, holidays} = this.props
-        const selectedEvents = customEvents.parsedData && this.state.selectedDate ?
-            getParsedEventsForSelectedDate(customEvents.parsedData, this.state.selectedDate) :
+        const isDateSelected = Object.keys(this.state.selectedDate).some(part => this.state.selectedDate[part])
+        const selectedEvents = customEvents.parsedData && isDateSelected ?
+            getParsedEventsForSelectedRange(customEvents.parsedData, this.state.selectedDate) :
             []
-        const selectedHolidays = holidays.parsedData && this.state.selectedDate ?
-            getParsedHolidaysForSelectedDate(holidays, this.state.selectedDate) :
+        const selectedHolidays = holidays.parsedData && isDateSelected ?
+            getParsedHolidaysForSelectedRange(holidays, this.state.selectedDate) :
             []
 
         return (
@@ -90,8 +116,8 @@ class Calendar extends React.Component {
                             this.props.holidays.getting && <p>Getting data...</p>
                         }
                         <DateSearchBar
-                            onRangeChange={this.handleRangeChange}
                             selectedDate={this.state.selectedDate}
+                            onRangeChange={this.handleRangeChange}
                         />
 
                         <NewEventButton selectedDate={this.state.selectedDate}/>

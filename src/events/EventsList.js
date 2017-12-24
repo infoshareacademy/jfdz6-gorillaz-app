@@ -8,7 +8,7 @@ const EventsList = props => {
 
     return (
         <div>
-            <h2>Holidays for {selectedDate ? selectedDate.toDateString() : 'selected range'}</h2>
+            <h2>Holidays for {JSON.stringify(selectedDate)}</h2>
             <ul>
                 {
                     events.map(event => (

@@ -82,10 +82,10 @@ const parsePublicMovableHolidays = currentYear => (
 
 const parsePublicNonMovableHolidays = currentYear => (
     event => ({
-            ...getParsedHolidayCommonPart(currentYear, event),
-            id: event.date + 'public',
-            type: 'public'
-        })
+        ...getParsedHolidayCommonPart(currentYear, event),
+        id: event.date + 'public',
+        type: 'public'
+    })
 )
 
 export const getParsedEvents = (events, year) => (
@@ -128,47 +128,45 @@ export const getParsedHolidaysForSelectedDate = (holidays, date) => {
     ]
 }
 
-export function getParsedEventsForSelectedRange(range, sentParsedEvents) {
-    const parsedEvents = sentParsedEvents || this.state.events
-    const nullPattern = '00'
-    const dateKey = (nullPattern + range.day).slice(-2) + (nullPattern + range.month).slice(-2)
-    const isDateFull = dateKey.slice(0, 2) !== nullPattern && dateKey.slice(-2) !== nullPattern
-    const nameDays = this.props.holidays.data.nameDays
+export function getParsedEventsForSelectedRange(parsedEvents, selectedDate) {
 
-    const namesArr = Object.keys(nameDays).reduce((acc, next) => {
-            const isMatching = next === dateKey ||
+    return parsedEvents.filter(event =>
+        (selectedDate.year ? (event.since <= selectedDate.year) : true) &&
+        (selectedDate.month ? (event.start.getMonth() + 1 === selectedDate.month) : true) &&
+        (selectedDate.day ? (event.start.getDate() === selectedDate.day) : true)
+    )
+}
+
+export function getParsedHolidaysForSelectedRange(holidays, selectedDate) {
+    const nullPattern = '00'
+    const dateKey = (nullPattern + selectedDate.day).slice(-2) + (nullPattern + selectedDate.month).slice(-2)
+    const isDateFull = dateKey.slice(0, 2) !== nullPattern && dateKey.slice(-2) !== nullPattern
+    const nameDays = holidays.data.nameDays
+
+    const nameDaysForSelectedRange = Object.keys(nameDays).reduce((acc, date) => {
+            const isMatching = date === dateKey ||
                 (!isDateFull &&
-                    (next.slice(0, 2) === dateKey.slice(0, 2) ||
-                    next.slice(-2) === dateKey.slice(-2))
+                    (date.slice(0, 2) === dateKey.slice(0, 2) ||
+                    date.slice(-2) === dateKey.slice(-2))
                 )
-            isMatching && (acc.push(
-                {
-                    id: next + 'name',
-                    start: next,
-                    title: 'People celebrating name day at ' + next,
-                    payload: nameDays[next].join(' ')
-                }
-            ))
+            isMatching && (acc.push({
+                    id: date + 'name',
+                    start: date,
+                    title: 'People celebrating name day at ' + date,
+                    payload: nameDays[date].join(' ')
+                })
+            )
 
             return acc
         },
         []
     )
 
-    this.setState(
-        {
-            selectedEvents: [
-                ...parsedEvents.filter(event =>
-                    (range.year && event.since ? (event.since <= range.year) : true) &&
-                    (range.month ? (event.start.getMonth() + 1 === range.month) : true) &&
-                    (range.day ? (event.start.getDate() === range.day) : true)
-                ),
-                ...namesArr
-            ],
-            selectedDate: null
-        }
-    )
+    return [
+        ...holidays.parsedData.filter(event =>
+            (selectedDate.month ? (event.start.getMonth() + 1 === selectedDate.month) : true) &&
+            (selectedDate.day ? (event.start.getDate() === selectedDate.day) : true)
+        ),
+        ...nameDaysForSelectedRange
+    ]
 }
-
-
-

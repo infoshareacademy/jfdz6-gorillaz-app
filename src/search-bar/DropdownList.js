@@ -2,7 +2,10 @@ import React from 'react'
 
 const DropdownList = props => (
     <div>
-        <select value={props.value} onChange={props.onSelectChange}>
+        <select
+            value={props.value}
+            onChange={props.onSelectChange}
+        >
             <option
                 key={'select'}
                 value={''}
@@ -22,7 +25,7 @@ const DropdownList = props => (
                             key={item.value}
                             value={item.value}
                         >
-                            {item.name}
+                            {item.name || item.value}
                         </option>
                     )
                 )

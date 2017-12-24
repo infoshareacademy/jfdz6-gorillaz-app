@@ -21,7 +21,7 @@ class EditableEvent extends React.Component {
 
     render() {
         const {event, selectedDate} = this.props
-        const initialDate = selectedDate || new Date()
+        const initialDate = new Date()
         const parsedDate = [
             initialDate.getFullYear(),
             ('0' + (initialDate.getMonth() + 1)).slice(-2),

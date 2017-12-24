@@ -11,7 +11,7 @@ class NewEventButton extends React.Component {
     }
 
     render() {
-        const initialDate = this.props.selectedDate || new Date()
+        const initialDate = new Date()
         const parsedDate = [
                 initialDate.getFullYear(),
                 ('0' + (initialDate.getMonth() + 1)).slice(-2),
