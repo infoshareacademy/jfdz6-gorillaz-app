@@ -32,9 +32,9 @@ class Calendar extends React.Component {
     state = {
         currentYear: (new Date()).getFullYear(),
         selectedDate: {
-            year: '',
-            month: '',
-            day: ''
+            year: (new Date()).getFullYear(),
+            month: (new Date()).getMonth() + 1,
+            day: (new Date()).getDate()
         }
     }
 
@@ -95,10 +95,10 @@ class Calendar extends React.Component {
     render() {
         const {customEvents, holidays} = this.props
         const isDateSelected = Object.keys(this.state.selectedDate).some(part => this.state.selectedDate[part])
-        const selectedEvents = customEvents.parsedData && isDateSelected ?
+        const selectedEvents = customEvents.data && isDateSelected ?
             getParsedEventsForSelectedRange(customEvents.parsedData, this.state.selectedDate) :
             []
-        const selectedHolidays = holidays.parsedData && isDateSelected ?
+        const selectedHolidays = holidays.data && isDateSelected ?
             getParsedHolidaysForSelectedRange(holidays, this.state.selectedDate) :
             []
 
