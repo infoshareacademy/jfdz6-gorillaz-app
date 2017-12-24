@@ -38,111 +38,94 @@ const getEasterRelatedDate = (year, holiday) => {
     return ('0' + holidayDate.getDate()).slice(-2) + ('0' + holidayDate.getMonth()).slice(-2)
 }
 
-const getParsedObjectCommonPart = (currentYear, event) => (
-    {
-        start: new Date(currentYear, +event.date.slice(2) - 1, +event.date.slice(0, 2)),
-        end: new Date(currentYear, +event.date.slice(2) - 1, +event.date.slice(0, 2)),
+const getParsedHolidayCommonPart = (currentYear, event) => ({
+    start: new Date(currentYear, +event.date.slice(2) - 1, +event.date.slice(0, 2)),
+    end: new Date(currentYear, +event.date.slice(2) - 1, +event.date.slice(0, 2)),
+    title: event.title,
+    payload: event.payload
+})
+
+const parseCustomEvents = currentYear => (
+    event => ({
+        id: event.id,
+        start: new Date(currentYear, +event.date.slice(5, 7) - 1, +event.date.slice(8)),
+        end: new Date(currentYear, +event.date.slice(5, 7) - 1, +event.date.slice(8)),
+        since: +event.date.slice(0, 4),
         title: event.title,
-        payload: event.payload
-    }
+        payload: event.payload,
+        type: 'custom'
+    })
 )
 
-const parseCustomEvents = (currentYear) => (
-    (event) => (
-        {
-            id: event.id,
-            start: new Date(currentYear, +event.date.slice(5, 7) - 1, +event.date.slice(8)),
-            end: new Date(currentYear, +event.date.slice(5, 7) - 1, +event.date.slice(8)),
-            since: +event.date.slice(0, 4),
-            title: event.title,
-            payload: event.payload,
-            type: 'custom'
+const parseOtherHolidays = currentYear => (
+    event => ({
+        ...getParsedHolidayCommonPart(currentYear, event),
+        id: event.date + 'other',
+        type: 'other'
+    })
+)
+
+const parsePublicMovableHolidays = currentYear => (
+    event => {
+        event = {
+            ...event,
+            date: getEasterRelatedDate(currentYear, event.title)
         }
-    )
-)
 
-const parseOtherHolidays = (currentYear) => (
-    (event) => (
-        {
-            ...getParsedObjectCommonPart(currentYear, event),
-            id: event.date + 'other',
-            type: 'other'
-        }
-    )
-)
-
-const parsePublicMovableHolidays = (currentYear) => (
-    (event) => {
-        event =
-            {
-                ...event,
-                date: getEasterRelatedDate(currentYear, event.title)
-            }
-
-        return (
-            {
-                ...getParsedObjectCommonPart(currentYear, event),
-                id: event.date + 'public',
-                type: 'public'
-            }
-        )
-    }
-)
-
-const parsePublicNonMovableHolidays = (currentYear) => (
-    (event) => (
-        {
-            ...getParsedObjectCommonPart(currentYear, event),
+        return {
+            ...getParsedHolidayCommonPart(currentYear, event),
             id: event.date + 'public',
             type: 'public'
         }
+    }
+)
+
+const parsePublicNonMovableHolidays = currentYear => (
+    event => ({
+            ...getParsedHolidayCommonPart(currentYear, event),
+            id: event.date + 'public',
+            type: 'public'
+        })
+)
+
+export const getParsedEvents = (events, year) => (
+    events.filter(event =>
+        +event.date.slice(0, 4) <= year
+    ).map(parseCustomEvents(year))
+)
+
+export const getParsedEventsForSelectedDate = (parsedEvents, date) => (
+    parsedEvents.filter(event =>
+        event.start.toString() === date.toString()
     )
 )
 
-export function getParsedEvents(currentYear, sentProps) {
-    const props = sentProps || this.props
-    const {customEvents} = props
-    const {otherHolidays, publicMovableHolidays, publicNonMovableHolidays} = props.holidays.data
-    const parsedEvents =
-        [
-            ...customEvents.filter(event =>
-            +event.date.slice(0, 4) <= currentYear)
-                .map(parseCustomEvents(currentYear)),
-            ...otherHolidays.map(parseOtherHolidays(currentYear)),
-            ...publicMovableHolidays.map(parsePublicMovableHolidays(currentYear)),
-            ...publicNonMovableHolidays.map(parsePublicNonMovableHolidays(currentYear))
-        ]
+export const getParsedHolidays = (holidays, year) => {
+    const {otherHolidays, publicMovableHolidays, publicNonMovableHolidays} = holidays
 
-    this.setState({
-        events: parsedEvents
-    })
-
-    return parsedEvents
+    return [
+        ...otherHolidays.map(parseOtherHolidays(year)),
+        ...publicMovableHolidays.map(parsePublicMovableHolidays(year)),
+        ...publicNonMovableHolidays.map(parsePublicNonMovableHolidays(year))
+    ]
 }
 
-export function getParsedEventsForSelectedDate(date, sentParsedEvents) {
-    const parsedEvents = sentParsedEvents || this.state.events
+export const getParsedHolidaysForSelectedDate = (holidays, date) => {
     const dateKey = ('0' + date.getDate()).slice(-2) + ('0' + (date.getMonth() + 1)).slice(-2)
-    const names = this.props.holidays.data.nameDays[dateKey].join(' ')
-    const namesObj =
-        {
-            id: dateKey + 'name',
-            start: new Date(date),
-            title: 'People celebrating name day',
-            payload: names
-        }
+    const names = holidays.data.nameDays[dateKey].join(' ')
+    const namesObj = {
+        id: dateKey + 'name',
+        start: new Date(date),
+        title: 'People celebrating name day',
+        payload: names
+    }
 
-    this.setState(
-        {
-            selectedEvents: [
-                ...parsedEvents.filter(event =>
-                    event.start.toString() === date.toString()
-                ),
-                namesObj
-            ],
-            selectedDate: date
-        }
-    )
+    return [
+        ...holidays.parsedData.filter(event =>
+            event.start.toString() === date.toString()
+        ),
+        namesObj
+    ]
 }
 
 export function getParsedEventsForSelectedRange(range, sentParsedEvents) {

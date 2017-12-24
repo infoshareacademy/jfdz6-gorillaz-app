@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import {add} from "../../state/contacts"
+import {addContact} from "../../state/contacts"
 import getContactForm from '../form/contact-form-factory'
 
 class NewContact extends React.Component {
@@ -19,7 +19,7 @@ class NewContact extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    addContact: (newContact) => dispatch(add(newContact))
+    addContact: newContact => dispatch(addContact(newContact))
 })
 
 export default connect(

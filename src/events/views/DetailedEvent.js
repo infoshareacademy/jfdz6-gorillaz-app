@@ -5,7 +5,7 @@ import {
     ButtonToolbar
 } from 'react-bootstrap'
 
-import {add, remove} from "../../state/custom-events"
+import {addEvent, removeEvent} from "../../state/custom-events"
 
 class DetailedEvent extends React.Component {
     handleDeleteEventClick = () => {
@@ -36,8 +36,8 @@ class DetailedEvent extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    addEvent: (newEvent) => dispatch(add(newEvent)),
-    removeEvent: (eventId) => dispatch(remove(eventId))
+    addEvent: (newEvent) => dispatch(addEvent(newEvent)),
+    removeEvent: (eventId) => dispatch(removeEvent(eventId))
 })
 
 export default connect(

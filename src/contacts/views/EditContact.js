@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import {add, remove} from "../../state/contacts"
+import {addContact, removeContact} from "../../state/contacts"
 import getContactForm from '../form/contact-form-factory'
 
 class EditContact extends React.Component {
@@ -17,7 +17,13 @@ class EditContact extends React.Component {
         return (
             <EditContactForm
                 onSubmit={this.handleSubmit}
-                initialValues={{...item}}
+                initialValues={{
+                    firstName: item.firstName,
+                    lastName: item.lastName,
+                    email: item.email,
+                    sex: item.sex,
+                    notes: item.notes
+                }}
                 cancelButton ={this.props.children}
             />
         )
@@ -25,8 +31,8 @@ class EditContact extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    addContact: (newContact) => dispatch(add(newContact)),
-    removeContact: (contactId) => dispatch(remove(contactId))
+    addContact: newContact => dispatch(addContact(newContact)),
+    removeContact: contactId => dispatch(removeContact(contactId))
 })
 
 export default connect(

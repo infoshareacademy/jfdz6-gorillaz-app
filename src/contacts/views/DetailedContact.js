@@ -5,7 +5,7 @@ import {
     ButtonToolbar
 } from 'react-bootstrap'
 
-import {add, remove} from "../../state/contacts"
+import {removeContact} from "../../state/contacts"
 
 class DetailedContact extends React.Component {
     handleDeleteContactClick = () => {
@@ -38,8 +38,7 @@ class DetailedContact extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    addContact: (newContact) => dispatch(add(newContact)),
-    removeContact: (contactId) => dispatch(remove(contactId))
+    removeContact: contactId => dispatch(removeContact(contactId))
 })
 
 export default connect(

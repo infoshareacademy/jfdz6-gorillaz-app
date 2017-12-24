@@ -1,41 +1,81 @@
-import {customEvents} from '../events/data/custom-events'
+import firebase from 'firebase'
 
-const ADD = 'custom-events/ADD_EVENT'
-const GET = 'custom-events/GET_EVENTS'
-const REMOVE = 'custom-events/REMOVE_EVENT'
+import {getParsedEvents} from '../calendar/parsers'
 
-export const add = newEvent => ({
-    type: ADD,
-    newEvent
+const GET_SUCCESS = 'custom-events/GET_SUCCESS'
+const PARSE = 'custom-events/PARSE'
+
+export const addEvent = newEvent => dispatch => {
+    const userId = firebase.auth().currentUser.uid
+    const newEventKey = firebase.database().ref(`users/${userId}/custom-events`).push().key
+
+    firebase.database().ref(`/users/${userId}/custom-events/${newEventKey}`).set({
+        ...newEvent,
+        payload: newEvent.payload || 'no data'
+    })
+}
+
+export const subscribeCustomEvents = () => dispatch => {
+    const userId = firebase.auth().currentUser.uid
+    const customEventsRef = firebase.database().ref(`users/${userId}/custom-events`)
+
+    customEventsRef.on('value', function (snapshot) {
+        const data = snapshot.val() ?
+            Object.keys(snapshot.val()).reduce((arrayedEvents, eventId) => {
+                    arrayedEvents.push({
+                        ...snapshot.val()[eventId],
+                        id: eventId
+                    })
+
+                    return arrayedEvents
+                },
+                []) :
+            []
+
+        dispatch({
+            type: GET_SUCCESS,
+            data,
+            parsedData: getParsedEvents(data, (new Date()).getFullYear())
+        })
+    })
+}
+
+export const unsubscribeCustomEvents = () => dispatch => {
+    const userId = firebase.auth().currentUser.uid
+    const customEventsRef = firebase.database().ref(`users/${userId}/custom-events`)
+
+    customEventsRef.off()
+}
+
+export const removeEvent = eventId => dispatch => {
+    const userId = firebase.auth().currentUser.uid
+
+    firebase.database().ref(`/users/${userId}/custom-events/${eventId}`).remove()
+}
+
+export const parseEvents = year => ({
+    type: PARSE,
+    year
 })
 
-export const get = () => ({
-    type: GET
-})
-
-export const remove = eventId => ({
-    type: REMOVE,
-    eventId
-})
-
-const initialState = customEvents
+const initialState = {
+    data: null,
+    parsedData: []
+}
 
 export default (state = initialState, action = {}) => {
     switch (action.type) {
-        case ADD:
-            return (
-                [
-                    ...state,
-                    {
-                        ...action.newEvent,
-                        id: Date.now()
-                    }
-                ]
-            )
-        case GET:
-            return state
-        case REMOVE:
-            return state.filter(event => event.id !== action.eventId)
+        case GET_SUCCESS:
+            return {
+                ...state,
+                data: action.data,
+                parsedData: action.parsedData,
+            }
+        case PARSE:
+            return {
+                ...state,
+                parsedData: getParsedEvents(state.data, action.year)
+            }
         default:
             return state
     }
