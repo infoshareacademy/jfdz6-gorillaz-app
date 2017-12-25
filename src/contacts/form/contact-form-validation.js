@@ -19,6 +19,10 @@ const validateContactForm = values => {
         errors.email = 'Invalid email address'
     }
 
+    if (!values.sex) {
+        errors.sex = 'Required'
+    }
+
     return errors
 }
 
