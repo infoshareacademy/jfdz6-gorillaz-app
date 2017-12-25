@@ -53,7 +53,7 @@ const EventForm = props => {
     const {handleSubmit, pristine, reset, submitting, submitSucceeded} = props
 
     return (
-        <div className="form__wrapper">
+        <div className="EventForm__wrapper">
             <form onSubmit={handleSubmit}>
                 <Field
                     name="date"
