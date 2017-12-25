@@ -6,7 +6,8 @@ import {
     FormControl,
     HelpBlock,
     Button,
-    ButtonToolbar
+    ButtonToolbar,
+    Glyphicon
 } from 'react-bootstrap'
 
 import './EventForm.css'
@@ -81,6 +82,8 @@ const EventForm = props => {
                         bsStyle="success"
                         disabled={pristine || submitting}
                     >
+                        <Glyphicon glyph="send" />
+                        {' '}
                         {'Submit' + (submitting ? 'ting' : '')}
                     </Button>
 
@@ -90,6 +93,8 @@ const EventForm = props => {
                         disabled={pristine || submitting}
                         onClick={reset}
                     >
+                        <Glyphicon glyph="retweet" />
+                        {' '}
                         Clear
                     </Button>
 
