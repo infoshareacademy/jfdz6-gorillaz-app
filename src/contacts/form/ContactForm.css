@@ -1,4 +1,9 @@
-.form__wrapper {
+.control-label-contact {
+    letter-spacing: 1.2px;
+}
+
+.ContactForm__wrapper {
     max-width: 400px;
     margin: 0 auto;
+    padding: 10px;
 }

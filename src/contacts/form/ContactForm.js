@@ -6,7 +6,8 @@ import {
     FormControl,
     HelpBlock,
     Button,
-    ButtonToolbar
+    ButtonToolbar,
+    Glyphicon
 } from 'react-bootstrap'
 
 import './ContactForm.css'
@@ -15,7 +16,12 @@ const renderTextField = ({input, label, type, meta: {touched, error}}) => (
     <FormGroup
         validationState={touched ? (error ? 'error' : 'success') : null}
     >
-        <ControlLabel>{label}</ControlLabel>
+        <ControlLabel
+            bsClass="control-label-contact"
+        >
+            {label}
+        </ControlLabel>
+
         <FormControl
             {...input}
             type={type}
@@ -28,11 +34,18 @@ const renderTextField = ({input, label, type, meta: {touched, error}}) => (
 
 const renderTextareaField = ({input, label, type}) => (
     <FormGroup>
-        <ControlLabel>{label}</ControlLabel>
+        <ControlLabel
+            bsClass="control-label-contact"
+        >
+            {label}
+        </ControlLabel>
+
         <FormControl
             {...input}
             componentClass={type}
-            placeholder={label}/>
+            placeholder={label}
+            rows={4}
+        />
     </FormGroup>
 )
 
@@ -40,20 +53,20 @@ const ContactForm = props => {
     const {handleSubmit, pristine, reset, submitting, submitSucceeded} = props
 
     return (
-        <div className="form__wrapper">
+        <div className="ContactForm__wrapper">
             <form onSubmit={handleSubmit}>
                 <Field
                     name="firstName"
                     component={renderTextField}
                     type="text"
-                    label="First Name"
+                    label="First name"
                 />
 
                 <Field
                     name="lastName"
                     component={renderTextField}
                     type="text"
-                    label="Last Name"
+                    label="Last name"
                 />
 
                 <Field
@@ -64,17 +77,22 @@ const ContactForm = props => {
                 />
 
                 <FormGroup>
-                    <label>Sex</label>
+                    <ControlLabel
+                        bsClass="control-label-contact"
+                    >
+                        Sex
+                    </ControlLabel>
+
                     <div>
-                        <label>
+                        <label className="control-label-contact">
                             <Field name="sex" component="input" type="radio" value="male"/>
-                            {' '}
+                            {'  '}
                             Male
                         </label>
-
-                        <label>
+                        {'   '}
+                        <label className="control-label-contact">
                             <Field name="sex" component="input" type="radio" value="female"/>
-                            {' '}
+                            {'  '}
                             Female
                         </label>
                     </div>
@@ -93,6 +111,8 @@ const ContactForm = props => {
                         bsStyle="success"
                         disabled={pristine || submitting}
                     >
+                        <Glyphicon glyph="send"/>
+                        {' '}
                         {'Submit' + (submitting ? 'ting' : '')}
                     </Button>
 
@@ -102,6 +122,8 @@ const ContactForm = props => {
                         disabled={pristine || submitting}
                         onClick={reset}
                     >
+                        <Glyphicon glyph="erase"/>
+                        {' '}
                         Clear
                     </Button>
 
