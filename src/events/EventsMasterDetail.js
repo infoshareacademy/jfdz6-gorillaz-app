@@ -23,7 +23,7 @@ class EventsMasterDetail extends React.Component {
     render = () =>
         (
             <MasterDetail
-                items={this.props.items}
+                items={this.props.items || []}
                 name={'event'}
                 NewItem={NewEvent}
                 PreviewItem={PreviewEvent}
