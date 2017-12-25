@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button} from 'react-bootstrap'
+import {Button, ListGroup, ListGroupItem} from 'react-bootstrap'
 
 import './MasterView.css'
 
@@ -8,23 +8,20 @@ const MasterView = props => {
 
     return (
         <div className="MasterView__wrapper">
-        <ul>
+        <ListGroup>
             {
                 items.map(item => (
-                        <li key={item.id}>
+                        <ListGroupItem
+                            key={item.id}
+                            onClick={onItemClick}
+                            data-item-id={item.id}
+                        >
                             <PreviewItem item={item}/>
-
-                            <Button
-                                onClick={onItemClick}
-                                data-item-id={item.id}
-                            >
-                                See more..
-                            </Button>
-                        </li>
+                        </ListGroupItem>
                     )
                 )
             }
-        </ul>
+        </ListGroup>
         </div>
     )
 }
