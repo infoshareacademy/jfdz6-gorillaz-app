@@ -23,12 +23,14 @@ import {Container, Box} from './styled-components/grid-components'
 const MainRouter = () => (
     <Router>
         <div>
-            <Navbar>
+            <Navbar collapseOnSelect>
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <a href="#">Wishes generator</a>
+                        <a href="#">My calendar</a>
                     </Navbar.Brand>
+                    <Navbar.Toggle />
                 </Navbar.Header>
+                <Navbar.Collapse>
                 <Nav>
                     <LinkContainer exact to="/">
                         <NavItem>Home</NavItem>
@@ -38,18 +40,19 @@ const MainRouter = () => (
                         <NavItem>About us</NavItem>
                     </LinkContainer>
 
-                    <LinkContainer to="/contacts">
-                        <NavItem>Contacts</NavItem>
-                    </LinkContainer>
-
                     <LinkContainer to="/calendar">
                         <NavItem>Calendar</NavItem>
                     </LinkContainer>
 
                     <LinkContainer to="/my-events">
-                        <NavItem>My events</NavItem>
+                        <NavItem>Events</NavItem>
+                    </LinkContainer>
+
+                    <LinkContainer to="/contacts">
+                        <NavItem>Contacts</NavItem>
                     </LinkContainer>
                 </Nav>
+                </Navbar.Collapse>
             </Navbar>
 
             <Route exact path="/" component={Home}/>

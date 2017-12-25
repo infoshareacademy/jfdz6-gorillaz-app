@@ -1,6 +1,27 @@
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: 5px;
+    background-color: rgba(51, 165, 183, 0.85);
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow-x: hidden;
+}
+
+a.list-group-item:hover,
+button.list-group-item:hover,
+a.list-group-item:focus,
+button.list-group-item:focus {
+    background-color: rgba(63, 116, 181, 0.85);
+    outline-width: 0;
+}
+
 .MasterView__wrapper {
-    background-color: red;
+    max-width: 330px;
     max-height: 40vh;
+    margin: 0 auto;
+    padding: 10px;
     overflow-y: scroll;
 }
 

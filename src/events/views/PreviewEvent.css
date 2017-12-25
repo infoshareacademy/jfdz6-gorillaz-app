@@ -1,0 +1,11 @@
+.PreviewEvent__title {
+    margin-top: 5px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: ghostwhite;
+}
+
+.PreviewEvent__date {
+    letter-spacing: 2px;
+    color: ghostwhite;
+}
