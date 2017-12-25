@@ -5,18 +5,20 @@ import './PreviewEvent.css'
 
 const PreviewEvent = props => {
     const {item} = props
+    const shortMonth = (months.find(month => month.value === +item.date.slice(5, 7))).name.slice(0, 3) + '.'
 
     return (
-        <div>
-            <h4 className="PreviewEvent__title">
+        <div className="PreviewEvent__wrapper">
+            <h4 className="PreviewEvent__header">
                 {item.title}
             </h4>
-            <p className="PreviewEvent__date">
-                {item.date.slice(8)}
+
+            <p className="PreviewEvent__paragraph">
+                {item.date.slice(-2)}
                 {' '}
-                {(months.find(month => month.value === +item.date.slice(5, 7))).name.slice(0, 3) + '.'}
+                {shortMonth}
                 {' | '}
-                {item.payload.slice(0, 10) + '...'}
+                {`${item.payload.slice(0, 10)}...`}
             </p>
         </div>
     )
