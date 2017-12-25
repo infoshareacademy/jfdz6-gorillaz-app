@@ -1,4 +1,9 @@
+.control-label-event {
+    letter-spacing: 1.2px;
+}
+
 .form__wrapper {
-    max-width: 400px;
+    max-width: 360px;
     margin: 0 auto;
+    padding: 10px;
 }

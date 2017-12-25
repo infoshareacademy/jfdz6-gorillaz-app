@@ -18,7 +18,7 @@ button.list-group-item:focus {
 }
 
 .MasterView__wrapper {
-    max-width: 330px;
+    max-width: 360px;
     max-height: 40vh;
     margin: 0 auto;
     padding: 10px;

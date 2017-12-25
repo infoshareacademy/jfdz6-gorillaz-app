@@ -1,8 +1,10 @@
 import React from 'react'
 
+import {Glyphicon} from 'react-bootstrap'
 import {Container, Box} from '../styled-components/grid-components'
 import MasterView from './MasterView'
 import DetailView from './DetailView'
+import './MasterDetail.css'
 
 class MasterDetail extends React.Component {
     state = {
@@ -31,7 +33,15 @@ class MasterDetail extends React.Component {
         return (
             <Container>
                 <Box sm={5}>
-                    <h2>List of {name}s</h2>
+                    <h3 className="MasterDetail__header">
+                        <Glyphicon
+                            glyph="list-alt"
+                            className="MasterDetail__logo"
+                        />
+                        {' '}
+                        Your {name}s
+                    </h3>
+
                     <MasterView
                         items={this.props.items}
                         PreviewItem={this.props.PreviewItem}
@@ -40,7 +50,15 @@ class MasterDetail extends React.Component {
                 </Box>
 
                 <Box sm={7}>
-                    <h2>Add new {name}</h2>
+                    <h3 className="MasterDetail__header">
+                        <Glyphicon
+                            glyph="plus"
+                            className="MasterDetail__logo"
+                        />
+                        {' '}
+                        Add new {name}
+                    </h3>
+
                     <NewItem/>
 
                     {

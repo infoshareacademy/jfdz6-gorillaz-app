@@ -15,7 +15,12 @@ const renderTextField = ({input, label, type, meta: {touched, error}}) => (
     <FormGroup
         validationState={touched ? (error ? 'error' : 'success') : null}
     >
-        <ControlLabel>{label}</ControlLabel>
+        <ControlLabel
+            bsClass="control-label-event"
+        >
+            {label}
+        </ControlLabel>
+
         <FormControl
             {...input}
             type={type}
@@ -28,11 +33,18 @@ const renderTextField = ({input, label, type, meta: {touched, error}}) => (
 
 const renderTextareaField = ({input, label, type}) => (
     <FormGroup>
-        <ControlLabel>{label}</ControlLabel>
+        <ControlLabel
+            bsClass="control-label-event"
+        >
+            {label}
+        </ControlLabel>
+
         <FormControl
             {...input}
             componentClass={type}
-            placeholder={label}/>
+            placeholder={label}
+            rows={4}
+        />
     </FormGroup>
 )
 
@@ -46,14 +58,14 @@ const EventForm = props => {
                     name="date"
                     component={renderTextField}
                     type="date"
-                    label="Record event since"
+                    label="Date"
                 />
 
                 <Field
                     name="title"
                     component={renderTextField}
                     type="text"
-                    label="Event name"
+                    label="Title"
                 />
 
                 <Field
