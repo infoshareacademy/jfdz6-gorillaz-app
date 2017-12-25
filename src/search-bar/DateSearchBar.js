@@ -11,7 +11,9 @@ export default class DateSearchBar extends React.Component {
     handleMonthChange = event => {
         const selectedMonthValue = +event.currentTarget.value
         const currentDaysRange = getDaysForGivenMonth(selectedMonthValue)
-        const noSuchDay = !currentDaysRange.find(day => day.value === this.props.selectedDate.day)
+        const noSuchDay = selectedMonthValue ?
+            !currentDaysRange.find(day => day.value === this.props.selectedDate.day) :
+            false
 
         this.props.onRangeChange('month', selectedMonthValue, noSuchDay)
     }

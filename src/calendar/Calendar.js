@@ -114,7 +114,7 @@ class Calendar extends React.Component {
 
     render() {
         const {customEvents, holidays} = this.props
-        const isDateSelected = Object.keys(this.state.selectedDate).some(part => this.state.selectedDate[part])
+        const isDateSelected = !Object.keys(this.state.selectedDate).every(part => this.state.selectedDate[part] === '')
         const selectedEvents = customEvents.data && isDateSelected ?
             getParsedEventsForSelectedRange(customEvents.parsedData, this.state.selectedDate) :
             []
