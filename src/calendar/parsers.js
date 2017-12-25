@@ -148,7 +148,7 @@ export function getParsedHolidaysForSelectedRange(holidays, selectedDate) {
                 (!isDateFull &&
                     (date.slice(0, 2) === dateKey.slice(0, 2) ||
                     date.slice(-2) === dateKey.slice(-2) ||
-                    date === '0000')
+                    dateKey === '0000')
                 )
             isMatching && (acc.push({
                     id: date + 'name',
