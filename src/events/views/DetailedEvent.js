@@ -1,11 +1,17 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {
+    FormGroup,
+    ControlLabel,
+    FormControl,
     Button,
-    ButtonToolbar
+    ButtonToolbar,
+    Glyphicon
 } from 'react-bootstrap'
 
 import {addEvent, removeEvent} from "../../state/custom-events"
+import {months} from '../../search-bar/date-data'
+import './DetailedEvent.css'
 
 class DetailedEvent extends React.Component {
     handleDeleteEventClick = () => {
@@ -14,18 +20,65 @@ class DetailedEvent extends React.Component {
 
     render() {
         const {item} = this.props
+        const eventsMonth = months.find(month => month.value === +item.date.slice(5, 7)).name
+        const eventSince = item.date.slice(0, 4)
 
         return (
-            <div>
-                <h2>Event details</h2>
-                <h3>Title: {item.title}</h3>
-                <h5>Date {item.date}</h5>
-                <p>Description: {item.payload}</p>
+            <div className="DetailedEvent__wrapper">
+                <FormGroup>
+                    <ControlLabel
+                        bsClass="control-label-detailed-event"
+                    >
+                        Date
+                    </ControlLabel>
+
+                    <FormControl.Static>
+                        <span className="DetailedEvent__paragraph">
+                            {item.date.slice(-2)}
+                            {' '}
+                            {eventsMonth}
+                            {` (tracked since ${eventSince})`}
+                        </span>
+                    </FormControl.Static>
+                </FormGroup>
+
+                <FormGroup>
+                    <ControlLabel
+                        bsClass="control-label-detailed-event"
+                    >
+                        Title
+                    </ControlLabel>
+
+                    <FormControl.Static>
+                        <span className="DetailedEvent__paragraph">
+                        {item.title}
+                        </span>
+                    </FormControl.Static>
+                </FormGroup>
+
+                <FormGroup>
+                    <ControlLabel
+                        bsClass="control-label-detailed-event"
+                    >
+                        Description
+                    </ControlLabel>
+
+                    <FormControl.Static>
+                        <span className="DetailedEvent__paragraph DetailedEvent__paragraph--justified">
+                        {item.payload}
+                        </span>
+                    </FormControl.Static>
+                </FormGroup>
 
                 <ButtonToolbar>
                     {this.props.children}
 
-                    <Button onClick={this.handleDeleteEventClick}>
+                    <Button
+                        bsStyle="danger"
+                        onClick={this.handleDeleteEventClick}
+                    >
+                        <Glyphicon glyph="trash"/>
+                        {' '}
                         Delete
                     </Button>
                 </ButtonToolbar>
@@ -44,3 +97,4 @@ export default connect(
     null,
     mapDispatchToProps
 )(DetailedEvent)
+

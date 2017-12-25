@@ -93,7 +93,7 @@ const EventForm = props => {
                         disabled={pristine || submitting}
                         onClick={reset}
                     >
-                        <Glyphicon glyph="retweet" />
+                        <Glyphicon glyph="erase" />
                         {' '}
                         Clear
                     </Button>

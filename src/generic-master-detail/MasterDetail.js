@@ -52,11 +52,21 @@ class MasterDetail extends React.Component {
                 <Box sm={7}>
                     {
                         this.state.selectedItem ?
-                            <DetailView
-                                item={this.state.selectedItem}
-                                DetailedItem={this.props.DetailedItem}
-                                EditItem={this.props.EditItem}
-                            /> :
+                            <div>
+                                <h3 className="MasterDetail__header">
+                                    <Glyphicon
+                                        glyph="wrench"
+                                        className="MasterDetail__logo"
+                                    />
+                                    {' '}
+                                    {name} details
+                                </h3>
+                                <DetailView
+                                    item={this.state.selectedItem}
+                                    DetailedItem={this.props.DetailedItem}
+                                    EditItem={this.props.EditItem}
+                                />
+                            </div> :
                             <h3 className="MasterDetail__header">
                                 <Glyphicon
                                     glyph="eye-open"

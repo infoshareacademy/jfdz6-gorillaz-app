@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button} from 'react-bootstrap'
+import {Button, Glyphicon} from 'react-bootstrap'
 
 export default class EventDetailView extends React.Component {
     state = {
@@ -30,15 +30,28 @@ export default class EventDetailView extends React.Component {
         return (
             this.state.isBeingEdited ?
                 <div>
-                    <h2>Edit selected event</h2>
                     <EditItem item={item}>
-                        <Button onClick={this.handleCancelClick}>Cancel</Button>
+                        <Button
+                            bsStyle="info"
+                            onClick={this.handleCancelClick}
+                        >
+                            <Glyphicon glyph="remove-circle"/>
+                            {' '}
+                            Cancel
+                        </Button>
                     </EditItem>
                 </div> :
 
                 <div>
                     <DetailedItem item={item}>
-                        <Button onClick={this.handleEditItemClick}>Edit</Button>
+                        <Button
+                            bsStyle="success"
+                            onClick={this.handleEditItemClick}
+                        >
+                            <Glyphicon glyph="pencil"/>
+                            {' '}
+                            Edit
+                        </Button>
                     </DetailedItem>
                 </div>
         )
