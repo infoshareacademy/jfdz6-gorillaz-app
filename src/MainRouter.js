@@ -19,11 +19,12 @@ import ContactsMasterDetail from './contacts/ContactsMasterDetail'
 import Calendar from './calendar/Calendar'
 import EventsMasterDetail from './events/EventsMasterDetail'
 import {Container, Box} from './styled-components/grid-components'
+import './MainRouter.css'
 
 const MainRouter = () => (
     <Router>
-        <div>
-            <Navbar collapseOnSelect>
+        <div className="MainRouter__wrapper">
+            <Navbar fixedTop collapseOnSelect>
                 <Navbar.Header>
                     <Navbar.Brand>
                         <a href="#">My calendar</a>
@@ -31,7 +32,7 @@ const MainRouter = () => (
                     <Navbar.Toggle />
                 </Navbar.Header>
                 <Navbar.Collapse>
-                <Nav>
+                <Nav pullRight >
                     <LinkContainer exact to="/">
                         <NavItem>Home</NavItem>
                     </LinkContainer>
