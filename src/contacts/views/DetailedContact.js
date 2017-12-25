@@ -1,11 +1,16 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {
+    FormGroup,
+    ControlLabel,
+    FormControl,
     Button,
-    ButtonToolbar
+    ButtonToolbar,
+    Glyphicon
 } from 'react-bootstrap'
 
 import {removeContact} from "../../state/contacts"
+import './DetailedContact.css'
 
 class DetailedContact extends React.Component {
     handleDeleteContactClick = () => {
@@ -16,18 +21,73 @@ class DetailedContact extends React.Component {
         const {item} = this.props
 
         return (
-            <div>
-                <h2>Contact details</h2>
-                <h3>First Name: {item.firstName}</h3>
-                <h3>Last Name: {item.lastName}</h3>
-                <h5>Email: {item.email}</h5>
-                <h5>Sex: {item.sex}</h5>
-                <p>Notes: {item.notes}</p>
+            <div className="DetailedContact__wrapper">
+
+                <FormGroup>
+                    <ControlLabel
+                        bsClass="control-label-detailed-contact"
+                    >
+                        First name
+                    </ControlLabel>
+
+                    <FormControl.Static>
+                        <span className="DetailedContact__paragraph">
+                            {item.firstName}
+                        </span>
+                    </FormControl.Static>
+                </FormGroup>
+
+                <FormGroup>
+                    <ControlLabel
+                        bsClass="control-label-detailed-contact"
+                    >
+                        Last name
+                    </ControlLabel>
+
+                    <FormControl.Static>
+                        <span className="DetailedContact__paragraph">
+                            {item.lastName}
+                        </span>
+                    </FormControl.Static>
+                </FormGroup>
+
+                <FormGroup>
+                    <ControlLabel
+                        bsClass="control-label-detailed-contact"
+                    >
+                        Email
+                    </ControlLabel>
+
+                    <FormControl.Static>
+                        <span className="DetailedContact__paragraph">
+                            {item.email}
+                        </span>
+                    </FormControl.Static>
+                </FormGroup>
+
+                <FormGroup>
+                    <ControlLabel
+                        bsClass="control-label-detailed-contact"
+                    >
+                        Notes
+                    </ControlLabel>
+
+                    <FormControl.Static>
+                        <span className="DetailedContact__paragraph DetailedContact__paragraph--justified">
+                        {item.notes}
+                        </span>
+                    </FormControl.Static>
+                </FormGroup>
 
                 <ButtonToolbar>
                     {this.props.children}
 
-                    <Button onClick={this.handleDeleteContactClick}>
+                    <Button
+                        bsStyle="danger"
+                        onClick={this.handleDeleteContactClick}
+                    >
+                        <Glyphicon glyph="trash"/>
+                        {' '}
                         Delete
                     </Button>
                 </ButtonToolbar>
