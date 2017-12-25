@@ -1,10 +1,13 @@
 import React from 'react'
 import {Button} from 'react-bootstrap'
 
+import './MasterView.css'
+
 const MasterView = props => {
     const {items, PreviewItem, onItemClick} = props
 
     return (
+        <div className="MasterView__wrapper">
         <ul>
             {
                 items.map(item => (
@@ -22,6 +25,7 @@ const MasterView = props => {
                 )
             }
         </ul>
+        </div>
     )
 }
 

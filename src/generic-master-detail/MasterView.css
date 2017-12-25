@@ -1,0 +1,11 @@
+.MasterView__wrapper {
+    background-color: red;
+    max-height: 40vh;
+    overflow-y: scroll;
+}
+
+@media only screen and (min-width: 768px) {
+    .MasterView__wrapper {
+        max-height: 80vh;
+    }
+}
