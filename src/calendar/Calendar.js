@@ -124,13 +124,13 @@ class Calendar extends React.Component {
 
         return (
             <Container>
-                <Box sm={8}>
+                <Box md={8}>
                     <div className="Calendar__wrapper">
                         <BigCalendar {...this.getCalendarConfig()}/>
                     </div>
                 </Box>
 
-                <Box sm={4}>
+                <Box md={4}>
                     <div>
                         {
                             this.props.holidays.getting && <p>Getting data...</p>

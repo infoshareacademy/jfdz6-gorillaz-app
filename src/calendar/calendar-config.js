@@ -1,9 +1,11 @@
 const eventPropGetter = ({type}) => {
     switch (type) {
+        case 'custom':
+            return {className: 'Calendar__event Calendar__event-custom'}
         case 'public':
-            return {className: 'Calendar__event-public'}
+            return {className: ' Calendar__event Calendar__event-public'}
         case 'other':
-            return {className: 'Calendar__event-other'}
+            return {className: 'Calendar__event Calendar__event-other'}
         default:
             return {className: {}}
     }

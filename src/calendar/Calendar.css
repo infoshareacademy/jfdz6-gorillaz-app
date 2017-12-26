@@ -1,28 +1,65 @@
-.rbc-day-bg {
+.rbc-toolbar-label {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #009688;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.rbc-header {
+    padding: 5px;
+    font-size: 0.9em;
+    color: #009688;
+    letter-spacing: 1.5px;
+}
+
+.rbc-day-bg,
+.rbc-row {
     cursor: pointer;
 }
 
 .rbc-today {
-    background-color: lightpink;
+    background-color: #ffeb3b;
 }
 
-.rbc-event {
-    background-color: deepskyblue;
+.rbc-off-range-bg {
+    background-color: #f1f1f1;
 }
 
 .Calendar__wrapper {
-    max-width: 800px;
-    height: 80vh;
+    max-width: 700px;
+    height: 550px;
     margin: 0 auto;
-    padding: 15px;
+    padding: 10px;
+}
+
+.Calendar__event {
+    font-size: 0.8em;
+}
+
+.Calendar__event-custom,
+.Calendar__event-custom.rbc-selected {
+    background-color: #2196f3;
 }
 
 .Calendar__event-public,
 .Calendar__event-public.rbc-selected {
-    background-color: red;
+    background-color: #f44336;
 }
 
 .Calendar__event-other,
-.Calendar__event-other.rbc-selected{
-    background-color: green;
+.Calendar__event-other.rbc-selected {
+    background-color: #4caf50;
+}
+
+@media only screen and (min-width: 768px) {
+    .Calendar__event {
+        font-size: 0.9em;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .Calendar__event {
+        font-size: 1em;
+    }
 }
