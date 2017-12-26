@@ -1,4 +1,9 @@
 import React from 'react'
+import {
+    Form,
+    FormGroup,
+    ControlLabel,
+} from 'react-bootstrap'
 
 import {years, months, getDaysForGivenMonth} from './date-data'
 import DropdownList from './DropdownList'
@@ -28,28 +33,37 @@ export default class DateSearchBar extends React.Component {
 
         return (
             <div>
-                <p>Search bar</p>
+                <Form inline>
+                    <FormGroup>
+                        <ControlLabel>Year</ControlLabel>
+                        {' '}
+                        <DropdownList
+                            value={year}
+                            onSelectChange={this.handleYearChange}
+                            options={years}
+                        />
+                    </FormGroup>
 
-                Year:
-                <DropdownList
-                    value={year}
-                    onSelectChange={this.handleYearChange}
-                    options={years}
-                />
+                    <FormGroup>
+                        <ControlLabel>Month</ControlLabel>
+                        {' '}
+                        <DropdownList
+                            value={month}
+                            onSelectChange={this.handleMonthChange}
+                            options={months}
+                        />
+                    </FormGroup>
 
-                Month:
-                <DropdownList
-                    value={month}
-                    onSelectChange={this.handleMonthChange}
-                    options={months}
-                />
-
-                Day:
-                <DropdownList
-                    value={day}
-                    onSelectChange={this.handleDayChange}
-                    options={currentDaysRange}
-                />
+                    <FormGroup>
+                        <ControlLabel>Day</ControlLabel>
+                        {' '}
+                        <DropdownList
+                            value={day}
+                            onSelectChange={this.handleDayChange}
+                            options={currentDaysRange}
+                        />
+                    </FormGroup>
+                </Form>
             </div>
         )
     }
