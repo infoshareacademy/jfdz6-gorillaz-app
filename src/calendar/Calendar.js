@@ -127,6 +127,7 @@ class Calendar extends React.Component {
                 <Box md={8}>
                     <div className="Calendar__wrapper">
                         <BigCalendar {...this.getCalendarConfig()}/>
+                        <NewEventButton selectedDate={this.state.selectedDate}/>
                     </div>
                 </Box>
 
@@ -139,8 +140,6 @@ class Calendar extends React.Component {
                             selectedDate={this.state.selectedDate}
                             onRangeChange={this.handleRangeChange}
                         />
-
-                        <NewEventButton selectedDate={this.state.selectedDate}/>
                         {
                             selectedEvents.length || selectedHolidays.length ?
                                 <EventsList

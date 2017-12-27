@@ -1,21 +1,26 @@
 import React from 'react'
-import { Modal, Button } from 'react-bootstrap'
+import {Modal, Button} from 'react-bootstrap'
 
 export default class ModalButton extends React.Component {
     state = {
         show: false
     }
 
-    close = () => this.setState({ show: false })
+    close = () => this.setState({show: false})
 
-    open = () => this.setState({ show: true })
+    open = () => this.setState({show: true})
 
     render() {
-        const {buttonName, modalHeader} = this.props
+        const {className, buttonName, modalHeader} = this.props
 
         return (
             <div>
-                <Button onClick={this.open}>{buttonName}</Button>
+                <button
+                    className={className}
+                    onClick={this.open}
+                >
+                    {buttonName}
+                </button>
                 <Modal
                     show={this.state.show}
                     onHide={this.close}

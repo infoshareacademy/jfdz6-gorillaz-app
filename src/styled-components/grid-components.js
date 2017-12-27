@@ -34,8 +34,8 @@ export const Box = styled.div`
   width: ${props => props.xs ? (props.xs / gridBasis) * 100 : 100}%;
   
 ${media.tablet`width: ${props => (props.sm || props.xs || gridBasis) / gridBasis * 100}%;`}
-${media.desktop`width: ${props => (props.md ||props.sm || props.xs || gridBasis) / gridBasis * 100}%;`}
-${media.largeDesktop`width: ${props => (props.lg || props.md ||props.sm || props.xs || gridBasis) / gridBasis * 100}%;`}
+${media.desktop`width: ${props => (props.md || props.sm || props.xs || gridBasis) / gridBasis * 100}%;`}
+${media.largeDesktop`width: ${props => (props.lg || props.md || props.sm || props.xs || gridBasis) / gridBasis * 100}%;`}
 
 ${media.tablet`order: ${props => (props.smPush || props.xsPush || 0)};`}
 `
