@@ -9,7 +9,7 @@ import {
 import EventsTable from '../events/EventsTable'
 import ReadOnlyEvent from '../events/views/ReadOnlyEvent'
 import EditableEvent from '../events/views/EditableEvent'
-// import './EventsDashboard.css'
+import './EventsDashboard.css'
 
 class EventsDashboard extends React.Component {
 
@@ -28,30 +28,36 @@ class EventsDashboard extends React.Component {
             []
 
         return (
-                isDateSelected ?
-                    <div>
+            isDateSelected ?
+                <div className="EventsDashboard__wrapper">
+                    <div className="EventsDashboard__table">
                         <EventsTable
                             eventsName="Holidays"
                             icon="calendar"
                             events={selectedHolidays}
                             eventViewComponent={ReadOnlyEvent}
                         />
+                    </div>
 
+                    <div className="EventsDashboard__table">
                         <EventsTable
                             eventsName="Your events"
                             icon="user"
                             events={selectedEvents}
                             eventViewComponent={EditableEvent}
                         />
+                    </div>
 
+                    <div className="EventsDashboard__table">
                         <EventsTable
                             eventsName="Name days"
                             icon="gift"
                             events={selectedNameDays}
                             eventViewComponent={ReadOnlyEvent}
                         />
-                    </div> :
-                    <h5>Click on a given day to check who celebrates a name day!</h5>
+                    </div>
+                </div> :
+                <h5>Click on a given day to check who celebrates a name day!</h5>
         )
     }
 }
