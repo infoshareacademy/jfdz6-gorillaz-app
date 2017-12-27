@@ -159,9 +159,8 @@ export function getNameDaysForSelectedRange(nameDays, selectedDate) {
                 )
             isMatching && (acc.push({
                     id: date + 'name',
-                    start: date,
-                    title: 'Names for ' + date,
-                    payload: nameDays[date].join(' ')
+                    start: new Date(2017, +date.slice(-2) - 1,date.slice(0, 2)),
+                    payload: nameDays[date].join(', ')
                 })
             )
 

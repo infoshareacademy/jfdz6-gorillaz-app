@@ -27,7 +27,7 @@ class EventsDashboard extends React.Component {
             getParsedHolidaysForSelectedRange(holidays.parsedData, selectedDate).sort(sortEventsAscending) :
             []
         const selectedNameDays = holidays.data && isDateSelected ?
-            getNameDaysForSelectedRange(holidays.data.nameDays, selectedDate) :
+            getNameDaysForSelectedRange(holidays.data.nameDays, selectedDate).sort(sortEventsAscending) :
             []
 
         return (
