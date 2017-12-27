@@ -15,7 +15,8 @@ import {
 }from "../state/holidays"
 import {
     getParsedEventsForSelectedRange,
-    getParsedHolidaysForSelectedRange
+    getParsedHolidaysForSelectedRange,
+    getNameDaysForSelectedRange
 } from './parsers'
 import {getCalendarConfig} from './calendar-config'
 import NewEventButton from '../events/views/NewEventButton'
@@ -121,7 +122,10 @@ class Calendar extends React.Component {
             getParsedEventsForSelectedRange(customEvents.parsedData, this.state.selectedDate) :
             []
         const selectedHolidays = holidays.data && isDateSelected ?
-            getParsedHolidaysForSelectedRange(holidays, this.state.selectedDate) :
+            getParsedHolidaysForSelectedRange(holidays.parsedData, this.state.selectedDate) :
+            []
+        const selectedNameDays = holidays.data && isDateSelected ?
+            getNameDaysForSelectedRange(holidays.data.nameDays, this.state.selectedDate) :
             []
 
         return (
@@ -143,7 +147,7 @@ class Calendar extends React.Component {
                             onRangeChange={this.handleRangeChange}
                         />
                         {
-                            selectedEvents.length || selectedHolidays.length ?
+                            isDateSelected ?
                                 <div>
                                     <EventsTable
                                         eventsName="Holidays"
@@ -157,6 +161,13 @@ class Calendar extends React.Component {
                                         icon="user"
                                         events={selectedEvents}
                                         eventViewComponent={EditableEvent}
+                                    />
+
+                                    <EventsTable
+                                        eventsName="Name days"
+                                        icon="gift"
+                                        events={selectedNameDays}
+                                        eventViewComponent={ReadOnlyEvent}
                                     />
                                 </div> :
                                 <h5>Click on a given day to check who celebrates a name day!</h5>

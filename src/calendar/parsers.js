@@ -137,13 +137,20 @@ export function getParsedEventsForSelectedRange(parsedEvents, selectedDate) {
     )
 }
 
-export function getParsedHolidaysForSelectedRange(holidays, selectedDate) {
+export function getParsedHolidaysForSelectedRange(parsedHolidays, selectedDate) {
+
+    return parsedHolidays.filter(event =>
+            (selectedDate.month ? (event.start.getMonth() + 1 === selectedDate.month) : true) &&
+            (selectedDate.day ? (event.start.getDate() === selectedDate.day) : true)
+        )
+}
+
+export function getNameDaysForSelectedRange(nameDays, selectedDate) {
     const nullPattern = '00'
     const dateKey = (nullPattern + selectedDate.day).slice(-2) + (nullPattern + selectedDate.month).slice(-2)
     const isDateFull = dateKey.slice(0, 2) !== nullPattern && dateKey.slice(-2) !== nullPattern
-    const nameDays = holidays.data.nameDays
 
-    const nameDaysForSelectedRange = Object.keys(nameDays).reduce((acc, date) => {
+    return Object.keys(nameDays).reduce((acc, date) => {
             const isMatching = date === dateKey ||
                 (!isDateFull &&
                     (date.slice(0, 2) === dateKey.slice(0, 2) ||
@@ -153,7 +160,7 @@ export function getParsedHolidaysForSelectedRange(holidays, selectedDate) {
             isMatching && (acc.push({
                     id: date + 'name',
                     start: date,
-                    title: 'People celebrating name day at ' + date,
+                    title: 'Names for ' + date,
                     payload: nameDays[date].join(' ')
                 })
             )
@@ -162,12 +169,4 @@ export function getParsedHolidaysForSelectedRange(holidays, selectedDate) {
         },
         []
     )
-
-    return [
-        ...holidays.parsedData.filter(event =>
-            (selectedDate.month ? (event.start.getMonth() + 1 === selectedDate.month) : true) &&
-            (selectedDate.day ? (event.start.getDate() === selectedDate.day) : true)
-        ),
-        ...nameDaysForSelectedRange
-    ]
 }

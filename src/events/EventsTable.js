@@ -14,6 +14,7 @@ const EventsTable = props => {
                     glyph={icon}
                     className="EventsTable__logo"
                 />
+                {' '}
                 {eventsName}
             </h3>
 
