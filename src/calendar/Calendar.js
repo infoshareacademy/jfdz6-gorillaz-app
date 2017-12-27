@@ -19,7 +19,9 @@ import {
 } from './parsers'
 import {getCalendarConfig} from './calendar-config'
 import NewEventButton from '../events/views/NewEventButton'
-import EventsList from '../events/EventsList'
+import EventsTable from '../events/EventsTable'
+import ReadOnlyEvent from '../events/views/ReadOnlyEvent'
+import EditableEvent from '../events/views/EditableEvent'
 import DateSearchBar from '../search-bar/DateSearchBar'
 import {Container, Box} from '../styled-components/grid-components'
 import './Calendar.css'
@@ -142,13 +144,21 @@ class Calendar extends React.Component {
                         />
                         {
                             selectedEvents.length || selectedHolidays.length ?
-                                <EventsList
-                                    events={[
-                                        ...selectedEvents,
-                                        ...selectedHolidays
-                                    ]}
-                                    selectedDate={this.state.selectedDate}
-                                /> :
+                                <div>
+                                    <EventsTable
+                                        eventsName="Holidays"
+                                        icon="calendar"
+                                        events={selectedHolidays}
+                                        eventViewComponent={ReadOnlyEvent}
+                                    />
+
+                                    <EventsTable
+                                        eventsName="Your events"
+                                        icon="user"
+                                        events={selectedEvents}
+                                        eventViewComponent={EditableEvent}
+                                    />
+                                </div> :
                                 <h5>Click on a given day to check who celebrates a name day!</h5>
                         }
                     </div>

@@ -1,32 +1,20 @@
 import React from 'react'
 
-import ReadOnlyEvent from './views/ReadOnlyEvent'
-import EditableEvent from './views/EditableEvent'
-
 const EventsList = props => {
-    const {events, selectedDate} = props
+    const {events} = props
+    const EventViewComponent = props.eventViewComponent
 
     return (
-        <div>
-            <h2>Holidays for {JSON.stringify(selectedDate)}</h2>
-            <ul>
-                {
-                    events.map(event => (
-                            <li key={event.id}>
-                                {
-                                    event.type === 'custom' ?
-                                        <EditableEvent
-                                            event={event}
-                                            selectedDate={selectedDate}
-                                        /> :
-                                        <ReadOnlyEvent event={event}/>
-                                }
-                            </li>
-                        )
+        <ul>
+            {
+                events.map(event => (
+                        <li key={event.id}>
+                            <EventViewComponent event={event}/>
+                        </li>
                     )
-                }
-            </ul>
-        </div>
+                )
+            }
+        </ul>
     )
 }
 
