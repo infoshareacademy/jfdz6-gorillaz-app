@@ -5,7 +5,7 @@ import EventsList from './EventsList'
 import './EventsTable.css'
 
 const EventsTable = props => {
-    const {eventsName,icon, events, eventViewComponent} = props
+    const {eventsName,icon, events, eventViewComponent, marker} = props
 
     return (
         <div>
@@ -21,6 +21,7 @@ const EventsTable = props => {
             <EventsList
                 events={events}
                 eventViewComponent={eventViewComponent}
+                marker={marker}
             />
         </div>
     )

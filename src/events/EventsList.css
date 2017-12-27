@@ -1,0 +1,11 @@
+.EventsList__wrapper {
+    list-style-type: none;
+    position: relative;
+    padding-right: 50px;
+}
+
+.EventsList__marker {
+    position: absolute;
+    left: 5px;
+    font-size: 1.5em;
+}

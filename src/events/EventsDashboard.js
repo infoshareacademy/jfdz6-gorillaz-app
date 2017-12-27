@@ -36,6 +36,7 @@ class EventsDashboard extends React.Component {
                             icon="calendar"
                             events={selectedHolidays}
                             eventViewComponent={ReadOnlyEvent}
+                            marker={'\u{1F385}'}
                         />
                     </div>
 
@@ -45,6 +46,7 @@ class EventsDashboard extends React.Component {
                             icon="user"
                             events={selectedEvents}
                             eventViewComponent={EditableEvent}
+                            marker={"\u{1F4C5}"}
                         />
                     </div>
 
@@ -54,6 +56,7 @@ class EventsDashboard extends React.Component {
                             icon="gift"
                             events={selectedNameDays}
                             eventViewComponent={ReadOnlyEvent}
+                            marker={"\u{1F382}"}
                         />
                     </div>
                 </div> :
