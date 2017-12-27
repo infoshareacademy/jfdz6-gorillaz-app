@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import moment from 'moment'
 
 import {
     getParsedEventsForSelectedRange,
@@ -11,6 +12,8 @@ import ReadOnlyEvent from '../events/views/ReadOnlyEvent'
 import EditableEvent from '../events/views/EditableEvent'
 import './EventsDashboard.css'
 
+const sortEventsAscending = (prev, next) => moment(prev.start).isBefore(next.start) ? -1 : 1
+
 class EventsDashboard extends React.Component {
 
     render() {
@@ -18,10 +21,10 @@ class EventsDashboard extends React.Component {
         const isDateSelected = !Object.keys(selectedDate).every(part => selectedDate[part] === '')
 
         const selectedEvents = customEvents.data && isDateSelected ?
-            getParsedEventsForSelectedRange(customEvents.parsedData, selectedDate) :
+            getParsedEventsForSelectedRange(customEvents.parsedData, selectedDate).sort(sortEventsAscending) :
             []
         const selectedHolidays = holidays.data && isDateSelected ?
-            getParsedHolidaysForSelectedRange(holidays.parsedData, selectedDate) :
+            getParsedHolidaysForSelectedRange(holidays.parsedData, selectedDate).sort(sortEventsAscending) :
             []
         const selectedNameDays = holidays.data && isDateSelected ?
             getNameDaysForSelectedRange(holidays.data.nameDays, selectedDate) :

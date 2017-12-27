@@ -4,6 +4,10 @@
     padding-right: 50px;
 }
 
+.EventsList__item {
+    margin-bottom: 20px;
+}
+
 .EventsList__marker {
     position: absolute;
     left: 5px;

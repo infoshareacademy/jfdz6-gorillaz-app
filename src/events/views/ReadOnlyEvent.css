@@ -1,0 +1,15 @@
+.ReadOnlyEvent__header {
+    text-align: center;
+    letter-spacing: 1.2px;
+    line-height: 1.5em;
+}
+
+.ReadOnlyEvent__subheader {
+    color: grey;
+}
+
+.ReadOnlyEvent__paragraph {
+    font-size: 1.1em;
+    text-align: justify;
+    letter-spacing: 1.1px;
+}
