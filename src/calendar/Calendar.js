@@ -13,16 +13,8 @@ import {
     getHolidays,
     parseHolidays
 }from "../state/holidays"
-import {
-    getParsedEventsForSelectedRange,
-    getParsedHolidaysForSelectedRange,
-    getNameDaysForSelectedRange
-} from './parsers'
 import {getCalendarConfig} from './calendar-config'
 import NewEventButton from '../events/views/NewEventButton'
-import EventsTable from '../events/EventsTable'
-import ReadOnlyEvent from '../events/views/ReadOnlyEvent'
-import EditableEvent from '../events/views/EditableEvent'
 import DateSearchBar from '../search-bar/DateSearchBar'
 import EventsDashboard from '../events/EventsDashboard'
 import {Container, Box} from '../styled-components/grid-components'
@@ -117,17 +109,6 @@ class Calendar extends React.Component {
 
 
     render() {
-        // const {customEvents, holidays} = this.props
-        // const isDateSelected = !Object.keys(this.state.selectedDate).every(part => this.state.selectedDate[part] === '')
-        // const selectedEvents = customEvents.data && isDateSelected ?
-        //     getParsedEventsForSelectedRange(customEvents.parsedData, this.state.selectedDate) :
-        //     []
-        // const selectedHolidays = holidays.data && isDateSelected ?
-        //     getParsedHolidaysForSelectedRange(holidays.parsedData, this.state.selectedDate) :
-        //     []
-        // const selectedNameDays = holidays.data && isDateSelected ?
-        //     getNameDaysForSelectedRange(holidays.data.nameDays, this.state.selectedDate) :
-        //     []
 
         return (
             <Container>
@@ -150,32 +131,6 @@ class Calendar extends React.Component {
                         <EventsDashboard
                             selectedDate={this.state.selectedDate}
                         />
-                        {/*{*/}
-                            {/*isDateSelected ?*/}
-                                {/*<div>*/}
-                                    {/*<EventsTable*/}
-                                        {/*eventsName="Holidays"*/}
-                                        {/*icon="calendar"*/}
-                                        {/*events={selectedHolidays}*/}
-                                        {/*eventViewComponent={ReadOnlyEvent}*/}
-                                    {/*/>*/}
-
-                                    {/*<EventsTable*/}
-                                        {/*eventsName="Your events"*/}
-                                        {/*icon="user"*/}
-                                        {/*events={selectedEvents}*/}
-                                        {/*eventViewComponent={EditableEvent}*/}
-                                    {/*/>*/}
-
-                                    {/*<EventsTable*/}
-                                        {/*eventsName="Name days"*/}
-                                        {/*icon="gift"*/}
-                                        {/*events={selectedNameDays}*/}
-                                        {/*eventViewComponent={ReadOnlyEvent}*/}
-                                    {/*/>*/}
-                                {/*</div> :*/}
-                                {/*<h5>Click on a given day to check who celebrates a name day!</h5>*/}
-                        {/*}*/}
                     </div>
                 </Box>
             </Container>
