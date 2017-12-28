@@ -8,6 +8,7 @@ import {
 import {addEvent, removeEvent} from "../../state/custom-events"
 import getEventForm from '../form/event-form-factory'
 import ModalButton from '../../ModalButton'
+import ListItemEvent from './ListItemEvent'
 
 class EditableEvent extends React.Component {
     handleDeleteEventClick = () => {
@@ -20,7 +21,7 @@ class EditableEvent extends React.Component {
     }
 
     render() {
-        const {event, selectedDate} = this.props
+        const {event} = this.props
         const initialDate = new Date()
         const parsedDate = [
             initialDate.getFullYear(),
@@ -31,8 +32,7 @@ class EditableEvent extends React.Component {
 
         return (
             <div>
-                <h3>Title: {event.title}</h3>
-                <p>Description: {event.payload}</p>
+                <ListItemEvent event={event}/>
 
                 <ButtonToolbar>
                     <ModalButton

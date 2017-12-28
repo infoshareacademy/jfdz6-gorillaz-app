@@ -8,7 +8,7 @@ import {
     getNameDaysForSelectedRange
 } from '../calendar/parsers'
 import EventsTable from '../events/EventsTable'
-import ReadOnlyEvent from '../events/views/ReadOnlyEvent'
+import ListItemEvent from './views/ListItemEvent'
 import EditableEvent from '../events/views/EditableEvent'
 import './EventsDashboard.css'
 
@@ -38,7 +38,7 @@ class EventsDashboard extends React.Component {
                             eventsName="Holidays"
                             icon="calendar"
                             events={selectedHolidays}
-                            eventViewComponent={ReadOnlyEvent}
+                            eventViewComponent={ListItemEvent}
                             marker={'\u{1F385}'}
                         />
                     </div>
@@ -58,7 +58,7 @@ class EventsDashboard extends React.Component {
                             eventsName="Name days"
                             icon="gift"
                             events={selectedNameDays}
-                            eventViewComponent={ReadOnlyEvent}
+                            eventViewComponent={ListItemEvent}
                             marker={"\u{1F382}"}
                         />
                     </div>
