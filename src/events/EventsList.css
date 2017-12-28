@@ -1,7 +1,10 @@
 .EventsList__wrapper {
     list-style-type: none;
     position: relative;
-    padding-right: 50px;
+    margin-right: 20px;
+    padding-right: 35px;
+    max-height: 400px;
+    overflow-y: scroll;
 }
 
 .EventsList__item {

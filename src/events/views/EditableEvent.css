@@ -1,0 +1,8 @@
+.EditableEvent__toolbar {
+    text-align: center;
+}
+
+.EditableEvent__toolbar button:not(last-of-type) {
+    text-align: center;
+    margin-right: 15px;
+}

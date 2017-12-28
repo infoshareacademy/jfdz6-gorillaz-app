@@ -1,7 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Glyphicon} from 'react-bootstrap'
 
-import {MyButton} from '../../styled-components/button-components'
+import './EditableEvent.css'
+import {RoundButton} from '../../styled-components/button-components'
 import {addEvent, removeEvent} from "../../state/custom-events"
 import getEventForm from '../form/event-form-factory'
 import ModalButton from '../../ModalButton'
@@ -25,9 +27,13 @@ class EditableEvent extends React.Component {
             <div>
                 <ListItemEvent event={event}/>
 
+                <div className="EditableEvent__toolbar">
                     <ModalButton
-                        buttonName="Edit"
-                        buttonProps={{bgc: '#f44336'}}
+                        buttonProps={{
+                            bgc: '#4caf50',
+                            radius: '20px'
+                        }}
+                        glyph="pencil"
                         modalHeader="Edit your event"
                     >
                         <EditEventForm
@@ -40,12 +46,14 @@ class EditableEvent extends React.Component {
                         />
                     </ModalButton>
 
-                    <MyButton
+                    <RoundButton
                         bgc={'#f44336'}
+                        radius={'20px'}
                         onClick={this.handleDeleteEventClick}
                     >
-                        Delete
-                    </MyButton>
+                        <Glyphicon glyph="trash"/>
+                    </RoundButton>
+                </div>
             </div>
         )
     }

@@ -1,7 +1,7 @@
 import React from 'react'
-import {Modal, Button} from 'react-bootstrap'
+import {Modal, Button, Glyphicon} from 'react-bootstrap'
 
-import {MyButton} from './styled-components/button-components'
+import {RoundButton} from './styled-components/button-components'
 import './ModalButton.css'
 
 export default class ModalButton extends React.Component {
@@ -14,18 +14,20 @@ export default class ModalButton extends React.Component {
     open = () => this.setState({show: true})
 
     render() {
-        const {buttonName, buttonProps, className, modalHeader} = this.props
+        const {buttonName, buttonProps, glyph, className, modalHeader} = this.props
 
         return (
             <div className="ModalButton__wrapper">
                 {
                     buttonProps ?
-                        <MyButton
+                        <RoundButton
                             {...buttonProps}
                             onClick={this.open}
                         >
+                            {glyph && <Glyphicon glyph={glyph}/>}
+                            {' '}
                             {buttonName}
-                        </MyButton> :
+                        </RoundButton> :
                         <button
                             className={className}
                             onClick={this.open}
