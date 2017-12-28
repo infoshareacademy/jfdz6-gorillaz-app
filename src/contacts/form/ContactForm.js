@@ -5,11 +5,10 @@ import {
     ControlLabel,
     FormControl,
     HelpBlock,
-    Button,
-    ButtonToolbar,
     Glyphicon
 } from 'react-bootstrap'
 
+import {RectButton} from '../../styled-components/button-components'
 import './ContactForm.css'
 
 const renderTextField = ({input, label, type, meta: {touched, error}}) => (
@@ -105,30 +104,30 @@ const ContactForm = props => {
                     label="Notes"
                 />
 
-                <ButtonToolbar>
-                    <Button
+                <div className="ContactForm__toolbar">
+                    <RectButton
                         type="submit"
-                        bsStyle="success"
+                        bgc={'#4caf50'}
                         disabled={pristine || submitting}
                     >
                         <Glyphicon glyph="send"/>
                         {' '}
                         {'Submit' + (submitting ? 'ting' : '')}
-                    </Button>
+                    </RectButton>
 
-                    <Button
+                    <RectButton
                         type="button"
-                        bsStyle="warning"
+                        bgc={'#ff9800'}
                         disabled={pristine || submitting}
                         onClick={reset}
                     >
                         <Glyphicon glyph="erase"/>
                         {' '}
                         Clear
-                    </Button>
+                    </RectButton>
 
                     {props.cancelButton}
-                </ButtonToolbar>
+                </div>
 
                 <HelpBlock>{submitSucceeded && 'Contact has been added!'}</HelpBlock>
             </form>

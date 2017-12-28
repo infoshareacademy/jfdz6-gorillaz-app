@@ -7,3 +7,15 @@
     margin: 0 auto;
     padding: 10px;
 }
+
+.ContactForm__toolbar {
+    text-align: center;
+}
+
+.ContactForm__toolbar button:not(last-of-type) {
+    margin-right: 15px;
+}
+
+.ContactForm__toolbar button:disabled {
+    cursor: not-allowed;
+}
