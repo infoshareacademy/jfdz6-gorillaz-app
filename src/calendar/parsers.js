@@ -50,6 +50,7 @@ const parseCustomEvents = currentYear => (
         id: event.id,
         start: new Date(currentYear, +event.date.slice(5, 7) - 1, +event.date.slice(8)),
         end: new Date(currentYear, +event.date.slice(5, 7) - 1, +event.date.slice(8)),
+        date: event.date,
         since: +event.date.slice(0, 4),
         title: event.title,
         payload: event.payload,
