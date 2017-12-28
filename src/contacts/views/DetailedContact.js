@@ -4,12 +4,11 @@ import {
     FormGroup,
     ControlLabel,
     FormControl,
-    Button,
-    ButtonToolbar,
     Glyphicon
 } from 'react-bootstrap'
 
 import {removeContact} from "../../state/contacts"
+import {RectButton} from '../../styled-components/button-components'
 import './DetailedContact.css'
 
 class DetailedContact extends React.Component {
@@ -79,18 +78,18 @@ class DetailedContact extends React.Component {
                     </FormControl.Static>
                 </FormGroup>
 
-                <ButtonToolbar>
+                <div className="DetailedContact__toolbar">
                     {this.props.children}
 
-                    <Button
-                        bsStyle="danger"
+                    <RectButton
+                        bgc={'#f44336'}
                         onClick={this.handleDeleteContactClick}
                     >
                         <Glyphicon glyph="trash"/>
                         {' '}
                         Delete
-                    </Button>
-                </ButtonToolbar>
+                    </RectButton>
+                </div>
             </div>
         )
     }

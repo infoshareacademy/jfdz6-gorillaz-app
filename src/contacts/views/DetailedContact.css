@@ -16,3 +16,11 @@
 .DetailedContact__paragraph--justified {
     text-align: justify;
 }
+
+.DetailedContact__toolbar {
+    text-align: center;
+}
+
+.DetailedContact__toolbar button:not(last-of-type) {
+    margin-right: 15px;
+}
