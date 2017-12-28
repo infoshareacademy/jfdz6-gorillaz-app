@@ -4,13 +4,12 @@ import {
     FormGroup,
     ControlLabel,
     FormControl,
-    Button,
-    ButtonToolbar,
     Glyphicon
 } from 'react-bootstrap'
 
 import {addEvent, removeEvent} from "../../state/custom-events"
 import {months} from '../../search-bar/date-data'
+import {RectButton} from '../../styled-components/button-components'
 import './DetailedEvent.css'
 
 class DetailedEvent extends React.Component {
@@ -70,18 +69,18 @@ class DetailedEvent extends React.Component {
                     </FormControl.Static>
                 </FormGroup>
 
-                <ButtonToolbar>
+                <div className="DetailedEvent__toolbar">
                     {this.props.children}
 
-                    <Button
-                        bsStyle="danger"
+                    <RectButton
+                        bgc={'#f44336'}
                         onClick={this.handleDeleteEventClick}
                     >
                         <Glyphicon glyph="trash"/>
                         {' '}
                         Delete
-                    </Button>
-                </ButtonToolbar>
+                    </RectButton>
+                </div>
             </div>
         )
     }

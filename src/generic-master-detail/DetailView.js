@@ -1,5 +1,7 @@
 import React from 'react'
-import {Button, Glyphicon} from 'react-bootstrap'
+import {Glyphicon} from 'react-bootstrap'
+
+import {RectButton} from '../styled-components/button-components'
 
 export default class EventDetailView extends React.Component {
     state = {
@@ -31,27 +33,27 @@ export default class EventDetailView extends React.Component {
             this.state.isBeingEdited ?
                 <div>
                     <EditItem item={item}>
-                        <Button
-                            bsStyle="info"
+                        <RectButton
+                            bgc={'#2196f3'}
                             onClick={this.handleCancelClick}
                         >
                             <Glyphicon glyph="remove-circle"/>
                             {' '}
                             Cancel
-                        </Button>
+                        </RectButton>
                     </EditItem>
                 </div> :
 
                 <div>
                     <DetailedItem item={item}>
-                        <Button
-                            bsStyle="success"
+                        <RectButton
+                            bgc={'#4caf50'}
                             onClick={this.handleEditItemClick}
                         >
                             <Glyphicon glyph="pencil"/>
                             {' '}
                             Edit
-                        </Button>
+                        </RectButton>
                     </DetailedItem>
                 </div>
         )
