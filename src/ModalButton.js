@@ -2,6 +2,7 @@ import React from 'react'
 import {Modal, Button} from 'react-bootstrap'
 
 import {MyButton} from './styled-components/button-components'
+import './ModalButton.css'
 
 export default class ModalButton extends React.Component {
     state = {
@@ -16,7 +17,7 @@ export default class ModalButton extends React.Component {
         const {buttonName, buttonProps, className, modalHeader} = this.props
 
         return (
-            <div>
+            <div className="ModalButton__wrapper">
                 {
                     buttonProps ?
                         <MyButton
