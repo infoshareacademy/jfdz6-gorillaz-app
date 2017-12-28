@@ -1,6 +1,8 @@
 import React from 'react'
 import {Modal, Button} from 'react-bootstrap'
 
+import {MyButton} from './styled-components/button-components'
+
 export default class ModalButton extends React.Component {
     state = {
         show: false
@@ -11,16 +13,25 @@ export default class ModalButton extends React.Component {
     open = () => this.setState({show: true})
 
     render() {
-        const {className, buttonName, modalHeader} = this.props
+        const {buttonName, buttonProps, className, modalHeader} = this.props
 
         return (
             <div>
-                <button
-                    className={className}
-                    onClick={this.open}
-                >
-                    {buttonName}
-                </button>
+                {
+                    buttonProps ?
+                        <MyButton
+                            {...buttonProps}
+                            onClick={this.open}
+                        >
+                            {buttonName}
+                        </MyButton> :
+                        <button
+                            className={className}
+                            onClick={this.open}
+                        >
+                            {buttonName}
+                        </button>
+                }
                 <Modal
                     show={this.state.show}
                     onHide={this.close}

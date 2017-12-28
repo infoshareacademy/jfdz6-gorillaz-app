@@ -1,10 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {
-    Button,
-    ButtonToolbar
-} from 'react-bootstrap'
 
+import {MyButton} from '../../styled-components/button-components'
 import {addEvent, removeEvent} from "../../state/custom-events"
 import getEventForm from '../form/event-form-factory'
 import ModalButton from '../../ModalButton'
@@ -28,9 +25,9 @@ class EditableEvent extends React.Component {
             <div>
                 <ListItemEvent event={event}/>
 
-                <ButtonToolbar>
                     <ModalButton
                         buttonName="Edit"
+                        buttonProps={{bgc: '#f44336'}}
                         modalHeader="Edit your event"
                     >
                         <EditEventForm
@@ -43,10 +40,12 @@ class EditableEvent extends React.Component {
                         />
                     </ModalButton>
 
-                    <Button onClick={this.handleDeleteEventClick}>
+                    <MyButton
+                        bgc={'#f44336'}
+                        onClick={this.handleDeleteEventClick}
+                    >
                         Delete
-                    </Button>
-                </ButtonToolbar>
+                    </MyButton>
             </div>
         )
     }
