@@ -3,7 +3,7 @@ import styled, {css} from 'styled-components'
 export const RectButton = styled.button`
   background-color: ${props => props.bgc ? props.bgc : 'grey'};
   color: ${props => props.color ? props.color : 'white'};
-  font-size: ${props => props.size ? props.size : '1em'};
+  font-size: ${props => props.size ? props.size : '1.1em'};
   text-transform: ${props => props.uppercase ? 'uppercase' : 'none'};
   letter-spacing: ${props => props.spacing ? props.spacing : '1px'};
   padding: 0.5em 0.8em;
