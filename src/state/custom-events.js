@@ -2,7 +2,9 @@ import firebase from 'firebase'
 
 import {getParsedEvents} from '../calendar/parsers'
 
+const GET_BEGIN = 'custom-events/GET_BEGIN'
 const GET_SUCCESS = 'custom-events/GET_SUCCESS'
+const GET_FAIL = 'custom-events/GET_FAIL'
 const PARSE = 'custom-events/PARSE'
 
 export const addEvent = newEvent => dispatch => {
@@ -16,6 +18,8 @@ export const addEvent = newEvent => dispatch => {
 }
 
 export const subscribeCustomEvents = () => dispatch => {
+    dispatch({type: GET_BEGIN})
+
     const userId = firebase.auth().currentUser.uid
     const customEventsRef = firebase.database().ref(`users/${userId}/custom-events`)
 
@@ -60,16 +64,25 @@ export const parseEvents = year => ({
 
 const initialState = {
     data: null,
-    parsedData: []
+    parsedData: [],
+    getting: false,
+    error: null
 }
 
 export default (state = initialState, action = {}) => {
     switch (action.type) {
+        case GET_BEGIN:
+            return {
+                ...state,
+                getting: true,
+                error: null
+            }
         case GET_SUCCESS:
             return {
                 ...state,
                 data: action.data,
                 parsedData: action.parsedData,
+                getting: false
             }
         case PARSE:
             return {

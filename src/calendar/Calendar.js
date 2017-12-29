@@ -114,7 +114,7 @@ class Calendar extends React.Component {
 
 
     render() {
-        const isDataRetrieved = !this.props.holidays.getting
+        const isDataRetrieved = !this.props.holidays.getting && !this.props.customEvents.getting
 
         return (
             <Container>

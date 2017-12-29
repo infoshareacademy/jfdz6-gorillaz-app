@@ -20,21 +20,26 @@ class EventsMasterDetail extends React.Component {
         this.props.unsubscribeCustomEvents()
     }
 
-    render = () =>
-        (
-            <MasterDetail
-                items={this.props.items || []}
-                name={'event'}
-                NewItem={NewEvent}
-                PreviewItem={PreviewEvent}
-                DetailedItem={DetailedEvent}
-                EditItem={EditEvent}
-            />
+    render() {
+        const isDataRetrieved = !this.props.customEvents.getting
+
+        return (
+            isDataRetrieved ?
+                <MasterDetail
+                    items={this.props.customEvents.data || []}
+                    name={'event'}
+                    NewItem={NewEvent}
+                    PreviewItem={PreviewEvent}
+                    DetailedItem={DetailedEvent}
+                    EditItem={EditEvent}
+                /> :
+                <p>Getting data...</p>
         )
+    }
 }
 
 const mapStateToProps = state => ({
-    items: state.customEvents.data
+    customEvents: state.customEvents
 })
 
 const mapDispatchToProps = dispatch => ({
