@@ -3,7 +3,7 @@
     display: block;
     padding: 10px 15px;
     margin-bottom: 5px;
-    background-color: rgba(91, 192, 222, 0.85);
+    background-color: #2196f3;
     border: 1px solid #ddd;
     border-radius: 10px;
     overflow-x: hidden;
@@ -13,7 +13,7 @@ a.list-group-item:hover,
 button.list-group-item:hover,
 a.list-group-item:focus,
 button.list-group-item:focus {
-    background-color: rgba(63, 116, 181, 0.85);
+    background-color: #3f51b5;
     outline-width: 0;
 }
 
