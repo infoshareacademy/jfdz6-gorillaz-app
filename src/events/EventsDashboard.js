@@ -10,6 +10,11 @@ import {
 import EventsTable from '../events/EventsTable'
 import ListItemEvent from './views/ListItemEvent'
 import EditableEvent from '../events/views/EditableEvent'
+
+import {
+    FlexContainer,
+    FlexBox,
+} from '../styled-components/grid-components'
 import './EventsDashboard.css'
 
 const sortEventsAscending = (prev, next) => moment(prev.start).isBefore(next.start) ? -1 : 1
@@ -32,17 +37,17 @@ class EventsDashboard extends React.Component {
 
         return (
             isDateSelected ?
-                <div className="EventsDashboard__wrapper">
-                    <div className="EventsDashboard__table">
+                <FlexContainer>
+                    <FlexBox xsFlex="1 0 240px">
                         <EventsTable
                             eventsName="Holidays"
                             icon="calendar"
                             events={selectedHolidays}
                             eventViewComponent={ListItemEvent}
                         />
-                    </div>
+                    </FlexBox>
 
-                    <div className="EventsDashboard__table">
+                    <FlexBox xsFlex="1 0 240px">
                         <EventsTable
                             eventsName="Your events"
                             icon="user"
@@ -50,9 +55,9 @@ class EventsDashboard extends React.Component {
                             eventViewComponent={EditableEvent}
                             marker={"\u{1F4C5}"}
                         />
-                    </div>
+                    </FlexBox>
 
-                    <div className="EventsDashboard__table">
+                    <FlexBox xsFlex="1 0 240px">
                         <EventsTable
                             eventsName="Name days"
                             icon="gift"
@@ -60,8 +65,8 @@ class EventsDashboard extends React.Component {
                             eventViewComponent={ListItemEvent}
                             marker={"\u{1F382}"}
                         />
-                    </div>
-                </div> :
+                    </FlexBox>
+                </FlexContainer> :
                 <h5>Click on a given day to check who celebrates a name day!</h5>
         )
     }

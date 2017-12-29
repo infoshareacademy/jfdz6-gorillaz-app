@@ -28,9 +28,7 @@
 
 .Calendar__wrapper {
     position: relative;
-    /*max-width: 700px;*/
     height: 550px;
-    /*margin: 0 auto;*/
     padding: 10px;
 }
 
