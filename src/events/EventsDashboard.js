@@ -15,7 +15,6 @@ import {
     FlexContainer,
     FlexBox,
 } from '../styled-components/grid-components'
-import './EventsDashboard.css'
 
 const sortEventsAscending = (prev, next) => moment(prev.start).isBefore(next.start) ? -1 : 1
 
