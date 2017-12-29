@@ -7,7 +7,11 @@ import {
 
 import {years, months, getDaysForGivenMonth} from './date-data'
 import DropdownList from './DropdownList'
-import './DateSearchBar.css'
+
+import {
+    FlexContainer,
+    FlexBox,
+} from '../styled-components/grid-components'
 
 export default class DateSearchBar extends React.Component {
     handleYearChange = event => (
@@ -33,54 +37,54 @@ export default class DateSearchBar extends React.Component {
         const currentDaysRange = getDaysForGivenMonth(month || 1)
 
         return (
-            <div className="DateSearchBar__wrapper">
-                <div className="DateSearchBar__date-picker">
-                    <div className="DateSearchBar__date-item">
-                        <FormGroup>
-                            <ControlLabel>Year</ControlLabel>
-                            {' '}
-                            <DropdownList
-                                value={year}
-                                onSelectChange={this.handleYearChange}
-                                options={years}
-                            />
-                        </FormGroup>
-                    </div>
+            <FlexContainer>
 
-                    <div className="DateSearchBar__date-item">
-                        <FormGroup>
-                            <ControlLabel>Month</ControlLabel>
-                            {' '}
-                            <DropdownList
-                                value={month}
-                                onSelectChange={this.handleMonthChange}
-                                options={months}
-                            />
-                        </FormGroup>
-                    </div>
+                <FlexBox xsFlex="1 0 115px">
+                    <FormGroup>
+                        <ControlLabel>Year</ControlLabel>
+                        {' '}
+                        <DropdownList
+                            value={year}
+                            onSelectChange={this.handleYearChange}
+                            options={years}
+                        />
+                    </FormGroup>
+                </FlexBox>
 
-                    <div className="DateSearchBar__date-item">
-                        <FormGroup>
-                            <ControlLabel>Day</ControlLabel>
-                            {' '}
-                            <DropdownList
-                                value={day}
-                                onSelectChange={this.handleDayChange}
-                                options={currentDaysRange}
-                            />
-                        </FormGroup>
-                    </div>
-                </div>
+                <FlexBox xsFlex="1 0 200px">
+                    <FormGroup>
+                        <ControlLabel>Month</ControlLabel>
+                        {' '}
+                        <DropdownList
+                            value={month}
+                            onSelectChange={this.handleMonthChange}
+                            options={months}
+                        />
+                    </FormGroup>
+                </FlexBox>
 
-                <div className="DateSearchBar__phrase-search">
+                <FlexBox xsFlex="1 0 115px">
+                    <FormGroup>
+                        <ControlLabel>Day</ControlLabel>
+                        {' '}
+                        <DropdownList
+                            value={day}
+                            onSelectChange={this.handleDayChange}
+                            options={currentDaysRange}
+                        />
+                    </FormGroup>
+                </FlexBox>
+
+
+                <FlexBox xsFlex="2 0 200px">
                     <FormGroup>
                         <ControlLabel>Phrase</ControlLabel>
                         <FormControl
                             type="text"
                         />
                     </FormGroup>
-                </div>
-            </div>
+                </FlexBox>
+            </FlexContainer>
         )
     }
 }
