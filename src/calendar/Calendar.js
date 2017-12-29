@@ -112,14 +112,14 @@ class Calendar extends React.Component {
 
         return (
             <Container>
-                <Box md={8}>
+                <Box md={12}>
                     <div className="Calendar__wrapper">
                         <BigCalendar {...this.getCalendarConfig()}/>
                         <NewEventButton selectedDate={this.state.selectedDate}/>
                     </div>
                 </Box>
 
-                <Box md={4}>
+                <Box md={12}>
                     <div>
                         {
                             this.props.holidays.getting && <p>Getting data...</p>

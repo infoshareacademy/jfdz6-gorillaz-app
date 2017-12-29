@@ -18,7 +18,12 @@ import {
 import ContactsMasterDetail from './contacts/ContactsMasterDetail'
 import Calendar from './calendar/Calendar'
 import EventsMasterDetail from './events/EventsMasterDetail'
-import {Container, Box} from './styled-components/grid-components'
+
+import {
+    Container,
+    FlexContainer,
+    FlexBox
+} from './styled-components/grid-components'
 import './MainRouter.css'
 
 const MainRouter = () => (
@@ -32,27 +37,27 @@ const MainRouter = () => (
                     <Navbar.Toggle />
                 </Navbar.Header>
                 <Navbar.Collapse>
-                <Nav pullRight >
-                    <LinkContainer exact to="/">
-                        <NavItem>Home</NavItem>
-                    </LinkContainer>
+                    <Nav pullRight>
+                        <LinkContainer exact to="/">
+                            <NavItem>Home</NavItem>
+                        </LinkContainer>
 
-                    <LinkContainer to="/about">
-                        <NavItem>About us</NavItem>
-                    </LinkContainer>
+                        <LinkContainer to="/about">
+                            <NavItem>About us</NavItem>
+                        </LinkContainer>
 
-                    <LinkContainer to="/calendar">
-                        <NavItem>Calendar</NavItem>
-                    </LinkContainer>
+                        <LinkContainer to="/calendar">
+                            <NavItem>Calendar</NavItem>
+                        </LinkContainer>
 
-                    <LinkContainer to="/my-events">
-                        <NavItem>Events</NavItem>
-                    </LinkContainer>
+                        <LinkContainer to="/my-events">
+                            <NavItem>Events</NavItem>
+                        </LinkContainer>
 
-                    <LinkContainer to="/contacts">
-                        <NavItem>Contacts</NavItem>
-                    </LinkContainer>
-                </Nav>
+                        <LinkContainer to="/contacts">
+                            <NavItem>Contacts</NavItem>
+                        </LinkContainer>
+                    </Nav>
                 </Navbar.Collapse>
             </Navbar>
 
@@ -75,31 +80,37 @@ const Home = () => (
 
 const About = () => (
     <Container>
-        <Box
-            sm={6}
-            md={3}
-            smPush={1}
-        >
-            Box1
-        </Box>
-        <Box
-            sm={6}
-            md={3}
-        >
-            Box2
-        </Box>
-        <Box
-            sm={6}
-            md={3}
-        >
-            Box3
-        </Box>
-        <Box
-            sm={6}
-            md={3}
-        >
-            Box4
-        </Box>
+        <FlexContainer>
+            <FlexBox>
+                Header
+            </FlexBox>
+
+            <FlexBox
+                mdFlex="2 0 0"
+                mdOrder="2"
+            >
+                Section
+                This is an example how to use grid styled-components
+            </FlexBox>
+
+            <FlexBox
+                smFlex="1 0 0"
+                mdOrder="1"
+            >
+                Aside left
+            </FlexBox>
+
+            <FlexBox
+                smFlex="1 0 0"
+                mdOrder="3"
+            >
+                Aside right
+            </FlexBox>
+
+            <FlexBox mdOrder="4">
+                Footer
+            </FlexBox>
+        </FlexContainer>
     </Container>
 )
 

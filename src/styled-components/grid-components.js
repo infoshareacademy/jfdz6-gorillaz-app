@@ -19,18 +19,41 @@ const media = Object.keys(screenSizes).reduce((acc, label) => {
 const gridBasis = 12
 
 export const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
   margin: 0 auto;
-  padding: 10px;
+  padding: 15px;
   
 ${media.tablet`width: 750px;`}
 ${media.desktop`width: 970px;`}
 ${media.largeDesktop`width: 1170px;`}
 `
 
+export const FlexContainer = styled.div`
+  display: flex;
+  flex-direction: ${props => props.direction || 'row'};
+  flex-wrap: ${props => props.wrap || 'wrap'};
+  justify-content: ${props => props.justify || 'flex-start'};
+  align-items: ${props => props.align || 'flex-start'};
+`
+
+export const FlexBox = styled.div`
+  display: ${props => props.display || 'block'};
+  padding: 0 15px;
+  flex: ${props => props.xsFlex || '0 0 100%'};
+  order: ${props => props.xsOrder || '0'};
+  align-self: ${props => props.align || 'flex-start'};
+  
+  ${props => props.smFlex && media.tablet`flex: ${props => props.smFlex};`}
+  ${props => props.mdFlex && media.desktop`flex: ${props => props.mdFlex};`}
+  ${props => props.lgFlex && media.largeDesktop`flex: ${props => props.lgFlex};`}
+  
+  ${props => props.smOrder && media.tablet`order: ${props => props.smOrder};`}
+  ${props => props.mdOrder && media.desktop`order: ${props => props.mdOrder};`}
+  ${props => props.lgOrder && media.largeDesktop`order: ${props => props.lgOrder};`}
+`
+
+
 export const Box = styled.div`
-  padding: 10px;
+  padding: 0 15px;
   width: ${props => props.xs ? (props.xs / gridBasis) * 100 : 100}%;
   
 ${media.tablet`width: ${props => (props.sm || props.xs || gridBasis) / gridBasis * 100}%;`}
