@@ -4,6 +4,11 @@ import {Glyphicon} from 'react-bootstrap'
 import {Container, Box} from '../styled-components/grid-components'
 import MasterView from './MasterView'
 import DetailView from './DetailView'
+
+import {
+    FlexContainer,
+    FlexBox,
+} from '../styled-components/grid-components'
 import './MasterDetail.css'
 
 class MasterDetail extends React.Component {
@@ -32,7 +37,8 @@ class MasterDetail extends React.Component {
 
         return (
             <Container>
-                <Box sm={5}>
+                <FlexContainer>
+                <FlexBox smFlex="5 0 0">
                     <h3 className="MasterDetail__header">
                         <Glyphicon
                             glyph="list-alt"
@@ -47,9 +53,9 @@ class MasterDetail extends React.Component {
                         PreviewItem={this.props.PreviewItem}
                         onItemClick={this.handleItemClick}
                     />
-                </Box>
+                </FlexBox>
 
-                <Box sm={7}>
+                    <FlexBox smFlex="7 0 0">
                     {
                         this.state.selectedItem ?
                             <div>
@@ -87,7 +93,8 @@ class MasterDetail extends React.Component {
                     </h3>
 
                     <NewItem/>
-                </Box>
+                </FlexBox>
+                </FlexContainer>
             </Container>
         )
     }
