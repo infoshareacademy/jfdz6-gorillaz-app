@@ -10,6 +10,7 @@ import NewContact from './views/NewContact'
 import PreviewContact from './views/PreviewContact'
 import DetailedContact from './views/DetailedContact'
 import EditContact from './views/EditContact'
+import Spinner from '../shared-components/Spinner'
 
 class ContactsMasterDetail extends React.Component {
     componentDidMount = () => {

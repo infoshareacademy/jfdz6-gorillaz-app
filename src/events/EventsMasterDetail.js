@@ -10,6 +10,7 @@ import NewEvent from './views/NewEvent'
 import PreviewEvent from './views/PreviewEvent'
 import DetailedEvent from './views/DetailedEvent'
 import EditEvent from './views/EditEvent'
+import Spinner from '../shared-components/Spinner'
 
 class EventsMasterDetail extends React.Component {
     componentDidMount = () => {
@@ -33,7 +34,7 @@ class EventsMasterDetail extends React.Component {
                     DetailedItem={DetailedEvent}
                     EditItem={EditEvent}
                 /> :
-                <p>Getting data...</p>
+               <Spinner/>
         )
     }
 }

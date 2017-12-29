@@ -23,6 +23,7 @@ import {
     FlexContainer,
     FlexBox,
 } from '../styled-components/grid-components'
+import Spinner from '../shared-components/Spinner'
 import './Calendar.css'
 
 BigCalendar.setLocalizer(
@@ -147,7 +148,7 @@ class Calendar extends React.Component {
                                 </FlexBox>
                             </FlexContainer>
                         </div> :
-                        <p>Getting data...</p>
+                        <Spinner/>
                 }
             </Container>
         )
