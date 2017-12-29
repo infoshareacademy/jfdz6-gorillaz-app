@@ -14,7 +14,7 @@ const EventsList = props => {
                             className="EventsList__item"
                             key={event.id}
                         >
-                            <span className="EventsList__marker">{marker}</span>
+                            <span className="EventsList__marker">{marker || event.emoji}</span>
                             <EventViewComponent event={event}/>
                         </li>
                     )

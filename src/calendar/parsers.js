@@ -42,7 +42,8 @@ const getParsedHolidayCommonPart = (currentYear, event) => ({
     start: new Date(currentYear, +event.date.slice(2) - 1, +event.date.slice(0, 2)),
     end: new Date(currentYear, +event.date.slice(2) - 1, +event.date.slice(0, 2)),
     title: event.title,
-    payload: event.payload
+    payload: event.payload,
+    emoji: event.emoji,
 })
 
 const parseCustomEvents = currentYear => (
@@ -141,9 +142,9 @@ export function getParsedEventsForSelectedRange(parsedEvents, selectedDate) {
 export function getParsedHolidaysForSelectedRange(parsedHolidays, selectedDate) {
 
     return parsedHolidays.filter(event =>
-            (selectedDate.month ? (event.start.getMonth() + 1 === selectedDate.month) : true) &&
-            (selectedDate.day ? (event.start.getDate() === selectedDate.day) : true)
-        )
+        (selectedDate.month ? (event.start.getMonth() + 1 === selectedDate.month) : true) &&
+        (selectedDate.day ? (event.start.getDate() === selectedDate.day) : true)
+    )
 }
 
 export function getNameDaysForSelectedRange(nameDays, selectedDate) {
@@ -160,7 +161,7 @@ export function getNameDaysForSelectedRange(nameDays, selectedDate) {
                 )
             isMatching && (acc.push({
                     id: date + 'name',
-                    start: new Date(2017, +date.slice(-2) - 1,date.slice(0, 2)),
+                    start: new Date(2017, +date.slice(-2) - 1, date.slice(0, 2)),
                     payload: nameDays[date].join(', ')
                 })
             )

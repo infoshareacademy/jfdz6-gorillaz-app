@@ -39,7 +39,6 @@ class EventsDashboard extends React.Component {
                             icon="calendar"
                             events={selectedHolidays}
                             eventViewComponent={ListItemEvent}
-                            marker={'\u{1F385}'}
                         />
                     </div>
 
