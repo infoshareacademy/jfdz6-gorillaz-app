@@ -17,7 +17,12 @@ import {getCalendarConfig} from './calendar-config'
 import NewEventButton from '../events/views/NewEventButton'
 import DateSearchBar from '../search-bar/DateSearchBar'
 import EventsDashboard from '../events/EventsDashboard'
-import {Container, Box} from '../styled-components/grid-components'
+
+import {
+    Container,
+    FlexContainer,
+    FlexBox,
+} from '../styled-components/grid-components'
 import './Calendar.css'
 
 BigCalendar.setLocalizer(
@@ -109,30 +114,41 @@ class Calendar extends React.Component {
 
 
     render() {
+        const isDataRetrieved = !this.props.holidays.getting
 
         return (
             <Container>
-                <Box md={12}>
-                    <div className="Calendar__wrapper">
-                        <BigCalendar {...this.getCalendarConfig()}/>
-                        <NewEventButton selectedDate={this.state.selectedDate}/>
-                    </div>
-                </Box>
+                {
+                    isDataRetrieved ?
+                        <div>
+                            <FlexContainer justify="center">
+                                <FlexBox xsFlex="0 1 900px">
+                                    <div className="Calendar__wrapper">
+                                        <BigCalendar {...this.getCalendarConfig()}/>
+                                        <NewEventButton selectedDate={this.state.selectedDate}/>
+                                    </div>
+                                </FlexBox>
+                            </FlexContainer>
 
-                <Box md={12}>
-                    <div>
-                        {
-                            this.props.holidays.getting && <p>Getting data...</p>
-                        }
-                        <DateSearchBar
-                            selectedDate={this.state.selectedDate}
-                            onRangeChange={this.handleRangeChange}
-                        />
-                        <EventsDashboard
-                            selectedDate={this.state.selectedDate}
-                        />
-                    </div>
-                </Box>
+                            <FlexContainer justify="center">
+                                <FlexBox xsFlex="0 1 900px">
+                                    <DateSearchBar
+                                        selectedDate={this.state.selectedDate}
+                                        onRangeChange={this.handleRangeChange}
+                                    />
+                                </FlexBox>
+                            </FlexContainer>
+
+                            <FlexContainer>
+                                <FlexBox>
+                                    <EventsDashboard
+                                        selectedDate={this.state.selectedDate}
+                                    />
+                                </FlexBox>
+                            </FlexContainer>
+                        </div> :
+                        <p>Getting data...</p>
+                }
             </Container>
         )
     }
