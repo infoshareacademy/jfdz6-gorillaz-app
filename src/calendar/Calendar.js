@@ -7,12 +7,13 @@ import 'react-big-calendar/lib/css/react-big-calendar.css'
 import {
     subscribeCustomEvents,
     unsubscribeCustomEvents,
-    parseEvents
 } from '../state/custom-events'
 import {
     getHolidays,
-    parseHolidays
 }from "../state/holidays"
+import {
+    setDate
+} from '../state/calendar'
 import {getCalendarConfig} from './calendar-config'
 import NewEventButton from '../events/views/NewEventButton'
 import DateSearchBar from '../search-bar/DateSearchBar'
@@ -31,15 +32,6 @@ BigCalendar.setLocalizer(
 )
 
 class Calendar extends React.Component {
-    state = {
-        currentYear: (new Date()).getFullYear(),
-        selectedDate: {
-            year: '',
-            month: '',
-            day: ''
-        },
-        selectedPhrase: ''
-    }
 
     componentDidMount = () => {
         !this.props.holidays.data && this.props.getHolidays()
@@ -52,39 +44,9 @@ class Calendar extends React.Component {
 
     getCalendarConfig = getCalendarConfig.bind(this)
 
-    handleNavigate = currentDate => {
-        const currentYear = (new Date(currentDate)).getFullYear()
+    handleNavigate = date => this.props.setDate(date)
 
-        if (this.state.currentYear !== currentYear) {
-            this.props.parseEvents(currentYear)
-            this.props.parseHolidays(currentYear)
-
-            this.setState({
-                currentYear,
-                selectedDate: {
-                    year: currentDate.getFullYear(),
-                    month: (currentDate.getMonth() + 1),
-                    day: currentDate.getDate()
-                }
-            })
-        } else {
-            this.setState({
-                selectedDate: {
-                    year: currentDate.getFullYear(),
-                    month: (currentDate.getMonth() + 1),
-                    day: currentDate.getDate()
-                }
-            })
-        }
-    }
-
-    handleSelectSlot = ({start}) => this.setState({
-        selectedDate: {
-            year: start.getFullYear(),
-            month: start.getMonth() + 1,
-            day: start.getDate()
-        }
-    })
+    handleSelectSlot = ({start}) => this.props.setDate(start)
 
     handleSelectEvent = event => this.handleSelectSlot(event)
 
@@ -161,16 +123,16 @@ class Calendar extends React.Component {
 }
 
 const mapStateToProps = state => ({
+    calendar: state.calendar,
     customEvents: state.customEvents,
     holidays: state.holidays
 })
 
 const mapDispatchToProps = dispatch => ({
-    parseEvents: year => dispatch(parseEvents(year)),
+    setDate: date => dispatch(setDate(date)),
     subscribeCustomEvents: () => dispatch(subscribeCustomEvents()),
     unsubscribeCustomEvents: () => dispatch(unsubscribeCustomEvents()),
-    getHolidays: () => dispatch(getHolidays()),
-    parseHolidays: year => dispatch(parseHolidays(year))
+    getHolidays: () => dispatch(getHolidays())
 })
 
 export default connect(

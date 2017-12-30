@@ -7,10 +7,10 @@ const GET_SUCCESS = 'custom-events/GET_SUCCESS'
 const GET_FAIL = 'custom-events/GET_FAIL'
 const PARSE = 'custom-events/PARSE'
 
-export const addEvent = newEvent => dispatch => {
+export const addEvent = newEvent => (dispatch, getState) => {
     const userId = firebase.auth().currentUser.uid
     const newEventKey = firebase.database().ref(`users/${userId}/custom-events`).push().key
-
+console.log(getState().holidays.getting)
     firebase.database().ref(`/users/${userId}/custom-events/${newEventKey}`).set({
         ...newEvent,
         payload: newEvent.payload || 'no data'
