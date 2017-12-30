@@ -6,7 +6,7 @@ import './EditableEvent.css'
 import {RoundButton} from '../../styled-components/button-components'
 import {addEvent, removeEvent} from "../../state/custom-events"
 import getEventForm from '../form/event-form-factory'
-import ModalButton from '../../ModalButton'
+import ModalButton from '../../shared-components/ModalButton/ModalButton'
 import ListItemEvent from './ListItemEvent'
 
 class EditableEvent extends React.Component {
@@ -33,8 +33,9 @@ class EditableEvent extends React.Component {
                             bgc: '#4caf50',
                             radius: '20px'
                         }}
-                        glyph="pencil"
-                        modalHeader="Edit your event"
+                        buttonGlyph="pencil"
+                        modalGlyph="wrench"
+                        modalTitle="Edit your event"
                     >
                         <EditEventForm
                             onSubmit={this.handleSubmit}

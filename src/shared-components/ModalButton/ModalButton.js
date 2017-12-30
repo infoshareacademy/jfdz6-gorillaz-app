@@ -1,7 +1,10 @@
 import React from 'react'
-import {Modal, Button, Glyphicon} from 'react-bootstrap'
+import {
+    Modal,
+    Glyphicon
+} from 'react-bootstrap'
 
-import {RoundButton} from './styled-components/button-components'
+import {RoundButton} from '../../styled-components/button-components'
 import './ModalButton.css'
 
 export default class ModalButton extends React.Component {
@@ -14,7 +17,14 @@ export default class ModalButton extends React.Component {
     open = () => this.setState({show: true})
 
     render() {
-        const {buttonName, buttonProps, glyph, className, modalHeader} = this.props
+        const {
+            buttonName,
+            buttonProps,
+            buttonGlyph,
+            buttonClass,
+            modalGlyph,
+            modalTitle
+        } = this.props
 
         return (
             <div className="ModalButton__wrapper">
@@ -24,17 +34,18 @@ export default class ModalButton extends React.Component {
                             {...buttonProps}
                             onClick={this.open}
                         >
-                            {glyph && <Glyphicon glyph={glyph}/>}
+                            {buttonGlyph && <Glyphicon glyph={buttonGlyph}/>}
                             {' '}
                             {buttonName}
                         </RoundButton> :
                         <button
-                            className={className}
+                            className={buttonClass}
                             onClick={this.open}
                         >
                             {buttonName}
                         </button>
                 }
+
                 <Modal
                     show={this.state.show}
                     onHide={this.close}
@@ -42,21 +53,24 @@ export default class ModalButton extends React.Component {
                     keyboard={false}
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title>
-                            {modalHeader}
+                        <Modal.Title bsClass="ModalButton__title">
+                            {
+                                modalGlyph &&
+                            <Glyphicon
+                                glyph={modalGlyph}
+                                className="ModalButton__logo"
+                            />
+                            }
+                            {' '}
+                            {modalTitle}
                         </Modal.Title>
                     </Modal.Header>
 
                     <Modal.Body>
                         {this.props.children}
                     </Modal.Body>
-
-                    <Modal.Footer>
-                        <Button onClick={this.close}>Close</Button>
-                    </Modal.Footer>
                 </Modal>
             </div>
         )
     }
 }
-

@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import moment from 'moment'
 
 import {addEvent} from "../../state/custom-events"
-import ModalButton from '../../ModalButton'
+import ModalButton from '../../shared-components/ModalButton/ModalButton'
 import getEventForm from '../form/event-form-factory'
 
 class NewEventButton extends React.Component {
@@ -17,9 +17,10 @@ class NewEventButton extends React.Component {
 
         return (
             <ModalButton
-                className="Calendar__button--new-event"
+                buttonClass="Calendar__button--new-event"
                 buttonName="+"
-                modalHeader="Add new event"
+                modalGlyph="plus"
+                modalTitle="Add new event"
             >
                 <NewEventForm
                     onSubmit={this.handleSubmit}

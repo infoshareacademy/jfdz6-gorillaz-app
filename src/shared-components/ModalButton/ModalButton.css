@@ -1,0 +1,15 @@
+.ModalButton__wrapper {
+    display: inline-block;
+}
+
+.ModalButton__logo {
+    color: rgb(255, 167, 7);
+}
+
+.ModalButton__title {
+    text-align: center;
+    color: rgb(3, 120, 244);
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
