@@ -1,4 +1,5 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import {
     FormGroup,
     ControlLabel,
@@ -9,34 +10,42 @@ import {years, months, getDaysForGivenMonth} from './date-data'
 import DropdownList from './DropdownList'
 
 import {
+    setYear,
+    setMonth,
+    setDay,
+    setPhrase
+} from '../state/calendar'
+
+import {
     FlexContainer,
     FlexBox,
 } from '../styled-components/grid-components'
 
-export default class DateSearchBar extends React.Component {
+class DateSearchBar extends React.Component {
     handleYearChange = event => (
-        this.props.onRangeChange('year', +event.currentTarget.value)
+        this.props.setYear(+event.currentTarget.value)
     )
 
     handleMonthChange = event => {
         const selectedMonthValue = +event.currentTarget.value
         const currentDaysRange = getDaysForGivenMonth(selectedMonthValue)
         const noSuchDay = selectedMonthValue ?
-            !currentDaysRange.find(day => day.value === this.props.selectedDate.day) :
+            !currentDaysRange.find(day => day.value === this.props.calendar.day) :
             false
 
-        this.props.onRangeChange('month', selectedMonthValue, noSuchDay)
+        this.props.setMonth(selectedMonthValue)
+        noSuchDay && this.props.setDay('')
     }
 
     handleDayChange = event => (
-        this.props.onRangeChange('day', +event.currentTarget.value)
+        this.props.setDay(+event.currentTarget.value)
     )
 
-    handlePhraseChange = event => this.props.onPhraseChange(event.currentTarget.value)
+    handlePhraseChange = event => this.props.setPhrase(event.currentTarget.value)
 
     render() {
-        const {year, month, day} = this.props.selectedDate
-        const {selectedPhrase} = this.props
+        const {year, month, day} = this.props.calendar
+        const selectedPhrase = this.props.calendar.phrase
         const currentDaysRange = getDaysForGivenMonth(month || 1)
 
         return (
@@ -93,3 +102,18 @@ export default class DateSearchBar extends React.Component {
         )
     }
 }
+
+const mapStateToProps = state => ({
+    calendar: state.calendar
+})
+
+const mapDispatchToProps = dispatch => ({
+    setYear: year => dispatch(setYear(year)),
+    setMonth: month => dispatch(setMonth(month)),
+    setDay: day => dispatch(setDay(day)),
+    setPhrase: phrase => dispatch(setPhrase(phrase)),
+})
+
+export default connect(
+    mapStateToProps
+)(DateSearchBar)

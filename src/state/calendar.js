@@ -26,10 +26,17 @@ export const setDate = date => (dispatch, getState) => {
     }
 }
 
-export const setYear = year => ({
-    type: SET_YEAR,
-    year
-})
+export const setYear = year => (dispatch, getState) => {
+    dispatch({
+        type: SET_YEAR,
+        year
+    })
+
+    if (year !== getState().calendar.year) {
+        dispatch(parseEvents(year))
+        dispatch(parseHolidays(year))
+    }
+}
 
 export const setMonth = month => ({
     type: SET_MONTH,

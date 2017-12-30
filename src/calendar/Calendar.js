@@ -50,34 +50,6 @@ class Calendar extends React.Component {
 
     handleSelectEvent = event => this.handleSelectSlot(event)
 
-    handleRangeChange = (part, value, noSuchDay) => {
-        if (part === 'year' && this.state.currentYear !== value) {
-            this.props.parseEvents(value)
-            this.props.parseHolidays(value)
-
-            this.setState({
-                currentYear: value,
-            })
-        }
-
-        noSuchDay ?
-            this.setState({
-                selectedDate: {
-                    ...this.state.selectedDate,
-                    [part]: value,
-                    day: ''
-                }
-            }) :
-            this.setState({
-                selectedDate: {
-                    ...this.state.selectedDate,
-                    [part]: value
-                }
-            })
-    }
-
-    handlePhraseChange = selectedPhrase =>  this.setState({selectedPhrase})
-
     render() {
         const isDataRetrieved = !this.props.holidays.getting && !this.props.customEvents.getting
 
@@ -90,19 +62,14 @@ class Calendar extends React.Component {
                                 <FlexBox xsFlex="0 1 900px">
                                     <div className="Calendar__wrapper">
                                         <BigCalendar {...this.getCalendarConfig()}/>
-                                        <NewEventButton selectedDate={this.state.selectedDate}/>
+                                        <NewEventButton/>
                                     </div>
                                 </FlexBox>
                             </FlexContainer>
 
                             <FlexContainer justify="center">
                                 <FlexBox xsFlex="0 1 900px">
-                                    <DateSearchBar
-                                        selectedDate={this.state.selectedDate}
-                                        onRangeChange={this.handleRangeChange}
-                                        selectedPhrase={this.state.selectedPhrase}
-                                        onPhraseChange={this.handlePhraseChange}
-                                    />
+                                    <DateSearchBar/>
                                 </FlexBox>
                             </FlexContainer>
 
