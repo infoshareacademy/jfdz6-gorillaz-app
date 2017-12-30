@@ -23,7 +23,13 @@ const filterMatchingPhrase = (event, phrase) => phrase ? new RegExp('\\b' + phra
 class EventsDashboard extends React.Component {
 
     render() {
-        const {customEvents, holidays, selectedDate, selectedPhrase} = this.props
+        const {calendar, customEvents, holidays} = this.props
+        const selectedDate = {
+            year: calendar.year,
+            month: calendar.month,
+            day: calendar.day
+        }
+        const selectedPhrase = calendar.phrase
         const isDateSelected = !Object.keys(selectedDate).every(part => selectedDate[part] === '')
 
         const selectedEvents = customEvents.data && isDateSelected ?
@@ -80,6 +86,7 @@ class EventsDashboard extends React.Component {
 }
 
 const mapStateToProps = state => ({
+    calendar: state.calendar,
     customEvents: state.customEvents,
     holidays: state.holidays
 })

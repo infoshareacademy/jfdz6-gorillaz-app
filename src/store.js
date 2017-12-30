@@ -5,6 +5,7 @@ import { reducer as reduxFormReducer } from 'redux-form';
 import firebase from 'firebase'
 
 import auth from './state/auth'
+import calendar from './state/calendar'
 import contacts from './state/contacts'
 import customEvents from './state/custom-events'
 import holidays from './state/holidays'
@@ -22,6 +23,7 @@ firebase.initializeApp(config);
 const reducer = combineReducers({
     form: reduxFormReducer,
     auth,
+    calendar,
     contacts,
     customEvents,
     holidays

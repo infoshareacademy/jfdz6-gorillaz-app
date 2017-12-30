@@ -108,10 +108,7 @@ class Calendar extends React.Component {
 
                             <FlexContainer>
                                 <FlexBox>
-                                    <EventsDashboard
-                                        selectedDate={this.state.selectedDate}
-                                        selectedPhrase={this.state.selectedPhrase}
-                                    />
+                                    <EventsDashboard/>
                                 </FlexBox>
                             </FlexContainer>
                         </div> :
