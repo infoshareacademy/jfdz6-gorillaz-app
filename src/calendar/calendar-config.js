@@ -12,15 +12,8 @@ const eventPropGetter = ({type}) => {
 }
 
 export function getCalendarConfig() {
-    const {year, month, day} = this.state.selectedDate
-    const isDatePristine = Object.keys(this.state.selectedDate).every(part => this.state.selectedDate[part] === '')
-    const defaultDate = isDatePristine ?
-        {
-            year: (new Date()).getFullYear(),
-            month: (new Date()).getMonth(),
-            day: (new Date()).getDate()
-        } :
-        {
+    const {year, month, day} = this.props.calendar
+    const defaultDate = {
             year: (new Date()).getFullYear(),
             month: 0,
             day: 1

@@ -53,10 +53,12 @@ export const setPhrase = phrase => ({
     phrase
 })
 
+const todayDate = moment()
+
 const initialState = {
-    year: moment().year(),
-    month: '',
-    day: '',
+    year: todayDate.year(),
+    month: todayDate.month(),
+    day: todayDate.date(),
     phrase: ''
 }
 
