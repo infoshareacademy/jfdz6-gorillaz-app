@@ -12,8 +12,8 @@ export const addContact = newContact => dispatch => {
     })
 }
 
-export const subscribeContacts = () => dispatch => {
-    const userId = firebase.auth().currentUser.uid
+export const subscribeContacts = () => (dispatch, getState) => {
+    const userId = getState().auth.data.uid
     const contactsRef = firebase.database().ref(`users/${userId}/contacts`)
 
     contactsRef.on('value', function (snapshot) {
@@ -36,8 +36,8 @@ export const subscribeContacts = () => dispatch => {
     })
 }
 
-export const unsubscribeContacts = () => dispatch => {
-    const userId = firebase.auth().currentUser.uid
+export const unsubscribeContacts = () => (dispatch, getState) => {
+    const userId = getState().auth.data.uid
     const contactsRef = firebase.database().ref(`users/${userId}/contacts`)
 
     contactsRef.off()

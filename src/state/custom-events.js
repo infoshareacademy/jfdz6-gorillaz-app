@@ -20,7 +20,7 @@ export const addEvent = newEvent => dispatch => {
 export const subscribeCustomEvents = () => (dispatch, getState) => {
     dispatch({type: GET_BEGIN})
 
-    const userId = firebase.auth().currentUser.uid
+    const userId = getState().auth.data.uid
     const customEventsRef = firebase.database().ref(`users/${userId}/custom-events`)
 
     customEventsRef.on('value', function (snapshot) {
@@ -44,8 +44,8 @@ export const subscribeCustomEvents = () => (dispatch, getState) => {
     })
 }
 
-export const unsubscribeCustomEvents = () => dispatch => {
-    const userId = firebase.auth().currentUser.uid
+export const unsubscribeCustomEvents = () => (dispatch, getState) => {
+    const userId = getState().auth.data.uid
     const customEventsRef = firebase.database().ref(`users/${userId}/custom-events`)
 
     customEventsRef.off()

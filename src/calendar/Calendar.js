@@ -68,6 +68,7 @@ class Calendar extends React.Component {
 }
 
 const mapStateToProps = state => ({
+    calendar: state.calendar,
     customEvents: state.customEvents,
     holidays: state.holidays
 })
