@@ -9,33 +9,33 @@ const SET_MONTH = 'calendar/SET_MONTH'
 const SET_DAY = 'calendar/SET_DAY'
 const SET_PHRASE = 'calendar/SET_PHRASE'
 
-export const setDate = date => (dispatch, getState) => {
-    const date = moment(date)
+export const setDate = newDate => (dispatch, getState) => {
+    const date = moment(newDate)
     const year = date.year()
+
+    if (year !== getState().calendar.year) {
+        dispatch(parseEvents(year))
+        dispatch(parseHolidays(year))
+    }
 
     dispatch({
         type: SET_DATE,
         year,
-        month: date.month(),
+        month: date.month() + 1,
         day: date.date()
     })
+}
 
+export const setYear = year => (dispatch, getState) => {
     if (year !== getState().calendar.year) {
         dispatch(parseEvents(year))
         dispatch(parseHolidays(year))
     }
-}
-
-export const setYear = year => (dispatch, getState) => {
+console.log(getState().calendar.year)
     dispatch({
         type: SET_YEAR,
         year
     })
-
-    if (year !== getState().calendar.year) {
-        dispatch(parseEvents(year))
-        dispatch(parseHolidays(year))
-    }
 }
 
 export const setMonth = month => ({
@@ -57,7 +57,7 @@ const todayDate = moment()
 
 const initialState = {
     year: todayDate.year(),
-    month: todayDate.month(),
+    month: todayDate.month() + 1,
     day: todayDate.date(),
     phrase: ''
 }
@@ -79,12 +79,12 @@ export default (state = initialState, action = {}) => {
         case SET_MONTH:
             return {
                 ...state,
-                year: action.year,
+                month: action.month,
             }
         case SET_DAY:
             return {
                 ...state,
-                year: action.year,
+                day: action.day,
             }
         case SET_PHRASE:
             return {
