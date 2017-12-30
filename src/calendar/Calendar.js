@@ -4,16 +4,7 @@ import BigCalendar from 'react-big-calendar'
 import moment from 'moment'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 
-import {
-    subscribeCustomEvents,
-    unsubscribeCustomEvents,
-} from '../state/custom-events'
-import {
-    getHolidays,
-}from "../state/holidays"
-import {
-    setDate
-} from '../state/calendar'
+import {setDate} from '../state/calendar'
 import {getCalendarConfig} from './calendar-config'
 import NewEventButton from '../events/views/NewEventButton'
 import DateSearchBar from '../search-bar/DateSearchBar'
@@ -32,16 +23,6 @@ BigCalendar.setLocalizer(
 )
 
 class Calendar extends React.Component {
-
-    componentDidMount = () => {
-        !this.props.holidays.data && this.props.getHolidays()
-        this.props.subscribeCustomEvents()
-    }
-
-    componentWillUnmount = () => {
-        this.props.unsubscribeCustomEvents()
-    }
-
     getCalendarConfig = getCalendarConfig.bind(this)
 
     handleNavigate = date => this.props.setDate(date)
@@ -87,16 +68,12 @@ class Calendar extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    calendar: state.calendar,
     customEvents: state.customEvents,
     holidays: state.holidays
 })
 
 const mapDispatchToProps = dispatch => ({
-    setDate: date => dispatch(setDate(date)),
-    subscribeCustomEvents: () => dispatch(subscribeCustomEvents()),
-    unsubscribeCustomEvents: () => dispatch(unsubscribeCustomEvents()),
-    getHolidays: () => dispatch(getHolidays())
+    setDate: date => dispatch(setDate(date))
 })
 
 export default connect(
