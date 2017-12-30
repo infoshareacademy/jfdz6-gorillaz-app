@@ -37,7 +37,8 @@ class Calendar extends React.Component {
             year: '',
             month: '',
             day: ''
-        }
+        },
+        selectedPhrase: ''
     }
 
     componentDidMount = () => {
@@ -144,6 +145,7 @@ class Calendar extends React.Component {
                                 <FlexBox>
                                     <EventsDashboard
                                         selectedDate={this.state.selectedDate}
+                                        selectedPhrase={this.state.selectedPhrase}
                                     />
                                 </FlexBox>
                             </FlexContainer>

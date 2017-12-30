@@ -17,21 +17,28 @@ import {
 } from '../styled-components/grid-components'
 
 const sortEventsAscending = (prev, next) => moment(prev.start).isBefore(next.start) ? -1 : 1
+const filterMatchingPhrase = (event, phrase) => new RegExp(phrase).test(event.title || '' + event.payload)
 
 class EventsDashboard extends React.Component {
 
     render() {
-        const {customEvents, holidays, selectedDate} = this.props
+        const {customEvents, holidays, selectedDate, selectedPhrase} = this.props
         const isDateSelected = !Object.keys(selectedDate).every(part => selectedDate[part] === '')
 
         const selectedEvents = customEvents.data && isDateSelected ?
-            getParsedEventsForSelectedRange(customEvents.parsedData, selectedDate).sort(sortEventsAscending) :
+            getParsedEventsForSelectedRange(customEvents.parsedData, selectedDate)
+                .filter(event => filterMatchingPhrase(event, selectedPhrase))
+                .sort(sortEventsAscending) :
             []
         const selectedHolidays = holidays.data && isDateSelected ?
-            getParsedHolidaysForSelectedRange(holidays.parsedData, selectedDate).sort(sortEventsAscending) :
+            getParsedHolidaysForSelectedRange(holidays.parsedData, selectedDate)
+                .filter(event => filterMatchingPhrase(event, selectedPhrase))
+                .sort(sortEventsAscending) :
             []
         const selectedNameDays = holidays.data && isDateSelected ?
-            getNameDaysForSelectedRange(holidays.data.nameDays, selectedDate).sort(sortEventsAscending) :
+            getNameDaysForSelectedRange(holidays.data.nameDays, selectedDate)
+                .filter(event => filterMatchingPhrase(event, selectedPhrase))
+                .sort(sortEventsAscending) :
             []
 
         return (
