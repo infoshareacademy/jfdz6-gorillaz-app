@@ -7,17 +7,17 @@ const GET_SUCCESS = 'custom-events/GET_SUCCESS'
 const GET_FAIL = 'custom-events/GET_FAIL'
 const PARSE = 'custom-events/PARSE'
 
-export const addEvent = newEvent => (dispatch, getState) => {
+export const addEvent = newEvent => dispatch => {
     const userId = firebase.auth().currentUser.uid
     const newEventKey = firebase.database().ref(`users/${userId}/custom-events`).push().key
-console.log(getState().holidays.getting)
+
     firebase.database().ref(`/users/${userId}/custom-events/${newEventKey}`).set({
         ...newEvent,
         payload: newEvent.payload || 'no data'
     })
 }
 
-export const subscribeCustomEvents = () => dispatch => {
+export const subscribeCustomEvents = () => (dispatch, getState) => {
     dispatch({type: GET_BEGIN})
 
     const userId = firebase.auth().currentUser.uid
@@ -39,7 +39,7 @@ export const subscribeCustomEvents = () => dispatch => {
         dispatch({
             type: GET_SUCCESS,
             data,
-            parsedData: getParsedEvents(data, (new Date()).getFullYear())
+            parsedData: getParsedEvents(data, getState().calendar.year)
         })
     })
 }
