@@ -41,6 +41,7 @@ export const FlexBox = styled.div`
   flex: ${props => props.xsFlex || '0 0 100%'};
   order: ${props => props.xsOrder || '0'};
   align-self: ${props => props.align || 'flex-start'};
+  overflow: hidden;
   
   ${props => props.smFlex && media.tablet`flex: ${props => props.smFlex};`}
   ${props => props.mdFlex && media.desktop`flex: ${props => props.mdFlex};`}
