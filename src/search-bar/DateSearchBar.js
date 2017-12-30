@@ -32,8 +32,11 @@ export default class DateSearchBar extends React.Component {
         this.props.onRangeChange('day', +event.currentTarget.value)
     )
 
+    handlePhraseChange = event => this.props.onPhraseChange(event.currentTarget.value)
+
     render() {
         const {year, month, day} = this.props.selectedDate
+        const {selectedPhrase} = this.props
         const currentDaysRange = getDaysForGivenMonth(month || 1)
 
         return (
@@ -81,6 +84,8 @@ export default class DateSearchBar extends React.Component {
                         <ControlLabel>Phrase</ControlLabel>
                         <FormControl
                             type="text"
+                            value={selectedPhrase}
+                            onChange={this.handlePhraseChange}
                         />
                     </FormGroup>
                 </FlexBox>

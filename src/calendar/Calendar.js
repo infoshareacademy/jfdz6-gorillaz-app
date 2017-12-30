@@ -114,6 +114,7 @@ class Calendar extends React.Component {
             })
     }
 
+    handlePhraseChange = selectedPhrase =>  this.setState({selectedPhrase})
 
     render() {
         const isDataRetrieved = !this.props.holidays.getting && !this.props.customEvents.getting
@@ -137,6 +138,8 @@ class Calendar extends React.Component {
                                     <DateSearchBar
                                         selectedDate={this.state.selectedDate}
                                         onRangeChange={this.handleRangeChange}
+                                        selectedPhrase={this.state.selectedPhrase}
+                                        onPhraseChange={this.handlePhraseChange}
                                     />
                                 </FlexBox>
                             </FlexContainer>

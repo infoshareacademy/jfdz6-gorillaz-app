@@ -17,7 +17,8 @@ import {
 } from '../styled-components/grid-components'
 
 const sortEventsAscending = (prev, next) => moment(prev.start).isBefore(next.start) ? -1 : 1
-const filterMatchingPhrase = (event, phrase) => new RegExp(phrase).test(event.title || '' + event.payload)
+const filterMatchingPhrase = (event, phrase) => phrase ? new RegExp('\\b' + phrase , 'i')
+    .test((event.title || '') + ' ' + event.payload) : true
 
 class EventsDashboard extends React.Component {
 
