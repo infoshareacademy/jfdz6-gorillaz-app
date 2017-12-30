@@ -26,6 +26,21 @@ export const setDate = date => (dispatch, getState) => {
     }
 }
 
+export const setYear = year => ({
+    type: SET_YEAR,
+    year
+})
+
+export const setMonth = month => ({
+    type: SET_MONTH,
+    month
+})
+
+export const setDay = day => ({
+    type: SET_DAY,
+    day
+})
+
 export const setPhrase = phrase => ({
     type: SET_PHRASE,
     phrase
@@ -46,6 +61,21 @@ export default (state = initialState, action = {}) => {
                 year: action.year,
                 month: action.month,
                 day: action.day
+            }
+        case SET_YEAR:
+            return {
+                ...state,
+                year: action.year,
+            }
+        case SET_MONTH:
+            return {
+                ...state,
+                year: action.year,
+            }
+        case SET_DAY:
+            return {
+                ...state,
+                year: action.year,
             }
         case SET_PHRASE:
             return {
