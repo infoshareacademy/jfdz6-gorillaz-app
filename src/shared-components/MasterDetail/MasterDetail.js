@@ -75,7 +75,7 @@ class MasterDetail extends React.Component {
                             </div> :
                             <h3 className="MasterDetail__header">
                                 <Glyphicon
-                                    glyph="eye-open"
+                                    glyph="zoom-in"
                                     className="MasterDetail__logo"
                                 />
                                 {' '}
