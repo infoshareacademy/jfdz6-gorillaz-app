@@ -3,11 +3,11 @@ import moment from 'moment'
 import {parseEvents} from './custom-events'
 import {parseHolidays} from './holidays'
 
-const SET_DATE = 'calendar/SET_DATE'
-const SET_YEAR = 'calendar/SET_YEAR'
-const SET_MONTH = 'calendar/SET_MONTH'
-const SET_DAY = 'calendar/SET_DAY'
-const SET_PHRASE = 'calendar/SET_PHRASE'
+const SET_DATE = 'calendar-module/SET_DATE'
+const SET_YEAR = 'calendar-module/SET_YEAR'
+const SET_MONTH = 'calendar-module/SET_MONTH'
+const SET_DAY = 'calendar-module/SET_DAY'
+const SET_PHRASE = 'calendar-module/SET_PHRASE'
 
 export const setDate = newDate => (dispatch, getState) => {
     const date = moment(newDate)

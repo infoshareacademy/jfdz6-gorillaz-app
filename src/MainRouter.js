@@ -24,9 +24,9 @@ unsubscribeContacts
 } from './state/contacts'
 import SignUp from './SignUp'
 import SignIn from './SignIn'
-import Calendar from './calendar/Calendar'
-import EventsMasterDetail from './events/EventsMasterDetail'
-import ContactsMasterDetail from './contacts/ContactsMasterDetail'
+import Calendar from './calendar-module/Calendar/Calendar'
+import EventsMasterDetail from './events-crud-module/EventsMasterDetail/EventsMasterDetail'
+import ContactsMasterDetail from './contacts-crud-module/ContactsMasterDetail/ContactsMasterDetail'
 
 import {
     Container,

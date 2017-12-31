@@ -1,4 +1,4 @@
-import {getParsedHolidays} from '../calendar/parsers'
+import {getParsedHolidays} from '../calendar-module/_helpers/parsers'
 
 const GET_BEGIN = 'holidays/GET_BEGIN'
 const GET_SUCCESS = 'holidays/GET_SUCCESS'

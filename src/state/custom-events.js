@@ -1,6 +1,6 @@
 import firebase from 'firebase'
 
-import {getParsedEvents} from '../calendar/parsers'
+import {getParsedEvents} from '../calendar-module/_helpers/parsers'
 
 const GET_BEGIN = 'custom-events/GET_BEGIN'
 const GET_SUCCESS = 'custom-events/GET_SUCCESS'
