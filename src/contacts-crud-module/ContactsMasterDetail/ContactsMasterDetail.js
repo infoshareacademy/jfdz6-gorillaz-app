@@ -10,20 +10,26 @@ import EditContact from '../EditContact/EditContact'
 import Spinner from '../../shared-components/Spinner/Spinner'
 
 class ContactsMasterDetail extends React.Component {
-    render = () => (
-        <MasterDetail
-            items={this.props.items || []}
-            name={'contact'}
-            NewItem={NewContact}
-            PreviewItem={PreviewContact}
-            DetailedItem={DetailedContact}
-            EditItem={EditContact}
-        />
-    )
+    render() {
+        const isDataRetrieved = !this.props.contacts.getting
+
+        return (
+            isDataRetrieved ?
+                <MasterDetail
+                    items={this.props.contacts.data || []}
+                    name={'contact'}
+                    NewItem={NewContact}
+                    PreviewItem={PreviewContact}
+                    DetailedItem={DetailedContact}
+                    EditItem={EditContact}
+                /> :
+                <Spinner/>
+        )
+    }
 }
 
 const mapStateToProps = state => ({
-    items: state.contacts
+    contacts: state.contacts
 })
 
 export default connect(
