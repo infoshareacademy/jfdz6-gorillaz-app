@@ -4,7 +4,8 @@ import {getParsedEvents} from '../calendar/parsers'
 
 const GET_BEGIN = 'custom-events/GET_BEGIN'
 const GET_SUCCESS = 'custom-events/GET_SUCCESS'
-const GET_FAIL = 'custom-events/GET_FAIL'
+const ADD_FAIL = 'custom-events/ADD_FAIL'
+const REMOVE_FAIL = 'custom-events/REMOVE_FAIL'
 const PARSE = 'custom-events/PARSE'
 
 export const addEvent = newEvent => (dispatch, getState) => {
@@ -16,7 +17,7 @@ export const addEvent = newEvent => (dispatch, getState) => {
         payload: newEvent.payload || 'no data'
     }).then(
         console.log('event has been added!')
-    ). catch(error => dispatch({type: GET_FAIL, error}))
+    ).catch(error => dispatch({type: ADD_FAIL, error}))
 }
 
 export const subscribeCustomEvents = () => (dispatch, getState) => {
@@ -53,10 +54,13 @@ export const unsubscribeCustomEvents = () => (dispatch, getState) => {
     customEventsRef.off()
 }
 
-export const removeEvent = eventId => dispatch => {
-    const userId = firebase.auth().currentUser.uid
+export const removeEvent = eventId => (dispatch, getState) => {
+    const userId = getState().auth.data.uid
 
     firebase.database().ref(`/users/${userId}/custom-events/${eventId}`).remove()
+        .then(
+            console.log('event has been removed!')
+        ).catch(error => dispatch({type: REMOVE_FAIL, error}))
 }
 
 export const parseEvents = year => ({
@@ -86,7 +90,12 @@ export default (state = initialState, action = {}) => {
                 parsedData: action.parsedData,
                 getting: false
             }
-        case GET_FAIL:
+        case ADD_FAIL:
+            return {
+                ...state,
+                error: action.error
+            }
+        case REMOVE_FAIL:
             return {
                 ...state,
                 error: action.error
