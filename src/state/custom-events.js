@@ -7,14 +7,16 @@ const GET_SUCCESS = 'custom-events/GET_SUCCESS'
 const GET_FAIL = 'custom-events/GET_FAIL'
 const PARSE = 'custom-events/PARSE'
 
-export const addEvent = newEvent => dispatch => {
-    const userId = firebase.auth().currentUser.uid
+export const addEvent = newEvent => (dispatch, getState) => {
+    const userId = getState().auth.data.uid
     const newEventKey = firebase.database().ref(`users/${userId}/custom-events`).push().key
 
     firebase.database().ref(`/users/${userId}/custom-events/${newEventKey}`).set({
         ...newEvent,
         payload: newEvent.payload || 'no data'
-    })
+    }).then(
+        console.log('event has been added!')
+    ). catch(error => dispatch({type: GET_FAIL, error}))
 }
 
 export const subscribeCustomEvents = () => (dispatch, getState) => {
@@ -83,6 +85,11 @@ export default (state = initialState, action = {}) => {
                 data: action.data,
                 parsedData: action.parsedData,
                 getting: false
+            }
+        case GET_FAIL:
+            return {
+                ...state,
+                error: action.error
             }
         case PARSE:
             return {
