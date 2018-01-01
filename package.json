@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "firebase": "^4.8.0",
+    "material-ui": "^1.0.0-beta.25",
     "moment": "^2.19.3",
     "react": "^16.1.1",
     "react-big-calendar": "^0.17.0",
@@ -17,7 +19,8 @@
     "redux-form": "^7.2.0",
     "redux-localstorage": "^0.4.1",
     "redux-thunk": "^2.2.0",
-    "styled-components": "^2.2.4"
+    "styled-components": "^2.2.4",
+    "typeface-roboto": "0.0.45"
   },
   "scripts": {
     "start": "react-scripts start",

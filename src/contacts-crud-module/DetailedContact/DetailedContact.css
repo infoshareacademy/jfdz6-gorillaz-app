@@ -1,0 +1,26 @@
+.control-label-detailed-contact {
+    letter-spacing: 1.2px;
+}
+
+.DetailedContact__wrapper {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.DetailedContact__paragraph {
+    letter-spacing: 1.1px;
+    font-size: 1.1em;
+}
+
+.DetailedContact__paragraph--justified {
+    text-align: justify;
+}
+
+.DetailedContact__toolbar {
+    text-align: center;
+}
+
+.DetailedContact__toolbar button:not(last-of-type) {
+    margin-right: 15px;
+}
