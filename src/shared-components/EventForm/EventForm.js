@@ -49,7 +49,7 @@ const renderTextareaField = ({input, label, type}) => (
 )
 
 const EventForm = props => {
-    const {handleSubmit, pristine, reset, submitting, submitSucceeded} = props
+    const {error, handleSubmit, pristine, reset, submitting, submitSucceeded} = props
 
     return (
         <div className="EventForm__wrapper">
@@ -81,7 +81,7 @@ const EventForm = props => {
                         bgc={'#4caf50'}
                         disabled={pristine || submitting}
                     >
-                        <Glyphicon glyph="send" />
+                        <Glyphicon glyph="send"/>
                         {' '}
                         {'Submit' + (submitting ? 'ting' : '')}
                     </RectButton>
@@ -92,15 +92,17 @@ const EventForm = props => {
                         disabled={pristine || submitting}
                         onClick={reset}
                     >
-                        <Glyphicon glyph="erase" />
+                        <Glyphicon glyph="erase"/>
                         {' '}
                         Clear
                     </RectButton>
 
                     {props.cancelButton}
                 </div>
-
-                <HelpBlock>{submitSucceeded && 'Event has been added!'}</HelpBlock>
+                <HelpBlock>
+                    {submitSucceeded && 'Event has been added!'}
+                    {error}
+                </HelpBlock>
             </form>
         </div>
     )

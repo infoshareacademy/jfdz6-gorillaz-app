@@ -7,9 +7,7 @@ import ModalButton from '../../shared-components/ModalButton/ModalButton'
 import getEventForm from '../../shared-utils/events/event-form-factory'
 
 class NewEventButton extends React.Component {
-    handleSubmit = newEvent => {
-        this.props.addEvent(newEvent)
-    }
+    handleSubmit = newEvent => this.props.addEvent(newEvent)
 
     render() {
         const currentDate = moment().format("YYYY-MM-DD")

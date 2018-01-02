@@ -5,9 +5,7 @@ import {addEvent} from "../../state/custom-events"
 import getEventForm from '../../shared-utils/events/event-form-factory'
 
 class NewEvent extends React.Component {
-    handleSubmit = newEvent => {
-        this.props.addEvent(newEvent)
-    }
+    handleSubmit = newEvent => this.props.addEvent(newEvent)
 
     render() {
         const initialDate = this.props.selectedDate || new Date()
