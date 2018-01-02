@@ -29,10 +29,7 @@ class EditableEvent extends React.Component {
 
                 <div className="EditableEvent__toolbar">
                     <ModalButton
-                        buttonProps={{
-                            bgc: '#4caf50',
-                            radius: '20px'
-                        }}
+                        buttonProps={{bgc: '#4caf50'}}
                         buttonGlyph="pencil"
                         modalGlyph="wrench"
                         modalTitle="Edit your event"
@@ -49,7 +46,6 @@ class EditableEvent extends React.Component {
 
                     <RoundButton
                         bgc={'#f44336'}
-                        radius={'20px'}
                         onClick={this.handleDeleteEventClick}
                     >
                         <Glyphicon glyph="trash"/>

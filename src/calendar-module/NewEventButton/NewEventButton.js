@@ -15,7 +15,7 @@ class NewEventButton extends React.Component {
 
         return (
             <ModalButton
-                buttonClass="Calendar__button--new-event"
+                buttonType="AddEventButton"
                 buttonName="+"
                 modalGlyph="plus"
                 modalTitle="Add new event"

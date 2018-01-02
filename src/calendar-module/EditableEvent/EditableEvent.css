@@ -2,6 +2,6 @@
     text-align: center;
 }
 
-.EditableEvent__toolbar button:not(last-of-type) {
+.EditableEvent__toolbar > *:not(:last-child) {
     margin-right: 15px;
 }
