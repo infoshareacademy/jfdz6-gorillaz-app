@@ -1,0 +1,26 @@
+.control-label-detailed-event {
+    letter-spacing: 1.2px;
+}
+
+.DetailedEvent__paragraph {
+    letter-spacing: 1.1px;
+    font-size: 1.1em;
+}
+
+.DetailedEvent__paragraph--justified {
+    text-align: justify;
+}
+
+.DetailedEvent__wrapper {
+    max-width: 360px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.DetailedEvent__toolbar {
+    text-align: center;
+}
+
+.DetailedEvent__toolbar button:not(last-of-type) {
+    margin-right: 15px;
+}

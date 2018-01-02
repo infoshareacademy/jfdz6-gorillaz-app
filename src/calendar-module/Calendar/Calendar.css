@@ -1,0 +1,90 @@
+.rbc-toolbar-label {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #009688;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.rbc-header {
+    padding: 5px;
+    font-size: 0.9em;
+    color: #009688;
+    letter-spacing: 1.5px;
+}
+
+.rbc-day-bg,
+.rbc-row {
+    cursor: pointer;
+}
+
+.rbc-today {
+    background-color: #ffeb3b;
+}
+
+.rbc-off-range-bg {
+    background-color: #f1f1f1;
+}
+
+.Calendar__wrapper {
+    position: relative;
+    height: 550px;
+    padding: 10px;
+}
+
+.Calendar__event {
+    font-size: 0.8em;
+}
+
+.Calendar__event-custom,
+.Calendar__event-custom.rbc-selected {
+    background-color: #2196f3;
+}
+
+.Calendar__event-public,
+.Calendar__event-public.rbc-selected {
+    background-color: #f44336;
+}
+
+.Calendar__event-other,
+.Calendar__event-other.rbc-selected {
+    background-color: #4caf50;
+}
+
+.Calendar__button--new-event {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    padding: 0 12.5px;
+    background-color: rgba(76, 175, 80, 0.8);
+    font-size: 2.2em;
+    color: white;
+}
+
+.Calendar__button--new-event:hover {
+    background-color: rgba(76, 175, 80, 1);
+}
+
+@media only screen and (min-width: 550px) {
+    .Calendar__button--new-event {
+        position: absolute;
+        top: 0;
+        bottom: auto;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .Calendar__event {
+        font-size: 0.9em;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .Calendar__event {
+        font-size: 1em;
+    }
+}
+
