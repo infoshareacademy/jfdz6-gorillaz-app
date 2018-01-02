@@ -5,9 +5,7 @@ import {addContact} from "../../state/contacts"
 import getContactForm from '../../shared-utils/contacts/contact-form-factory'
 
 class NewContact extends React.Component {
-    handleSubmit = newContact => {
-        this.props.addContact(newContact)
-    }
+    handleSubmit = newContact => this.props.addContact(newContact)
 
     render() {
         const NewContactForm = getContactForm('newContactForm', 2000)

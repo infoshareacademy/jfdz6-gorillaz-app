@@ -49,7 +49,7 @@ const renderTextareaField = ({input, label, type}) => (
 )
 
 const ContactForm = props => {
-    const {handleSubmit, pristine, reset, submitting, submitSucceeded} = props
+    const {error, handleSubmit, pristine, reset, submitting, submitSucceeded} = props
 
     return (
         <div className="ContactForm__wrapper">
@@ -129,7 +129,10 @@ const ContactForm = props => {
                     {props.cancelButton}
                 </div>
 
-                <HelpBlock>{submitSucceeded && 'Contact has been added!'}</HelpBlock>
+                <HelpBlock>
+                    {submitSucceeded && 'Contact has been added!'}
+                    {error}
+                </HelpBlock>
             </form>
         </div>
     )
