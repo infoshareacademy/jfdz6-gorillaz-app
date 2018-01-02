@@ -23,73 +23,54 @@ class signIn extends Component {
     )
   }
 
-  // render() {
-  //   return (
-  //     <Grid>
-  //       <Row className="show-grid">
-  //         <Col xs={12} md={8}>
-  //           <Form onSubmit={this.handleSubmit} horizontal>
-  //             {this.props.auth.error && <p>{this.props.auth.error.message}</p>}
-  //             <FormGroup controlId="formHorizontalEmail">
-  //               <Col componentClass={ControlLabel} sm={2}>
-  //                 Email
-  //               </Col>
-  //               <Col sm={10}>
-  //                 <FormControl
-  //                   type="email"
-  //                   placeholder="Email"
-  //                   onChange={this.handleChange}
-  //                 />
-  //               </Col>
-  //             </FormGroup>
-  //             <FormGroup controlId="formHorizontalPassword">
-  //               <Col componentClass={ControlLabel} sm={2}>
-  //                 Password
-  //               </Col>
-  //               <Col sm={10}>
-  //                 <FormControl
-  //                   type="password"
-  //                   placeholder="Password"
-  //                   onChange={this.handleChange}
-  //                 />
-  //               </Col>
-  //             </FormGroup>
-  //             <FormGroup>
-  //               <Col smOffset={2} sm={10}>
-  //                 <Button type="submit">
-  //                   Sign in
-  //                 </Button>
-  //               </Col>
-  //             </FormGroup>
-  //           </Form>
-  //         </Col>
-  //       </Row>
-  //     </Grid>
-  //
-  //   )
-  // }
+    render() {
+      return (
+        <Grid>
+          <Row className="show-grid">
+            <Col xs={12} md={8}>
+              <Form onSubmit={this.handleSubmit} horizontal>
+                  {
+                      this.props.auth.error && <p>{this.props.auth.error.message}</p>
+                  }
+                <FormGroup controlId="formHorizontalEmail">
+                  <Col componentClass={ControlLabel} sm={2}>
+                    Email
+                  </Col>
+                  <Col sm={10}>
+                    <FormControl
+                      placeholder="Email"
+                      name="login"
+                      onChange={this.handleChange}
+                    />
+                  </Col>
+                </FormGroup>
+                <FormGroup controlId="formHorizontalPassword">
+                  <Col componentClass={ControlLabel} sm={2}>
+                    Password
+                  </Col>
+                  <Col sm={10}>
+                    <FormControl
+                      type="password"
+                      placeholder="Password"
+                      name="password"
+                      onChange={this.handleChange}
+                    />
+                  </Col>
+                </FormGroup>
+                <FormGroup>
+                  <Col smOffset={2} sm={10}>
+                    <Button type="submit" bsStyle="info" bsSize="large" block>
+                      Sign in
+                    </Button>
+                  </Col>
+                </FormGroup>
+              </Form>
+            </Col>
+          </Row>
+        </Grid>
 
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        {
-          this.props.auth.error && <p>{this.props.auth.error.message}</p>
-        }
-        Login:
-        <input
-          name="login"
-          onChange={this.handleChange}
-        />
-        Password:
-        <input
-          name="password"
-          type="password"
-          onChange={this.handleChange}
-        />
-        <Button type="submit" bsStyle="primary">Sign in</Button>
-      </form>
-    )
-  }
+      )
+    }
 }
 
 const mapStateToProps = state => ({
