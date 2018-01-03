@@ -14,12 +14,15 @@ const DropdownList = props => (
         >
             select
         </option>
-        <option
-            key={'all'}
-            value={0}
-        >
-            all
-        </option>
+        {
+            props.allNotApplicable ||
+            <option
+                key={'all'}
+                value={0}
+            >
+                all
+            </option>
+        }
         {
             props.options.map(item => (
                     <option
