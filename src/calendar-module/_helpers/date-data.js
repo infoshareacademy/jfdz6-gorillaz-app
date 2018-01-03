@@ -1,15 +1,9 @@
 import moment from 'moment'
 
-const firstYear = 1980
-const yearsRange = 50
+const firstYear = 1990
+const yearsRange = 40
 
-export const years = Array(yearsRange)
-    .fill(null)
-    .map((item, index) => ({
-            value: firstYear + index
-        })
-    )
-
+export const years = Array.from({length: yearsRange}, (value, index) => ({value: firstYear + index}))
 export const months = moment.months().map((month, i) => ({ name: month, value: i + 1 }))
 
 const monthToDayMap = {
