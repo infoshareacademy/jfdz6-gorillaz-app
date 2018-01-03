@@ -6,7 +6,7 @@ import {
     FormControl
 } from 'react-bootstrap'
 
-import {years, months, getDaysForGivenMonth} from '../_helpers/date-data'
+import {years, months, getDays} from '../_helpers/date-data'
 import DropdownList from '../DropdownList/DropdownList'
 
 import {
@@ -28,13 +28,13 @@ class DateSearchBar extends React.Component {
 
     handleMonthChange = event => {
         const selectedMonthValue = +event.currentTarget.value
-        const currentDaysRange = getDaysForGivenMonth(selectedMonthValue)
-        const noSuchDay = selectedMonthValue ?
-            !currentDaysRange.find(day => day.value === this.props.calendar.day) :
-            false
+        // const currentDaysRange = getDaysForGivenMonth(selectedMonthValue)
+        // const noSuchDay = selectedMonthValue ?
+        //     !currentDaysRange.find(day => day.value === this.props.calendar.day) :
+        //     false
 
         this.props.setMonth(selectedMonthValue)
-        noSuchDay && this.props.setDay('')
+        // noSuchDay && this.props.setDay('')
     }
 
     handleDayChange = event => (
@@ -46,7 +46,7 @@ class DateSearchBar extends React.Component {
     render() {
         const {year, month, day} = this.props.calendar
         const selectedPhrase = this.props.calendar.phrase
-        const currentDaysRange = getDaysForGivenMonth(month || 1)
+        const days = getDays(year, month)
 
         return (
             <FlexContainer>
@@ -82,7 +82,7 @@ class DateSearchBar extends React.Component {
                         <DropdownList
                             value={day}
                             onSelectChange={this.handleDayChange}
-                            options={currentDaysRange}
+                            options={days}
                         />
                     </FormGroup>
                 </FlexBox>
