@@ -2,6 +2,8 @@ import React from 'react'
 import {Glyphicon} from 'react-bootstrap'
 
 import EventsList from '../EventsList/EventsList'
+
+import {NoDataContainer, NoDataInfo} from '../../styled-components/typography-components'
 import './EventsTable.css'
 
 const EventsTable = props => {
@@ -18,11 +20,20 @@ const EventsTable = props => {
                 {eventsName}
             </h3>
 
-            <EventsList
-                events={events}
-                eventViewComponent={eventViewComponent}
-                marker={marker}
-            />
+            {
+                events.length ?
+                    <EventsList
+                        events={events}
+                        eventViewComponent={eventViewComponent}
+                        marker={marker}
+                    /> :
+                    <NoDataContainer>
+                        <NoDataInfo>
+                            No items for the selected range
+                        </NoDataInfo>
+                    </NoDataContainer>
+            }
+
         </div>
     )
 }

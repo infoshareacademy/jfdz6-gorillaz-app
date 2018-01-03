@@ -9,6 +9,7 @@ import {
     FlexContainer,
     FlexBox,
 } from '../../styled-components/grid-components'
+import {NoDataContainer, NoDataInfo} from '../../styled-components/typography-components'
 import './MasterDetail.css'
 
 class MasterDetail extends React.Component {
@@ -38,62 +39,70 @@ class MasterDetail extends React.Component {
         return (
             <Container>
                 <FlexContainer>
-                <FlexBox smFlex="5 0 0">
-                    <h3 className="MasterDetail__header">
-                        <Glyphicon
-                            glyph="list-alt"
-                            className="MasterDetail__logo"
-                        />
-                        {' '}
-                        Your {name}s
-                    </h3>
+                    <FlexBox smFlex="5 0 0">
+                        <h3 className="MasterDetail__header">
+                            <Glyphicon
+                                glyph="list-alt"
+                                className="MasterDetail__logo"
+                            />
+                            {' '}
+                            Your {name}s
+                        </h3>
 
-                    <MasterView
-                        items={this.props.items}
-                        PreviewItem={this.props.PreviewItem}
-                        onItemClick={this.handleItemClick}
-                    />
-                </FlexBox>
+                        {
+                            this.props.items.length ?
+                                <MasterView
+                                    items={this.props.items}
+                                    PreviewItem={this.props.PreviewItem}
+                                    onItemClick={this.handleItemClick}
+                                /> :
+                                <NoDataContainer>
+                                    <NoDataInfo>
+                                        No {name} added so far
+                                    </NoDataInfo>
+                                </NoDataContainer>
+                        }
+                    </FlexBox>
 
                     <FlexBox smFlex="7 0 0">
-                    {
-                        this.state.selectedItem ?
-                            <div>
+                        {
+                            this.state.selectedItem ?
+                                <div>
+                                    <h3 className="MasterDetail__header">
+                                        <Glyphicon
+                                            glyph="wrench"
+                                            className="MasterDetail__logo"
+                                        />
+                                        {' '}
+                                        {name} details
+                                    </h3>
+                                    <DetailView
+                                        item={this.state.selectedItem}
+                                        DetailedItem={this.props.DetailedItem}
+                                        EditItem={this.props.EditItem}
+                                    />
+                                </div> :
                                 <h3 className="MasterDetail__header">
                                     <Glyphicon
-                                        glyph="wrench"
+                                        glyph="zoom-in"
                                         className="MasterDetail__logo"
                                     />
                                     {' '}
-                                    {name} details
+                                    Select {name} from the&nbsp;list
                                 </h3>
-                                <DetailView
-                                    item={this.state.selectedItem}
-                                    DetailedItem={this.props.DetailedItem}
-                                    EditItem={this.props.EditItem}
-                                />
-                            </div> :
-                            <h3 className="MasterDetail__header">
-                                <Glyphicon
-                                    glyph="zoom-in"
-                                    className="MasterDetail__logo"
-                                />
-                                {' '}
-                                Select {name} from the&nbsp;list
-                            </h3>
-                    }
+                        }
 
-                    <h3 className="MasterDetail__header">
-                        <Glyphicon
-                            glyph="plus"
-                            className="MasterDetail__logo"
-                        />
-                        {' '}
-                        Add new {name}
-                    </h3>
+                        <h3 className="MasterDetail__header">
+                            <Glyphicon
+                                glyph="plus"
+                                className="MasterDetail__logo"
+                            />
+                            {' '}
+                            Add new {name}
+                        </h3>
 
-                    <NewItem/>
-                </FlexBox>
+                        <NewItem/>
+                    </FlexBox>
                 </FlexContainer>
             </Container>
         )
