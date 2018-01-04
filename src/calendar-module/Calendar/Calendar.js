@@ -9,18 +9,12 @@ import {getCalendarConfig} from '../_helpers/calendar-config'
 import NewEventButton from '../NewEventButton/NewEventButton'
 import DateSearchBar from '../DateSearchBar/DateSearchBar'
 import EventsDashboard from '../EventsDashboard/EventsDashboard'
-
-import {
-    Container,
-    FlexContainer,
-    FlexBox,
-} from '../../styled-components/grid-components'
 import Spinner from '../../shared-components/Spinner/Spinner'
+
+import {Container, FlexContainer, FlexBox} from '../../styled-components/grid-components'
 import './Calendar.css'
 
-BigCalendar.setLocalizer(
-    BigCalendar.momentLocalizer(moment)
-)
+BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment))
 
 class Calendar extends React.Component {
     getCalendarConfig = getCalendarConfig.bind(this)
@@ -38,28 +32,17 @@ class Calendar extends React.Component {
             <Container>
                 {
                     isDataRetrieved ?
-                        <div>
-                            <FlexContainer justify="center">
-                                <FlexBox xsFlex="0 1 900px">
-                                    <div className="Calendar__wrapper">
-                                        <BigCalendar {...this.getCalendarConfig()}/>
-                                        <NewEventButton/>
-                                    </div>
-                                </FlexBox>
-                            </FlexContainer>
+                        <FlexContainer justify="center">
+                            <FlexBox xsFlex="0 1 1000px">
+                                <div className="Calendar__wrapper">
+                                    <BigCalendar {...this.getCalendarConfig()}/>
+                                    <NewEventButton/>
+                                </div>
 
-                            <FlexContainer justify="center">
-                                <FlexBox xsFlex="0 1 900px">
-                                    <DateSearchBar/>
-                                </FlexBox>
-                            </FlexContainer>
-
-                            <FlexContainer>
-                                <FlexBox>
-                                    <EventsDashboard/>
-                                </FlexBox>
-                            </FlexContainer>
-                        </div> :
+                                <DateSearchBar/>
+                                <EventsDashboard/>
+                            </FlexBox>
+                        </FlexContainer> :
                         <Spinner/>
                 }
             </Container>
@@ -73,9 +56,7 @@ const mapStateToProps = state => ({
     holidays: state.holidays
 })
 
-const mapDispatchToProps = dispatch => ({
-    setDate: date => dispatch(setDate(date))
-})
+const mapDispatchToProps = dispatch => ({setDate: date => dispatch(setDate(date))})
 
 export default connect(
     mapStateToProps,
