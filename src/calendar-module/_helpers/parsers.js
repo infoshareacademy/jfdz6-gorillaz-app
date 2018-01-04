@@ -89,9 +89,8 @@ const parsePublicNonMovableHolidays = currentYear => (
 )
 
 export const getParsedEvents = (events, year) => (
-    events.filter(event =>
-        +event.date.slice(0, 4) <= year
-    ).map(parseCustomEvents(year))
+    events.filter(event => +event.date.slice(0, 4) <= year)
+        .map(parseCustomEvents(year))
 )
 
 export const getParsedHolidays = (holidays, year) => {
@@ -104,22 +103,21 @@ export const getParsedHolidays = (holidays, year) => {
     ]
 }
 
-export function getParsedEventsForSelectedRange(parsedEvents, selectedDate) {
+const isDayAndMonthInRange = (event, selectedDate) => (
+    (selectedDate.month ? (event.start.getMonth() + 1 === selectedDate.month) : true) &&
+    (selectedDate.day ? (event.start.getDate() === selectedDate.day) : true)
+)
 
-    return parsedEvents.filter(event =>
-        (selectedDate.year ? (event.since <= selectedDate.year) : true) &&
-        (selectedDate.month ? (event.start.getMonth() + 1 === selectedDate.month) : true) &&
-        (selectedDate.day ? (event.start.getDate() === selectedDate.day) : true)
+export const getParsedEventsForSelectedRange = (parsedEvents, selectedDate) => (
+    parsedEvents.filter(event =>
+        event.since <= selectedDate.year &&
+        isDayAndMonthInRange(event, selectedDate)
     )
-}
+)
 
-export function getParsedHolidaysForSelectedRange(parsedHolidays, selectedDate) {
-
-    return parsedHolidays.filter(event =>
-        (selectedDate.month ? (event.start.getMonth() + 1 === selectedDate.month) : true) &&
-        (selectedDate.day ? (event.start.getDate() === selectedDate.day) : true)
-    )
-}
+export const getParsedHolidaysForSelectedRange = (parsedHolidays, selectedDate) => (
+    parsedHolidays.filter(event => isDayAndMonthInRange(event, selectedDate))
+)
 
 export function getNameDaysForSelectedRange(nameDays, selectedDate) {
     const nullPattern = '00'
@@ -130,8 +128,8 @@ export function getNameDaysForSelectedRange(nameDays, selectedDate) {
             const isMatching = date === dateKey ||
                 (!isDateFull &&
                     (date.slice(0, 2) === dateKey.slice(0, 2) ||
-                    date.slice(-2) === dateKey.slice(-2) ||
-                    dateKey === '0000')
+                        date.slice(-2) === dateKey.slice(-2) ||
+                        dateKey === '0000')
                 )
             isMatching && (acc.push({
                     id: date + 'name',
