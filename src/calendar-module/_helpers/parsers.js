@@ -119,27 +119,26 @@ export const getParsedHolidaysForSelectedRange = (parsedHolidays, selectedDate) 
     parsedHolidays.filter(event => isDayAndMonthInRange(event, selectedDate))
 )
 
-export function getNameDaysForSelectedRange(nameDays, selectedDate) {
+export const getNameDaysForSelectedRange = (nameDays, selectedDate) => {
     const nullPattern = '00'
     const dateKey = (nullPattern + selectedDate.day).slice(-2) + (nullPattern + selectedDate.month).slice(-2)
     const isDateFull = dateKey.slice(0, 2) !== nullPattern && dateKey.slice(-2) !== nullPattern
 
     return Object.keys(nameDays).reduce((acc, date) => {
-            const isMatching = date === dateKey ||
-                (!isDateFull &&
-                    (date.slice(0, 2) === dateKey.slice(0, 2) ||
-                        date.slice(-2) === dateKey.slice(-2) ||
-                        dateKey === '0000')
+        const isMatching = date === dateKey ||
+            (!isDateFull &&
+                (date.slice(0, 2) === dateKey.slice(0, 2) ||
+                    date.slice(-2) === dateKey.slice(-2) ||
+                    dateKey === '0000'
                 )
-            isMatching && (acc.push({
-                    id: date + 'name',
-                    start: new Date(2017, +date.slice(-2) - 1, date.slice(0, 2)),
-                    payload: nameDays[date].join(', ')
-                })
             )
+        isMatching && (acc.push({
+                id: date + 'name',
+                start: new Date(2017, +date.slice(-2) - 1, date.slice(0, 2)),
+                payload: nameDays[date].join(', ')
+            })
+        )
 
-            return acc
-        },
-        []
-    )
+        return acc
+    }, [])
 }
