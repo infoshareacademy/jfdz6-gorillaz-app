@@ -28,7 +28,7 @@
 
 .Calendar__wrapper {
     position: relative;
-    height: 550px;
+    height: 500px;
     padding: 10px;
 }
 
@@ -51,15 +51,18 @@
     background-color: #4caf50;
 }
 
-@media only screen and (min-width: 768px) {
+@media (min-width: 768px) {
+    .Calendar__wrapper {
+        height: 550px;
+    }
+
     .Calendar__event {
         font-size: 0.9em;
     }
 }
 
-@media only screen and (min-width: 992px) {
+@media (min-width: 992px) {
     .Calendar__event {
         font-size: 1em;
     }
 }
-
