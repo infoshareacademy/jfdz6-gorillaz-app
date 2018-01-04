@@ -1,14 +1,10 @@
 import React from 'react'
-
 import {Glyphicon} from 'react-bootstrap'
-import {Container, Box} from '../../styled-components/grid-components'
+
 import MasterView from '../MasterView/MasterView'
 import DetailView from '../DetailView/DetailView'
 
-import {
-    FlexContainer,
-    FlexBox,
-} from '../../styled-components/grid-components'
+import {Container, FlexContainer, FlexBox} from '../../styled-components/grid-components'
 import {NoDataContainer, NoDataInfo} from '../../styled-components/typography-components'
 import './MasterDetail.css'
 
