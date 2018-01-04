@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 const getEasterRelatedDate = (year, holiday) => {
     const auxVars = []
     let holidayOffset = null
@@ -31,11 +33,7 @@ const getEasterRelatedDate = (year, holiday) => {
     const month = Math.floor((auxVars[6] - auxVars[9] + auxVars[10] + 90) / 25)
     const day = Math.floor((auxVars[6] - auxVars[9] + auxVars[10] + month + 19) % 32)
 
-    const easterDate = new Date(year, month, day)
-    let holidayDate = new Date(easterDate)
-    holidayDate.setDate(holidayDate.getDate() + holidayOffset)
-
-    return ('0' + holidayDate.getDate()).slice(-2) + ('0' + holidayDate.getMonth()).slice(-2)
+    return moment().year(year).month(month - 1).date(day).add(holidayOffset, 'd').format('DDMM')
 }
 
 const getParsedHolidayCommonPart = (currentYear, event) => ({
