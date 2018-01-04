@@ -94,12 +94,6 @@ export const getParsedEvents = (events, year) => (
     ).map(parseCustomEvents(year))
 )
 
-export const getParsedEventsForSelectedDate = (parsedEvents, date) => (
-    parsedEvents.filter(event =>
-        event.start.toString() === date.toString()
-    )
-)
-
 export const getParsedHolidays = (holidays, year) => {
     const {otherHolidays, publicMovableHolidays, publicNonMovableHolidays} = holidays
 
@@ -107,24 +101,6 @@ export const getParsedHolidays = (holidays, year) => {
         ...otherHolidays.map(parseOtherHolidays(year)),
         ...publicMovableHolidays.map(parsePublicMovableHolidays(year)),
         ...publicNonMovableHolidays.map(parsePublicNonMovableHolidays(year))
-    ]
-}
-
-export const getParsedHolidaysForSelectedDate = (holidays, date) => {
-    const dateKey = ('0' + date.getDate()).slice(-2) + ('0' + (date.getMonth() + 1)).slice(-2)
-    const names = holidays.data.nameDays[dateKey].join(' ')
-    const namesObj = {
-        id: dateKey + 'name',
-        start: new Date(date),
-        title: 'People celebrating name day',
-        payload: names
-    }
-
-    return [
-        ...holidays.parsedData.filter(event =>
-            event.start.toString() === date.toString()
-        ),
-        namesObj
     ]
 }
 
