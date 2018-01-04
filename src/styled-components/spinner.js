@@ -1,4 +1,4 @@
-import styled, {css} from 'styled-components'
+import styled from 'styled-components'
 
 export const Spinner = styled.div`
   width: ${props => props.size || '125px'};
