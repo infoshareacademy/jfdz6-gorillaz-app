@@ -7,22 +7,6 @@ const DropdownList = props => (
         value={props.value}
         onChange={props.onSelectChange}
     >
-        <option
-            key={'select'}
-            value={''}
-            disabled
-        >
-            select
-        </option>
-        {
-            props.allNotApplicable ||
-            <option
-                key={'all'}
-                value={0}
-            >
-                all
-            </option>
-        }
         {
             props.options.map(item => (
                     <option

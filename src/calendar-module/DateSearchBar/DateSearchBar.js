@@ -9,6 +9,8 @@ import DropdownList from '../DropdownList/DropdownList'
 
 import {FlexContainer, FlexBox} from '../../styled-components/grid-components'
 
+const dropdownConstants = {ALL: ''}
+
 class DateSearchBar extends React.Component {
     handleYearChange = event => this.props.setYear(+event.currentTarget.value)
 
@@ -16,12 +18,10 @@ class DateSearchBar extends React.Component {
         const {year, day: currentDay} = this.props.calendar
         const selectedMonth = +event.currentTarget.value
         const days = getDays(year, selectedMonth)
-        const noSuchDay = selectedMonth ?
-            !days.find(day => day.value === currentDay) :
-            false
+        const noSuchDay = currentDay && selectedMonth && !days.find(day => day.value === currentDay)
 
         this.props.setMonth(selectedMonth)
-        noSuchDay && this.props.setDay(moment().year(year).month(selectedMonth -1).endOf('month').date())
+        noSuchDay && this.props.setDay(moment().year(year).month(selectedMonth - 1).endOf('month').date())
     }
 
     handleDayChange = event => this.props.setDay(+event.currentTarget.value)
@@ -43,7 +43,6 @@ class DateSearchBar extends React.Component {
                             value={year}
                             onSelectChange={this.handleYearChange}
                             options={years}
-                            allNotApplicable={true}
                         />
                     </FormGroup>
                 </FlexBox>
@@ -55,7 +54,7 @@ class DateSearchBar extends React.Component {
                         <DropdownList
                             value={month}
                             onSelectChange={this.handleMonthChange}
-                            options={months}
+                            options={[{value: dropdownConstants.ALL, name: 'all'}, ...months]}
                         />
                     </FormGroup>
                 </FlexBox>
@@ -67,7 +66,7 @@ class DateSearchBar extends React.Component {
                         <DropdownList
                             value={day}
                             onSelectChange={this.handleDayChange}
-                            options={days}
+                            options={[{value: dropdownConstants.ALL, name: 'all'}, ...days]}
                         />
                     </FormGroup>
                 </FlexBox>
