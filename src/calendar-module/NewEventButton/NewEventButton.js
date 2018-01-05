@@ -3,8 +3,8 @@ import {connect} from 'react-redux'
 import moment from 'moment'
 
 import {addEvent} from "../../state/custom-events"
-import ModalButton from '../../shared-components/ModalButton/ModalButton'
 import getEventForm from '../../shared-utils/events/event-form-factory'
+import ModalButton from '../../shared-components/ModalButton/ModalButton'
 
 class NewEventButton extends React.Component {
     handleSubmit = newEvent => this.props.addEvent(newEvent)
