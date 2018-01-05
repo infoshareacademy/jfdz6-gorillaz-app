@@ -1,22 +1,18 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import moment from 'moment'
 
 import {
     getParsedEventsForSelectedRange,
     getParsedHolidaysForSelectedRange,
     getNameDaysForSelectedRange
 } from '../_helpers/parsers'
+import {sortEventsAscending} from '../_helpers/sorting'
 import EventsTable from '../EventsTable/EventsTable'
 import ListItemEvent from '../ListItemEvent/ListItemEvent'
 import EditableEvent from '../EditableEvent/EditableEvent'
 
-import {
-    FlexContainer,
-    FlexBox,
-} from '../../styled-components/grid-components'
+import {FlexContainer, FlexBox} from '../../styled-components/grid-components'
 
-const sortEventsAscending = (prev, next) => moment(prev.start).isBefore(next.start) ? -1 : 1
 const filterMatchingPhrase = (event, phrase) => phrase ? new RegExp('\\b' + phrase , 'i')
     .test((event.title || '') + ' ' + event.payload) : true
 
