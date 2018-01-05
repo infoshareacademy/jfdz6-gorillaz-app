@@ -4,7 +4,7 @@ import BigCalendar from 'react-big-calendar'
 import moment from 'moment'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 
-import {setDate} from '../../state/calendar'
+import {setDate, setPhrase} from '../../state/calendar'
 import {getCalendarConfig} from '../_helpers/calendar-config'
 import NewEventButton from '../NewEventButton/NewEventButton'
 import DateSearchBar from '../DateSearchBar/DateSearchBar'
@@ -19,9 +19,14 @@ BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment))
 class Calendar extends React.Component {
     getCalendarConfig = getCalendarConfig.bind(this)
 
-    handleNavigate = date => this.props.setDate(date)
+    handleDateChange = newDate => {
+        this.props.setDate(newDate)
+        this.props.setPhrase('')
+    }
 
-    handleSelectSlot = ({start}) => this.props.setDate(start)
+    handleNavigate = date => this.handleDateChange(date)
+
+    handleSelectSlot = ({start}) => this.handleDateChange(start)
 
     handleSelectEvent = event => this.handleSelectSlot(event)
 
@@ -56,7 +61,10 @@ const mapStateToProps = state => ({
     holidays: state.holidays
 })
 
-const mapDispatchToProps = dispatch => ({setDate: date => dispatch(setDate(date))})
+const mapDispatchToProps = dispatch => ({
+    setDate: date => dispatch(setDate(date)),
+    setPhrase: phrase => dispatch(setPhrase(phrase))
+})
 
 export default connect(
     mapStateToProps,
