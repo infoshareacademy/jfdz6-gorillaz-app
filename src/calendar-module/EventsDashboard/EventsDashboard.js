@@ -1,13 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import {
-    getParsedEventsForSelectedRange,
-    getParsedHolidaysForSelectedRange,
-    getNameDaysForSelectedRange
-} from '../_helpers/parsers'
+import {filterEvents, filterHolidays, filterNameDays} from '../_helpers/filtering'
 import {sortEventsAscending} from '../_helpers/sorting'
-import {filterMatchingPhrase} from '../_helpers/filtering'
 import EventsTable from '../EventsTable/EventsTable'
 import ListItemEvent from '../ListItemEvent/ListItemEvent'
 import EditableEvent from '../EditableEvent/EditableEvent'
@@ -17,17 +12,19 @@ import {FlexContainer, FlexBox} from '../../styled-components/grid-components'
 class EventsDashboard extends React.Component {
     render() {
         const {calendar, customEvents, holidays} = this.props
-        const selectedDate = {
-            year: calendar.year,
-            month: calendar.month,
-            day: calendar.day
+        const filterParams = {
+            date: {
+                year: calendar.year,
+                month: calendar.month,
+                day: calendar.day
+            },
+            phrase: calendar.phrase
         }
-        const selectedPhrase = calendar.phrase
 
-        const selectedData = [
+        const eventsDashboard = [
             {
                 inputData: holidays.parsedData,
-                parser: getParsedHolidaysForSelectedRange,
+                filter: filterHolidays,
                 configObj: {
                     eventsName: 'Holidays',
                     icon: 'calendar',
@@ -36,7 +33,7 @@ class EventsDashboard extends React.Component {
             },
             {
                 inputData: customEvents.parsedData,
-                parser: getParsedEventsForSelectedRange,
+                filter: filterEvents,
                 configObj: {
                     eventsName: 'Your events',
                     icon: 'user',
@@ -46,7 +43,7 @@ class EventsDashboard extends React.Component {
             },
             {
                 inputData: holidays.data && holidays.data.nameDays || [],
-                parser: getNameDaysForSelectedRange,
+                filter: filterNameDays,
                 configObj: {
                     eventsName: 'Name days',
                     icon: 'gift',
@@ -54,18 +51,16 @@ class EventsDashboard extends React.Component {
                     marker: '\u{1F382}'
                 }
             }
-        ].map(eventGroup => ({...eventGroup.configObj, events: eventGroup.parser.call(null, eventGroup.inputData, selectedDate)}))
-            .map(eventGroup => ({...eventGroup, events: eventGroup.events
-                .filter(event => filterMatchingPhrase(event, selectedPhrase))
-                .sort(sortEventsAscending)
-            }))
+        ].map(eventGroup => ({...eventGroup.configObj, events: eventGroup
+            .filter.call(null, eventGroup.inputData, filterParams)
+            .sort(sortEventsAscending)}))
             .map(eventGroup =>(
                 <FlexBox xsFlex="1 0 260px" key={eventGroup.eventsName}>
                     <EventsTable {...eventGroup}/>
                 </FlexBox>
             ))
 
-        return <FlexContainer>{selectedData}</FlexContainer>
+        return <FlexContainer>{eventsDashboard}</FlexContainer>
     }
 }
 
