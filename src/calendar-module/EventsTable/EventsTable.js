@@ -7,7 +7,7 @@ import {NoDataContainer, NoDataInfo} from '../../styled-components/typography-co
 import './EventsTable.css'
 
 const EventsTable = props => {
-    const {eventsName,icon, events, eventViewComponent, marker} = props
+    const {eventsName, icon, events, eventViewComponent, marker} = props
 
     return (
         <div>
@@ -33,7 +33,6 @@ const EventsTable = props => {
                         </NoDataInfo>
                     </NoDataContainer>
             }
-
         </div>
     )
 }
