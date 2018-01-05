@@ -2,17 +2,16 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Glyphicon} from 'react-bootstrap'
 
-import './EditableEvent.css'
-import {RoundButton} from '../../styled-components/button-components'
 import {addEvent, removeEvent} from "../../state/custom-events"
 import getEventForm from '../../shared-utils/events/event-form-factory'
 import ModalButton from '../../shared-components/ModalButton/ModalButton'
 import ListItemEvent from '../ListItemEvent/ListItemEvent'
 
+import {RoundButton} from '../../styled-components/button-components'
+import './EditableEvent.css'
+
 class EditableEvent extends React.Component {
-    handleDeleteEventClick = () => {
-        this.props.removeEvent(this.props.event.id)
-    }
+    handleDeleteEventClick = () => this.props.removeEvent(this.props.event.id)
 
     handleSubmit = newEvent => {
         this.props.addEvent(newEvent)
