@@ -1,16 +1,11 @@
 import React from 'react'
-import {
-    Modal,
-    Glyphicon
-} from 'react-bootstrap'
+import {Modal, Glyphicon} from 'react-bootstrap'
 
 import * as StyledButtons from '../../styled-components/button-components'
 import './ModalButton.css'
 
 export default class ModalButton extends React.Component {
-    state = {
-        show: false
-    }
+    state = {show: false}
 
     close = () => this.setState({show: false})
 
