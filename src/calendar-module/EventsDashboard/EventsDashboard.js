@@ -7,14 +7,12 @@ import {
     getNameDaysForSelectedRange
 } from '../_helpers/parsers'
 import {sortEventsAscending} from '../_helpers/sorting'
+import {filterMatchingPhrase} from '../_helpers/filtering'
 import EventsTable from '../EventsTable/EventsTable'
 import ListItemEvent from '../ListItemEvent/ListItemEvent'
 import EditableEvent from '../EditableEvent/EditableEvent'
 
 import {FlexContainer, FlexBox} from '../../styled-components/grid-components'
-
-const filterMatchingPhrase = (event, phrase) => phrase ? new RegExp('\\b' + phrase , 'i')
-    .test((event.title || '') + ' ' + event.payload) : true
 
 class EventsDashboard extends React.Component {
 
