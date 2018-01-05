@@ -15,7 +15,6 @@ import EditableEvent from '../EditableEvent/EditableEvent'
 import {FlexContainer, FlexBox} from '../../styled-components/grid-components'
 
 class EventsDashboard extends React.Component {
-
     render() {
         const {calendar, customEvents, holidays} = this.props
         const selectedDate = {
@@ -24,58 +23,49 @@ class EventsDashboard extends React.Component {
             day: calendar.day
         }
         const selectedPhrase = calendar.phrase
-        const isDateSelected = !Object.keys(selectedDate).every(part => selectedDate[part] === '')
 
-        const selectedEvents = customEvents.data && isDateSelected ?
-            getParsedEventsForSelectedRange(customEvents.parsedData, selectedDate)
+        const selectedData = [
+            {
+                inputData: holidays.parsedData,
+                parser: getParsedHolidaysForSelectedRange,
+                configObj: {
+                    eventsName: 'Holidays',
+                    icon: 'calendar',
+                    eventViewComponent: ListItemEvent
+                }
+            },
+            {
+                inputData: customEvents.parsedData,
+                parser: getParsedEventsForSelectedRange,
+                configObj: {
+                    eventsName: 'Your events',
+                    icon: 'user',
+                    eventViewComponent: EditableEvent,
+                    marker: '\u{1F4C5}'
+                }
+            },
+            {
+                inputData: holidays.data && holidays.data.nameDays || [],
+                parser: getNameDaysForSelectedRange,
+                configObj: {
+                    eventsName: 'Name days',
+                    icon: 'gift',
+                    eventViewComponent: ListItemEvent,
+                    marker: '\u{1F382}'
+                }
+            }
+        ].map(eventGroup => ({...eventGroup.configObj, events: eventGroup.parser.call(null, eventGroup.inputData, selectedDate)}))
+            .map(eventGroup => ({...eventGroup, events: eventGroup.events
                 .filter(event => filterMatchingPhrase(event, selectedPhrase))
-                .sort(sortEventsAscending) :
-            []
-        const selectedHolidays = holidays.data && isDateSelected ?
-            getParsedHolidaysForSelectedRange(holidays.parsedData, selectedDate)
-                .filter(event => filterMatchingPhrase(event, selectedPhrase))
-                .sort(sortEventsAscending) :
-            []
-        const selectedNameDays = holidays.data && isDateSelected ?
-            getNameDaysForSelectedRange(holidays.data.nameDays, selectedDate)
-                .filter(event => filterMatchingPhrase(event, selectedPhrase))
-                .sort(sortEventsAscending) :
-            []
+                .sort(sortEventsAscending)
+            }))
+            .map(eventGroup =>(
+                <FlexBox xsFlex="1 0 260px" key={eventGroup.eventsName}>
+                    <EventsTable {...eventGroup}/>
+                </FlexBox>
+            ))
 
-        return (
-            isDateSelected ?
-                <FlexContainer>
-                    <FlexBox xsFlex="1 0 240px">
-                        <EventsTable
-                            eventsName="Holidays"
-                            icon="calendar"
-                            events={selectedHolidays}
-                            eventViewComponent={ListItemEvent}
-                        />
-                    </FlexBox>
-
-                    <FlexBox xsFlex="1 0 240px">
-                        <EventsTable
-                            eventsName="Your events"
-                            icon="user"
-                            events={selectedEvents}
-                            eventViewComponent={EditableEvent}
-                            marker={"\u{1F4C5}"}
-                        />
-                    </FlexBox>
-
-                    <FlexBox xsFlex="1 0 240px">
-                        <EventsTable
-                            eventsName="Name days"
-                            icon="gift"
-                            events={selectedNameDays}
-                            eventViewComponent={ListItemEvent}
-                            marker={"\u{1F382}"}
-                        />
-                    </FlexBox>
-                </FlexContainer> :
-                <h5>Click on a given day to check who celebrates a name day!</h5>
-        )
+        return <FlexContainer>{selectedData}</FlexContainer>
     }
 }
 
@@ -88,4 +78,3 @@ const mapStateToProps = state => ({
 export default connect(
     mapStateToProps
 )(EventsDashboard)
-
