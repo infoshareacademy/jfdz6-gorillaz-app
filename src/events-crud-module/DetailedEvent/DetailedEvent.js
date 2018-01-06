@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import moment from 'moment'
 import {FormGroup, ControlLabel, FormControl, Glyphicon} from 'react-bootstrap'
 
-import {addEvent, removeEvent} from "../../state/custom-events"
+import {removeEvent} from "../../state/custom-events"
 
 import {RectButton} from '../../styled-components/button-components'
 import './DetailedEvent.css'
@@ -18,9 +18,7 @@ class DetailedEvent extends React.Component {
         return (
             <div className="DetailedEvent__wrapper">
                 <FormGroup>
-                    <ControlLabel bsClass="control-label-custom">
-                        Date
-                    </ControlLabel>
+                    <ControlLabel bsClass="control-label-custom">Date</ControlLabel>
 
                     <FormControl.Static>
                         <span className="DetailedEvent__paragraph">
@@ -30,25 +28,15 @@ class DetailedEvent extends React.Component {
                 </FormGroup>
 
                 <FormGroup>
-                    <ControlLabel
-                        bsClass="control-label-detailed-event"
-                    >
-                        Title
-                    </ControlLabel>
+                    <ControlLabel bsClass="control-label-custom">Title</ControlLabel>
 
                     <FormControl.Static>
-                        <span className="DetailedEvent__paragraph">
-                        {item.title}
-                        </span>
+                        <span className="DetailedEvent__paragraph">{item.title}</span>
                     </FormControl.Static>
                 </FormGroup>
 
                 <FormGroup>
-                    <ControlLabel
-                        bsClass="control-label-detailed-event"
-                    >
-                        Description
-                    </ControlLabel>
+                    <ControlLabel bsClass="control-label-custom">Description</ControlLabel>
 
                     <FormControl.Static>
                         <span className="DetailedEvent__paragraph DetailedEvent__paragraph--justified">
@@ -72,16 +60,11 @@ class DetailedEvent extends React.Component {
             </div>
         )
     }
-
 }
 
-const mapDispatchToProps = dispatch => ({
-    addEvent: (newEvent) => dispatch(addEvent(newEvent)),
-    removeEvent: (eventId) => dispatch(removeEvent(eventId))
-})
+const mapDispatchToProps = dispatch => ({removeEvent: (eventId) => dispatch(removeEvent(eventId))})
 
 export default connect(
     null,
     mapDispatchToProps
 )(DetailedEvent)
-

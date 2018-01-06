@@ -21,6 +21,6 @@
     text-align: center;
 }
 
-.DetailedEvent__toolbar button:not(last-of-type) {
+.DetailedEvent__toolbar button:not(:last-of-type) {
     margin-right: 15px;
 }
