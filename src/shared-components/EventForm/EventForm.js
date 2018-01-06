@@ -1,10 +1,10 @@
 import React from 'react'
 import {Field} from 'redux-form'
-import {HelpBlock, Glyphicon} from 'react-bootstrap'
+import {Glyphicon} from 'react-bootstrap'
 
 import {renderTextField, renderTextareaField} from '../../shared-utils/events/event-fields-factory'
 
-import {ButtonsToolbar} from '../../styled-components/form-components'
+import {ButtonsToolbar, ActionMessage} from '../../styled-components/form-components'
 import {RectButton} from '../../styled-components/button-components'
 import './EventForm.css'
 
@@ -60,10 +60,10 @@ const EventForm = props => {
                     {props.cancelButton}
                 </ButtonsToolbar>
 
-                <HelpBlock>
+                <ActionMessage {...{error, submitSucceeded}}>
                     {submitSucceeded && 'Event has been added!'}
                     {error}
-                </HelpBlock>
+                </ActionMessage>
             </form>
         </div>
     )

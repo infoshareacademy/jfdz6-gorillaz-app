@@ -21,3 +21,9 @@ export const ButtonsToolbar = styled.div`
     }
   }
 `;
+
+export const ActionMessage = styled.h5`
+  text-align: center;
+  letter-spacing: 1.2px;
+  color: ${props => (props.error && 'red') || (props.submitSucceeded && 'green')};
+`;
