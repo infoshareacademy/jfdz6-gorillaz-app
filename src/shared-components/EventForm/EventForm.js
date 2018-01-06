@@ -4,6 +4,7 @@ import {HelpBlock, Glyphicon} from 'react-bootstrap'
 
 import {renderTextField, renderTextareaField} from '../../shared-utils/events/event-fields-factory'
 
+import {ButtonsToolbar} from '../../styled-components/form-components'
 import {RectButton} from '../../styled-components/button-components'
 import './EventForm.css'
 
@@ -34,7 +35,7 @@ const EventForm = props => {
                     label="Description"
                 />
 
-                <div className="EventForm__toolbar">
+                <ButtonsToolbar>
                     <RectButton
                         type="submit"
                         bgc={'#4caf50'}
@@ -57,7 +58,7 @@ const EventForm = props => {
                     </RectButton>
 
                     {props.cancelButton}
-                </div>
+                </ButtonsToolbar>
 
                 <HelpBlock>
                     {submitSucceeded && 'Event has been added!'}

@@ -7,25 +7,3 @@
     margin: 0 auto;
     padding: 10px;
 }
-
-.EventForm__toolbar {
-    text-align: center;
-}
-
-.EventForm__toolbar button:not(:last-of-type) {
-    margin-right: 15px;
-}
-
-.EventForm__toolbar button:nth-child(3) {
-    margin-top: 20px;
-}
-
-.EventForm__toolbar button:disabled {
-    cursor: not-allowed;
-}
-
-@media (min-width: 400px) {
-    .EventForm__toolbar button:nth-child(3) {
-        margin-top: 0;
-    }
-}
