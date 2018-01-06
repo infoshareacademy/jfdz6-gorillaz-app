@@ -10,15 +10,11 @@ class NewContact extends React.Component {
     render() {
         const NewContactForm = getContactForm('newContactForm', 2000)
 
-        return (
-            <NewContactForm onSubmit={this.handleSubmit}/>
-        )
+        return <NewContactForm onSubmit={this.handleSubmit}/>
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    addContact: newContact => dispatch(addContact(newContact))
-})
+const mapDispatchToProps = dispatch => ({addContact: newContact => dispatch(addContact(newContact))})
 
 export default connect(
     null,
