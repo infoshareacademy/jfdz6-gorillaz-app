@@ -1,7 +1,6 @@
 import React from 'react'
 import {Glyphicon} from 'react-bootstrap'
 
-import {sortRawEventsAscending} from '../../calendar-module/_helpers/sorting'
 import MasterView from '../MasterView/MasterView'
 import DetailView from '../DetailView/DetailView'
 
@@ -40,7 +39,7 @@ class MasterDetail extends React.Component {
                         {
                             items.length ?
                                 <MasterView
-                                    items={items.sort(sortRawEventsAscending)}
+                                    items={items}
                                     selectedItem={this.state.selectedItem}
                                     PreviewItem={this.props.PreviewItem}
                                     onItemClick={this.handleItemClick}

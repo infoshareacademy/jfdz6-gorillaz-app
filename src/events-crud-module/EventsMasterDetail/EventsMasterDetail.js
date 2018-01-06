@@ -6,17 +6,17 @@ import NewEvent from '../NewEvent/NewEvent'
 import PreviewEvent from '../PreviewEvent/PreviewEvent'
 import DetailedEvent from '../DetailedEvent/DetailedEvent'
 import EditEvent from '../EditEvent/EditEvent'
-
 import Spinner from '../../shared-components/Spinner/Spinner'
 
 class EventsMasterDetail extends React.Component {
     render() {
         const isDataRetrieved = !this.props.customEvents.getting
+        const rawCustomEvents = this.props.customEvents.data
 
         return (
             isDataRetrieved ?
                 <MasterDetail
-                    items={this.props.customEvents.data || []}
+                    items={rawCustomEvents || []}
                     name={'event'}
                     NewItem={NewEvent}
                     PreviewItem={PreviewEvent}
@@ -28,10 +28,6 @@ class EventsMasterDetail extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({
-    customEvents: state.customEvents
-})
+const mapStateToProps = state => ({customEvents: state.customEvents})
 
-export default connect(
-    mapStateToProps
-)(EventsMasterDetail)
+export default connect(mapStateToProps)(EventsMasterDetail)
