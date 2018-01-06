@@ -1,23 +1,13 @@
 import React from 'react'
 import {Field} from 'redux-form'
-import {
-    FormGroup,
-    ControlLabel,
-    FormControl,
-    HelpBlock,
-    Glyphicon
-} from 'react-bootstrap'
+import {FormGroup, ControlLabel, FormControl, HelpBlock, Glyphicon} from 'react-bootstrap'
 
 import {RectButton} from '../../styled-components/button-components'
 import './EventForm.css'
 
 const renderTextField = ({input, label, type, meta: {touched, error}}) => (
-    <FormGroup
-        validationState={touched ? (error ? 'error' : 'success') : null}
-    >
-        <ControlLabel
-            bsClass="control-label-event"
-        >
+    <FormGroup validationState={touched ? (error ? 'error' : 'success') : null}>
+        <ControlLabel bsClass="control-label-event">
             {label}
         </ControlLabel>
 
@@ -27,15 +17,14 @@ const renderTextField = ({input, label, type, meta: {touched, error}}) => (
             placeholder={label}
         />
         <FormControl.Feedback/>
+
         <HelpBlock>{touched && error ? error : null}</HelpBlock>
     </FormGroup>
 )
 
 const renderTextareaField = ({input, label, type}) => (
     <FormGroup>
-        <ControlLabel
-            bsClass="control-label-event"
-        >
+        <ControlLabel bsClass="control-label-event">
             {label}
         </ControlLabel>
 
@@ -99,6 +88,7 @@ const EventForm = props => {
 
                     {props.cancelButton}
                 </div>
+
                 <HelpBlock>
                     {submitSucceeded && 'Event has been added!'}
                     {error}
