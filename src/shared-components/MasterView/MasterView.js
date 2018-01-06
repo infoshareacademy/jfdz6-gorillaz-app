@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, ListGroup, ListGroupItem} from 'react-bootstrap'
+import {ListGroup, ListGroupItem} from 'react-bootstrap'
 
 import './MasterView.css'
 

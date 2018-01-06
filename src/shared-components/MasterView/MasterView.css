@@ -31,10 +31,10 @@ button.list-group-item:focus {
     max-height: 40vh;
     margin: 0 auto;
     padding: 10px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
-@media only screen and (min-width: 768px) {
+@media (min-width: 768px) {
     .MasterView__wrapper {
         max-height: 80vh;
     }
