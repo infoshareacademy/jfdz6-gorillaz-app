@@ -1,6 +1,6 @@
 import React from 'react'
-import {ListGroup, ListGroupItem} from 'react-bootstrap'
 
+import {ListButton} from '../../styled-components/button-components'
 import './MasterView.css'
 
 const MasterView = props => {
@@ -8,20 +8,18 @@ const MasterView = props => {
 
     return (
         <div className="MasterView__wrapper">
-        <ListGroup>
             {
                 items.map(item => (
-                        <ListGroupItem
+                        <ListButton
                             key={item.id}
                             onClick={onItemClick}
                             data-item-id={item.id}
                         >
                             <PreviewItem item={item}/>
-                        </ListGroupItem>
+                        </ListButton>
                     )
                 )
             }
-        </ListGroup>
         </div>
     )
 }

@@ -38,3 +38,16 @@ export const AddEventButton = RoundButton.extend`
      bottom: auto;
   }
 `;
+
+export const ListButton = Button.extend`
+  background-color: ${props => props.bgc || '#2196f3'};
+  width:100%;
+  padding: 10px 15px;
+  margin-bottom: 5px;
+  border-radius: 10px;
+  text-align: left;
+  
+  &:hover {
+    background-color: #3f51b5;
+  }
+`;
