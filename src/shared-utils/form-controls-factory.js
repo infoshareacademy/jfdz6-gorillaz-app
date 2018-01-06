@@ -1,11 +1,9 @@
 import React from 'react'
 import {FormGroup, ControlLabel, FormControl, HelpBlock} from 'react-bootstrap'
 
-import '../shared-components/EventForm/EventForm.css'
-
 export const renderTextField = ({input, label, type, meta: {touched, error}}) => (
     <FormGroup validationState={touched ? (error ? 'error' : 'success') : null}>
-        <ControlLabel bsClass="control-label-event">
+        <ControlLabel bsClass="control-label-custom">
             {label}
         </ControlLabel>
 
