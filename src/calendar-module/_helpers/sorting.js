@@ -1,3 +1,7 @@
 import moment from 'moment'
 
-export const sortEventsAscending = (prev, next) => moment(prev.start).isBefore(next.start) ? -1 : 1
+const sortEvents = sortBy => (prev, next) => moment(prev[sortBy]).isBefore(next[sortBy]) ? -1 : 1
+
+export const sortParsedEventsAscending = sortEvents('start')
+
+export const sortRawEventsAscending = sortEvents('date')
