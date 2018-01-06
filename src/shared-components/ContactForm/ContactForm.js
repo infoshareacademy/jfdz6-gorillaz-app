@@ -1,52 +1,12 @@
 import React from 'react'
 import {Field} from 'redux-form'
-import {
-    FormGroup,
-    ControlLabel,
-    FormControl,
-    HelpBlock,
-    Glyphicon
-} from 'react-bootstrap'
+import {FormGroup, ControlLabel, Glyphicon} from 'react-bootstrap'
 
+import {renderTextField, renderTextareaField} from '../../shared-utils/form-controls-factory'
+
+import {ButtonsToolbar, ActionMessage} from '../../styled-components/form-components'
 import {RectButton} from '../../styled-components/button-components'
 import './ContactForm.css'
-
-const renderTextField = ({input, label, type, meta: {touched, error}}) => (
-    <FormGroup
-        validationState={touched ? (error ? 'error' : 'success') : null}
-    >
-        <ControlLabel
-            bsClass="control-label-contact"
-        >
-            {label}
-        </ControlLabel>
-
-        <FormControl
-            {...input}
-            type={type}
-            placeholder={label}
-        />
-        <FormControl.Feedback/>
-        <HelpBlock>{touched && error ? error : null}</HelpBlock>
-    </FormGroup>
-)
-
-const renderTextareaField = ({input, label, type}) => (
-    <FormGroup>
-        <ControlLabel
-            bsClass="control-label-contact"
-        >
-            {label}
-        </ControlLabel>
-
-        <FormControl
-            {...input}
-            componentClass={type}
-            placeholder={label}
-            rows={4}
-        />
-    </FormGroup>
-)
 
 const ContactForm = props => {
     const {error, handleSubmit, pristine, reset, submitting, submitSucceeded} = props
@@ -76,9 +36,7 @@ const ContactForm = props => {
                 />
 
                 <FormGroup>
-                    <ControlLabel
-                        bsClass="control-label-contact"
-                    >
+                    <ControlLabel bsClass="control-label-contact">
                         Sex
                     </ControlLabel>
 
@@ -104,7 +62,7 @@ const ContactForm = props => {
                     label="Notes"
                 />
 
-                <div className="ContactForm__toolbar">
+                <ButtonsToolbar>
                     <RectButton
                         type="submit"
                         bgc={'#4caf50'}
@@ -127,12 +85,12 @@ const ContactForm = props => {
                     </RectButton>
 
                     {props.cancelButton}
-                </div>
+                </ButtonsToolbar>
 
-                <HelpBlock>
+                <ActionMessage {...{error, submitSucceeded}}>
                     {submitSucceeded && 'Contact has been added!'}
                     {error}
-                </HelpBlock>
+                </ActionMessage>
             </form>
         </div>
     )

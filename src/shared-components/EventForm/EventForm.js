@@ -2,7 +2,7 @@ import React from 'react'
 import {Field} from 'redux-form'
 import {Glyphicon} from 'react-bootstrap'
 
-import {renderTextField, renderTextareaField} from '../../shared-utils/events/event-fields-factory'
+import {renderTextField, renderTextareaField} from '../../shared-utils/form-controls-factory'
 
 import {ButtonsToolbar, ActionMessage} from '../../styled-components/form-components'
 import {RectButton} from '../../styled-components/button-components'
