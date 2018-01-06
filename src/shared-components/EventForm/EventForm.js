@@ -1,41 +1,11 @@
 import React from 'react'
 import {Field} from 'redux-form'
-import {FormGroup, ControlLabel, FormControl, HelpBlock, Glyphicon} from 'react-bootstrap'
+import {HelpBlock, Glyphicon} from 'react-bootstrap'
+
+import {renderTextField, renderTextareaField} from '../../shared-utils/events/event-fields-factory'
 
 import {RectButton} from '../../styled-components/button-components'
 import './EventForm.css'
-
-const renderTextField = ({input, label, type, meta: {touched, error}}) => (
-    <FormGroup validationState={touched ? (error ? 'error' : 'success') : null}>
-        <ControlLabel bsClass="control-label-event">
-            {label}
-        </ControlLabel>
-
-        <FormControl
-            {...input}
-            type={type}
-            placeholder={label}
-        />
-        <FormControl.Feedback/>
-
-        <HelpBlock>{touched && error ? error : null}</HelpBlock>
-    </FormGroup>
-)
-
-const renderTextareaField = ({input, label, type}) => (
-    <FormGroup>
-        <ControlLabel bsClass="control-label-event">
-            {label}
-        </ControlLabel>
-
-        <FormControl
-            {...input}
-            componentClass={type}
-            placeholder={label}
-            rows={4}
-        />
-    </FormGroup>
-)
 
 const EventForm = props => {
     const {error, handleSubmit, pristine, reset, submitting, submitSucceeded} = props
