@@ -9,24 +9,16 @@ import {NoDataContainer, NoDataInfo} from '../../styled-components/typography-co
 import './MasterDetail.css'
 
 class MasterDetail extends React.Component {
-    state = {
-        selectedItem: null
-    }
+    state = {selectedItem: null}
 
-    componentWillReceiveProps = () => {
-        this.setState({
-            selectedItem: null
-        })
-    }
+    componentWillReceiveProps = () => this.setState({selectedItem: null})
 
     handleItemClick = event => {
         const target = event.currentTarget
         const selectedItemId = target.dataset.itemId
         const selectedItem = this.props.items.find(item => item.id === selectedItemId)
 
-        this.setState({
-            selectedItem
-        })
+        this.setState({selectedItem})
     }
 
     render() {
@@ -44,7 +36,6 @@ class MasterDetail extends React.Component {
                             {' '}
                             Your {name}s
                         </h3>
-
                         {
                             this.props.items.length ?
                                 <MasterView
@@ -96,7 +87,6 @@ class MasterDetail extends React.Component {
                             {' '}
                             Add new {name}
                         </h3>
-
                         <NewItem/>
                     </FlexBox>
                 </FlexContainer>
