@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
+import {sortRawEventsAscending} from '../_helpers/sorting'
 import MasterDetail from '../../shared-components/MasterDetail/MasterDetail'
 import NewEvent from '../NewEvent/NewEvent'
 import PreviewEvent from '../PreviewEvent/PreviewEvent'
@@ -16,7 +17,7 @@ class EventsMasterDetail extends React.Component {
         return (
             isDataRetrieved ?
                 <MasterDetail
-                    items={rawCustomEvents || []}
+                    items={rawCustomEvents && rawCustomEvents.sort(sortRawEventsAscending) || []}
                     name={'event'}
                     NewItem={NewEvent}
                     PreviewItem={PreviewEvent}
