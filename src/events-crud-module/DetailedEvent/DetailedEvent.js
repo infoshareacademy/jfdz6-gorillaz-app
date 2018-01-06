@@ -5,6 +5,7 @@ import {FormGroup, ControlLabel, FormControl, Glyphicon} from 'react-bootstrap'
 
 import {removeEvent} from "../../state/custom-events"
 
+import {DetailedParagraph, DetailedDescription} from '../../styled-components/master-detail-components'
 import {RectButton} from '../../styled-components/button-components'
 import './DetailedEvent.css'
 
@@ -21,9 +22,9 @@ class DetailedEvent extends React.Component {
                     <ControlLabel bsClass="control-label-custom">Date</ControlLabel>
 
                     <FormControl.Static>
-                        <span className="DetailedEvent__paragraph">
+                        <DetailedParagraph>
                             {eventsDate.format("Do MMMM [(tracked since] YYYY)")}
-                        </span>
+                        </DetailedParagraph>
                     </FormControl.Static>
                 </FormGroup>
 
@@ -31,7 +32,7 @@ class DetailedEvent extends React.Component {
                     <ControlLabel bsClass="control-label-custom">Title</ControlLabel>
 
                     <FormControl.Static>
-                        <span className="DetailedEvent__paragraph">{item.title}</span>
+                        <DetailedParagraph>{item.title}</DetailedParagraph>
                     </FormControl.Static>
                 </FormGroup>
 
@@ -39,9 +40,9 @@ class DetailedEvent extends React.Component {
                     <ControlLabel bsClass="control-label-custom">Description</ControlLabel>
 
                     <FormControl.Static>
-                        <span className="DetailedEvent__paragraph DetailedEvent__paragraph--justified">
+                        <DetailedDescription>
                         {item.payload}
-                        </span>
+                        </DetailedDescription>
                     </FormControl.Static>
                 </FormGroup>
 

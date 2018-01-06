@@ -9,3 +9,12 @@ export const PreviewHeader = styled.h4`
 export const PreviewParagraph = styled.p`
  letter-spacing: 2px;
 `;
+
+export const DetailedParagraph = styled.span`
+ letter-spacing: 1.1px;
+ font-size: 1.1em;
+`;
+
+export const DetailedDescription = DetailedParagraph.extend`
+ text-align: justify;
+`;
