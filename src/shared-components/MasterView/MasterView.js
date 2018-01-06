@@ -4,7 +4,7 @@ import {ListButton} from '../../styled-components/button-components'
 import './MasterView.css'
 
 const MasterView = props => {
-    const {items, PreviewItem, onItemClick} = props
+    const {items, selectedItem, PreviewItem, onItemClick} = props
 
     return (
         <div className="MasterView__wrapper">
@@ -14,6 +14,7 @@ const MasterView = props => {
                             key={item.id}
                             onClick={onItemClick}
                             data-item-id={item.id}
+                            isSelected={selectedItem && item.id === selectedItem.id}
                         >
                             <PreviewItem item={item}/>
                         </ListButton>

@@ -41,6 +41,7 @@ class MasterDetail extends React.Component {
                             items.length ?
                                 <MasterView
                                     items={items.sort(sortRawEventsAscending)}
+                                    selectedItem={this.state.selectedItem}
                                     PreviewItem={this.props.PreviewItem}
                                     onItemClick={this.handleItemClick}
                                 /> :

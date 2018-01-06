@@ -40,7 +40,7 @@ export const AddEventButton = RoundButton.extend`
 `;
 
 export const ListButton = Button.extend`
-  background-color: ${props => props.bgc || '#2196f3'};
+  background-color: ${props => (props.isSelected && '#3f51b5') || props.bgc || '#2196f3'};
   width:100%;
   padding: 10px 15px;
   margin-bottom: 5px;
