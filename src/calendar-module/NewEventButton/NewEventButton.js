@@ -29,9 +29,7 @@ class NewEventButton extends React.Component {
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    addEvent: (newEvent) => dispatch(addEvent(newEvent)),
-})
+const mapDispatchToProps = dispatch => ({addEvent: newEvent => dispatch(addEvent(newEvent))})
 
 export default connect(
     null,
