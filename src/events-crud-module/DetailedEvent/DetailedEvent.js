@@ -1,42 +1,30 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {
-    FormGroup,
-    ControlLabel,
-    FormControl,
-    Glyphicon
-} from 'react-bootstrap'
+import moment from 'moment'
+import {FormGroup, ControlLabel, FormControl, Glyphicon} from 'react-bootstrap'
 
 import {addEvent, removeEvent} from "../../state/custom-events"
-import {months} from '../../calendar-module/_helpers/date-data'
+
 import {RectButton} from '../../styled-components/button-components'
 import './DetailedEvent.css'
 
 class DetailedEvent extends React.Component {
-    handleDeleteEventClick = () => {
-        this.props.removeEvent(this.props.item.id)
-    }
+    handleDeleteEventClick = () => this.props.removeEvent(this.props.item.id)
 
     render() {
         const {item} = this.props
-        const eventsMonth = months.find(month => month.value === +item.date.slice(5, 7)).name
-        const eventSince = item.date.slice(0, 4)
+        const eventsDate = moment(item.date)
 
         return (
             <div className="DetailedEvent__wrapper">
                 <FormGroup>
-                    <ControlLabel
-                        bsClass="control-label-detailed-event"
-                    >
+                    <ControlLabel bsClass="control-label-custom">
                         Date
                     </ControlLabel>
 
                     <FormControl.Static>
                         <span className="DetailedEvent__paragraph">
-                            {item.date.slice(-2)}
-                            {' '}
-                            {eventsMonth}
-                            {` (tracked since ${eventSince})`}
+                            {eventsDate.format("Do MMMM [(tracked since] YYYY)")}
                         </span>
                     </FormControl.Static>
                 </FormGroup>
