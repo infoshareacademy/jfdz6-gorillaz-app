@@ -1,11 +1,11 @@
 import React from 'react'
+import moment from 'moment'
 
-import {months} from '../../calendar-module/_helpers/date-data'
 import './PreviewEvent.css'
 
 const PreviewEvent = props => {
     const {item} = props
-    const shortMonth = (months.find(month => month.value === +item.date.slice(5, 7))).name.slice(0, 3) + '.'
+    const shortMonth = moment(item.date).format("MMM")
 
     return (
         <div className="PreviewEvent__wrapper">
