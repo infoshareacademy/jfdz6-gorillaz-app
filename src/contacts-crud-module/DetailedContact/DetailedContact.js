@@ -1,80 +1,58 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {
-    FormGroup,
-    ControlLabel,
-    FormControl,
-    Glyphicon
-} from 'react-bootstrap'
+import {FormGroup, ControlLabel, FormControl, Glyphicon} from 'react-bootstrap'
 
 import {removeContact} from "../../state/contacts"
+
+import {DetailedParagraph, DetailedDescription} from '../../styled-components/master-detail-components'
 import {RectButton} from '../../styled-components/button-components'
 import './DetailedContact.css'
 
 class DetailedContact extends React.Component {
-    handleDeleteContactClick = () => {
-        this.props.removeContact(this.props.item.id)
-    }
+    handleDeleteContactClick = () => this.props.removeContact(this.props.item.id)
 
     render() {
         const {item} = this.props
 
         return (
             <div className="DetailedContact__wrapper">
-
                 <FormGroup>
-                    <ControlLabel
-                        bsClass="control-label-detailed-contact"
-                    >
-                        First name
-                    </ControlLabel>
+                    <ControlLabel bsClass="control-label-custom">First name</ControlLabel>
 
                     <FormControl.Static>
-                        <span className="DetailedContact__paragraph">
-                            {item.firstName}
-                        </span>
+                        <DetailedParagraph>{item.firstName}</DetailedParagraph>
                     </FormControl.Static>
                 </FormGroup>
 
                 <FormGroup>
-                    <ControlLabel
-                        bsClass="control-label-detailed-contact"
-                    >
-                        Last name
-                    </ControlLabel>
+                    <ControlLabel bsClass="control-label-custom">Last name</ControlLabel>
 
                     <FormControl.Static>
-                        <span className="DetailedContact__paragraph">
-                            {item.lastName}
-                        </span>
+                        <DetailedParagraph>{item.lastName}</DetailedParagraph>
                     </FormControl.Static>
                 </FormGroup>
 
                 <FormGroup>
-                    <ControlLabel
-                        bsClass="control-label-detailed-contact"
-                    >
-                        Email
-                    </ControlLabel>
+                    <ControlLabel bsClass="control-label-detailed-custom">Email</ControlLabel>
 
                     <FormControl.Static>
-                        <span className="DetailedContact__paragraph">
-                            {item.email}
-                        </span>
+                        <DetailedParagraph>{item.email}</DetailedParagraph>
                     </FormControl.Static>
                 </FormGroup>
 
                 <FormGroup>
-                    <ControlLabel
-                        bsClass="control-label-detailed-contact"
-                    >
-                        Notes
-                    </ControlLabel>
+                    <ControlLabel bsClass="control-label-detailed-custom">Sex</ControlLabel>
 
                     <FormControl.Static>
-                        <span className="DetailedContact__paragraph DetailedContact__paragraph--justified">
-                        {item.notes}
-                        </span>
+                        <DetailedParagraph>{item.sex}</DetailedParagraph>
+                    </FormControl.Static>
+                </FormGroup>
+
+                <FormGroup>
+                    <ControlLabel bsClass="control-label-custom">Notes</ControlLabel>
+
+                    <FormControl.Static>
+                        <DetailedDescription>{item.notes}</DetailedDescription>
                     </FormControl.Static>
                 </FormGroup>
 
@@ -96,9 +74,7 @@ class DetailedContact extends React.Component {
 
 }
 
-const mapDispatchToProps = dispatch => ({
-    removeContact: contactId => dispatch(removeContact(contactId))
-})
+const mapDispatchToProps = dispatch => ({removeContact: contactId => dispatch(removeContact(contactId))})
 
 export default connect(
     null,
