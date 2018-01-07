@@ -7,8 +7,8 @@ import getEventForm from '../../shared-utils/events/event-form-factory'
 import ModalButton from '../../shared-components/ModalButton/ModalButton'
 import ListItemEvent from '../ListItemEvent/ListItemEvent'
 
+import {ButtonsToolbar} from '../../styled-components/form-components'
 import {RoundButton} from '../../styled-components/button-components'
-import './EditableEvent.css'
 
 class EditableEvent extends React.Component {
     handleDeleteEventClick = () => this.props.removeEvent(this.props.event.id)
@@ -26,7 +26,7 @@ class EditableEvent extends React.Component {
             <div>
                 <ListItemEvent event={event}/>
 
-                <div className="EditableEvent__toolbar">
+                <ButtonsToolbar>
                     <ModalButton
                         buttonProps={{bgc: '#4caf50'}}
                         buttonGlyph="pencil"
@@ -49,7 +49,7 @@ class EditableEvent extends React.Component {
                     >
                         <Glyphicon glyph="trash"/>
                     </RoundButton>
-                </div>
+                </ButtonsToolbar>
             </div>
         )
     }

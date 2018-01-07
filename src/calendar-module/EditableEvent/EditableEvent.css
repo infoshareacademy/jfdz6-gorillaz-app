@@ -1,7 +1,0 @@
-.EditableEvent__toolbar {
-    text-align: center;
-}
-
-.EditableEvent__toolbar > *:not(:last-child) {
-    margin-right: 15px;
-}

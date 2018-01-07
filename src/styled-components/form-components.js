@@ -14,6 +14,10 @@ export const ButtonsToolbar = styled.div`
   > button:disabled {
     cursor: not-allowed;
   }
+  
+   > div:not(:last-child) {
+    margin-right: 15px;
+  }
 
   @media (min-width: 400px) {
   > button:nth-child(3) {
