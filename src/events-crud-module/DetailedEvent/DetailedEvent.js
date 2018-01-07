@@ -1,14 +1,13 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import moment from 'moment'
-import {FormGroup, ControlLabel, FormControl, Glyphicon} from 'react-bootstrap'
+import {FormGroup, ControlLabel, FormControl} from 'react-bootstrap'
 
 import {removeEvent} from "../../state/custom-events"
+import DetailedItemToolbar from '../../shared-components/DetailedItemToolbar/DetailedItemToolbar'
 
 import {Wrapper} from '../../styled-components/miscellaneous-components'
-import {ButtonsToolbar} from '../../styled-components/form-components'
 import {DetailedParagraph, DetailedDescription} from '../../styled-components/master-detail-components'
-import {RectButton} from '../../styled-components/button-components'
 
 class DetailedEvent extends React.Component {
     handleDeleteEventClick = () => this.props.removeEvent(this.props.item.id)
@@ -47,18 +46,10 @@ class DetailedEvent extends React.Component {
                     </FormControl.Static>
                 </FormGroup>
 
-                <ButtonsToolbar>
-                    {this.props.children}
-
-                    <RectButton
-                        bgc={'#f44336'}
-                        onClick={this.handleDeleteEventClick}
-                    >
-                        <Glyphicon glyph="trash"/>
-                        {' '}
-                        Delete
-                    </RectButton>
-                </ButtonsToolbar>
+                <DetailedItemToolbar
+                    editItemButton={this.props.children}
+                    onDeleteItemClick={this.handleDeleteEventClick}
+                />
             </Wrapper>
         )
     }
