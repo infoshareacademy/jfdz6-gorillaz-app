@@ -4,7 +4,7 @@ import {FormGroup, ControlLabel, FormControl} from 'react-bootstrap'
 import {DetailedParagraph, DetailedDescription} from '../styled-components/master-detail-components'
 
 export const renderField = (label, content, DetailComponent) => (
-    <FormGroup>
+    <FormGroup key={label}>
         <ControlLabel bsClass="control-label-custom">{label}</ControlLabel>
 
         <FormControl.Static>

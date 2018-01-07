@@ -11,32 +11,16 @@ import './DetailedContact.css'
 class DetailedContact extends React.Component {
     handleDeleteContactClick = () => this.props.removeContact(this.props.item.id)
 
+    getLabelFromObjectKey = key => key.split(/(?=[A-Z])/)
+        .map((v, i) => i ? v.toLowerCase() : v.charAt(0).toUpperCase() + v.slice(1)).join(' ')
+
+    getContactDetail = (contact, detailKey) => (detailKey !== 'notes' ? renderTextField : renderTextareaField)
+        .call(null, this.getLabelFromObjectKey(detailKey), contact[detailKey])
+
     render() {
-        const {item} = this.props
-        const contactDetails = [
-            {
-                label: 'First name',
-                content: item.firstName
-            },
-            {
-                label: 'Last name',
-                content: item.lastName
-            },
-            {
-                label: 'Email',
-                content: item.email
-            },
-            {
-                label: 'Sex',
-                content: item.sex
-            },
-            {
-                label: 'Notes',
-                content: item.notes
-            }
-        ].map(detail =>
-            (detail.label !== 'Notes' ? renderTextField : renderTextareaField).call(null, detail.label, detail.content)
-        )
+        const {item: contact} = this.props
+        const contactDetails = ['firstName', 'lastName', 'email', 'sex', 'notes']
+            .map(detailKey => this.getContactDetail(contact, detailKey))
 
         return (
             <div className="DetailedContact__wrapper">
