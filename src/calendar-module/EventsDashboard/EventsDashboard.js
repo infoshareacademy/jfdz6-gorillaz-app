@@ -1,8 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import {filterEvents, filterHolidays, filterNameDays} from '../_helpers/filtering'
-import {sortParsedEventsAscending} from '../_helpers/sorting'
+import {filterCustomEvents, filterHolidays, filterNameDays} from '../_helpers/filtering'
+import {sortEventsAscending} from '../_helpers/sorting'
 import EventsTable from '../EventsTable/EventsTable'
 import ListItemEvent from '../ListItemEvent/ListItemEvent'
 import EditableEvent from '../EditableEvent/EditableEvent'
@@ -28,16 +28,16 @@ class EventsDashboard extends React.Component {
                 configObj: {
                     eventsName: 'Holidays',
                     icon: 'calendar',
-                    eventViewComponent: ListItemEvent
+                    EventViewComponent: ListItemEvent
                 }
             },
             {
                 inputData: customEvents.parsedData,
-                filter: filterEvents,
+                filter: filterCustomEvents,
                 configObj: {
                     eventsName: 'Your events',
                     icon: 'user',
-                    eventViewComponent: EditableEvent,
+                    EventViewComponent: EditableEvent,
                     marker: '\u{1F4C5}'
                 }
             },
@@ -47,13 +47,13 @@ class EventsDashboard extends React.Component {
                 configObj: {
                     eventsName: 'Name days',
                     icon: 'gift',
-                    eventViewComponent: ListItemEvent,
+                    EventViewComponent: ListItemEvent,
                     marker: '\u{1F382}'
                 }
             }
         ].map(eventGroup => ({...eventGroup.configObj, events: eventGroup
             .filter.call(null, eventGroup.inputData, filterParams)
-            .sort(sortParsedEventsAscending)}))
+            .sort(sortEventsAscending)}))
             .map(eventGroup =>(
                 <FlexBox xsFlex="1 0 260px" key={eventGroup.eventsName}>
                     <EventsTable {...eventGroup}/>

@@ -15,7 +15,7 @@ const isDateMatching = (date, dateKey, isDateFull) => (
     )
 )
 
-export const filterEvents = (events, {date, phrase}) => (
+export const filterCustomEvents = (events, {date, phrase}) => (
     events.filter(event => event.since <= date.year && isEventInRange(event, {date, phrase}))
 )
 

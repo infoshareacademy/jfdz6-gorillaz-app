@@ -3,8 +3,7 @@ import React from 'react'
 import './EventsList.css'
 
 const EventsList = props => {
-    const {events, marker} = props
-    const EventViewComponent = props.eventViewComponent
+    const {events, marker, EventViewComponent} = props
 
     return (
         <ul className="EventsList__wrapper">

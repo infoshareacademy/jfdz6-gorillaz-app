@@ -6,19 +6,18 @@ import EventsList from '../EventsList/EventsList'
 import {NoDataContainer, NoDataInfo, Header} from '../../styled-components/typography-components'
 
 const EventsTable = props => {
-    const {eventsName, icon, events, eventViewComponent, marker} = props
+    const {eventsName, icon, events, EventViewComponent, marker} = props
 
     return (
         <div>
             <Header>
                 <Glyphicon glyph={icon}/>{eventsName}
             </Header>
-
             {
                 events.length ?
                     <EventsList
                         events={events}
-                        eventViewComponent={eventViewComponent}
+                        EventViewComponent={EventViewComponent}
                         marker={marker}
                     /> :
                     <NoDataContainer>
