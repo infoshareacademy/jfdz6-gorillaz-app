@@ -20,3 +20,12 @@ export const Wrapper = styled.div`
   margin: 0 auto;
   padding: 10px;
 `;
+
+export const WrapperYLimited = Wrapper.extend`
+  max-height: ${props => props.xsMaxHeight || '100vh'};
+  overflow-y: auto;
+  
+  @media (min-width: 768px) {
+    max-height: ${props => props.smMaxHeight || 'auto'};
+  }
+`;

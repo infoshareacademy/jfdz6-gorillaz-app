@@ -4,15 +4,15 @@ import {FormGroup, ControlLabel, Glyphicon} from 'react-bootstrap'
 
 import {renderTextField, renderTextareaField} from '../../shared-utils/form-controls-factory'
 
+import {Wrapper} from '../../styled-components/miscellaneous-components'
 import {ButtonsToolbar, ActionMessage} from '../../styled-components/form-components'
 import {RectButton} from '../../styled-components/button-components'
-import './ContactForm.css'
 
 const ContactForm = props => {
     const {error, handleSubmit, pristine, reset, submitting, submitSucceeded} = props
 
     return (
-        <div className="ContactForm__wrapper">
+        <Wrapper maxWidth="380px">
             <form onSubmit={handleSubmit}>
                 <Field
                     name="firstName"
@@ -92,7 +92,7 @@ const ContactForm = props => {
                     {error}
                 </ActionMessage>
             </form>
-        </div>
+        </Wrapper>
     )
 }
 

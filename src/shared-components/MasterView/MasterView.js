@@ -1,13 +1,13 @@
 import React from 'react'
 
+import {WrapperYLimited} from '../../styled-components/miscellaneous-components'
 import {ListButton} from '../../styled-components/button-components'
-import './MasterView.css'
 
 const MasterView = props => {
     const {items, selectedItem, PreviewItem, onItemClick} = props
 
     return (
-        <div className="MasterView__wrapper">
+        <WrapperYLimited xsMaxHeight="40vh" smMaxHeight="80vh">
             {
                 items.map(item => (
                         <ListButton
@@ -21,7 +21,7 @@ const MasterView = props => {
                     )
                 )
             }
-        </div>
+        </WrapperYLimited>
     )
 }
 

@@ -5,6 +5,7 @@ import {FormGroup, ControlLabel, FormControl, Glyphicon} from 'react-bootstrap'
 
 import {removeEvent} from "../../state/custom-events"
 
+import {Wrapper} from '../../styled-components/miscellaneous-components'
 import {DetailedParagraph, DetailedDescription} from '../../styled-components/master-detail-components'
 import {RectButton} from '../../styled-components/button-components'
 import './DetailedEvent.css'
@@ -17,7 +18,7 @@ class DetailedEvent extends React.Component {
         const eventsDate = moment(item.date)
 
         return (
-            <div className="DetailedEvent__wrapper">
+            <Wrapper>
                 <FormGroup>
                     <ControlLabel bsClass="control-label-custom">Date</ControlLabel>
 
@@ -58,7 +59,7 @@ class DetailedEvent extends React.Component {
                         Delete
                     </RectButton>
                 </div>
-            </div>
+            </Wrapper>
         )
     }
 }
