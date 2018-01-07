@@ -58,6 +58,7 @@ class MasterDetail extends React.Component {
                                         item={this.state.selectedItem}
                                         DetailedItem={this.props.DetailedItem}
                                         EditItem={this.props.EditItem}
+                                        onDeleteItemClick={this.props.onDeleteItemClick}
                                     />
                                 </div> :
                                 <Header>

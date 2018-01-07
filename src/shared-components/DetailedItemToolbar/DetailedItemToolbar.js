@@ -6,7 +6,14 @@ import {RectButton} from '../../styled-components/button-components'
 
 const DetailedItemToolbar = props => (
     <ButtonsToolbar>
-        {props.editItemButton}
+        <RectButton
+            bgc={'#4caf50'}
+            onClick={props.onEditItemClick}
+        >
+            <Glyphicon glyph="pencil"/>
+            {' '}
+            Edit
+        </RectButton>
 
         <RectButton
             bgc={'#f44336'}

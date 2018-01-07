@@ -1,6 +1,7 @@
 import React from 'react'
 import {Glyphicon} from 'react-bootstrap'
 
+import DetailedItemToolbar from '../DetailedItemToolbar/DetailedItemToolbar'
 import {RectButton} from '../../styled-components/button-components'
 
 export default class EventDetailView extends React.Component {
@@ -11,6 +12,8 @@ export default class EventDetailView extends React.Component {
     handleEditItemClick = () => this.setState({isBeingEdited: true})
 
     handleCancelClick = () => this.setState({isBeingEdited: false})
+
+    handleDeleteItemClick = () => this.props.onDeleteItemClick(this.props.item.id)
 
     render() {
         const {item, DetailedItem, EditItem} = this.props
@@ -27,16 +30,14 @@ export default class EventDetailView extends React.Component {
                         Cancel
                     </RectButton>
                 </EditItem> :
-                <DetailedItem item={item}>
-                    <RectButton
-                        bgc={'#4caf50'}
-                        onClick={this.handleEditItemClick}
-                    >
-                        <Glyphicon glyph="pencil"/>
-                        {' '}
-                        Edit
-                    </RectButton>
-                </DetailedItem>
+                <div>
+                    <DetailedItem item={item}/>
+
+                    <DetailedItemToolbar
+                        onEditItemClick={this.handleEditItemClick}
+                        onDeleteItemClick={this.handleDeleteItemClick}
+                    />
+                </div>
         )
     }
 }

@@ -1,15 +1,10 @@
 import React from 'react'
-import {connect} from 'react-redux'
 
 import {renderTextField, renderTextareaField} from '../../shared-utils/form-static-controls-factory'
-import {removeContact} from "../../state/contacts"
-import DetailedItemToolbar from '../../shared-components/DetailedItemToolbar/DetailedItemToolbar'
 
 import {Wrapper} from '../../styled-components/miscellaneous-components'
 
 class DetailedContact extends React.Component {
-    handleDeleteContactClick = () => this.props.removeContact(this.props.item.id)
-
     getLabelFromObjectKey = key => key.split(/(?=[A-Z])/)
         .map((v, i) => i ? v.toLowerCase() : v.charAt(0).toUpperCase() + v.slice(1)).join(' ')
 
@@ -21,23 +16,8 @@ class DetailedContact extends React.Component {
         const contactDetails = ['firstName', 'lastName', 'email', 'sex', 'notes']
             .map(detailKey => this.getContactDetail(contact, detailKey))
 
-        return (
-            <Wrapper maxWidth="380px">
-                {contactDetails}
-
-                <DetailedItemToolbar
-                    editItemButton={this.props.children}
-                    onDeleteItemClick={this.handleDeleteContactClick}
-                />
-            </Wrapper>
-        )
+        return <Wrapper maxWidth="380px">{contactDetails}</Wrapper>
     }
-
 }
 
-const mapDispatchToProps = dispatch => ({removeContact: contactId => dispatch(removeContact(contactId))})
-
-export default connect(
-    null,
-    mapDispatchToProps
-)(DetailedContact)
+export default DetailedContact

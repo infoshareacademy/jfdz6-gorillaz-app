@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
+import {removeContact} from "../../state/contacts"
 import {sortContactsAscending} from '../_helpers/sorting'
 import MasterDetail from '../../shared-components/MasterDetail/MasterDetail'
 import NewContact from '../NewContact/NewContact'
@@ -23,6 +24,7 @@ class ContactsMasterDetail extends React.Component {
                     PreviewItem={PreviewContact}
                     DetailedItem={DetailedContact}
                     EditItem={EditContact}
+                    onDeleteItemClick={this.props.removeContact}
                 /> :
                 <Spinner/>
         )
@@ -31,4 +33,9 @@ class ContactsMasterDetail extends React.Component {
 
 const mapStateToProps = state => ({contacts: state.contacts})
 
-export default connect(mapStateToProps)(ContactsMasterDetail)
+const mapDispatchToProps = dispatch => ({removeContact: contactId => dispatch(removeContact(contactId))})
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ContactsMasterDetail)

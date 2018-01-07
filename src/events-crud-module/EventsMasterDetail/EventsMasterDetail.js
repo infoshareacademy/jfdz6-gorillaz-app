@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
+import {removeEvent} from "../../state/custom-events"
 import {sortRawEventsAscending} from '../_helpers/sorting'
 import MasterDetail from '../../shared-components/MasterDetail/MasterDetail'
 import NewEvent from '../NewEvent/NewEvent'
@@ -23,6 +24,7 @@ class EventsMasterDetail extends React.Component {
                     PreviewItem={PreviewEvent}
                     DetailedItem={DetailedEvent}
                     EditItem={EditEvent}
+                    onDeleteItemClick={this.props.removeEvent}
                 /> :
                <Spinner/>
         )
@@ -31,4 +33,9 @@ class EventsMasterDetail extends React.Component {
 
 const mapStateToProps = state => ({customEvents: state.customEvents})
 
-export default connect(mapStateToProps)(EventsMasterDetail)
+const mapDispatchToProps = dispatch => ({removeEvent: (eventId) => dispatch(removeEvent(eventId))})
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(EventsMasterDetail)
