@@ -1,7 +1,7 @@
 import React from 'react'
 
 import {FlexContainer, FlexBox} from '../../styled-components/grid-components'
-import {Spinner as SpinnerComponent} from '../../styled-components/spinner'
+import {Spinner as SpinnerComponent} from '../../styled-components/miscellaneous-components'
 
 const Spinner = props => (
     <FlexContainer justify="center">

@@ -5,6 +5,7 @@ import {Glyphicon} from 'react-bootstrap'
 import {renderTextField, renderTextareaField} from '../../shared-utils/form-static-controls-factory'
 import {removeContact} from "../../state/contacts"
 
+import {Wrapper} from '../../styled-components/miscellaneous-components'
 import {RectButton} from '../../styled-components/button-components'
 import './DetailedContact.css'
 
@@ -23,7 +24,7 @@ class DetailedContact extends React.Component {
             .map(detailKey => this.getContactDetail(contact, detailKey))
 
         return (
-            <div className="DetailedContact__wrapper">
+            <Wrapper maxWidth="380px">
                 {contactDetails}
 
                 <div className="DetailedContact__toolbar">
@@ -38,7 +39,7 @@ class DetailedContact extends React.Component {
                         Delete
                     </RectButton>
                 </div>
-            </div>
+            </Wrapper>
         )
     }
 

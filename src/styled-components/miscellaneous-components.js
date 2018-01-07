@@ -13,3 +13,10 @@ export const Spinner = styled.div`
   100% { transform: rotate(360deg); }
 }
 `;
+
+
+export const Wrapper = styled.div`
+  max-width: ${props => props.maxWidth || '360px'};
+  margin: 0 auto;
+  padding: 10px;
+`;
