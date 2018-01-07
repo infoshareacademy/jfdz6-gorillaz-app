@@ -13,3 +13,13 @@ export const NoDataInfo = styled.h5`
   letter-spacing: 1px;
 }
 `;
+
+export const Header = styled.h3`
+   margin-bottom: 30px;
+   text-align: center;
+   color: rgb(3, 120, 244);
+   text-transform: uppercase;
+   font-weight: bold;
+   letter-spacing: 2px;
+}
+`;
