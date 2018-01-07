@@ -1,13 +1,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Glyphicon} from 'react-bootstrap'
 
 import {renderTextField, renderTextareaField} from '../../shared-utils/form-static-controls-factory'
 import {removeContact} from "../../state/contacts"
+import DetailedItemToolbar from '../../shared-components/DetailedItemToolbar/DetailedItemToolbar'
 
 import {Wrapper} from '../../styled-components/miscellaneous-components'
-import {ButtonsToolbar} from '../../styled-components/form-components'
-import {RectButton} from '../../styled-components/button-components'
 
 class DetailedContact extends React.Component {
     handleDeleteContactClick = () => this.props.removeContact(this.props.item.id)
@@ -27,18 +25,10 @@ class DetailedContact extends React.Component {
             <Wrapper maxWidth="380px">
                 {contactDetails}
 
-                <ButtonsToolbar>
-                    {this.props.children}
-
-                    <RectButton
-                        bgc={'#f44336'}
-                        onClick={this.handleDeleteContactClick}
-                    >
-                        <Glyphicon glyph="trash"/>
-                        {' '}
-                        Delete
-                    </RectButton>
-                </ButtonsToolbar>
+                <DetailedItemToolbar
+                    editItemButton={this.props.children}
+                    onDeleteItemClick={this.handleDeleteContactClick}
+                />
             </Wrapper>
         )
     }
