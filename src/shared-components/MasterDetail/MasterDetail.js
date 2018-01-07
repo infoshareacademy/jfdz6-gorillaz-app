@@ -5,8 +5,7 @@ import MasterView from '../MasterView/MasterView'
 import DetailView from '../DetailView/DetailView'
 
 import {Container, FlexContainer, FlexBox} from '../../styled-components/grid-components'
-import {NoDataContainer, NoDataInfo} from '../../styled-components/typography-components'
-import './MasterDetail.css'
+import {NoDataContainer, NoDataInfo, Header} from '../../styled-components/typography-components'
 
 class MasterDetail extends React.Component {
     state = {selectedItem: null}
@@ -28,14 +27,9 @@ class MasterDetail extends React.Component {
             <Container>
                 <FlexContainer>
                     <FlexBox smFlex="5 0 0">
-                        <h3 className="MasterDetail__header">
-                            <Glyphicon
-                                glyph="list-alt"
-                                className="MasterDetail__logo"
-                            />
-                            {' '}
-                            Your {name}s
-                        </h3>
+                        <Header>
+                            <Glyphicon glyph="list-alt"/>Your {name}s
+                        </Header>
                         {
                             items.length ?
                                 <MasterView
@@ -56,38 +50,24 @@ class MasterDetail extends React.Component {
                         {
                             this.state.selectedItem ?
                                 <div>
-                                    <h3 className="MasterDetail__header">
-                                        <Glyphicon
-                                            glyph="wrench"
-                                            className="MasterDetail__logo"
-                                        />
-                                        {' '}
-                                        {name} details
-                                    </h3>
+                                    <Header>
+                                        <Glyphicon glyph="wrench"/>{name} details
+                                    </Header>
+
                                     <DetailView
                                         item={this.state.selectedItem}
                                         DetailedItem={this.props.DetailedItem}
                                         EditItem={this.props.EditItem}
                                     />
                                 </div> :
-                                <h3 className="MasterDetail__header">
-                                    <Glyphicon
-                                        glyph="zoom-in"
-                                        className="MasterDetail__logo"
-                                    />
-                                    {' '}
-                                    Select {name} from the&nbsp;list
-                                </h3>
+                                <Header>
+                                    <Glyphicon glyph="zoom-in"/>Select {name} from the&nbsp;list
+                                </Header>
                         }
+                        <Header>
+                            <Glyphicon glyph="plus"/>Add new {name}
+                        </Header>
 
-                        <h3 className="MasterDetail__header">
-                            <Glyphicon
-                                glyph="plus"
-                                className="MasterDetail__logo"
-                            />
-                            {' '}
-                            Add new {name}
-                        </h3>
                         <NewItem/>
                     </FlexBox>
                 </FlexContainer>
