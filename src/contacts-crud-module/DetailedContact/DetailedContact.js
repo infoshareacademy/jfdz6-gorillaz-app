@@ -6,8 +6,8 @@ import {renderTextField, renderTextareaField} from '../../shared-utils/form-stat
 import {removeContact} from "../../state/contacts"
 
 import {Wrapper} from '../../styled-components/miscellaneous-components'
+import {ButtonsToolbar} from '../../styled-components/form-components'
 import {RectButton} from '../../styled-components/button-components'
-import './DetailedContact.css'
 
 class DetailedContact extends React.Component {
     handleDeleteContactClick = () => this.props.removeContact(this.props.item.id)
@@ -27,7 +27,7 @@ class DetailedContact extends React.Component {
             <Wrapper maxWidth="380px">
                 {contactDetails}
 
-                <div className="DetailedContact__toolbar">
+                <ButtonsToolbar>
                     {this.props.children}
 
                     <RectButton
@@ -38,7 +38,7 @@ class DetailedContact extends React.Component {
                         {' '}
                         Delete
                     </RectButton>
-                </div>
+                </ButtonsToolbar>
             </Wrapper>
         )
     }

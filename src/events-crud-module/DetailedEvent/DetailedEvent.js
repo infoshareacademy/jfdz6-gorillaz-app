@@ -6,9 +6,9 @@ import {FormGroup, ControlLabel, FormControl, Glyphicon} from 'react-bootstrap'
 import {removeEvent} from "../../state/custom-events"
 
 import {Wrapper} from '../../styled-components/miscellaneous-components'
+import {ButtonsToolbar} from '../../styled-components/form-components'
 import {DetailedParagraph, DetailedDescription} from '../../styled-components/master-detail-components'
 import {RectButton} from '../../styled-components/button-components'
-import './DetailedEvent.css'
 
 class DetailedEvent extends React.Component {
     handleDeleteEventClick = () => this.props.removeEvent(this.props.item.id)
@@ -47,7 +47,7 @@ class DetailedEvent extends React.Component {
                     </FormControl.Static>
                 </FormGroup>
 
-                <div className="DetailedEvent__toolbar">
+                <ButtonsToolbar>
                     {this.props.children}
 
                     <RectButton
@@ -58,7 +58,7 @@ class DetailedEvent extends React.Component {
                         {' '}
                         Delete
                     </RectButton>
-                </div>
+                </ButtonsToolbar>
             </Wrapper>
         )
     }
