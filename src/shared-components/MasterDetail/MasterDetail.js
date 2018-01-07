@@ -34,7 +34,7 @@ class MasterDetail extends React.Component {
                             items.length ?
                                 <MasterView
                                     items={items}
-                                    selectedItem={this.state.selectedItem}
+                                    selectedItemId={this.state.selectedItem && this.state.selectedItem.id}
                                     PreviewItem={this.props.PreviewItem}
                                     onItemClick={this.handleItemClick}
                                 /> :

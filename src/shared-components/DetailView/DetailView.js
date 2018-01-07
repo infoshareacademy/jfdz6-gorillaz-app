@@ -4,7 +4,7 @@ import {Glyphicon} from 'react-bootstrap'
 import DetailedItemToolbar from '../DetailedItemToolbar/DetailedItemToolbar'
 import {RectButton} from '../../styled-components/button-components'
 
-export default class EventDetailView extends React.Component {
+class DetailView extends React.Component {
     state = {isBeingEdited: false}
 
     componentWillReceiveProps = () => this.setState({isBeingEdited: false})
@@ -41,3 +41,5 @@ export default class EventDetailView extends React.Component {
         )
     }
 }
+
+export default DetailView
