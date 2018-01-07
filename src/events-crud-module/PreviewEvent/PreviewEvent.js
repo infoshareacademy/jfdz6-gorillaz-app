@@ -4,19 +4,19 @@ import moment from 'moment'
 import {PreviewHeader, PreviewParagraph} from '../../styled-components/master-detail-components'
 
 const PreviewEvent = props => {
-    const {item} = props
-    const shortMonth = moment(item.date).format("MMM")
+    const {item: event} = props
+    const shortMonth = moment(event.date).format("MMM")
 
     return (
         <div>
-            <PreviewHeader>{item.title}</PreviewHeader>
+            <PreviewHeader>{event.title}</PreviewHeader>
 
             <PreviewParagraph>
-                {item.date.slice(-2)}
+                {event.date.slice(-2)}
                 {' '}
                 {shortMonth}
                 {' | '}
-                {`${item.payload.slice(0, 10)}...`}
+                {`${event.payload.slice(0, 10)}...`}
             </PreviewParagraph>
         </div>
     )
