@@ -6,20 +6,20 @@ const isDayAndMonthInRange = (event, selectedDate) => (
     (selectedDate.day ? (event.start.getDate() === selectedDate.day) : true)
 )
 
-export const filterEvents = (events, {date, phrase}) => (
-    events.filter(event =>
-        event.since <= date.year &&
-        isDayAndMonthInRange(event, date) &&
-        isPhraseMatching(event, phrase)
+const isEventInRange = (event, {date, phrase}) => isDayAndMonthInRange(event, date) && isPhraseMatching(event, phrase)
+
+const isDateMatching = (date, dateKey, isDateFull) => (
+    date === dateKey ||
+    (!isDateFull &&
+        (date.slice(0, 2) === dateKey.slice(0, 2) || date.slice(-2) === dateKey.slice(-2) || dateKey === '0000')
     )
 )
 
-export const filterHolidays = (events, {date, phrase}) => (
-    events.filter(event =>
-        isDayAndMonthInRange(event, date) &&
-        isPhraseMatching(event, phrase)
-    )
+export const filterEvents = (events, {date, phrase}) => (
+    events.filter(event => event.since <= date.year && isEventInRange(event, {date, phrase}))
 )
+
+export const filterHolidays = (events, {date, phrase}) => events.filter(event => isEventInRange(event, {date, phrase}))
 
 export const filterNameDays = (nameDays, {date, phrase}) => {
     const nullPattern = '00'
@@ -27,14 +27,7 @@ export const filterNameDays = (nameDays, {date, phrase}) => {
     const isDateFull = dateKey.slice(0, 2) !== nullPattern && dateKey.slice(-2) !== nullPattern
 
     return Object.keys(nameDays).reduce((acc, date) => {
-        const isMatching = date === dateKey ||
-            (!isDateFull &&
-                (date.slice(0, 2) === dateKey.slice(0, 2) ||
-                    date.slice(-2) === dateKey.slice(-2) ||
-                    dateKey === '0000'
-                )
-            )
-        isMatching && (acc.push({
+        isDateMatching(date, dateKey, isDateFull) && (acc.push({
                 id: date + 'name',
                 start: new Date(2017, +date.slice(-2) - 1, date.slice(0, 2)),
                 payload: nameDays[date].join(', ')
