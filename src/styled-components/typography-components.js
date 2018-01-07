@@ -21,5 +21,10 @@ export const Header = styled.h3`
    text-transform: uppercase;
    font-weight: bold;
    letter-spacing: 2px;
+   
+   > span {
+    color: rgb(255, 167, 7);
+    padding-right: 5px;
+   }
 }
 `;

@@ -4,7 +4,6 @@ import {Glyphicon} from 'react-bootstrap'
 import EventsList from '../EventsList/EventsList'
 
 import {NoDataContainer, NoDataInfo, Header} from '../../styled-components/typography-components'
-import './EventsTable.css'
 
 const EventsTable = props => {
     const {eventsName, icon, events, eventViewComponent, marker} = props
@@ -12,12 +11,7 @@ const EventsTable = props => {
     return (
         <div>
             <Header>
-                <Glyphicon
-                    glyph={icon}
-                    className="EventsTable__logo"
-                />
-                {' '}
-                {eventsName}
+                <Glyphicon glyph={icon}/>{eventsName}
             </Header>
 
             {
