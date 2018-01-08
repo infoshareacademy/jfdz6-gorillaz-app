@@ -63,10 +63,6 @@ class MainRouter extends React.Component {
                                 <NavItem>Home</NavItem>
                             </LinkContainer>
 
-                            <LinkContainer to="/about">
-                                <NavItem>About us</NavItem>
-                            </LinkContainer>
-
                             <LinkContainer to="/calendar">
                                 <NavItem>Calendar</NavItem>
                             </LinkContainer>
@@ -85,7 +81,6 @@ class MainRouter extends React.Component {
                 <Route exact path="/" component={Home}/>
                 <Route path="/sign-up" component={SignUp}/>
                 <Route path="/sign-in" component={SignIn}/>
-                <Route path="/about" component={About}/>
                 <Route path="/contacts" component={ContactsMasterDetail}/>
                 <Route path="/calendar" component={Calendar}/>
                 <Route path="/my-events" component={EventsMasterDetail}/>
@@ -95,12 +90,6 @@ class MainRouter extends React.Component {
 }
 
 const Home = () => (
-    <div>
-        <h2>Home</h2>
-    </div>
-)
-
-const About = () => (
     <Container>
         <FlexContainer>
             <FlexBox>
