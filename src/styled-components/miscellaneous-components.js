@@ -14,7 +14,6 @@ export const Spinner = styled.div`
 }
 `;
 
-
 export const Wrapper = styled.div`
   max-width: ${props => props.maxWidth || '360px'};
   margin: 0 auto;

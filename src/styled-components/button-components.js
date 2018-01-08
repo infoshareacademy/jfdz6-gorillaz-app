@@ -31,7 +31,6 @@ export const AddEventButton = RoundButton.extend`
   bottom: 10px;
   z-index: 100;
   
-
   @media (min-width: 550px) {
      position: absolute;
      top: 0;
