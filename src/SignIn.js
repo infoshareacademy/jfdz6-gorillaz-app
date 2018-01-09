@@ -27,7 +27,7 @@ class signIn extends Component {
       return (
         <Grid>
           <Row className="show-grid">
-            <Col xs={12} md={8}>
+            <Col smOffset={1} xs={12} md={8} lgOffset={2} lg={6}>
               <Form onSubmit={this.handleSubmit} horizontal>
                   {
                       this.props.auth.error && <p>{this.props.auth.error.message}</p>
@@ -59,7 +59,7 @@ class signIn extends Component {
                 </FormGroup>
                 <FormGroup>
                   <Col smOffset={2} sm={10}>
-                    <Button type="submit" bsStyle="success" bsSize="large" block>
+                    <Button type="submit" bsStyle="primary" bsSize="large" block>
                       Sign in
                     </Button>
                   </Col>

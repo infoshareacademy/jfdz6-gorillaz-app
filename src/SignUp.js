@@ -28,7 +28,7 @@ class SignUp extends Component {
         return (
             <Grid>
                 <Row className="show-grid">
-                    <Col xs={12} md={8}>
+                    <Col smOffset={1} xs={12} md={8} lgOffset={2} lg={6}>
                         <Form onSubmit={this.handleSubmit} horizontal>
                             <p>{this.props.auth.data && this.props.auth.data.email}</p>
                             <p>{this.props.auth.error && this.props.auth.error.message}</p>
@@ -60,7 +60,7 @@ class SignUp extends Component {
                             </FormGroup>
                             <FormGroup>
                                 <Col smOffset={2} sm={10}>
-                                    <Button type="submit" bsStyle="danger" bsSize="large" block>
+                                    <Button type="submit" bsStyle="success" bsSize="large" block>
                                         Sign up
                                     </Button>
                                 </Col>
