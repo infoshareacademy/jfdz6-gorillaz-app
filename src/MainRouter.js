@@ -130,7 +130,7 @@ const About = () => (
             </FlexBox>
 
             <FlexBox mdOrder="4">
-                Footer
+                All rights reserved. Gorillaz Group 2017-2018.
             </FlexBox>
         </FlexContainer>
     </Container>
