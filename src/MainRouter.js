@@ -19,8 +19,8 @@ import {
 } from './state/custom-events'
 import {getHolidays}from './state/holidays'
 import {
-subscribeContacts,
-unsubscribeContacts
+    subscribeContacts,
+    unsubscribeContacts
 } from './state/contacts'
 import SignUp from './SignUp'
 import SignIn from './SignIn'
@@ -95,41 +95,62 @@ class MainRouter extends React.Component {
 }
 
 const Home = () => (
-    <div>
-        <h2>Home</h2>
-    </div>
+    <Container>
+        <FlexContainer>
+            <FlexBox>
+                <div>
+                    <h1 className="MainRouter__header">Purpose of the application</h1>
+                    <p className="MainRouter__paragraph">
+                        Application description
+                    </p>
+                </div>
+            </FlexBox>
+            <FlexBox>
+                <div>
+                    <h1 className="MainRouter__header">Functionalities</h1>
+                    <p className="MainRouter__paragraph">
+                        List of the functionalities
+                    </p>
+                </div>
+            </FlexBox>
+        </FlexContainer>
+    </Container>
 )
 
 const About = () => (
     <Container>
         <FlexContainer>
             <FlexBox>
-                Header
+                <h1 className="MainRouter__header">ABOUT US</h1>
             </FlexBox>
 
             <FlexBox
                 mdFlex="2 0 0"
                 mdOrder="2"
             >
-                Section
-                This is an example how to use grid styled-components
+                <p className="MainRouter__paragraph">
+                    Authors of the calendar application
+                </p>
             </FlexBox>
 
             <FlexBox
                 smFlex="1 0 0"
                 mdOrder="1"
             >
-                Aside left
+                <p className="MainRouter__paragraph">
+                    Wojciech Trawiński
+                </p>
             </FlexBox>
 
             <FlexBox
                 smFlex="1 0 0"
                 mdOrder="3"
             >
-                Aside right
-            </FlexBox>
+                <p className="MainRouter__paragraph">
+                    Piotr Kramarz
+                </p></FlexBox>
 
-            <FlexBox mdOrder="4">
+            <FlexBox className="MainRouter__footer" mdOrder="4">
                 All rights reserved. Gorillaz Group 2017-2018.
             </FlexBox>
         </FlexContainer>
