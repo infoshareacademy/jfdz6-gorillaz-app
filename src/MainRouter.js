@@ -101,7 +101,8 @@ const Home = () => (
                 <div>
                     <h1 className="MainRouter__header">Purpose of the application</h1>
                     <p className="MainRouter__paragraph">
-                        Application description
+                        With our fancy application you may do number of things! You may customize it, so you add your own events, such as special holidays - day of pirate for instance!
+                        On the other hand you may use a standard features of the application, where there are alerady some events in the calendar, to mention them: name days and standard holidays.
                     </p>
                 </div>
             </FlexBox>
@@ -109,7 +110,11 @@ const Home = () => (
                 <div>
                     <h1 className="MainRouter__header">Functionalities</h1>
                     <p className="MainRouter__paragraph">
-                        List of the functionalities
+                        <ul>
+                            <li>Adding your own event</li>
+                            <li>Name days</li>
+                            <li>Holidays</li>
+                        </ul>
                     </p>
                 </div>
             </FlexBox>
