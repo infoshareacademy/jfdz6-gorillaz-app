@@ -79,7 +79,9 @@ class MainRouter extends React.Component {
                             <LinkContainer to="/contacts">
                                 <NavItem>Contacts</NavItem>
                             </LinkContainer>
-                            <SignOutButton/>
+                            <NavItem>
+                                <SignOutButton/>
+                            </NavItem>
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>

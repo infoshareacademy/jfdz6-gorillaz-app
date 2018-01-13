@@ -32,7 +32,7 @@ class SignUp extends Component {
                         <Form onSubmit={this.handleSubmit} horizontal>
                             <p>{this.props.auth.data && this.props.auth.data.email}</p>
                             <p>{this.props.auth.error && this.props.auth.error.message}</p>
-                            <FormGroup controlId="formHorizontalEmail">
+                            <FormGroup>
                                 <Col componentClass={ControlLabel} sm={2}>
                                     Email:
                                 </Col>
@@ -45,7 +45,7 @@ class SignUp extends Component {
                                     />
                                 </Col>
                             </FormGroup>
-                            <FormGroup controlId="formHorizontalPassword">
+                            <FormGroup>
                                 <Col componentClass={ControlLabel} sm={2}>
                                     Password
                                 </Col>
