@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 const getEasterRelatedDate = (year, holiday) => {
     const auxVars = []
     let holidayOffset = null
@@ -31,11 +33,7 @@ const getEasterRelatedDate = (year, holiday) => {
     const month = Math.floor((auxVars[6] - auxVars[9] + auxVars[10] + 90) / 25)
     const day = Math.floor((auxVars[6] - auxVars[9] + auxVars[10] + month + 19) % 32)
 
-    const easterDate = new Date(year, month, day)
-    let holidayDate = new Date(easterDate)
-    holidayDate.setDate(holidayDate.getDate() + holidayOffset)
-
-    return ('0' + holidayDate.getDate()).slice(-2) + ('0' + holidayDate.getMonth()).slice(-2)
+    return moment().year(year).month(month - 1).date(day).add(holidayOffset, 'd').format('DDMM')
 }
 
 const getParsedHolidayCommonPart = (currentYear, event) => ({
@@ -91,15 +89,8 @@ const parsePublicNonMovableHolidays = currentYear => (
 )
 
 export const getParsedEvents = (events, year) => (
-    events.filter(event =>
-        +event.date.slice(0, 4) <= year
-    ).map(parseCustomEvents(year))
-)
-
-export const getParsedEventsForSelectedDate = (parsedEvents, date) => (
-    parsedEvents.filter(event =>
-        event.start.toString() === date.toString()
-    )
+    events.filter(event => +event.date.slice(0, 4) <= year)
+        .map(parseCustomEvents(year))
 )
 
 export const getParsedHolidays = (holidays, year) => {
@@ -110,64 +101,4 @@ export const getParsedHolidays = (holidays, year) => {
         ...publicMovableHolidays.map(parsePublicMovableHolidays(year)),
         ...publicNonMovableHolidays.map(parsePublicNonMovableHolidays(year))
     ]
-}
-
-export const getParsedHolidaysForSelectedDate = (holidays, date) => {
-    const dateKey = ('0' + date.getDate()).slice(-2) + ('0' + (date.getMonth() + 1)).slice(-2)
-    const names = holidays.data.nameDays[dateKey].join(' ')
-    const namesObj = {
-        id: dateKey + 'name',
-        start: new Date(date),
-        title: 'People celebrating name day',
-        payload: names
-    }
-
-    return [
-        ...holidays.parsedData.filter(event =>
-            event.start.toString() === date.toString()
-        ),
-        namesObj
-    ]
-}
-
-export function getParsedEventsForSelectedRange(parsedEvents, selectedDate) {
-
-    return parsedEvents.filter(event =>
-        (selectedDate.year ? (event.since <= selectedDate.year) : true) &&
-        (selectedDate.month ? (event.start.getMonth() + 1 === selectedDate.month) : true) &&
-        (selectedDate.day ? (event.start.getDate() === selectedDate.day) : true)
-    )
-}
-
-export function getParsedHolidaysForSelectedRange(parsedHolidays, selectedDate) {
-
-    return parsedHolidays.filter(event =>
-        (selectedDate.month ? (event.start.getMonth() + 1 === selectedDate.month) : true) &&
-        (selectedDate.day ? (event.start.getDate() === selectedDate.day) : true)
-    )
-}
-
-export function getNameDaysForSelectedRange(nameDays, selectedDate) {
-    const nullPattern = '00'
-    const dateKey = (nullPattern + selectedDate.day).slice(-2) + (nullPattern + selectedDate.month).slice(-2)
-    const isDateFull = dateKey.slice(0, 2) !== nullPattern && dateKey.slice(-2) !== nullPattern
-
-    return Object.keys(nameDays).reduce((acc, date) => {
-            const isMatching = date === dateKey ||
-                (!isDateFull &&
-                    (date.slice(0, 2) === dateKey.slice(0, 2) ||
-                    date.slice(-2) === dateKey.slice(-2) ||
-                    dateKey === '0000')
-                )
-            isMatching && (acc.push({
-                    id: date + 'name',
-                    start: new Date(2017, +date.slice(-2) - 1, date.slice(0, 2)),
-                    payload: nameDays[date].join(', ')
-                })
-            )
-
-            return acc
-        },
-        []
-    )
 }

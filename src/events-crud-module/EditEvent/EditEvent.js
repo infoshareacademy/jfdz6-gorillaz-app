@@ -11,16 +11,16 @@ class EditEvent extends React.Component {
     }
 
     render() {
-        const {item} = this.props
-        const EditEventForm = getEventForm('editEventForm' + item.id)
+        const {item: event} = this.props
+        const EditEventForm = getEventForm('editEventForm' + event.id)
 
         return (
             <EditEventForm
                 onSubmit={this.handleSubmit}
                 initialValues={{
-                    date: item.date,
-                    title: item.title,
-                    payload: item.payload
+                    date: event.date,
+                    title: event.title,
+                    payload: event.payload
                 }}
                 cancelButton ={this.props.children}
             />

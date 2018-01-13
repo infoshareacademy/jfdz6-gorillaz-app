@@ -2,17 +2,16 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Glyphicon} from 'react-bootstrap'
 
-import './EditableEvent.css'
-import {RoundButton} from '../../styled-components/button-components'
 import {addEvent, removeEvent} from "../../state/custom-events"
 import getEventForm from '../../shared-utils/events/event-form-factory'
 import ModalButton from '../../shared-components/ModalButton/ModalButton'
 import ListItemEvent from '../ListItemEvent/ListItemEvent'
 
+import {ButtonsToolbar} from '../../styled-components/form-components'
+import {RoundButton} from '../../styled-components/button-components'
+
 class EditableEvent extends React.Component {
-    handleDeleteEventClick = () => {
-        this.props.removeEvent(this.props.event.id)
-    }
+    handleDeleteEventClick = () => this.props.removeEvent(this.props.event.id)
 
     handleSubmit = newEvent => {
         this.props.addEvent(newEvent)
@@ -27,12 +26,9 @@ class EditableEvent extends React.Component {
             <div>
                 <ListItemEvent event={event}/>
 
-                <div className="EditableEvent__toolbar">
+                <ButtonsToolbar>
                     <ModalButton
-                        buttonProps={{
-                            bgc: '#4caf50',
-                            radius: '20px'
-                        }}
+                        buttonProps={{bgc: '#4caf50'}}
                         buttonGlyph="pencil"
                         modalGlyph="wrench"
                         modalTitle="Edit your event"
@@ -49,12 +45,11 @@ class EditableEvent extends React.Component {
 
                     <RoundButton
                         bgc={'#f44336'}
-                        radius={'20px'}
                         onClick={this.handleDeleteEventClick}
                     >
                         <Glyphicon glyph="trash"/>
                     </RoundButton>
-                </div>
+                </ButtonsToolbar>
             </div>
         )
     }

@@ -1,94 +1,66 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {
-    FormGroup,
-    ControlLabel,
-    FormControl
-} from 'react-bootstrap'
+import {FormGroup, ControlLabel, FormControl} from 'react-bootstrap'
+import moment from 'moment'
 
-import {years, months, getDaysForGivenMonth} from '../_helpers/date-data'
+import {setYear, setMonth, setDay, setPhrase} from '../../state/calendar'
+import * as dateHelpers from '../_helpers/date-data'
 import DropdownList from '../DropdownList/DropdownList'
 
-import {
-    setYear,
-    setMonth,
-    setDay,
-    setPhrase
-} from '../../state/calendar'
+import {FlexContainer, FlexBox} from '../../styled-components/grid-components'
 
-import {
-    FlexContainer,
-    FlexBox,
-} from '../../styled-components/grid-components'
+const dropdownConstants = {ALL: ''}
+const dateConstants = {YEAR: 'year', MONTH: 'month', DAY: 'day'}
 
 class DateSearchBar extends React.Component {
-    handleYearChange = event => (
-        this.props.setYear(+event.currentTarget.value)
-    )
+    handleYearChange = event => this.props.setYear(+event.currentTarget.value)
 
     handleMonthChange = event => {
-        const selectedMonthValue = +event.currentTarget.value
-        const currentDaysRange = getDaysForGivenMonth(selectedMonthValue)
-        const noSuchDay = selectedMonthValue ?
-            !currentDaysRange.find(day => day.value === this.props.calendar.day) :
-            false
+        const {year, day: currentDay} = this.props.calendar
+        const selectedMonth = +event.currentTarget.value
+        const days = dateHelpers.getDays(year, selectedMonth)
+        const noSuchDay = currentDay && selectedMonth && !days.find(day => day.value === currentDay)
 
-        this.props.setMonth(selectedMonthValue)
-        noSuchDay && this.props.setDay('')
+        this.props.setMonth(selectedMonth)
+        noSuchDay && this.props.setDay(moment().year(year).month(selectedMonth - 1).endOf('month').date())
     }
 
-    handleDayChange = event => (
-        this.props.setDay(+event.currentTarget.value)
-    )
+    handleDayChange = event => this.props.setDay(+event.currentTarget.value)
 
     handlePhraseChange = event => this.props.setPhrase(event.currentTarget.value)
 
+    capitalize = word => word.charAt(0).toUpperCase() + word.slice(1)
+
     render() {
-        const {year, month, day} = this.props.calendar
-        const selectedPhrase = this.props.calendar.phrase
-        const currentDaysRange = getDaysForGivenMonth(month || 1)
+        const calendar = this.props.calendar
+        const selectedPhrase = calendar.phrase
+        const dateValues = {...dateHelpers, days: dateHelpers.getDays(calendar.year, calendar.month)}
+
+        const dateControls = Object.values(dateConstants).map(control => (
+                <FlexBox key={control} xsFlex={`1 0 ${control === dateConstants.MONTH ? 200 : 115}px`}>
+                    <FormGroup>
+                        <ControlLabel>{this.capitalize(control)}</ControlLabel>
+
+                        <DropdownList
+                            value={calendar[control]}
+                            onSelectChange={this[`handle${this.capitalize(control)}Change`]}
+                            options={control !== dateConstants.YEAR ? [
+                                {value: dropdownConstants.ALL, name: 'all'},
+                                ...dateValues[control + 's']
+                            ] :
+                                dateValues[control + 's']
+                            }
+                        />
+                    </FormGroup>
+                </FlexBox>
+            )
+        )
 
         return (
             <FlexContainer>
+                {dateControls}
 
-                <FlexBox xsFlex="1 0 115px">
-                    <FormGroup>
-                        <ControlLabel>Year</ControlLabel>
-                        {' '}
-                        <DropdownList
-                            value={year}
-                            onSelectChange={this.handleYearChange}
-                            options={years}
-                        />
-                    </FormGroup>
-                </FlexBox>
-
-                <FlexBox xsFlex="1 0 200px">
-                    <FormGroup>
-                        <ControlLabel>Month</ControlLabel>
-                        {' '}
-                        <DropdownList
-                            value={month}
-                            onSelectChange={this.handleMonthChange}
-                            options={months}
-                        />
-                    </FormGroup>
-                </FlexBox>
-
-                <FlexBox xsFlex="1 0 115px">
-                    <FormGroup>
-                        <ControlLabel>Day</ControlLabel>
-                        {' '}
-                        <DropdownList
-                            value={day}
-                            onSelectChange={this.handleDayChange}
-                            options={currentDaysRange}
-                        />
-                    </FormGroup>
-                </FlexBox>
-
-
-                <FlexBox xsFlex="2 0 200px">
+                <FlexBox key="phrase" xsFlex="2 0 200px">
                     <FormGroup>
                         <ControlLabel>Phrase</ControlLabel>
                         <FormControl
@@ -103,9 +75,7 @@ class DateSearchBar extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({
-    calendar: state.calendar
-})
+const mapStateToProps = state => ({calendar: state.calendar})
 
 const mapDispatchToProps = dispatch => ({
     setYear: year => dispatch(setYear(year)),
