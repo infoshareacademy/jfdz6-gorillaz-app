@@ -17,16 +17,16 @@ export const addContact = newContact => (dispatch, getState) => {
     ).catch(error => dispatch({type: ADD_FAIL, error}))
 }
 
-let customEventsRef = null
+let contactsRef = null
 let listener = null
 
 export const subscribeContacts = () => (dispatch, getState) => {
     dispatch({type: GET_BEGIN})
 
     const userId = getState().auth.data.uid
-    const contactsRef = firebase.database().ref(`users/${userId}/contacts`)
+    contactsRef = firebase.database().ref(`users/${userId}/contacts`)
 
-    contactsRef.on('value', function (snapshot) {
+    listener = contactsRef.on('value', function (snapshot) {
         const data = snapshot.val() ?
             Object.keys(snapshot.val()).reduce((arrayedContacts, contactId) => {
                     arrayedContacts.push({
@@ -46,11 +46,8 @@ export const subscribeContacts = () => (dispatch, getState) => {
     })
 }
 
-export const unsubscribeContacts = () => (dispatch, getState) => {
-    const userId = getState().auth.data.uid
-    const contactsRef = firebase.database().ref(`users/${userId}/contacts`)
-
-    contactsRef.off()
+export const unsubscribeContacts = () => () => {
+    contactsRef.off('value', listener)
 }
 
 export const removeContact = contactId => (dispatch, getState) => {
