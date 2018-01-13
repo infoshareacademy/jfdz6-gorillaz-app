@@ -17,6 +17,9 @@ export const addContact = newContact => (dispatch, getState) => {
     ).catch(error => dispatch({type: ADD_FAIL, error}))
 }
 
+let customEventsRef = null
+let listener = null
+
 export const subscribeContacts = () => (dispatch, getState) => {
     dispatch({type: GET_BEGIN})
 

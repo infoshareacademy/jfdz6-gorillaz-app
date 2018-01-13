@@ -24,6 +24,7 @@ unsubscribeContacts
 } from './state/contacts'
 import SignUp from './SignUp'
 import SignIn from './SignIn'
+import SignOutButton from './SignOutButton'
 import Calendar from './calendar-module/Calendar/Calendar'
 import EventsMasterDetail from './events-crud-module/EventsMasterDetail/EventsMasterDetail'
 import ContactsMasterDetail from './contacts-crud-module/ContactsMasterDetail/ContactsMasterDetail'
@@ -78,6 +79,7 @@ class MainRouter extends React.Component {
                             <LinkContainer to="/contacts">
                                 <NavItem>Contacts</NavItem>
                             </LinkContainer>
+                            <SignOutButton/>
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
