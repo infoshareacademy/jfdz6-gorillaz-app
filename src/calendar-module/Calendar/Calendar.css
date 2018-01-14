@@ -28,7 +28,7 @@
 
 .Calendar__wrapper {
     position: relative;
-    height: 550px;
+    height: 500px;
     padding: 10px;
 }
 
@@ -51,40 +51,18 @@
     background-color: #4caf50;
 }
 
-.Calendar__button--new-event {
-    position: fixed;
-    right: 10px;
-    bottom: 10px;
-    border: none;
-    border-radius: 20px;
-    outline: none;
-    padding: 0 12.5px;
-    background-color: rgba(76, 175, 80, 0.8);
-    font-size: 2.2em;
-    color: white;
-}
-
-.Calendar__button--new-event:hover {
-    background-color: rgba(76, 175, 80, 1);
-}
-
-@media only screen and (min-width: 550px) {
-    .Calendar__button--new-event {
-        position: absolute;
-        top: 0;
-        bottom: auto;
+@media (min-width: 768px) {
+    .Calendar__wrapper {
+        height: 550px;
     }
-}
 
-@media only screen and (min-width: 768px) {
     .Calendar__event {
         font-size: 0.9em;
     }
 }
 
-@media only screen and (min-width: 992px) {
+@media (min-width: 992px) {
     .Calendar__event {
         font-size: 1em;
     }
 }
-

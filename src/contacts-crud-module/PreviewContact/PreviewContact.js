@@ -1,19 +1,17 @@
 import React from 'react'
 
-import './PreviewContact.css'
+import {PreviewHeader, PreviewParagraph} from '../../styled-components/master-detail-components'
 
 const PreviewContact = props => {
-    const {item} = props
+    const {item: contact} = props
 
     return (
-        <div className="PreviewContact__wrapper">
-            <h4 className="PreviewContact__header">
-                {`${item.firstName.charAt(0)}. ${item.lastName}`}
-            </h4>
+        <div>
+            <PreviewHeader>
+                {`${contact.firstName.charAt(0)}. ${contact.lastName}`}
+            </PreviewHeader>
 
-            <p className="PreviewContact__paragraph">
-                {item.email}
-            </p>
+            <PreviewParagraph>{contact.email}</PreviewParagraph>
         </div>
     )
 }

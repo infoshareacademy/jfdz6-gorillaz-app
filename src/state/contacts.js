@@ -1,29 +1,32 @@
 import firebase from 'firebase'
+import {SubmissionError} from 'redux-form'
 
 const GET_BEGIN = 'contacts/GET_BEGIN'
 const GET_SUCCESS = 'contacts/GET_SUCCESS'
-const ADD_FAIL = 'contacts/ADD_FAIL'
 const REMOVE_FAIL = 'contacts/REMOVE_FAIL'
 
 export const addContact = newContact => (dispatch, getState) => {
     const userId = getState().auth.data.uid
     const newContactKey = firebase.database().ref(`users/${userId}/contacts`).push().key
 
-    firebase.database().ref(`/users/${userId}/contacts/${newContactKey}`).set({
+    return firebase.database().ref(`/users/${userId}/contacts/${newContactKey}`).set({
         ...newContact,
         notes: newContact.notes || 'no data'
-    }).then(
-        console.log('contact has been added!')
-    ).catch(error => dispatch({type: ADD_FAIL, error}))
+    })
+        .then(() => console.log('contact has been added!'))
+        .catch(() => {throw new SubmissionError({_error: 'submission failed'})})
 }
+
+let contactsRef = null
+let listener = null
 
 export const subscribeContacts = () => (dispatch, getState) => {
     dispatch({type: GET_BEGIN})
 
     const userId = getState().auth.data.uid
-    const contactsRef = firebase.database().ref(`users/${userId}/contacts`)
+    contactsRef = firebase.database().ref(`users/${userId}/contacts`)
 
-    contactsRef.on('value', function (snapshot) {
+    listener = contactsRef.on('value', function (snapshot) {
         const data = snapshot.val() ?
             Object.keys(snapshot.val()).reduce((arrayedContacts, contactId) => {
                     arrayedContacts.push({
@@ -43,11 +46,8 @@ export const subscribeContacts = () => (dispatch, getState) => {
     })
 }
 
-export const unsubscribeContacts = () => (dispatch, getState) => {
-    const userId = getState().auth.data.uid
-    const contactsRef = firebase.database().ref(`users/${userId}/contacts`)
-
-    contactsRef.off()
+export const unsubscribeContacts = () => () => {
+    contactsRef.off('value', listener)
 }
 
 export const removeContact = contactId => (dispatch, getState) => {
@@ -78,11 +78,6 @@ export default (state = initialState, action = {}) => {
                 ...state,
                 data: action.data,
                 getting: false
-            }
-        case ADD_FAIL:
-            return {
-                ...state,
-                error: action.error
             }
         case REMOVE_FAIL:
             return {

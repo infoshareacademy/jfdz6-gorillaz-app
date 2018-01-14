@@ -2,27 +2,30 @@ import React from 'react'
 import {Glyphicon} from 'react-bootstrap'
 
 import EventsList from '../EventsList/EventsList'
-import './EventsTable.css'
+
+import {NoDataContainer, NoDataInfo, Header} from '../../styled-components/typography-components'
 
 const EventsTable = props => {
-    const {eventsName,icon, events, eventViewComponent, marker} = props
+    const {eventsName, icon, events, EventViewComponent, marker} = props
 
     return (
         <div>
-            <h3 className="EventsTable__header">
-                <Glyphicon
-                    glyph={icon}
-                    className="EventsTable__logo"
-                />
-                {' '}
-                {eventsName}
-            </h3>
-
-            <EventsList
-                events={events}
-                eventViewComponent={eventViewComponent}
-                marker={marker}
-            />
+            <Header>
+                <Glyphicon glyph={icon}/>{eventsName}
+            </Header>
+            {
+                events.length ?
+                    <EventsList
+                        events={events}
+                        EventViewComponent={EventViewComponent}
+                        marker={marker}
+                    /> :
+                    <NoDataContainer>
+                        <NoDataInfo>
+                            No items for the selected range
+                        </NoDataInfo>
+                    </NoDataContainer>
+            }
         </div>
     )
 }

@@ -4,30 +4,29 @@ import BigCalendar from 'react-big-calendar'
 import moment from 'moment'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 
-import {setDate} from '../../state/calendar'
+import {setDate, setPhrase} from '../../state/calendar'
 import {getCalendarConfig} from '../_helpers/calendar-config'
 import NewEventButton from '../NewEventButton/NewEventButton'
 import DateSearchBar from '../DateSearchBar/DateSearchBar'
 import EventsDashboard from '../EventsDashboard/EventsDashboard'
-
-import {
-    Container,
-    FlexContainer,
-    FlexBox,
-} from '../../styled-components/grid-components'
 import Spinner from '../../shared-components/Spinner/Spinner'
+
+import {Container, FlexContainer, FlexBox} from '../../styled-components/grid-components'
 import './Calendar.css'
 
-BigCalendar.setLocalizer(
-    BigCalendar.momentLocalizer(moment)
-)
+BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment))
 
 class Calendar extends React.Component {
     getCalendarConfig = getCalendarConfig.bind(this)
 
-    handleNavigate = date => this.props.setDate(date)
+    handleDateChange = newDate => {
+        this.props.setDate(newDate)
+        this.props.setPhrase('')
+    }
 
-    handleSelectSlot = ({start}) => this.props.setDate(start)
+    handleNavigate = date => this.handleDateChange(date)
+
+    handleSelectSlot = ({start}) => this.handleDateChange(start)
 
     handleSelectEvent = event => this.handleSelectSlot(event)
 
@@ -38,28 +37,17 @@ class Calendar extends React.Component {
             <Container>
                 {
                     isDataRetrieved ?
-                        <div>
-                            <FlexContainer justify="center">
-                                <FlexBox xsFlex="0 1 900px">
-                                    <div className="Calendar__wrapper">
-                                        <BigCalendar {...this.getCalendarConfig()}/>
-                                        <NewEventButton/>
-                                    </div>
-                                </FlexBox>
-                            </FlexContainer>
+                        <FlexContainer justify="center">
+                            <FlexBox xsFlex="0 1 1000px">
+                                <div className="Calendar__wrapper">
+                                    <BigCalendar {...this.getCalendarConfig()}/>
+                                    <NewEventButton/>
+                                </div>
 
-                            <FlexContainer justify="center">
-                                <FlexBox xsFlex="0 1 900px">
-                                    <DateSearchBar/>
-                                </FlexBox>
-                            </FlexContainer>
-
-                            <FlexContainer>
-                                <FlexBox>
-                                    <EventsDashboard/>
-                                </FlexBox>
-                            </FlexContainer>
-                        </div> :
+                                <DateSearchBar/>
+                                <EventsDashboard/>
+                            </FlexBox>
+                        </FlexContainer> :
                         <Spinner/>
                 }
             </Container>
@@ -74,7 +62,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    setDate: date => dispatch(setDate(date))
+    setDate: date => dispatch(setDate(date)),
+    setPhrase: phrase => dispatch(setPhrase(phrase))
 })
 
 export default connect(

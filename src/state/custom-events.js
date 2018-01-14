@@ -1,10 +1,10 @@
 import firebase from 'firebase'
+import {SubmissionError} from 'redux-form'
 
 import {getParsedEvents} from '../calendar-module/_helpers/parsers'
 
 const GET_BEGIN = 'custom-events/GET_BEGIN'
 const GET_SUCCESS = 'custom-events/GET_SUCCESS'
-const ADD_FAIL = 'custom-events/ADD_FAIL'
 const REMOVE_FAIL = 'custom-events/REMOVE_FAIL'
 const PARSE = 'custom-events/PARSE'
 
@@ -12,21 +12,22 @@ export const addEvent = newEvent => (dispatch, getState) => {
     const userId = getState().auth.data.uid
     const newEventKey = firebase.database().ref(`users/${userId}/custom-events`).push().key
 
-    firebase.database().ref(`/users/${userId}/custom-events/${newEventKey}`).set({
+    return firebase.database().ref(`/users/${userId}/custom-events/${newEventKey}`).set({
         ...newEvent,
         payload: newEvent.payload || 'no data'
-    }).then(
-        console.log('event has been added!')
-    ).catch(error => dispatch({type: ADD_FAIL, error}))
+    })
+        .then(() => console.log('event has been added!'))
+        .catch(() => {throw new SubmissionError({_error: 'submission failed'})})
 }
-
+let customEventsRef = null
+let listener = null
 export const subscribeCustomEvents = () => (dispatch, getState) => {
     dispatch({type: GET_BEGIN})
 
     const userId = getState().auth.data.uid
-    const customEventsRef = firebase.database().ref(`users/${userId}/custom-events`)
+    customEventsRef = firebase.database().ref(`users/${userId}/custom-events`)
 
-    customEventsRef.on('value', function (snapshot) {
+    listener = customEventsRef.on('value', function (snapshot) {
         const data = snapshot.val() ?
             Object.keys(snapshot.val()).reduce((arrayedEvents, eventId) => {
                     arrayedEvents.push({
@@ -47,11 +48,8 @@ export const subscribeCustomEvents = () => (dispatch, getState) => {
     })
 }
 
-export const unsubscribeCustomEvents = () => (dispatch, getState) => {
-    const userId = getState().auth.data.uid
-    const customEventsRef = firebase.database().ref(`users/${userId}/custom-events`)
-
-    customEventsRef.off()
+export const unsubscribeCustomEvents = () => () => {
+    customEventsRef.off('value', listener)
 }
 
 export const removeEvent = eventId => (dispatch, getState) => {
@@ -89,11 +87,6 @@ export default (state = initialState, action = {}) => {
                 data: action.data,
                 parsedData: action.parsedData,
                 getting: false
-            }
-        case ADD_FAIL:
-            return {
-                ...state,
-                error: action.error
             }
         case REMOVE_FAIL:
             return {

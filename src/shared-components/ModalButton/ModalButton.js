@@ -1,16 +1,11 @@
 import React from 'react'
-import {
-    Modal,
-    Glyphicon
-} from 'react-bootstrap'
+import {Modal, Glyphicon} from 'react-bootstrap'
 
-import {RoundButton} from '../../styled-components/button-components'
+import * as StyledButtons from '../../styled-components/button-components'
 import './ModalButton.css'
 
-export default class ModalButton extends React.Component {
-    state = {
-        show: false
-    }
+class ModalButton extends React.Component {
+    state = {show: false}
 
     close = () => this.setState({show: false})
 
@@ -21,30 +16,22 @@ export default class ModalButton extends React.Component {
             buttonName,
             buttonProps,
             buttonGlyph,
-            buttonClass,
+            buttonType,
             modalGlyph,
             modalTitle
         } = this.props
+        const ButtonType = buttonType && StyledButtons[buttonType] || StyledButtons['RoundButton']
 
         return (
             <div className="ModalButton__wrapper">
-                {
-                    buttonProps ?
-                        <RoundButton
-                            {...buttonProps}
-                            onClick={this.open}
-                        >
-                            {buttonGlyph && <Glyphicon glyph={buttonGlyph}/>}
-                            {' '}
-                            {buttonName}
-                        </RoundButton> :
-                        <button
-                            className={buttonClass}
-                            onClick={this.open}
-                        >
-                            {buttonName}
-                        </button>
-                }
+                <ButtonType
+                    {...buttonProps}
+                    onClick={this.open}
+                >
+                    {buttonGlyph && <Glyphicon glyph={buttonGlyph}/>}
+                    {' '}
+                    {buttonName}
+                </ButtonType>
 
                 <Modal
                     show={this.state.show}
@@ -74,3 +61,5 @@ export default class ModalButton extends React.Component {
         )
     }
 }
+
+export default ModalButton
