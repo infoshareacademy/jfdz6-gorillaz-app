@@ -20,3 +20,7 @@
     padding-top: 25px;
     padding-bottom: 50px;
 }
+
+.btn-default, .btn-primary, .btn-success, .btn-info, .btn-warning, .btn-danger {
+    padding: 0px;
+}
