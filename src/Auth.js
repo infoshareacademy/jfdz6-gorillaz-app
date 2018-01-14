@@ -11,6 +11,7 @@ import './Auth.css'
 import SignIn from './SignIn'
 import SignUp from './SignUp'
 import authImage from './auth-image.png'
+import authStartImage from './auth-start-image.png'
 
 class Auth extends Component {
     render() {
@@ -42,9 +43,12 @@ class Auth extends Component {
                                 <FlexBox smFlex="1 0 0">
                                     <img className="Auth__image" src={authImage}/>
                                 </FlexBox>
+                            </FlexContainer>
+                                <FlexContainer>
                                 <FlexBox>
                                     <SignIn/>
                                     <SignUp/>
+                                    <img className="Auth__start__image" src={authStartImage}/>
                                 </FlexBox>
                             </FlexContainer>
                         </Container>
