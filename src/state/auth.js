@@ -34,7 +34,7 @@ export const signUp = (email, password) => dispatch => {
   )
 }
 
-export const SignIn = (email, password) => dispatch => {
+export const signIn = (email, password) => dispatch => {
   firebase.auth().signInWithEmailAndPassword(
     email,
     password

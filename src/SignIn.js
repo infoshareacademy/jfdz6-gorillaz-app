@@ -1,76 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { SignIn } from './state/auth'
-import { Grid, Row, Button, Form, FormGroup, ControlLabel, Col, FormControl } from 'react-bootstrap'
+import AuthForm from './AuthForm'
+import { signIn } from './state/auth'
 
-class signIn extends Component {
-  state = {
-    login: '',
-    password: ''
-  }
-
-  handleChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
-  }
-
-  handleSubmit = event => {
-    event.preventDefault()
-    this.props.SignIn(
-      this.state.login,
-      this.state.password
+class SignIn extends Component {
+  render() {
+    return (
+      <AuthForm
+        label={'Sign in'}
+        error={this.props.auth.error}
+        handleSubmit={this.props.signIn}
+      />
     )
   }
-
-    render() {
-      return (
-        <Grid>
-          <Row className="show-grid">
-            <Col xs={12} md={8}>
-              <Form onSubmit={this.handleSubmit} horizontal>
-                  {
-                      this.props.auth.error && <p>{this.props.auth.error.message}</p>
-                  }
-                <FormGroup>
-                  <Col componentClass={ControlLabel} sm={2}>
-                    Email
-                  </Col>
-                  <Col sm={10}>
-                    <FormControl
-                      placeholder="Email"
-                      name="login"
-                      onChange={this.handleChange}
-                    />
-                  </Col>
-                </FormGroup>
-                <FormGroup>
-                  <Col componentClass={ControlLabel} sm={2}>
-                    Password
-                  </Col>
-                  <Col sm={10}>
-                    <FormControl
-                      type="password"
-                      placeholder="Password"
-                      name="password"
-                      onChange={this.handleChange}
-                    />
-                  </Col>
-                </FormGroup>
-                <FormGroup>
-                  <Col smOffset={2} sm={10}>
-                    <Button type="submit" bsStyle="success" bsSize="large" block>
-                      Sign in
-                    </Button>
-                  </Col>
-                </FormGroup>
-              </Form>
-            </Col>
-          </Row>
-        </Grid>
-
-      )
-    }
 }
 
 const mapStateToProps = state => ({
@@ -78,10 +20,10 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  SignIn: (email, password) => dispatch(SignIn(email, password))
+  signIn: (email, password) => dispatch(signIn(email, password))
 })
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(signIn)
+)(SignIn)
