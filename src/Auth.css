@@ -21,6 +21,11 @@
     padding-bottom: 50px;
 }
 
+.Auth__image {
+    margin-left: 50%;
+    transform: translateX(-50%);
+    padding-bottom: 10px;
+}
 .btn-warning {
     padding: 0px;
 }

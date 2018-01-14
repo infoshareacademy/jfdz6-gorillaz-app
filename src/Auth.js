@@ -22,7 +22,6 @@ class Auth extends Component {
               this.props.auth.data === null ?
                 <div>
                   <h1 className="Auth__header">YOUR CUSTOMIZED CALENDAR!</h1>
-                  <img src={authImage}/>
                   <p className="Auth__paragraph">Welcome on our website, where you can create your own fancy calendar
                     including
                     customized database of occasions and events! Simple as never before!</p>
@@ -31,6 +30,7 @@ class Auth extends Component {
                     <strong> sign up</strong> in order to see what we can offer in our <strong>CUSTOMIZED
                       CALENDAR!</strong> Take a seat, fasten your seat belts and enjoy this uniqe experience.</p>
                   <p className="Auth__footer">With Best Regards - <strong>Gorillaz Team</strong></p>
+                  <img className="Auth__image" src={authImage}/>
                   <SignIn/>
                   <SignUp/>
                 </div> :
