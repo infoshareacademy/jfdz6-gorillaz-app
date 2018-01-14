@@ -21,6 +21,6 @@
     padding-bottom: 50px;
 }
 
-.btn-default, .btn-primary, .btn-success, .btn-info, .btn-warning, .btn-danger {
+.btn-warning {
     padding: 0px;
 }
