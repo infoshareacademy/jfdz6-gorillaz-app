@@ -1,23 +1,8 @@
-const eventPropGetter = ({type}) => {
-    switch (type) {
-        case 'custom':
-            return {className: 'Calendar__event Calendar__event-custom'}
-        case 'public':
-            return {className: ' Calendar__event Calendar__event-public'}
-        case 'other':
-            return {className: 'Calendar__event Calendar__event-other'}
-        default:
-            return {className: {}}
-    }
-}
+const eventPropGetter = ({type}) => ({className: type ? `Calendar__event Calendar__event-${type}` : {}})
 
 export function getCalendarConfig() {
     const {year, month, day} = this.props.calendar
-    const defaultDate = {
-            year: (new Date()).getFullYear(),
-            month: 0,
-            day: 1
-        }
+    const defaultDate = {month: 0, day: 1}
 
     return ({
         views: ['month'],
@@ -33,9 +18,6 @@ export function getCalendarConfig() {
         onSelectSlot: this.handleSelectSlot,
         onSelectEvent: this.handleSelectEvent,
         eventPropGetter: eventPropGetter,
-        date: new Date(year || defaultDate.year,
-            (month && month - 1) || defaultDate.month,
-            day || defaultDate.day
-        )
+        date: new Date(year, (month && month - 1) || defaultDate.month, day || defaultDate.day)
     })
 }

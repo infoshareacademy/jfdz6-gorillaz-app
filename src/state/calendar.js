@@ -31,27 +31,15 @@ export const setYear = year => (dispatch, getState) => {
         dispatch(parseEvents(year))
         dispatch(parseHolidays(year))
     }
-console.log(getState().calendar.year)
-    dispatch({
-        type: SET_YEAR,
-        year
-    })
+
+    dispatch({type: SET_YEAR, year})
 }
 
-export const setMonth = month => ({
-    type: SET_MONTH,
-    month
-})
+export const setMonth = month => ({type: SET_MONTH, month})
 
-export const setDay = day => ({
-    type: SET_DAY,
-    day
-})
+export const setDay = day => ({type: SET_DAY, day})
 
-export const setPhrase = phrase => ({
-    type: SET_PHRASE,
-    phrase
-})
+export const setPhrase = phrase => ({type: SET_PHRASE, phrase})
 
 const todayDate = moment()
 

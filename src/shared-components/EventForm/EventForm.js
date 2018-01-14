@@ -1,58 +1,18 @@
 import React from 'react'
 import {Field} from 'redux-form'
-import {
-    FormGroup,
-    ControlLabel,
-    FormControl,
-    HelpBlock,
-    Glyphicon
-} from 'react-bootstrap'
+import {Glyphicon} from 'react-bootstrap'
 
+import {renderTextField, renderTextareaField} from '../../shared-utils/form-controls-factory'
+
+import {Wrapper} from '../../styled-components/miscellaneous-components'
+import {ButtonsToolbar, ActionMessage} from '../../styled-components/form-components'
 import {RectButton} from '../../styled-components/button-components'
-import './EventForm.css'
-
-const renderTextField = ({input, label, type, meta: {touched, error}}) => (
-    <FormGroup
-        validationState={touched ? (error ? 'error' : 'success') : null}
-    >
-        <ControlLabel
-            bsClass="control-label-event"
-        >
-            {label}
-        </ControlLabel>
-
-        <FormControl
-            {...input}
-            type={type}
-            placeholder={label}
-        />
-        <FormControl.Feedback/>
-        <HelpBlock>{touched && error ? error : null}</HelpBlock>
-    </FormGroup>
-)
-
-const renderTextareaField = ({input, label, type}) => (
-    <FormGroup>
-        <ControlLabel
-            bsClass="control-label-event"
-        >
-            {label}
-        </ControlLabel>
-
-        <FormControl
-            {...input}
-            componentClass={type}
-            placeholder={label}
-            rows={4}
-        />
-    </FormGroup>
-)
 
 const EventForm = props => {
-    const {handleSubmit, pristine, reset, submitting, submitSucceeded} = props
+    const {error, handleSubmit, pristine, reset, submitting, submitSucceeded} = props
 
     return (
-        <div className="EventForm__wrapper">
+        <Wrapper>
             <form onSubmit={handleSubmit}>
                 <Field
                     name="date"
@@ -75,13 +35,13 @@ const EventForm = props => {
                     label="Description"
                 />
 
-                <div className="EventForm__toolbar">
+                <ButtonsToolbar>
                     <RectButton
                         type="submit"
                         bgc={'#4caf50'}
                         disabled={pristine || submitting}
                     >
-                        <Glyphicon glyph="send" />
+                        <Glyphicon glyph="send"/>
                         {' '}
                         {'Submit' + (submitting ? 'ting' : '')}
                     </RectButton>
@@ -92,17 +52,20 @@ const EventForm = props => {
                         disabled={pristine || submitting}
                         onClick={reset}
                     >
-                        <Glyphicon glyph="erase" />
+                        <Glyphicon glyph="erase"/>
                         {' '}
                         Clear
                     </RectButton>
 
                     {props.cancelButton}
-                </div>
+                </ButtonsToolbar>
 
-                <HelpBlock>{submitSucceeded && 'Event has been added!'}</HelpBlock>
+                <ActionMessage {...{error, submitSucceeded}}>
+                    {submitSucceeded && 'Event has been added!'}
+                    {error}
+                </ActionMessage>
             </form>
-        </div>
+        </Wrapper>
     )
 }
 

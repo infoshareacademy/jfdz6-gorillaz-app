@@ -4,11 +4,11 @@
     margin-right: 20px;
     padding-right: 35px;
     max-height: 400px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .EventsList__item {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .EventsList__marker {

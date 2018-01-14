@@ -16,8 +16,6 @@ const media = Object.keys(screenSizes).reduce((acc, label) => {
     return acc
 }, {})
 
-const gridBasis = 12
-
 export const Container = styled.div`
   margin: 0 auto;
   padding: 15px;
@@ -50,16 +48,4 @@ export const FlexBox = styled.div`
   ${props => props.smOrder && media.tablet`order: ${props => props.smOrder};`}
   ${props => props.mdOrder && media.desktop`order: ${props => props.mdOrder};`}
   ${props => props.lgOrder && media.largeDesktop`order: ${props => props.lgOrder};`}
-`
-
-
-export const Box = styled.div`
-  padding: 0 15px;
-  width: ${props => props.xs ? (props.xs / gridBasis) * 100 : 100}%;
-  
-${media.tablet`width: ${props => (props.sm || props.xs || gridBasis) / gridBasis * 100}%;`}
-${media.desktop`width: ${props => (props.md || props.sm || props.xs || gridBasis) / gridBasis * 100}%;`}
-${media.largeDesktop`width: ${props => (props.lg || props.md || props.sm || props.xs || gridBasis) / gridBasis * 100}%;`}
-
-${media.tablet`order: ${props => (props.smPush || props.xsPush || 0)};`}
 `
