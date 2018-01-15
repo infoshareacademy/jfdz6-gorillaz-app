@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Jolly+Lodger');
+@import url('https://fonts.googleapis.com/css?family=Khand');
+
 body {
     background-image: url("auth-background.png");
     background-position-y: 20%;
@@ -5,25 +8,30 @@ body {
 
 .Auth__header {
     margin-bottom: 30px;
+    font-size: 5em;
     text-align: center;
     color: rgb(3, 120, 244);
-    text-transform: uppercase;
     font-weight: bold;
     letter-spacing: 2px;
+    font-family: 'Jolly Lodger', cursive;
 }
 
 .Auth__paragraph {
     letter-spacing: 2px;
+    font-size: 1.2em;
     color: rgb(86, 87, 86);
     text-align: justify;
+    font-family: 'Khand', sans-serif;
 }
 
 .Auth__footer {
     letter-spacing: 2px;
+    font-size: 1.2em;
     color: rgb(86, 87, 86);
     text-align: right;
     padding-top: 25px;
-    padding-bottom: 50px;
+    padding-bottom: 30px;
+    font-family: 'Khand', sans-serif;
 }
 
 .Auth__image {

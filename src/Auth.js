@@ -20,12 +20,12 @@ class Auth extends Component {
                 {
                     this.props.auth.data === null ?
                         <Container>
-                            <h1 className="Auth__header">YOUR CUSTOMIZED CALENDAR!</h1>
+                            <h1 className="Auth__header">Welcome at your <br/> customized calendar!</h1>
                             <FlexContainer>
 
                                 <FlexBox smFlex="2 0 0">
                                     <p className="Auth__paragraph">
-                                        Dear User,
+                                        <strong>Dear User</strong>,
                                     </p>
                                     <p className="Auth__paragraph">
                                         Welcome on our website, where you can create your own fancy calendar
