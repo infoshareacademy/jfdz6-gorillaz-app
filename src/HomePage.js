@@ -7,6 +7,8 @@ import homePageLinkedinImage from './home-page-social-linkedin.png'
 import homePageHolidaysImage from './home-page-holidays.png'
 import homePageNameDaysImage from './home-page-calendar.png'
 import homePageCustomEventsImage from './home-page-present.png'
+import homePageEmailImage from './home-page-email.png'
+import homePageGreetingCardImage from './home-page-greeting-card.png'
 
 import './HomePage.css'
 import {
@@ -23,14 +25,17 @@ const Home = () => (
       <FlexContainer>
         <FlexBox smFlex="1 0 0">
           <img className="HomePage__image HomePage__image--feature" src={homePageHolidaysImage}/>
+          <p className="HomePage__paragraph">You can find plenty of occasions in our calendar - Christmas holidays, Easter and many, many others!</p>
         </FlexBox>
 
         <FlexBox smFlex="1 0 0">
           <img className="HomePage__image HomePage__image--feature" src={homePageNameDaysImage}/>
+          <p className="HomePage__paragraph">Have you ever forgot about a name day of your relatives? Maybe even your wife's or husbands? That is not goint to happen in the future as long as you use our calendar, where you can find all name days!</p>
         </FlexBox>
 
         <FlexBox smFlex="1 0 0">
           <img className="HomePage__image HomePage__image--feature" src={homePageCustomEventsImage}/>
+          <p className="HomePage__paragraph">On the top of previous features - you can add your own occasions to the calendar. You can add the lists of your contacts and many other.</p>
         </FlexBox>
       </FlexContainer>
 
@@ -42,10 +47,10 @@ const Home = () => (
           <img className="HomePage__image HomePage__image--author" src={homePageWojtekImage}/>
           <FlexContainer justify="center">
             <FlexBox xsFlex="0 1 150px">
-              <img className="HomePage__image HomePage__image--social" src={homePageGithubImage}/>
+              <a target="_blank" href="https://github.com/wojtrawi"><img className="HomePage__image HomePage__image--social" src={homePageGithubImage}/></a>
             </FlexBox>
             <FlexBox xsFlex="0 1 150px">
-              <img className="HomePage__image HomePage__image--social" src={homePageLinkedinImage}/>
+              <a target="_blank" href="https://www.linkedin.com/in/wojciech-trawi%C5%84ski/"><img className="HomePage__image HomePage__image--social" src={homePageLinkedinImage}/></a>
             </FlexBox>
           </FlexContainer>
         </FlexBox>
@@ -54,10 +59,10 @@ const Home = () => (
           <img className="HomePage__image HomePage__image--author" src={homePagePiotrImage}/>
           <FlexContainer justify="center">
             <FlexBox xsFlex="0 1 150px">
-              <img className="HomePage__image HomePage__image--social" src={homePageGithubImage}/>
+              <a target="_blank" href="https://github.com/piotrkramarz"><img className="HomePage__image HomePage__image--social" src={homePageGithubImage}/></a>
             </FlexBox>
             <FlexBox xsFlex="0 1 150px">
-              <img className="HomePage__image HomePage__image--social" src={homePageLinkedinImage}/>
+              <a target="_blank" href="https://www.linkedin.com/in/piotr-kramarz/"><img className="HomePage__image HomePage__image--social" src={homePageLinkedinImage}/></a>
             </FlexBox>
           </FlexContainer>
         </FlexBox>
@@ -67,11 +72,11 @@ const Home = () => (
 
       <FlexContainer>
         <FlexBox smFlex="1 0 0">
-          Emails
+          <img className="HomePage__image HomePage__image--upcomming" src={homePageEmailImage}/>
         </FlexBox>
 
         <FlexBox smFlex="1 0 0">
-          Unordinary wishes
+          <img className="HomePage__image HomePage__image--upcomming" src={homePageGreetingCardImage}/>
         </FlexBox>
       </FlexContainer>
     </Container>

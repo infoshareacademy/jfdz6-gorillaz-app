@@ -4,16 +4,18 @@
 body {
     background-image: url("auth-background.png");
     background-position-y: 20%;
+    background-size: cover;
+
 }
 
 .Auth__header {
     margin-bottom: 30px;
+    letter-spacing: 3px;
     font-size: 5em;
     text-align: center;
     color: rgb(3, 120, 244);
     opacity: 0.85;
     font-weight: bold;
-    letter-spacing: 2px;
     font-family: 'Jolly Lodger', cursive;
 }
 
@@ -42,6 +44,10 @@ body {
     width: 60%;
 }
 
+.btn-warning {
+    padding: 0px;
+}
+
 @media (max-width: 1200px){
     .Auth__start__image {
         display: none;
@@ -52,12 +58,11 @@ body {
     .Auth__start__image {
         transform: translate(10%, -150%) rotate(30deg);
     }
-}
 
-.btn-warning {
-    padding: 0px;
+    .form-control {
+        width: 100%;
+    }
 }
-
 
 @media (max-width: 992px) {
     .Auth__image {
