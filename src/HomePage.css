@@ -1,8 +1,8 @@
-.MainRouter__wrapper {
+.HomePage__wrapper {
     margin-top: 60px;
 }
 
-.MainRouter__header {
+.HomePage__header {
     margin-bottom: 30px;
     text-align: center;
     color: rgb(3, 120, 244);
@@ -11,16 +11,20 @@
     letter-spacing: 2px;
 }
 
-.MainRouter__paragraph {
+.HomePage__paragraph {
     letter-spacing: 2px;
     color: rgb(86, 87, 86);
     text-align: justify;
 }
 
-.MainRouter__footer {
+.HomePage__footer {
     letter-spacing: 2px;
     color: rgb(86, 87, 86);
     text-align: center;
     padding-top: 25px;
     padding-bottom: 50px;
+}
+
+.HomePage__image {
+    border-radius: 50%;
 }

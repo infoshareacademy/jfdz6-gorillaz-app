@@ -1,5 +1,8 @@
 import React from 'react'
 
+import homePageWojtekImage from './auth-wojtek.jpeg'
+import homePagePiotrImage from './auth-piotr.jpg'
+
 import './HomePage.css'
 import {
   Container,
@@ -10,7 +13,7 @@ import {
 const Home = () => (
   <div>
     <Container>
-      <h1 className="MainRouter__header">Features</h1>
+      <h1 className="HomePage__header">Features</h1>
 
       <FlexContainer>
         <FlexBox smFlex="1 0 0">
@@ -27,19 +30,21 @@ const Home = () => (
       </FlexContainer>
 
 
-      <h1 className="MainRouter__header">About us</h1>
+      <h1 className="HomePage__header">About us</h1>
 
       <FlexContainer>
         <FlexBox smFlex="1 0 0">
+          <img className="HomePage__image" src={homePageWojtekImage}/>
           Wojtek
         </FlexBox>
 
         <FlexBox smFlex="1 0 0">
+          <img className="HomePage__image" src={homePagePiotrImage}/>
           Piotr
         </FlexBox>
       </FlexContainer>
 
-      <h1 className="MainRouter__header">Comming soon</h1>
+      <h1 className="HomePage__header">Comming soon</h1>
 
       <FlexContainer>
         <FlexBox smFlex="1 0 0">
@@ -53,7 +58,7 @@ const Home = () => (
     </Container>
 
     <FlexContainer>
-      <FlexBox className="MainRouter__footer">
+      <FlexBox className="HomePage__footer">
         All rights reserved. Gorillaz Group 2017-2018.
       </FlexBox>
     </FlexContainer>

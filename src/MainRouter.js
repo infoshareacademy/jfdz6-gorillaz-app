@@ -44,7 +44,7 @@ class MainRouter extends React.Component {
 
   render = () => (
     <Router>
-      <div className="MainRouter__wrapper">
+      <div className="HomePage__wrapper">
         <Navbar fixedTop collapseOnSelect>
           <Navbar.Header>
             <Navbar.Brand>

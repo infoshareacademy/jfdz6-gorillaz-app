@@ -41,7 +41,7 @@ class Auth extends Component {
                                     <p className="Auth__footer">With Best Regards - <strong>Gorillaz Team</strong></p>
                                 </FlexBox>
                                 <FlexBox smFlex="1 0 0">
-                                    <img className="Auth__image" src={authImage}/>
+                                    <img className="HomePage__image" src={authImage}/>
                                 </FlexBox>
                             </FlexContainer>
                                 <FlexContainer>
