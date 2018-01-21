@@ -4,6 +4,9 @@ import homePageWojtekImage from './home-page-wojtek.jpeg'
 import homePagePiotrImage from './home-page-piotr.jpg'
 import homePageGithubImage from './home-page-social-github.png'
 import homePageLinkedinImage from './home-page-social-linkedin.png'
+import homePageHolidaysImage from './home-page-holidays.png'
+import homePageNameDaysImage from './home-page-calendar.png'
+import homePageCustomEventsImage from './home-page-present.png'
 
 import './HomePage.css'
 import {
@@ -19,15 +22,15 @@ const Home = () => (
 
       <FlexContainer>
         <FlexBox smFlex="1 0 0">
-          Holidays
+          <img className="HomePage__image HomePage__image--feature" src={homePageHolidaysImage}/>
         </FlexBox>
 
         <FlexBox smFlex="1 0 0">
-          Name days
+          <img className="HomePage__image HomePage__image--feature" src={homePageNameDaysImage}/>
         </FlexBox>
 
         <FlexBox smFlex="1 0 0">
-          Custom events
+          <img className="HomePage__image HomePage__image--feature" src={homePageCustomEventsImage}/>
         </FlexBox>
       </FlexContainer>
 
@@ -36,25 +39,25 @@ const Home = () => (
 
       <FlexContainer>
         <FlexBox smFlex="1 0 0">
-          <img className="HomePage__image" src={homePageWojtekImage}/>
+          <img className="HomePage__image HomePage__image--author" src={homePageWojtekImage}/>
           <FlexContainer justify="center">
             <FlexBox xsFlex="0 1 150px">
-              <img className="HomePage__social-media-image" src={homePageGithubImage}/>
+              <img className="HomePage__image HomePage__image--social" src={homePageGithubImage}/>
             </FlexBox>
             <FlexBox xsFlex="0 1 150px">
-              <img className="HomePage__social-media-image" src={homePageLinkedinImage}/>
+              <img className="HomePage__image HomePage__image--social" src={homePageLinkedinImage}/>
             </FlexBox>
           </FlexContainer>
         </FlexBox>
 
         <FlexBox smFlex="1 0 0">
-          <img className="HomePage__image" src={homePagePiotrImage}/>
+          <img className="HomePage__image HomePage__image--author" src={homePagePiotrImage}/>
           <FlexContainer justify="center">
             <FlexBox xsFlex="0 1 150px">
-              <img className="HomePage__social-media-image" src={homePageGithubImage}/>
+              <img className="HomePage__image HomePage__image--social" src={homePageGithubImage}/>
             </FlexBox>
             <FlexBox xsFlex="0 1 150px">
-              <img className="HomePage__social-media-image" src={homePageLinkedinImage}/>
+              <img className="HomePage__image HomePage__image--social" src={homePageLinkedinImage}/>
             </FlexBox>
           </FlexContainer>
         </FlexBox>

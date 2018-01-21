@@ -26,17 +26,21 @@
 }
 
 .HomePage__image {
-    border-radius: 50%;
     display: block;
     margin: 0 auto;
-    width: 400px;
     max-width: 100%;
 }
 
-.HomePage__social-media-image {
-    display: block;
+.HomePage__image--author {
+    border-radius: 50%;
+    width: 400px;
+}
+
+.HomePage__image--feature {
+    width: 200px;
+}
+
+.HomePage__image--social {
     padding: 30px;
-    margin: 0 auto;
     width: 120px;
-    max-width: 100%;
 }
