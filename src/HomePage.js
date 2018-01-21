@@ -1,7 +1,9 @@
 import React from 'react'
 
-import homePageWojtekImage from './auth-wojtek.jpeg'
-import homePagePiotrImage from './auth-piotr.jpg'
+import homePageWojtekImage from './home-page-wojtek.jpeg'
+import homePagePiotrImage from './home-page-piotr.jpg'
+import homePageGithubImage from './home-page-social-github.png'
+import homePageLinkedinImage from './home-page-social-linkedin.png'
 
 import './HomePage.css'
 import {
@@ -35,12 +37,26 @@ const Home = () => (
       <FlexContainer>
         <FlexBox smFlex="1 0 0">
           <img className="HomePage__image" src={homePageWojtekImage}/>
-          Wojtek
+          <FlexContainer justify="center">
+            <FlexBox xsFlex="0 1 150px">
+              <img className="HomePage__social-media-image" src={homePageGithubImage}/>
+            </FlexBox>
+            <FlexBox xsFlex="0 1 150px">
+              <img className="HomePage__social-media-image" src={homePageLinkedinImage}/>
+            </FlexBox>
+          </FlexContainer>
         </FlexBox>
 
         <FlexBox smFlex="1 0 0">
           <img className="HomePage__image" src={homePagePiotrImage}/>
-          Piotr
+          <FlexContainer justify="center">
+            <FlexBox xsFlex="0 1 150px">
+              <img className="HomePage__social-media-image" src={homePageGithubImage}/>
+            </FlexBox>
+            <FlexBox xsFlex="0 1 150px">
+              <img className="HomePage__social-media-image" src={homePageLinkedinImage}/>
+            </FlexBox>
+          </FlexContainer>
         </FlexBox>
       </FlexContainer>
 
