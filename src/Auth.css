@@ -11,6 +11,7 @@ body {
     font-size: 5em;
     text-align: center;
     color: rgb(3, 120, 244);
+    opacity: 0.85;
     font-weight: bold;
     letter-spacing: 2px;
     font-family: 'Jolly Lodger', cursive;
