@@ -17,7 +17,7 @@
 .HomePage__paragraph {
     letter-spacing: 2px;
     text-align: justify;
-    font-size: 1.2em;
+    font-size: 1.5em;
     color: rgb(86, 87, 86);
     font-family: 'Khand', sans-serif;
 }
@@ -28,6 +28,7 @@
     text-align: center;
     padding-top: 25px;
     padding-bottom: 50px;
+    font-family: 'Khand', sans-serif;
 }
 
 .HomePage__image {
