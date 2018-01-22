@@ -22,13 +22,13 @@ import {
   subscribeContacts,
   unsubscribeContacts
 } from './state/contacts'
-import SignUp from './SignUp'
-import SignIn from './SignIn'
-import SignOutButton from './SignOutButton'
+import SignUp from './auth-module/SignUp'
+import SignIn from './auth-module/SignIn'
+import SignOutButton from './auth-module/SignOutButton'
 import Calendar from './calendar-module/Calendar/Calendar'
 import EventsMasterDetail from './events-crud-module/EventsMasterDetail/EventsMasterDetail'
 import ContactsMasterDetail from './contacts-crud-module/ContactsMasterDetail/ContactsMasterDetail'
-import Home from './HomePage'
+import Home from './home-page-module/HomePage'
 
 class MainRouter extends React.Component {
   componentDidMount = () => {

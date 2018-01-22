@@ -15,7 +15,7 @@ import {
   Container,
   FlexContainer,
   FlexBox
-} from './styled-components/grid-components'
+} from '../styled-components/grid-components'
 
 const Home = () => (
   <div>
@@ -25,17 +25,17 @@ const Home = () => (
       <FlexContainer>
         <FlexBox smFlex="1 0 0">
           <img className="HomePage__image HomePage__image--feature" src={homePageHolidaysImage}/>
-          <p className="HomePage__paragraph">You can find plenty of occasions in our calendar - Christmas holidays, Easter and many, many others!</p>
+          <p className="HomePage__paragraph HomePage__paragraph--dark">You can find plenty of occasions in our calendar - Christmas holidays, Easter and many, many others!</p>
         </FlexBox>
 
         <FlexBox smFlex="1 0 0">
           <img className="HomePage__image HomePage__image--feature" src={homePageNameDaysImage}/>
-          <p className="HomePage__paragraph">Have you ever forgot about a name day of your relatives? Maybe even your wife's or husbands? That is not goint to happen in the future as long as you use our calendar, where you can find all name days!</p>
+          <p className="HomePage__paragraph HomePage__paragraph--dark">Have you ever forgot about a name day of your relatives? Maybe even your wife's or husbands? That is not goint to happen in the future as long as you use our calendar, where you can find all name days!</p>
         </FlexBox>
 
         <FlexBox smFlex="1 0 0">
           <img className="HomePage__image HomePage__image--feature" src={homePageCustomEventsImage}/>
-          <p className="HomePage__paragraph">On the top of previous features - you can add your own occasions to the calendar. You can add the lists of your contacts and many other.</p>
+          <p className="HomePage__paragraph HomePage__paragraph--dark">On the top of previous features - you can add your own occasions to the calendar. You can add the lists of your contacts and many other.</p>
         </FlexBox>
       </FlexContainer>
 
@@ -45,7 +45,7 @@ const Home = () => (
       <FlexContainer>
         <FlexBox smFlex="1 0 0">
           <img className="HomePage__image HomePage__image--author" src={homePageWojtekImage}/>
-          <p className="HomePage__paragraph">More information about Wojtek soon...</p>
+          <p className="HomePage__paragraph HomePage__paragraph--bright">More information about Wojtek soon...</p>
           <FlexContainer justify="center">
             <FlexBox xsFlex="0 1 150px">
               <a target="_blank" href="https://github.com/wojtrawi"><img className="HomePage__image HomePage__image--social" src={homePageGithubImage}/></a>
@@ -58,7 +58,7 @@ const Home = () => (
 
         <FlexBox smFlex="1 0 0">
           <img className="HomePage__image HomePage__image--author" src={homePagePiotrImage}/>
-          <p className="HomePage__paragraph">Currently working as a Senior EMS Development Manager in the industry of Electronics</p>
+          <p className="HomePage__paragraph HomePage__paragraph--bright">Currently working as a Senior EMS Development Manager in the industry of Electronics</p>
           <FlexContainer justify="center">
             <FlexBox xsFlex="0 1 150px">
               <a target="_blank" href="https://github.com/piotrkramarz"><img className="HomePage__image HomePage__image--social" src={homePageGithubImage}/></a>
@@ -75,12 +75,12 @@ const Home = () => (
       <FlexContainer>
         <FlexBox smFlex="1 0 0">
           <img className="HomePage__image HomePage__image--upcomming" src={homePageEmailImage}/>
-          <p className="HomePage__paragraph">We are working on the awesome new feature so you could send an e-mail to your relative/colleague with special wishes!</p>
+          <p className="HomePage__paragraph HomePage__paragraph--bright">We are working on the awesome new feature so you could send an e-mail to your relative/colleague with special wishes!</p>
         </FlexBox>
 
         <FlexBox smFlex="1 0 0">
           <img className="HomePage__image HomePage__image--upcomming" src={homePageGreetingCardImage}/>
-          <p className="HomePage__paragraph">Yet, another fancy feature! More details soon! Be patient!</p>
+          <p className="HomePage__paragraph HomePage__paragraph--bright">Yet, another fancy feature! More details soon! Be patient!</p>
         </FlexBox>
       </FlexContainer>
     </Container>

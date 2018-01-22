@@ -1,13 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Jolly+Lodger');
 @import url('https://fonts.googleapis.com/css?family=Khand');
 
-body {
-    background-image: url("auth-background.png");
-    background-position-y: 20%;
-    background-size: cover;
-
-}
-
 .Auth__header {
     margin-bottom: 30px;
     letter-spacing: 3px;

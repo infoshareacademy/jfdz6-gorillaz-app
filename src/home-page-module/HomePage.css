@@ -13,15 +13,21 @@
     letter-spacing: 2px;
     font-family: 'Khand', sans-serif;
     font-size: 4em;
-    /*background: rgba(240, 241, 240, 0.5);*/
 }
 
 .HomePage__paragraph {
     letter-spacing: 2px;
     text-align: justify;
     font-size: 1.5em;
-    color: rgb(86, 87, 86);
     font-family: 'Khand', sans-serif;
+}
+
+.HomePage__paragraph--bright {
+    color: rgb(242, 242, 242);
+}
+
+.HomePage__paragraph--dark {
+    color: rgb(86, 87, 86);
 }
 
 .HomePage__footer {

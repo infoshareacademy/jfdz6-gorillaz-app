@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 
 import store from "./store";
-import Auth from './Auth';
+import Auth from './auth-module/Auth';
 import MainRouter from './MainRouter';
 
 import './index.css';

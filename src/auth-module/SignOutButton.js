@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { signOut } from './state/auth';
+import { signOut } from '../state/auth';
 import { Button } from 'react-bootstrap'
 
 const SignOutButton = ({ shouldBeVisible, signOut}) => (

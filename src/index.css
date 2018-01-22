@@ -6,6 +6,10 @@ body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
+    background-image: url("./auth-module/auth-background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .control-label-custom {

@@ -5,7 +5,7 @@ import {
     Container,
     FlexContainer,
     FlexBox
-} from './styled-components/grid-components'
+} from '../styled-components/grid-components'
 import './Auth.css'
 
 import SignIn from './SignIn'
