@@ -65,7 +65,7 @@ class MasterDetail extends React.Component {
                                     />
                                 </div> :
                                 <Header>
-                                    <Glyphicon glyph="zoom-in"/>Select {name}
+                                    <Glyphicon glyph="zoom"/>Select {name}
                                 </Header>
                         }
                         <Header>
