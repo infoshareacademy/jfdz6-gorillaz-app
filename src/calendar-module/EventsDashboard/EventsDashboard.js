@@ -29,7 +29,8 @@ class EventsDashboard extends React.Component {
                 configObj: {
                     eventsName: 'Holidays',
                     icon: 'calendar',
-                    EventViewComponent: ListItemEvent
+                    EventViewComponent: ListItemEvent,
+                    marker: 'pushpin'
                 }
             },
             {
@@ -39,7 +40,7 @@ class EventsDashboard extends React.Component {
                     eventsName: 'Your events',
                     icon: 'user',
                     EventViewComponent: EditableEvent,
-                    marker: '\u{1F4C5}'
+                    marker: 'flash'
                 }
             },
             {
@@ -49,7 +50,7 @@ class EventsDashboard extends React.Component {
                     eventsName: 'Name days',
                     icon: 'gift',
                     EventViewComponent: ListItemEvent,
-                    marker: '\u{1F382}'
+                    marker: 'bell'
                 }
             }
         ].map(eventGroup => ({
