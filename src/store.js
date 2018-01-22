@@ -4,7 +4,7 @@ import thunk from 'redux-thunk'
 import { reducer as reduxFormReducer } from 'redux-form';
 import firebase from 'firebase'
 
-import auth from './state/auth'
+import auth, { enableSync } from './state/auth'
 import calendar from './state/calendar'
 import contacts from './state/contacts'
 import customEvents from './state/custom-events'
@@ -42,5 +42,6 @@ const store = createStore(
 )
 
 store.dispatch({ type: 'RESET'})
+store.dispatch(enableSync())
 
 export default store

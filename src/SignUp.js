@@ -1,47 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import AuthForm from './AuthForm'
 import { signUp } from './state/auth'
-import { Button } from 'react-bootstrap'
 
 class SignUp extends Component {
-
-  state = {
-    login: '',
-    password: ''
-  }
-
-  handleChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
-  }
-
-  handleSubmit = event => {
-    event.preventDefault()
-    this.props.signUp(
-      this.state.login,
-      this.state.password
-    )
-  }
-
-  render() {
+   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <p>{this.props.auth.data && this.props.auth.data.email}</p>
-        <p>{this.props.auth.error && this.props.auth.error.message}</p>
-        Login:
-        <input
-          name="login"
-          onChange={this.handleChange}
-        />
-        Password:
-        <input
-          name="password"
-          type="password"
-          onChange={this.handleChange}
-        />
-        <Button type="submit" bsStyle="primary">Sign up</Button>
-      </form>
+     <AuthForm
+      label={'Sign up'}
+      btnType={'success'}
+      error={this.props.auth.error}
+      handleSubmit={this.props.signUp}
+     />
     )
   }
 }
