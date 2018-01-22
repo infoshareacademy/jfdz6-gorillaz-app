@@ -6,6 +6,7 @@ import DetailView from '../DetailView/DetailView'
 
 import {Container, FlexContainer, FlexBox} from '../../styled-components/grid-components'
 import {NoDataContainer, NoDataInfo, Header} from '../../styled-components/typography-components'
+import {ColouredWrapper} from '../../styled-components/miscellaneous-components'
 
 class MasterDetail extends React.Component {
     state = {selectedItem: null}
@@ -46,7 +47,9 @@ class MasterDetail extends React.Component {
                         }
                     </FlexBox>
 
+
                     <FlexBox smFlex="7 0 0">
+                        <ColouredWrapper color="#e5eaef78">
                         {
                             this.state.selectedItem ?
                                 <div>
@@ -62,7 +65,7 @@ class MasterDetail extends React.Component {
                                     />
                                 </div> :
                                 <Header>
-                                    <Glyphicon glyph="zoom-in"/>Select {name} from the&nbsp;list
+                                    <Glyphicon glyph="zoom-in"/>Select {name}
                                 </Header>
                         }
                         <Header>
@@ -70,6 +73,7 @@ class MasterDetail extends React.Component {
                         </Header>
 
                         <NewItem/>
+                        </ColouredWrapper>
                     </FlexBox>
                 </FlexContainer>
             </Container>

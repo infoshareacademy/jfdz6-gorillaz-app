@@ -8,6 +8,7 @@ import ListItemEvent from '../ListItemEvent/ListItemEvent'
 import EditableEvent from '../EditableEvent/EditableEvent'
 
 import {FlexContainer, FlexBox} from '../../styled-components/grid-components'
+import {ColouredWrapper} from '../../styled-components/miscellaneous-components'
 
 class EventsDashboard extends React.Component {
     render() {
@@ -51,16 +52,24 @@ class EventsDashboard extends React.Component {
                     marker: '\u{1F382}'
                 }
             }
-        ].map(eventGroup => ({...eventGroup.configObj, events: eventGroup
-            .filter.call(null, eventGroup.inputData, filterParams)
-            .sort(sortEventsAscending)}))
-            .map(eventGroup =>(
+        ].map(eventGroup => ({
+            ...eventGroup.configObj, events: eventGroup
+                .filter.call(null, eventGroup.inputData, filterParams)
+                .sort(sortEventsAscending)
+        }))
+            .map(eventGroup => (
                 <FlexBox xsFlex="1 0 260px" key={eventGroup.eventsName}>
                     <EventsTable {...eventGroup}/>
                 </FlexBox>
             ))
 
-        return <FlexContainer>{eventsDashboard}</FlexContainer>
+        return (
+            <ColouredWrapper>
+                <FlexContainer>
+                    {eventsDashboard}
+                </FlexContainer>
+            </ColouredWrapper>
+        )
     }
 }
 
