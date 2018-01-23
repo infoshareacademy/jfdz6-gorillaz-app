@@ -14,5 +14,6 @@
 .EventsList__marker {
     position: absolute;
     left: 5px;
+    color: #0378f4;
     font-size: 1.65em;
 }

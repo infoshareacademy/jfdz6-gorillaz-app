@@ -1,4 +1,5 @@
 import React from 'react'
+import {Glyphicon} from 'react-bootstrap'
 
 import './EventsList.css'
 
@@ -13,7 +14,7 @@ const EventsList = props => {
                             className="EventsList__item"
                             key={event.id}
                         >
-                            <span className="EventsList__marker">{marker || event.emoji}</span>
+                            <span className="EventsList__marker"><Glyphicon glyph={marker}/></span>
                             <EventViewComponent event={event}/>
                         </li>
                     )
