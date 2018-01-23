@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Khand');
+
 .EventsList__wrapper {
     list-style-type: none;
     position: relative;
@@ -16,4 +18,5 @@
     left: 5px;
     color: #0378f4;
     font-size: 1.65em;
+    font-family: 'Khand', sans-serif;
 }

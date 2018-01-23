@@ -13,6 +13,7 @@ export const RectButton = Button.extend`
   letter-spacing: ${props => props.spacing || '1px'};
   padding: ${props => props.padding || '0.5em 0.8em'};
   border-radius: ${props => props.radius || '0.4em'};
+  font-family:'Khand', sans-serif;
 `;
 
 export const RoundButton = Button.extend`
@@ -20,11 +21,13 @@ export const RoundButton = Button.extend`
   text-transform: ${props => props.uppercase ? 'uppercase' : 'none'};
   padding: ${props => props.padding || '0.5em 0.7em'};
   border-radius: ${props => props.radius || '1.25em'};
+  font-family:'Khand', sans-serif;
 `;
 
 export const AddEventButton = RoundButton.extend`
   background-color: rgba(76, 175, 80, 0.8);
   font-size: 2.2em;
+  font-family:'Khand', sans-serif;
   padding: 0 12.5px;
   position: fixed;
   right: 10px;
@@ -45,6 +48,7 @@ export const ListButton = Button.extend`
   margin-bottom: 5px;
   border-radius: 10px;
   text-align: left;
+  font-family:'Khand', sans-serif;
   
   &:hover {
     background-color: #3f51b5;
