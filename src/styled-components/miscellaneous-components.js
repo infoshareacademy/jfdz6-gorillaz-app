@@ -28,3 +28,9 @@ export const WrapperYLimited = Wrapper.extend`
     max-height: ${props => props.smMaxHeight || 'auto'};
   }
 `;
+
+export const ColouredWrapper = styled.div`
+  background-color: ${props => props.color || '#e5eaefe0'};
+  padding-top: 0.1px;
+  border-radius: 10px;
+`;
