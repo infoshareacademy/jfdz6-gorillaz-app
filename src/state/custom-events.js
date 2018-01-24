@@ -1,6 +1,7 @@
 import firebase from 'firebase'
 import {SubmissionError} from 'redux-form'
 
+import {mapObjectToArrayData} from './_helpers'
 import {getParsedEvents} from '../calendar-module/_helpers/parsers'
 
 const GET_BEGIN = 'custom-events/GET_BEGIN'
@@ -28,17 +29,8 @@ export const subscribeCustomEvents = () => (dispatch, getState) => {
     customEventsRef = firebase.database().ref(`users/${userId}/custom-events`)
 
     listener = customEventsRef.on('value', function (snapshot) {
-        const data = snapshot.val() ?
-            Object.keys(snapshot.val()).reduce((arrayedEvents, eventId) => {
-                    arrayedEvents.push({
-                        ...snapshot.val()[eventId],
-                        id: eventId
-                    })
-
-                    return arrayedEvents
-                },
-                []) :
-            []
+        const objectData = snapshot.val()
+        const data = objectData ? mapObjectToArrayData(objectData) : []
 
         dispatch({
             type: GET_SUCCESS,
