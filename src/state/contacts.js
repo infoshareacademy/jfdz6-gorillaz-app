@@ -1,6 +1,8 @@
 import firebase from 'firebase'
 import {SubmissionError} from 'redux-form'
 
+import {mapObjectToArrayData} from './_helpers'
+
 const GET_BEGIN = 'contacts/GET_BEGIN'
 const GET_SUCCESS = 'contacts/GET_SUCCESS'
 const REMOVE_FAIL = 'contacts/REMOVE_FAIL'
@@ -14,7 +16,9 @@ export const addContact = newContact => (dispatch, getState) => {
         notes: newContact.notes || 'no data'
     })
         .then(() => console.log('contact has been added!'))
-        .catch(() => {throw new SubmissionError({_error: 'submission failed'})})
+        .catch(() => {
+            throw new SubmissionError({_error: 'submission failed'})
+        })
 }
 
 let contactsRef = null
@@ -27,17 +31,8 @@ export const subscribeContacts = () => (dispatch, getState) => {
     contactsRef = firebase.database().ref(`users/${userId}/contacts`)
 
     listener = contactsRef.on('value', function (snapshot) {
-        const data = snapshot.val() ?
-            Object.keys(snapshot.val()).reduce((arrayedContacts, contactId) => {
-                    arrayedContacts.push({
-                        ...snapshot.val()[contactId],
-                        id: contactId
-                    })
-
-                    return arrayedContacts
-                },
-                []) :
-            []
+        const objectData = snapshot.val()
+        const data = objectData ? mapObjectToArrayData(objectData) : []
 
         dispatch({
             type: GET_SUCCESS,
