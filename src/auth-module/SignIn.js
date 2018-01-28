@@ -1,17 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import AuthForm from './AuthForm'
-import { signUp } from './state/auth'
+import { signIn } from '../state/auth'
 
-class SignUp extends Component {
-   render() {
+class SignIn extends Component {
+  render() {
     return (
-     <AuthForm
-      label={'Sign up'}
-      btnType={'success'}
-      error={this.props.auth.error}
-      handleSubmit={this.props.signUp}
-     />
+      <AuthForm
+        label={'Sign in'}
+        error={this.props.auth.error}
+        handleSubmit={this.props.signIn}
+      />
     )
   }
 }
@@ -21,10 +20,10 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  signUp: (email, password) => dispatch(signUp(email, password))
+  signIn: (email, password) => dispatch(signIn(email, password))
 })
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SignUp)
+)(SignIn)

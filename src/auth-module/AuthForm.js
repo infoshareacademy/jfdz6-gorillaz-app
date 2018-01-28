@@ -25,7 +25,7 @@ class AuthForm extends Component {
     return (
       <Grid>
         <Row className="show-grid">
-          <Col smOffset={1} xs={12} mdOffset={0} md={8} lgOffset={2} lg={6}>
+          <Col smOffset={0} xs={12} mdOffset={1} md={8} lgOffset={2} lg={6}>
             <Form onSubmit={this.handleSubmit} horizontal>
               {
                 this.props.error && <p>{this.props.error.message}</p>

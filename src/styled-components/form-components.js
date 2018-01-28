@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const ButtonsToolbar = styled.div`
   text-align: center;
+  font-family:'Khand', sans-serif;
 
   > button:not(:last-of-type) {
     margin-right: 15px;
@@ -29,5 +30,6 @@ export const ButtonsToolbar = styled.div`
 export const ActionMessage = styled.h5`
   text-align: center;
   letter-spacing: 1.2px;
+  font-family:'Khand', sans-serif;
   color: ${props => (props.error && 'red') || (props.submitSucceeded && 'green')};
 `;

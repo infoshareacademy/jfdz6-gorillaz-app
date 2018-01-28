@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css?family=Khand');
+
+.HomePage__wrapper {
+    margin-top: 60px;
+}
+
+.HomePage__header {
+    margin-bottom: 30px;
+    text-align: center;
+    color: #f44336;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-family: 'Khand', sans-serif;
+    font-size: 4em;
+}
+
+.HomePage__paragraph {
+    letter-spacing: 2px;
+    text-align: justify;
+    font-size: 1.5em;
+    font-family: 'Khand', sans-serif;
+    padding-top: 15px;
+}
+
+.HomePage__paragraph--bright {
+    color: rgb(242, 242, 242);
+}
+
+.HomePage__paragraph--dark {
+    color: rgb(86, 87, 86);
+}
+
+.HomePage__footer {
+    letter-spacing: 2px;
+    color: rgb(240, 241, 240);
+    text-align: center;
+    padding-top: 25px;
+    padding-bottom: 50px;
+    font-family: 'Khand', sans-serif;
+}
+
+.HomePage__image {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+.HomePage__image--author {
+    border-radius: 50%;
+    width: 400px;
+}
+
+.HomePage__image--feature {
+    width: 200px;
+}
+
+.HomePage__image--social {
+    padding: 30px;
+    width: 120px;
+}
+
+.HomePage__image--upcomming {
+    width: 200px;
+}

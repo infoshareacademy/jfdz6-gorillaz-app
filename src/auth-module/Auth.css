@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css?family=Jolly+Lodger');
+@import url('https://fonts.googleapis.com/css?family=Khand');
+
+.Auth__header {
+    margin-bottom: 30px;
+    letter-spacing: 3px;
+    font-size: 5em;
+    text-align: center;
+    color: rgb(3, 120, 244);
+    opacity: 0.85;
+    font-weight: bold;
+    font-family: 'Jolly Lodger', cursive;
+}
+
+.Auth__paragraph {
+    letter-spacing: 2px;
+    font-size: 1.2em;
+    color: rgb(86, 87, 86);
+    text-align: justify;
+    font-family: 'Khand', sans-serif;
+}
+
+.Auth__footer {
+    letter-spacing: 2px;
+    font-size: 1.2em;
+    color: rgb(86, 87, 86);
+    text-align: right;
+    padding-top: 25px;
+    padding-bottom: 30px;
+    font-family: 'Khand', sans-serif;
+}
+
+.Auth__image {
+    margin-left: 50%;
+    transform: translateX(-50%);
+    padding-bottom: 10px;
+    width: 60%;
+}
+
+.btn-warning {
+    padding: 0px;
+}
+
+@media (max-width: 1200px){
+    .Auth__start__image {
+        display: none;
+    }
+}
+
+@media (min-width: 1200px){
+    .Auth__start__image {
+        transform: translate(10%, -150%) rotate(30deg);
+    }
+
+    .form-control {
+        width: 100%;
+    }
+}
+
+@media (max-width: 992px) {
+    .Auth__image {
+        transform: translateX(-50%);
+        width: 100%;
+    }
+
+    .btn-block {
+        width: 90%;
+    }
+
+    .form-control {
+        width: 90%;
+    }
+}
+
+@media (max-width: 768px) {
+    .Auth__image {
+        transform: translateX(-50%);
+        width: 60%;
+    }
+
+    .btn-block {
+        width: 100%;
+    }
+
+    .form-control {
+        width: 100%;
+    }
+}

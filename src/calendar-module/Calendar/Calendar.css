@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Khand');
+
 .rbc-toolbar-label {
     font-size: 1.2em;
     font-weight: bold;
     color: #009688;
     text-transform: uppercase;
     letter-spacing: 2px;
+    font-family: 'Khand', sans-serif;
 }
 
 .rbc-header {
@@ -11,6 +14,7 @@
     font-size: 0.9em;
     color: #009688;
     letter-spacing: 1.5px;
+    font-family: 'Khand', sans-serif;
 }
 
 .rbc-day-bg,
@@ -34,6 +38,7 @@
 
 .Calendar__event {
     font-size: 0.8em;
+    font-family: 'Khand', sans-serif;
 }
 
 .Calendar__event-custom,

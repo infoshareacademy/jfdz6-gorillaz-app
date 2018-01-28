@@ -1,15 +1,20 @@
+@import url('https://fonts.googleapis.com/css?family=Khand');
+
 .ListItemEvent__header {
     text-align: center;
     letter-spacing: 1.2px;
     line-height: 1.5em;
+    font-family: 'Khand', sans-serif;
 }
 
 .ListItemEvent__subheader {
     color: grey;
+    font-family: 'Khand', sans-serif;
 }
 
 .ListItemEvent__paragraph {
     font-size: 1.1em;
     text-align: justify;
     letter-spacing: 1.1px;
+    font-family: 'Khand', sans-serif;
 }
