@@ -10,6 +10,7 @@ export const NoDataInfo = styled.h5`
   color: ${props => props.color || 'white'};
   text-align: center;
   letter-spacing: 1px;
+  font-family:'Khand', sans-serif;
 `;
 
 export const Header = styled.h3`
@@ -19,6 +20,8 @@ export const Header = styled.h3`
    text-transform: uppercase;
    font-weight: bold;
    letter-spacing: 2px;
+   font-family:'Khand', sans-serif;
+
    
    > span {
     color: rgb(255, 167, 7);

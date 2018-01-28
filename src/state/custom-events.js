@@ -19,14 +19,15 @@ export const addEvent = newEvent => (dispatch, getState) => {
         .then(() => console.log('event has been added!'))
         .catch(() => {throw new SubmissionError({_error: 'submission failed'})})
 }
-
+let customEventsRef = null
+let listener = null
 export const subscribeCustomEvents = () => (dispatch, getState) => {
     dispatch({type: GET_BEGIN})
 
     const userId = getState().auth.data.uid
-    const customEventsRef = firebase.database().ref(`users/${userId}/custom-events`)
+    customEventsRef = firebase.database().ref(`users/${userId}/custom-events`)
 
-    customEventsRef.on('value', function (snapshot) {
+    listener = customEventsRef.on('value', function (snapshot) {
         const data = snapshot.val() ?
             Object.keys(snapshot.val()).reduce((arrayedEvents, eventId) => {
                     arrayedEvents.push({
@@ -47,11 +48,8 @@ export const subscribeCustomEvents = () => (dispatch, getState) => {
     })
 }
 
-export const unsubscribeCustomEvents = () => (dispatch, getState) => {
-    const userId = getState().auth.data.uid
-    const customEventsRef = firebase.database().ref(`users/${userId}/custom-events`)
-
-    customEventsRef.off()
+export const unsubscribeCustomEvents = () => () => {
+    customEventsRef.off('value', listener)
 }
 
 export const removeEvent = eventId => (dispatch, getState) => {
